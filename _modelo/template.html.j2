@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ titulo_pagina }}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Antonio:wght@700&amp;family=Manrope:wght@400;500;700;800&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+:root{--azul:#2B00FF;--tinta:#0A0044;--texto:#2E2950;--cinza:#F2F1F6;--lima:#BDE249;--cor:{{ cor }};--escura:{{ cor_escura }};--cor2:{{ cor_b2b }}}
+html,body{margin:0;background:#0A0044}html{overflow-y:scroll}
+a{color:var(--lima)}a:hover{color:#fff}
+#page{width:1080px;min-height:1528px;box-sizing:border-box;background:#fff;font-family:Manrope,system-ui,sans-serif;color:var(--tinta);display:flex;flex-direction:column;margin:0 auto;box-shadow:0 0 60px rgba(0,0,0,.35)}
+.cond{font-family:Antonio,'Arial Narrow','Roboto Condensed','Helvetica Neue',sans-serif;font-stretch:condensed;font-weight:700;text-transform:uppercase}
+.hero{background:var(--azul);color:#fff;padding:36px 64px 0 64px;display:grid;grid-template-columns:minmax(0,1fr) 440px;gap:32px;box-sizing:border-box;align-items:end}
+.hero-l{display:flex;flex-direction:column;gap:22px;padding-bottom:40px;align-self:stretch}
+.hero-top{display:flex;align-items:center;gap:18px;margin-bottom:auto}
+.hero-top .gl{width:140px;height:auto}
+.hero-top .ads{font-size:17px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.hero-top .bl{height:{{ logo_altura_hero }}px;width:auto;display:block;margin-left:auto{% if logo_branco %};filter:brightness(0) invert(1){% endif %}}
+.hero h1{margin:0;font-size:64px;line-height:1;width:470px}
+.hero .sub{margin:0;font-size:19px;line-height:1.45;max-width:490px;white-space:nowrap;opacity:.9}
+.hero-art{align-self:stretch;position:relative;margin:-36px -64px 0 0;min-height:360px}
+.cover{position:absolute;inset:0;overflow:hidden;container-type:size}
+.cover>div{position:absolute}
+.cover img.bg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.clients{background:#000;padding:22px 64px;display:flex;align-items:center;gap:28px}
+.clients .lbl{flex:none;font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#fff;line-height:1.35}
+.clients .grid{flex:1;display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.clients .grid>div{height:56px;display:flex;align-items:center;justify-content:center}
+.clients img{max-width:100%;width:auto;display:block}
+.sec-head{padding:44px 64px 0 64px}
+.sec-head>div{display:flex;align-items:center;gap:18px;border-bottom:3px solid var(--azul);padding-bottom:14px}
+.sec-head span{font-size:40px;line-height:1;color:var(--tinta)}
+.sec-head img{margin-left:auto;height:{{ logo_altura_secao }}px;width:auto;display:block}
+.b2b .sec-head>div{border-color:var(--cor2)}
+h2{margin:0;font-size:34px;color:var(--azul)}
+.b2b h2{color:var(--cor2)}
+.intro{padding:28px 64px 0 64px;display:grid;grid-template-columns:380px 1fr;gap:40px;align-items:center}
+.intro>div:first-child{display:flex;flex-direction:column;gap:10px}
+.intro p,.lead{margin:0;font-size:16px;line-height:1.5;color:var(--texto)}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.stats.two{grid-template-columns:1.25fr 1fr}
+.stat{background:var(--cinza);padding:20px 22px;box-shadow:8px 8px 0 var(--azul)}
+.b2b .stat{box-shadow:8px 8px 0 var(--cor2)}
+.stat.hl{background:var(--lima)}
+.stat b{display:block;font-size:44px;line-height:1;white-space:nowrap}
+.stat span{display:block;font-size:16px;font-weight:700;margin-top:6px}
+.src{padding:14px 64px 0 64px;font-size:13px;color:#5E5B73;text-align:right}
+.block{padding:26px 64px 0 64px}
+.block.act{padding-top:34px}
+.journey{position:relative}
+.journey .line{position:absolute;left:22px;right:22px;top:21px;height:2px;background:#B4B1CC;z-index:0}
+.steps4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.step{display:flex;flex-direction:column;gap:10px;position:relative;z-index:1}
+.num{width:44px;height:44px;background:var(--azul);color:#fff;font-weight:800;font-size:20px;display:flex;align-items:center;justify-content:center}
+.card{background:var(--cinza);display:flex;flex-direction:column;flex:1}
+.card.hl{background:var(--lima)}
+.shot{width:100%;display:block;background:#fff;padding:8px 8px 0 8px;box-sizing:border-box}
+.fmt-body{padding:12px 14px 14px 14px;display:flex;flex-direction:column;gap:6px}
+.fmt-body .t{font-size:16px;font-weight:800;line-height:1.2}
+.fmt-body .d{font-size:13px;line-height:1.45;color:var(--texto)}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{background:#fff;color:var(--tinta);font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 7px}
+.tag.on{background:var(--azul);color:#fff}
+.act-steps{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px}
+.act-step{display:flex;gap:14px;align-items:flex-start}
+.act-step .n{flex:none;width:34px;height:34px;background:var(--cor);color:{{ cor_texto }};font-weight:800;font-size:17px;display:flex;align-items:center;justify-content:center}
+.b2b .act-step .n{background:var(--cor2);color:{{ cor_b2b_texto }}}
+.act-step>div:last-child{display:flex;flex-direction:column;gap:4px}
+.act-step b{font-size:17px;font-weight:800}
+.act-step span{font-size:15px;line-height:1.45;color:var(--texto)}
+.demo{position:relative;width:100%;margin-top:28px;aspect-ratio:1565/1111}
+.panel{position:relative;margin-top:28px;width:100%;aspect-ratio:1360/603;box-shadow:0 12px 30px rgba(10,0,68,.18);border-radius:8px;overflow:hidden}
+.panel img.bg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.sign{margin-top:auto;background:var(--tinta);color:#fff;padding:44px 64px;display:flex;flex-direction:column;gap:26px}
+.sign .q{font-size:44px;line-height:1;color:var(--lima)}
+.sign .row{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px}
+.sign .who{display:flex;flex-direction:column;gap:4px}.sign .who b{font-size:24px}.sign .who span{font-size:16px;color:rgba(255,255,255,.8)}
+.sign .lines{display:grid;gap:10px}
+.sign .line{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.sign code{font:700 18px Manrope,system-ui,sans-serif;background:rgba(255,255,255,.12);padding:10px 14px}
+.btn{text-decoration:none;font-weight:800;font-size:14px;padding:12px 20px}
+.btn.fill{background:var(--lima);color:var(--tinta)}
+.btn.line{border:1.5px solid #fff;color:#fff;padding:11px 20px}
+
+/* abas B2C/B2B */
+body[data-tab="b2c"] .only-b2b,body[data-tab="b2b"] .only-b2c{display:none !important}
+.tabs{display:flex;flex-wrap:wrap;align-items:center;align-self:flex-start;gap:8px}
+.tabs .tl{font:800 11px Manrope,system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.75);flex-basis:100%}
+.tabs button{display:inline-flex;align-items:center;gap:8px;font:800 11.5px Manrope,system-ui,sans-serif;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;color:#fff;background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.7);border-radius:999px;padding:7px 14px;cursor:pointer;transition:background .15s,transform .15s}
+.tabs button:hover{background:rgba(255,255,255,.22);transform:translateY(-1px)}
+.tabs button::before{content:"";width:10px;height:10px;border-radius:50%;border:2px solid currentColor;box-sizing:border-box}
+.tabs button[aria-selected="false"]{animation:tabpulse 2.2s ease-in-out infinite}
+@keyframes tabpulse{0%,100%{box-shadow:0 0 0 0 rgba(189,226,73,0)}50%{box-shadow:0 0 0 5px rgba(189,226,73,.45)}}
+.tabs button[aria-selected="true"]{background:#fff;color:var(--azul);border-color:#fff}
+.tabs button[aria-selected="true"]::before{background:var(--azul);border-color:var(--azul)}
+.tabs button:focus-visible{outline:2px solid var(--lima);outline-offset:2px}
+
+/* telas do tablet */
+.cy-f{position:relative;width:100%;aspect-ratio:540/384;background:center/100% 100% no-repeat;container-type:inline-size;font-family:Poppins,Manrope,system-ui,sans-serif;text-align:left}
+.cy-f *,.cy-scr *{box-sizing:border-box}
+.cy-tab{position:relative;width:100%;aspect-ratio:1400/994;background:url({{ img.tablet }}) center/100% 100% no-repeat}
+.cy-scr{position:absolute;box-sizing:border-box;container-type:size;overflow:hidden;background:#0A0A0C;color:#fff;font-family:Poppins,Manrope,system-ui,sans-serif;text-align:left}
+.cy-ab{position:absolute;overflow:hidden}
+.cy-ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.menu-cell{position:absolute;container-type:size}.menu-cell>div{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12cqh;color:#fff;font-family:Poppins,Manrope,system-ui,sans-serif;text-align:center;line-height:1}
+.menu-cell b{font-weight:600;font-size:{{ menu_fs }}cqw;letter-spacing:.32em;margin-right:-.32em;text-transform:uppercase;white-space:nowrap}
+.menu-cell i{font-style:normal;font-weight:500;font-size:13cqw;opacity:.85;white-space:nowrap}
+.bnr{position:absolute;container-type:size;overflow:hidden;background:var(--escura)}.bnr>div{position:absolute;inset:0;color:#fff;font-family:Poppins,Manrope,system-ui,sans-serif;display:flex;align-items:center;gap:6cqh;padding:0 4cqw 0 3cqw;box-sizing:border-box}
+.bnr *{box-sizing:border-box}
+.bnr .lg{flex:none;height:46cqh;width:auto;max-width:16cqw;object-fit:contain{% if logo_branco %};filter:brightness(0) invert(1){% endif %}}
+.bnr .tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:5cqh;padding-left:4cqw;border-left:.25cqw solid rgba(255,255,255,.25)}
+.bnr .ey{font-size:8cqh;font-weight:600;letter-spacing:.22em;text-transform:uppercase;opacity:.8;white-space:nowrap}
+.bnr .hd{font-size:15cqh;font-weight:700;line-height:1.15}
+.bnr .hd em{font-style:normal;color:var(--cor2)}
+.bnr .ct{align-self:flex-start;background:var(--cor2);color:{{ cor_b2b_texto }};font-weight:700;font-size:8.5cqh;padding:3cqh 5cqh;border-radius:99px;white-space:nowrap}
+.bnr img.full{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+@keyframes cyfade{0%,8%{opacity:0}20%,100%{opacity:1}}
+@keyframes cylabel{0%,22%{opacity:0;transform:translateY(8%)}34%,100%{opacity:1;transform:none}}
+@keyframes cypop{0%,14%{opacity:0;transform:scale(.92)}26%,100%{opacity:1;transform:none}}
+@keyframes cyslide{0%,18%{transform:translateX(115%)}34%,100%{transform:none}}
+@keyframes cytap{0%,40%{opacity:0;transform:translate(-50%,-50%) scale(.4)}50%{opacity:1;transform:translate(-50%,-50%) scale(1)}62%,100%{opacity:0;transform:translate(-50%,-50%) scale(1.5)}}
+@keyframes cykb{from{transform:scale(1)}to{transform:scale(1.08)}}
+.cy-a1{animation:cyfade 6s ease-out infinite}.cy-a2{animation:cylabel 6s ease-out infinite}.cy-a3{animation:cypop 5s ease-out infinite}.cy-a4{animation:cyslide 5s ease-out infinite}
+.cy-kb{animation:cykb 8s ease-in-out infinite alternate}
+.cy-tap{position:absolute;left:45%;top:50%;width:5cqw;height:5cqw;border-radius:50%;border:.5cqw solid #fff;background:rgba(255,255,255,.35);animation:cytap 3s ease-out infinite}
+@media (prefers-reduced-motion: reduce){.cy-a1,.cy-a2,.cy-a3,.cy-a4,.cy-kb,.cy-tap,.tabs button{animation:none}}
+
+@media print{@page{size:1080px 1528px;margin:0}html,body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}#page{zoom:1 !important;box-shadow:none}.tabs{display:none}}
+@media (max-width: 759px){
+#page{width:100% !important;min-height:0 !important;box-shadow:none}
+.hero{grid-template-columns:1fr;padding:24px 20px 0 20px;gap:20px}
+.hero-art{margin:0 -20px;min-height:260px}
+.hero h1{font-size:44px;width:auto}.hero h1 br{display:none}
+.hero .sub{white-space:normal;font-size:17px}
+.hero-l{padding-bottom:4px}
+.clients{flex-direction:column;align-items:flex-start;padding:20px;gap:14px}
+.clients .grid{grid-template-columns:repeat(3,1fr);width:100%}
+.sec-head,.intro,.src,.block{padding-left:20px;padding-right:20px}
+.intro{grid-template-columns:1fr;gap:20px}
+.stats{grid-template-columns:1fr 1fr}
+.stat b{font-size:34px}
+.steps4{grid-template-columns:1fr 1fr;gap:14px}
+.journey .line{display:none}
+.act-steps{grid-template-columns:1fr;gap:14px}
+h2{font-size:30px}.sec-head span{font-size:30px}
+.src{text-align:left}
+.sign{padding:28px 20px}.sign .q{font-size:32px}.sign code{font-size:15px}
+}
+</style>
+</head>
+<body data-tab="b2c">
+<div id="page">
+
+{# ---------- ABERTURA ---------- #}
+<div class="hero">
+<div class="hero-l">
+<div class="hero-top">
+<img class="gl" src="{{ img.goomer }}" alt="Goomer"><span class="ads">Ads</span><img class="bl" src="{{ img.logo }}" alt="{{ marca }}">
+</div>
+{% if b2b %}<div class="tabs" role="tablist" aria-label="Escolha a proposta"><span class="tl">Escolha a proposta:</span>
+<button type="button" role="tab" data-t="b2c" aria-selected="true">B2C · Na mesa do cliente</button>
+<button type="button" role="tab" data-t="b2b" aria-selected="false">B2B · No painel do dono</button>
+</div>{% endif %}
+<h1 class="cond only-b2c">{{ hero.titulo }}</h1>
+<p class="sub only-b2c">{{ hero.subtitulo }}</p>
+{% if b2b %}<h1 class="cond only-b2b">{{ b2b.hero_titulo }}</h1>
+<p class="sub only-b2b">{{ b2b.hero_subtitulo }}</p>{% endif %}
+</div>
+<div class="hero-art only-b2c">
+<div class="cover"><div style="width:max(100cqw,150cqh);aspect-ratio:1536/1024;left:calc((100cqw - max(100cqw,150cqh))*.52);top:calc((100cqh - max(100cqw,150cqh)/1.5)*.6)">
+<img class="bg" src="{{ img.hero_b2c }}" alt="Tablet Goomer com a página especial {{ marca }} na mesa de um restaurante">
+<div class="menu-cell" style="left:30.6%;top:50.2%;width:3.45%;height:4.3%"><div><b>{{ menu_label }}</b><i>{{ menu_sub }}</i></div></div>
+<div class="cy-scr" style="left:35.55%;top:44.14%;width:38.67%;height:33.2%">{{ tela_especial }}</div>
+</div></div>
+</div>
+{% if b2b %}<div class="hero-art only-b2b">
+<div class="cover"><div style="width:max(100cqw,117.19cqh);aspect-ratio:1200/1024;left:calc((100cqw - max(100cqw,117.19cqh))*.5);top:calc((100cqh - max(100cqw,117.19cqh)/1.1719)*.6)">
+<img class="bg" src="{{ img.hero_b2b }}" alt="Computador no caixa do restaurante com o painel Goomer e o banner {{ marca }}">
+<div class="bnr" style="left:40.67%;top:37.89%;width:43.83%;height:6.74%"><div>{{ banner }}</div></div>
+</div></div>
+</div>{% endif %}
+</div>
+
+{# ---------- MARCAS ---------- #}
+<div class="clients">
+<div class="lbl">Marcas que já<br>anunciam com a gente</div>
+<div class="grid">
+{% for c in clientes %}<div><img src="{{ c.src }}" alt="{{ c.alt }}" style="max-height:{{ c.h }}px"></div>
+{% endfor %}</div>
+</div>
+
+{# ---------- B2C ---------- #}
+<div class="only-b2c">
+<div class="sec-head"><div><span class="cond">Na mesa do cliente</span><img src="{{ img.logo }}" alt="{{ marca }}"></div></div>
+<div class="intro">
+<div><h2 class="cond">O tablet Goomer</h2>
+<p>Fica na mesa do restaurante. O cliente vê o cardápio, faz o pedido e confere a conta ali mesmo, sem esperar o garçom. Com a Goomer Ads, a marca acompanha esse momento do começo ao fim da refeição.</p></div>
+<div class="stats">
+<div class="stat"><b class="cond">+50 MIL</b><span>telas nas mesas</span></div>
+<div class="stat"><b class="cond">+2 MIL</b><span>restaurantes por todo o Brasil</span></div>
+<div class="stat hl"><b class="cond">4</b><span>formatos na refeição</span></div>
+</div>
+</div>
+<div class="src">Fonte: rede Goomer, {{ fonte_data }}.</div>
+
+<div class="block">
+<h2 class="cond" style="margin-bottom:16px">A jornada da marca</h2>
+<p class="lead" style="margin:-4px 0 20px 0">O inventário Goomer tem 4 formatos de exibição da marca no mesmo tablet. Um tablet por mesa, sendo visto por diversas pessoas no momento de consumo.</p>
+<div class="journey"><div class="line"></div>
+<div class="steps4">
+
+<div class="step"><div class="num">1</div><div class="card">
+<div class="shot" role="img" aria-label="Formato Tela de Início no tablet Goomer, com {{ marca }}"><div class="cy-f" style="background-image:url({{ img.fmt1 }})">
+<div class="cy-ab cy-a1" style="left:17.593%;top:9.115%;width:77.963%;height:66.406%"><img class="cy-ph cy-kb" src="{{ img.foto_inicio }}" alt=""></div>
+<div class="cy-ab cy-a2" style="left:20.370%;top:61.458%;width:29.259%;height:10.417%;background:var(--escura);border-left:.5cqw solid var(--cor);color:#fff;padding:0 1.6cqw;display:flex;flex-direction:column;justify-content:center">
+<div style="font-weight:700;font-size:1.45cqw;line-height:1.2;text-transform:uppercase;white-space:nowrap;color:var(--cor)">{{ marca }}</div><div style="font-size:1.05cqw;opacity:.9;white-space:nowrap">{{ f.inicio.legenda }}</div></div>
+</div></div>
+<div class="fmt-body"><div class="t">Tela de Início</div><div class="d">Depois do pedido, um vídeo de 10 segundos da marca entra na tela inicial.</div><div class="tags"><span class="tag">Vídeo 10s</span></div></div>
+</div></div>
+
+<div class="step"><div class="num">2</div><div class="card">
+<div class="shot" role="img" aria-label="Formato Confirmação de Pedido no tablet Goomer, com {{ marca }}"><div class="cy-f" style="background-image:url({{ img.fmt2 }})">
+<div class="cy-ab cy-a3" style="left:32.407%;top:16.146%;width:48.148%;height:51.823%;background:#0B0B10">
+<div style="position:absolute;left:0;right:0;top:0;height:46%"><img class="cy-ph" src="{{ img.foto_confirmacao }}" alt=""></div>
+<div style="position:absolute;left:0;right:0;top:46%;height:26%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4cqw;color:#fff;font-weight:700;font-size:2cqw;background:var(--escura);text-align:center">{{ f.confirmacao.titulo }}<span style="font-size:1.3cqw;color:var(--cor)">{{ f.confirmacao.destaque }}</span></div>
+<div style="position:absolute;left:0;right:0;bottom:0;height:27.6%;background:#fff;display:flex;align-items:center;gap:1.2cqw;padding:0 1.8cqw;color:#1A1A1A">
+<div style="flex:none;width:3.4cqw;height:3.4cqw;border-radius:50%;background:#EEE;display:flex;align-items:center;justify-content:center;font-size:1.8cqw;font-weight:700">✓</div>
+<div style="flex:1;min-width:0"><div style="font-weight:700;font-size:1.45cqw;line-height:1.3;white-space:nowrap">Pedido enviado com sucesso!</div><div style="font-size:.85cqw;color:#777;white-space:nowrap">Em alguns instantes o seu pedido será entregue.</div></div>
+<div style="flex:none;background:#5BB974;color:#fff;font-weight:700;font-size:1cqw;padding:1.2cqw 2.8cqw;border-radius:.5cqw">OK</div></div></div>
+</div></div>
+<div class="fmt-body"><div class="t">Confirmação de Pedido</div><div class="d">Um banner aparece junto da mensagem de pedido enviado.</div></div>
+</div></div>
+
+<div class="step"><div class="num">3</div><div class="card">
+<div class="shot" role="img" aria-label="Formato Minha Conta no tablet Goomer, com {{ marca }}"><div class="cy-f" style="background-image:url({{ img.fmt3 }})">
+<div class="cy-ab" style="left:69.630%;top:13.802%;width:25.926%;height:21.875%"><div class="cy-a4" style="position:absolute;top:0;left:0;bottom:0;width:89.29%;background:var(--escura);border-radius:1.1cqw;overflow:hidden;color:#fff">
+<div style="position:absolute;left:0;right:0;top:0;height:55%"><img class="cy-ph" src="{{ img.foto_conta }}" alt=""></div>
+<div style="position:absolute;left:1.3cqw;right:.8cqw;bottom:1.2cqw"><div style="font-weight:700;font-size:1.3cqw;line-height:1.2;white-space:nowrap">{{ f.conta.titulo }}</div><div style="font-size:1.1cqw;color:var(--cor);font-weight:600;white-space:nowrap">{{ f.conta.cta }}</div></div></div></div>
+</div></div>
+<div class="fmt-body"><div class="t">Minha Conta</div><div class="d">Banner na tela da conta, na hora de pagar.</div></div>
+</div></div>
+
+<div class="step"><div class="num">4</div><div class="card hl">
+<div class="shot" role="img" aria-label="Formato Página Especial no tablet Goomer, com {{ marca }}"><div class="cy-f" style="background-image:url({{ img.fmt4 }})">
+<div class="menu-cell" style="left:7.6%;top:21.9%;width:6.9%;height:8.4%"><div><b>{{ menu_label }}</b><i>{{ menu_sub }}</i></div></div>
+<div class="cy-scr" style="left:17.593%;top:9.115%;width:77.963%;height:66.406%">{{ tela_especial }}</div>
+</div></div>
+<div class="fmt-body"><div class="t">Página Especial</div><div class="d">Uma categoria nova no cardápio leva a uma página exclusiva da marca.</div><div class="tags"><span class="tag">HTML interativo</span><span class="tag on">Demo {{ marca }}</span></div></div>
+</div></div>
+
+</div></div>
+</div>
+
+<div class="block act">
+<h2 class="cond" style="margin-bottom:18px">Da campanha para a mesa</h2>
+<div style="display:flex;flex-direction:column;gap:16px">
+<p class="lead">{{ ativacao.texto }}</p>
+<div class="act-steps">
+{% for p in ativacao.passos %}<div class="act-step"><div class="n">{{ loop.index }}</div><div><b>{{ p.titulo }}</b><span>{{ p.texto }}</span></div></div>
+{% endfor %}</div>
+</div>
+<div class="demo"><div class="cy-tab" role="img" aria-label="Tablet Goomer com o cardápio aberto na página especial {{ marca }}" style="position:absolute;inset:0">
+<div class="menu-cell" style="left:7.45%;top:21.6%;width:7.3%;height:8.9%"><div><b>{{ menu_label }}</b><i>{{ menu_sub }}</i></div></div>
+{% if demo_url %}<iframe src="{{ demo_url }}" title="Demo {{ marca }}" loading="lazy" allow="fullscreen" style="position:absolute;left:17.572%;top:9.091%;width:77.764%;height:66.517%;border:0;background:var(--escura)"></iframe>
+{% else %}<div class="cy-scr" style="left:17.572%;top:9.091%;width:77.764%;height:66.517%">{{ tela_especial }}</div>{% endif %}
+</div></div>
+</div>
+</div>
+
+{# ---------- B2B ---------- #}
+{% if b2b %}<div class="only-b2b b2b">
+<div class="sec-head"><div><span class="cond">No painel do dono</span><img src="{{ img.logo }}" alt="{{ marca }}"></div></div>
+<div class="intro">
+<div><h2 class="cond">O painel Goomer</h2>
+<p>É onde o dono e o gestor acompanham vendas, pedidos e cardápio. Com a Goomer Ads, a marca fala com quem decide as compras do restaurante, na tela inicial do painel.</p></div>
+<div class="stats two">
+<div class="stat"><b class="cond">+10 MIL</b><span>restaurantes cadastrados no painel</span></div>
+<div class="stat hl"><b class="cond">+30 MIL</b><span>acessos mensais</span></div>
+</div>
+</div>
+<div class="block act">
+<h2 class="cond" style="margin-bottom:18px">{{ b2b.titulo_ativacao }}</h2>
+<div style="display:flex;flex-direction:column;gap:18px">
+<p class="lead">{{ b2b.texto }}</p>
+<div class="act-steps">
+{% for p in b2b.passos %}<div class="act-step"><div class="n">{{ loop.index }}</div><div><b>{{ p.titulo }}</b><span>{{ p.texto }}</span></div></div>
+{% endfor %}</div>
+</div>
+<p class="lead" style="margin-top:20px;font-size:15px">{{ b2b.rodape }}</p>
+<div class="panel"><img class="bg" src="{{ img.painel }}" alt="Painel Goomer com banner {{ marca }} na tela Início">
+<div class="bnr" style="left:36.91%;top:25.37%;width:61.54%;height:18.41%"><div>{{ banner }}</div></div></div>
+</div>
+</div>{% endif %}
+
+<div style="height:44px"></div>
+<div class="sign">
+<div class="q cond">{{ cta.titulo }}</div>
+<div class="row">
+<div class="who"><b>{{ cta.nome }}</b><span>{{ cta.cargo }}</span></div>
+<div class="lines">
+<div class="line"><code style="user-select:all">{{ cta.email }}</code><a class="btn fill" href="mailto:{{ cta.email }}?subject={{ cta.assunto }}">Enviar e-mail</a></div>
+{% if cta.whatsapp %}<div class="line"><a href="https://wa.me/{{ cta.whatsapp }}" target="_blank" rel="noopener" style="color:inherit;text-decoration:none"><code>{{ cta.telefone }}</code></a><a class="btn line" href="https://wa.me/{{ cta.whatsapp }}" target="_blank" rel="noopener">Chamar no WhatsApp</a></div>{% endif %}
+</div>
+</div>
+</div>
+
+</div>
+<script>
+(function(){var p=document.getElementById('page');function fit(){var w=document.documentElement.clientWidth;var z=w<760?1:Math.max(0.7,Math.min(w/1080,1.5));p.style.zoom=z;}
+fit();window.addEventListener('resize',fit);
+{% if b2b %}var b=document.body;function set(t){b.setAttribute('data-tab',t);document.querySelectorAll('.tabs button').forEach(function(x){x.setAttribute('aria-selected',x.dataset.t===t?'true':'false')});try{history.replaceState(null,'','#'+t)}catch(e){}}
+document.querySelectorAll('.tabs button').forEach(function(x){x.addEventListener('click',function(){set(x.dataset.t)})});
+set(location.hash==='#b2b'?'b2b':'b2c');{% endif %}
+})();
+</script>
+</body>
+</html>
