@@ -1,0 +1,62 @@
+{
+  "slug": "insider",
+  "marca": "Insider",
+  "cor": "#C4C4C4",
+  "cor_escura": "#0A0A0A",
+  "logo_branco_no_escuro": true,
+  "logo_altura_hero": 20,
+  "logo_altura_secao": 26,
+  "imagens": {
+    "logo": "insider/logo.svg",
+    "foto_inicio": "insider/foto-inicio.jpg",
+    "foto_confirmacao": "insider/foto-confirmacao.jpg",
+    "foto_conta": "insider/foto-conta.jpg",
+    "foto_especial": "insider/foto-especial.jpg"
+  },
+  "menu": {
+    "label": "Insider",
+    "sub": "Members"
+  },
+  "hero": {
+    "titulo": "Insider Members, <br>na mesa do cliente",
+    "subtitulo": "Cadastro com 10% OFF no tablet de +2 mil restaurantes."
+  },
+  "formatos": {
+    "inicio": {
+      "legenda": "Roupas tecnológicas para o dia a dia"
+    },
+    "confirmacao": {
+      "titulo": "Vire Insider Member",
+      "destaque": "Cadastre-se e ganhe 10% OFF"
+    },
+    "conta": {
+      "titulo": "Enquanto a conta chega, garanta 10% OFF",
+      "cta": "Cadastre-se no Insider Members"
+    },
+    "especial": {
+      "selo": "Cadastro · 30s",
+      "titulo": "Vire Member e",
+      "titulo_destaque": "ganhe 10% OFF.",
+      "texto": "Cadastre-se em segundos e receba seu cupom na hora.",
+      "botao": "Quero meu cupom"
+    }
+  },
+  "ativacao": {
+    "texto": "Na página especial, é possível criar um modelo <strong>inovador</strong> de ativação da marca, podendo gerar benefícios e um nível único de interação com os usuários da mesa. Para a Insider, criamos uma página de cadastro no Insider Members: o cliente deixa seus dados na mesa e recebe na hora um cupom de 10% de desconto, gerando leads qualificados com segmentação por praça e perfil de restaurante.",
+    "passos": [
+      {
+        "titulo": "Entra no menu Insider",
+        "texto": "O usuário abre a categoria Insider no cardápio do tablet."
+      },
+      {
+        "titulo": "Faz o cadastro",
+        "texto": "Informa nome, e-mail e celular no tablet, em menos de 30 segundos."
+      },
+      {
+        "titulo": "Ganha 10% OFF",
+        "texto": "Recebe o cupom e vira Insider Member, com cashback nas próximas compras."
+      }
+    ]
+  },
+  "demo_url": null
+}
