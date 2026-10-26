@@ -1323,7 +1323,7 @@ function initAnim(root){
   if(v){const hl=root.querySelector('.vhl'),ph=root.querySelector('.ph'),box=root.querySelector('.tvbox');const t0=performance.now();let playing=false;
     const tick=(now)=>{if(!v.isConnected)return;const c=((now-t0)/1000)%14;ph.style.left=(c/14*100)+'%';const ad=c>=2&&c<12;
       if(ad&&!playing){playing=true;try{v.currentTime=0}catch(_){}const p=v.play();if(p)p.catch(()=>{})}
-      if(!ad&&playing){playing=false;v.pause()}
+      if(!ad&&playing){playing=false;v.pause()}if(ad&&playing&&v.paused&&v.readyState>=2&&!v.ended){const p=v.play();if(p)p.catch(()=>{})}
       box.classList.toggle('ad',ad);hl.classList.toggle('on',ad);requestAnimationFrame(tick)};requestAnimationFrame(tick)}
 }
 function showFx(i){
@@ -1370,7 +1370,7 @@ function applyBrand(root){const b=BRANDS.find(x=>x.id===curBrand);if(!b)return;
   root.querySelectorAll('img.mcscr').forEach(im=>{im.src=b.img.conta;im.alt='Tela Minha Conta com banner '+b.n});
   if(b.img.sug)root.querySelectorAll('img.vmodal').forEach(im=>{im.src=b.img.sug;im.alt='Venda sugestiva: '+b.sugtxt[0].slice(3)+' a partir de '+b.sugtxt[1]});
   if(b.sugtxt)root.querySelectorAll('.vs[data-seq="sug"]').forEach(vs=>{vs.querySelectorAll('.ci.sp').forEach(ci=>{ci.querySelector('span').innerHTML=esc(b.sugtxt[0])+' <small>patrocinado</small>';ci.querySelector('b').textContent=b.sugtxt[1]});vs.querySelectorAll('.t2').forEach(t=>t.textContent=b.sugtxt[2])});
-  root.querySelectorAll('video.tv').forEach(v=>{if(v.dataset.b===b.id)return;v.dataset.b=b.id;v.innerHTML='<source src="'+b.img.mp4+'" type="video/mp4"><source src="'+b.img.webm+'" type="video/webm">';v.muted=true;v.setAttribute('muted','');v.setAttribute('aria-label','Vídeo de 10 segundos de '+b.n+' na Tela de Início');try{v.load()}catch(_){}});
+  root.querySelectorAll('video.tv').forEach(v=>{if(v.dataset.b===b.id)return;v.dataset.b=b.id;v.innerHTML='<source src="'+b.img.mp4+'" type="video/mp4"><source src="'+b.img.webm+'" type="video/webm">';v.muted=true;v.setAttribute('muted','');v.setAttribute('aria-label','Vídeo de 10 segundos de '+b.n+' na Tela de Início');try{v.load();const bx=v.closest('.tvbox');if(bx&&bx.classList.contains('ad')){const p=v.play();if(p)p.catch(()=>{})}}catch(_){}});
   root.querySelectorAll('.scr.case').forEach(x=>x.classList.remove('case'));
   root.querySelectorAll('.fx-note').forEach(n=>n.textContent='Conteúdo do anunciante meramente ilustrativo.');
 }
