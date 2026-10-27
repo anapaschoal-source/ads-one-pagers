@@ -13,4 +13,6 @@ for f in sys.argv[1:]:
         s = s.replace('grid-template-columns:repeat(5,1fr)', 'grid-template-columns:repeat(6,1fr)', 1)
         s, k = re.subn(r'(<div class="clients">.*?<div class="grid">(?:\s*<div><img[^>]*></div>)+)', lambda m: m.group(1) + f'\n<div><img src="{cy}" alt="Cyrela" style="max-height:30px"></div>', s, count=1, flags=re.S)
         print(f, 'cyrela' if k else 'CYRELA NÃO ACHOU')
+    if '/*shopee-hero*/' not in s:
+        s = s.replace('</style>', '/*shopee-hero*/.hero h1{line-height:1.14}\n</style>', 1)
     open(f, 'w', encoding='utf-8').write(s); print(f, 'vídeo' if n else 'NÃO ACHOU')
