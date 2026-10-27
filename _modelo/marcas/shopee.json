@@ -13,15 +13,26 @@
     "foto_conta": "shopee/foto-conta.jpg",
     "foto_especial": "shopee/foto-especial.jpg"
   },
-  "menu": { "label": "Shopee", "sub": "11.11" },
+  "menu": {
+    "label": "Shopee",
+    "sub": "11.11"
+  },
   "hero": {
     "titulo": "O 11.11, <br>na mesa do cliente",
     "subtitulo": "Cupons da Shopee no tablet de +2 mil restaurantes."
   },
   "formatos": {
-    "inicio": { "legenda": "11.11 Super Liquidação" },
-    "confirmacao": { "titulo": "Pedido feito! Agora é o seu cupom", "destaque": "R$ 20 OFF no app Shopee" },
-    "conta": { "titulo": "Na hora da conta, o frete é grátis", "cta": "Baixe o app Shopee" },
+    "inicio": {
+      "legenda": "11.11 Super Liquidação"
+    },
+    "confirmacao": {
+      "titulo": "Pedido feito! Agora é o seu cupom",
+      "destaque": "R$ 20 OFF no app Shopee"
+    },
+    "conta": {
+      "titulo": "Frete grátis no 11.11",
+      "cta": "Baixe o app Shopee"
+    },
     "especial": {
       "selo": "Roleta 11.11 · 10s",
       "titulo": "Gire e ganhe no",
@@ -33,9 +44,18 @@
   "ativacao": {
     "texto": "Na página especial, é possível criar um modelo <strong>inovador</strong> de ativação da marca, podendo gerar benefícios e um nível único de interação com os usuários da mesa. Para a Shopee, criamos a Roleta 11.11: o cliente gira enquanto espera o pedido e ganha um cupom para usar no app, com segmentação por praça e horário.",
     "passos": [
-      { "titulo": "Entra no menu Shopee", "texto": "O usuário abre a categoria Shopee no cardápio do tablet." },
-      { "titulo": "Gira a roleta", "texto": "Uma rodada de 10 segundos enquanto o pedido não chega." },
-      { "titulo": "Ganha o cupom", "texto": "Código de desconto ou frete grátis para usar no app Shopee." }
+      {
+        "titulo": "Entra no menu Shopee",
+        "texto": "O usuário abre a categoria Shopee no cardápio do tablet."
+      },
+      {
+        "titulo": "Gira a roleta",
+        "texto": "Uma rodada de 10 segundos enquanto o pedido não chega."
+      },
+      {
+        "titulo": "Ganha o cupom",
+        "texto": "Código de desconto ou frete grátis para usar no app Shopee."
+      }
     ]
   },
   "demo_url": "/shopee/jogo/",
