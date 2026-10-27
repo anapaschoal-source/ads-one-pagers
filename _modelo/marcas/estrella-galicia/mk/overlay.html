@@ -1,0 +1,66 @@
+<div class="fx" id="fx" hidden role="dialog" aria-modal="true" aria-labelledby="fxTitle">
+  <div class="fx-card">
+    <div class="fx-side">
+      <span class="eyebrow">Formatos de mídia</span>
+      <h2 id="fxTitle">Formatos em ação</h2>
+      <div class="fx-where">Até <b>4 formatos</b> no tablet da mesa</div>
+      <ul class="fx-list" id="fxList" role="tablist" aria-label="Formatos"></ul>
+    </div>
+    <div class="fx-main">
+      <button type="button" class="fx-close" id="fxClose" aria-label="Fechar">×</button>
+      <div class="fx-info" id="fxInfo"></div>
+      <div id="fxStage"></div>
+    </div>
+  </div>
+</div>
+<script type="text/plain" id="game-eg">__GAME__</script>
+<script>
+(function(){
+const I=__IMG__;
+const FORMATS=__FORMATS__;
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let _game=null;function gameHTML(){if(!_game){const b=document.getElementById('game-eg').textContent.trim();_game=new TextDecoder().decode(Uint8Array.from(atob(b),c=>c.charCodeAt(0)))}return _game}
+const fx=document.getElementById('fx'),fxList=document.getElementById('fxList'),fxInfo=document.getElementById('fxInfo'),fxStage=document.getElementById('fxStage');
+let fxI=0,fxTimer=null,fxPaused=false,lastFocus=null;
+fxList.innerHTML=FORMATS.map((f,i)=>`<li><button type="button" role="tab" data-i="${i}" aria-selected="false"><b>${f.n}</b><span>${f.k}</span><small>${f.tags.join(' · ')}</small><i></i></button></li>`).join('');
+fxList.querySelectorAll('button').forEach(b=>b.onclick=()=>{fxPaused=true;fxList.classList.add('paused');showFx(+b.dataset.i)});
+function initAnim(root){
+  const vs=root.querySelector('.vs');
+  if(vs){const fg=vs.querySelector('.finger'),ph=root.querySelector('.ph');const t0=performance.now();let last=-1;
+    // passos: [início(s), classe, dedo x%, dedo y%, toque?] (mesmas sequências do media kit)
+    const SEQ={conta:{L:10,P:[[0,'',60,60,0],[1,'',83,4.6,0],[1.8,'',83,4.6,1],[2.3,'conta ban',60,120,0],[9.3,'',60,60,0]]},
+      confirm:{L:10,P:[[0,'',70,62,0],[0.8,'',89,45,0],[1.5,'',89,45,1],[2.2,'cart',86,58,0],[3,'cart',82,43,0],[3.6,'cart',82,43,1],[4.3,'sugm',93,86,0]]}};
+    const S=SEQ[vs.dataset.seq],P=S.P,L=S.L;
+    const tick=(now)=>{if(!vs.isConnected)return;const c=((now-t0)/1000)%L;if(ph)ph.style.left=(c/L*100)+'%';
+      let s=0;for(let k=0;k<P.length;k++)if(c>=P[k][0])s=k;
+      if(s!==last){last=s;const p=P[s];vs.className='vs '+p[1];fg.style.setProperty('--fx',p[2]+'%');fg.style.setProperty('--fy',p[3]+'%');
+        if(p[4]){fg.classList.remove('tap');void fg.offsetWidth;fg.classList.add('tap');setTimeout(()=>fg.classList.remove('tap'),300)}}
+      requestAnimationFrame(tick)};requestAnimationFrame(tick)}
+  const pb=root.querySelector('.playbtn');
+  if(pb){const gb=root.querySelector('.gamebox'),gc=root.querySelector('.gameclose'),fr=gb.querySelector('iframe');
+    pb.onclick=()=>{fxPaused=true;fxList.classList.add('paused');clearTimeout(fxTimer);fr.onload=()=>{try{const d=fr.contentDocument;const go=()=>{const b=[...d.querySelectorAll('button,[role=button],.btn,a')].find(x=>/bora/i.test(x.textContent));if(b)b.click();else setTimeout(go,150)};setTimeout(go,200)}catch(_){}};fr.removeAttribute('src');fr.srcdoc=gameHTML();gb.hidden=false;gc.hidden=false;pb.hidden=true;root.querySelectorAll('.hl').forEach(x=>x.style.display='none')};
+    gc.onclick=()=>{fr.removeAttribute('src');fr.srcdoc='';gb.hidden=true;gc.hidden=true;pb.hidden=false;root.querySelectorAll('.hl').forEach(x=>x.style.display='')};}
+  const box=root.querySelector('.vreal .tvbox');
+  if(box){const hl=root.querySelector('.vhl'),ph=root.querySelector('.ph');const t0=performance.now();
+    const tick=(now)=>{if(!box.isConnected)return;const c=((now-t0)/1000)%14;if(ph)ph.style.left=(c/14*100)+'%';const ad=c>=2&&c<12;
+      box.classList.toggle('ad',ad);hl.classList.toggle('on',ad);requestAnimationFrame(tick)};requestAnimationFrame(tick)}
+}
+function showFx(i){
+  fxI=i;const f=FORMATS[i];
+  fxList.querySelectorAll('button').forEach((b,j)=>{b.setAttribute('aria-selected',j===i);b.style.setProperty('--dur',f.dur+'s');const ii=b.querySelector('i');ii.style.animation='none';void ii.offsetWidth;ii.style.animation=''});
+  fxInfo.innerHTML=`<div class="mtags">${f.tags.map((t,j)=>`<span class="mtag ${j===0?'l':''}">${esc(t)}</span>`).join('')}</div><h3>${esc(f.n)}</h3><p>${esc(f.d)}</p>`;
+  fxStage.innerHTML=f.h+'<p class="fx-note">Conteúdo do anunciante meramente ilustrativo.</p>';
+  fxStage.querySelector('.scr').classList.add('on');initAnim(fxStage);
+  clearTimeout(fxTimer);if(!fxPaused)fxTimer=setTimeout(()=>showFx((fxI+1)%FORMATS.length),f.dur*1000);
+}
+function openFx(i){lastFocus=document.activeElement;fx.hidden=false;document.body.style.overflow='hidden';fxPaused=false;fxList.classList.remove('paused');showFx(i);document.getElementById('fxClose').focus()}
+function closeFx(){fx.hidden=true;document.body.style.overflow='';clearTimeout(fxTimer);fxStage.innerHTML='';if(lastFocus)lastFocus.focus()}
+document.getElementById('fxClose').onclick=closeFx;
+fx.addEventListener('click',e=>{if(e.target===fx)closeFx()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!fx.hidden)closeFx()});
+document.querySelectorAll('.mkthumb').forEach(el=>{const i=+el.dataset.mk,f=FORMATS[i];
+  el.innerHTML=`<div class="thumb">${f.h}</div>`;el.querySelector('.scr').classList.add('on');initAnim(el);
+  el.onclick=()=>openFx(i);el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openFx(i)}}});
+document.querySelectorAll('.mkmore').forEach(b=>b.onclick=()=>openFx(+b.dataset.mk));
+})();
+</script>
