@@ -2,36 +2,38 @@
   "slug": "estrella-galicia",
   "marca": "Estrella Galicia",
   "cor": "#C8102E",
-  "cor_escura": "#0E1A2B",
-  "logo_branco_no_escuro": true,
-  "logo_altura_hero": 26,
-  "logo_altura_secao": 34,
-  "imagens": {},
-  "menu": { "label": "Estrella", "sub": "0,0 MotoGP" },
+  "cor_escura": "#141414",
+  "logo_branco_no_escuro": false,
+  "logo_altura_hero": 46,
+  "logo_altura_secao": 58,
+  "imagens": {
+    "logo": "estrella-galicia/logo.png"
+  },
+  "menu": { "label": "Estrella", "sub": "Tirada 0,0" },
   "hero": {
     "titulo": "Estrella Galicia, <br>na mesa do cliente",
-    "subtitulo": "O Desafio 0,0 MotoGP no tablet de +2 mil restaurantes."
+    "subtitulo": "A Tirada Perfeita 0,0 no tablet de +2 mil restaurantes."
   },
   "formatos": {
     "inicio": { "legenda": "Que Cerveja!" },
     "confirmacao": { "titulo": "Pedido feito! Que tal uma 0,0?", "destaque": "Estrella Galicia 0,0 gelada" },
-    "conta": { "titulo": "Concorra a uma experiência MotoGP", "cta": "Jogue o Desafio 0,0" },
+    "conta": { "titulo": "Concorra a uma experiência Estrella Galicia", "cta": "Jogue a Tirada 0,0" },
     "especial": {
-      "selo": "Desafio 0,0 MotoGP · 30s",
-      "titulo": "Desafio",
-      "titulo_destaque": "0,0.",
-      "texto": "Uma volta rápida enquanto o pedido não chega, e o cliente concorre a uma experiência MotoGP.",
-      "botao": "Bora acelerar"
+      "selo": "Tirada Perfeita 0,0 · 15s",
+      "titulo": "Tirada",
+      "titulo_destaque": "perfeita.",
+      "texto": "Segure para encher o copo e solte na linha. Acertou, concorre a uma experiência Estrella Galicia.",
+      "botao": "Bora tirar"
     }
   },
   "ativacao": {
-    "texto": "Na página especial, é possível criar um modelo <strong>inovador</strong> de ativação da marca, podendo gerar benefícios e um nível único de interação com os usuários da mesa. Para a Estrella Galicia, criamos o Desafio 0,0 MotoGP: o cliente faz uma volta rápida enquanto espera o pedido e entra no sorteio de uma experiência MotoGP, com segmentação por praça e horário.",
+    "texto": "Na página especial, é possível criar um modelo <strong>inovador</strong> de ativação da marca, podendo gerar benefícios e um nível único de interação com os usuários da mesa. Para a Estrella Galicia, criamos a Tirada Perfeita 0,0: o cliente enche o copo da 0,0 até a linha enquanto espera o pedido e, se acertar, entra no sorteio de uma experiência Estrella Galicia, com segmentação por praça e horário.",
     "passos": [
       { "titulo": "Entra no menu Estrella", "texto": "O usuário abre a categoria Estrella Galicia no cardápio do tablet." },
-      { "titulo": "Faz uma volta", "texto": "Um desafio de 30 segundos na pista da 0,0 enquanto o pedido não chega." },
-      { "titulo": "Concorre à experiência", "texto": "Cadastro rápido para o sorteio de uma experiência MotoGP com a Estrella Galicia." }
+      { "titulo": "Tira a 0,0 perfeita", "texto": "Segura para encher o copo e solta na linha do colarinho, em 15 segundos." },
+      { "titulo": "Concorre à experiência", "texto": "Cadastro rápido para o sorteio de uma experiência Estrella Galicia." }
     ]
   },
-  "demo_url": null,
+  "demo_url": "/estrella-galicia/jogo/",
   "ocultar_clientes": []
 }
