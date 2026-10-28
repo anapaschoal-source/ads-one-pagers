@@ -118,8 +118,10 @@ def main():
         return data_uri(os.path.join(cdir, p), w) if p else None
 
     cr = criativo('criativo_inicio')
+    # sem criativo pronto: a frase entra dentro da peça (logo + título sobre a foto), sem rodapé de legenda
     criativo_inicio = (f'<img class="cr-ph" src="{cr}" alt="">' if cr else
-                       f'<img class="cr-ph" src="{img["foto_inicio"]}" alt=""><div class="cr-lb"><b>{marca}</b><span>{f["inicio"]["legenda"]}</span></div>')
+                       f'<div class="bx wide"><img class="ph cr-ph" src="{img["foto_inicio"]}" alt=""><div class="fd"></div><div class="tx">'
+                       f'<img class="lg" src="{img["logo"]}" alt=""><div class="h">{f["inicio"]["legenda"]}</div></div></div>')
 
     def banner_bx(full, foto, titulo, sub, cta=None):
         if full:
