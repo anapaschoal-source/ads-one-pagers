@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tirada Perfeita 0,0 • Estrella Galicia • Goomer Games</title>
+<style>
+/* Tirada Perfeita 0,0 para a Página Especial do tablet Goomer. Palco 1280x800 escalado. Touch first. */
+@font-face{font-family:'Manrope';src:url('__FONT700__') format('woff2');font-weight:700;font-display:block}
+@font-face{font-family:'Manrope';src:url('__FONT800__') format('woff2');font-weight:800;font-display:block}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--red:#C8102E;--red2:#E3263F;--gold:#D9A21B;--gold2:#F4C542;--ink:#111;--cr:#F7EFE2;--f:'Manrope',system-ui,sans-serif;--poc-h:40px}
+html,body{width:100%;height:100%;overflow:hidden;background:#0c0c0c;font-family:var(--f);color:#fff;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.viewport{position:absolute;width:1280px;height:800px;transform-origin:top left;overflow:hidden;
+  background:radial-gradient(55% 75% at 78% 35%,rgba(217,162,27,.28) 0%,rgba(217,162,27,0) 65%),linear-gradient(180deg,#1b1b1b,#0c0c0c 70%)}
+.viewport::after{content:"";position:absolute;left:0;right:0;bottom:var(--poc-h);height:10px;background:var(--red)}
+.screen{position:absolute;inset:0 0 calc(var(--poc-h) + 10px) 0;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;padding:0 72px;gap:40px;animation:in .35s ease-out both}
+@keyframes in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.copy{display:grid;gap:22px;align-content:center}
+.logo{height:92px;width:auto;justify-self:start}
+.badge{justify-self:start;font-size:15px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;background:var(--red);color:#fff;padding:8px 16px;border-radius:999px}
+h1{font-size:70px;line-height:1.02;font-weight:800;letter-spacing:-.02em}
+h1 em{font-style:normal;color:var(--gold2)}
+p{font-size:24px;line-height:1.45;font-weight:700;color:#d9d4cb;max-width:30ch}
+.btn{justify-self:start;display:inline-flex;align-items:center;gap:12px;min-height:76px;padding:0 44px;border:0;border-radius:999px;font:800 24px var(--f);cursor:pointer;background:var(--red);color:#fff;box-shadow:0 12px 30px rgba(200,16,46,.35),inset 0 -5px 0 #9c0c24}
+.btn.alt{background:#fff;color:var(--ink);box-shadow:0 12px 30px rgba(0,0,0,.35),inset 0 -5px 0 #ddd}
+.btn:active{transform:translateY(3px)}
+.foot{font-size:15px;color:#a8a29a;font-weight:700}
+.tries{display:flex;gap:10px}
+.tries i{width:18px;height:18px;border-radius:50%;background:var(--gold2)}
+.tries i.off{background:#3a3a3a}
+/* copo */
+.stage{position:relative;justify-self:center;width:420px;height:600px}
+.glass{position:absolute;left:50%;bottom:30px;width:300px;height:500px;transform:translateX(-50%);clip-path:polygon(0 0,100% 0,88% 100%,12% 100%);background:rgba(255,255,255,.08)}
+.glass::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.18),rgba(255,255,255,0) 22%,rgba(255,255,255,0) 78%,rgba(255,255,255,.12));z-index:3;pointer-events:none}
+.beer{position:absolute;left:0;right:0;bottom:0;height:0;background:linear-gradient(180deg,var(--gold2),var(--gold) 60%,#b9830f)}
+.foam{position:absolute;left:0;right:0;height:0;background:linear-gradient(180deg,#fff,var(--cr));border-radius:0 0 6px 6px}
+.bub{position:absolute;bottom:0;width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.55);animation:up 2.4s linear infinite}
+@keyframes up{to{transform:translateY(-480px);opacity:0}}
+.rim{position:absolute;left:50%;bottom:528px;width:300px;height:4px;transform:translateX(-50%);background:rgba(255,255,255,.35);border-radius:4px}
+.base{position:absolute;left:50%;bottom:20px;width:236px;height:12px;transform:translateX(-50%);background:rgba(255,255,255,.22);border-radius:0 0 10px 10px}
+.target{position:absolute;left:50%;width:340px;transform:translateX(-50%);border-top:3px dashed var(--red2);z-index:4}
+.target.top{border-top-color:rgba(227,38,63,.55)}
+.tlabel{position:absolute;right:-4px;transform:translate(100%,-50%);font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--red2);white-space:nowrap}
+.label00{position:absolute;left:50%;bottom:150px;transform:translateX(-50%);z-index:5;font-size:42px;font-weight:800;color:rgba(255,255,255,.9);text-shadow:0 2px 10px rgba(0,0,0,.3)}
+.hold{justify-self:start;min-height:96px;padding:0 52px;font-size:26px}
+.hold.on{background:var(--red2);transform:scale(.97)}
+.msg{font-size:28px;font-weight:800;min-height:38px;color:var(--gold2)}
+.card{justify-self:center;width:500px;background:#fff;color:var(--ink);border-radius:32px;padding:44px 48px;position:relative;box-shadow:0 30px 60px rgba(0,0,0,.5);animation:pop .5s cubic-bezier(.2,1.6,.4,1) both;border-top:12px solid var(--red)}
+@keyframes pop{from{transform:scale(.6) rotate(-6deg);opacity:0}to{transform:none;opacity:1}}
+.card .k{font-size:16px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--red)}
+.card .v{font-size:40px;font-weight:800;line-height:1.1;margin:14px 0 8px;letter-spacing:-.02em}
+.card .d{font-size:19px;font-weight:700;color:#5a554e;line-height:1.4}
+.card .code{margin-top:30px;border-top:3px dashed #e6ddd0;padding-top:24px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.card .code b{font-size:38px;letter-spacing:.08em;background:var(--cr);padding:10px 18px;border-radius:14px}
+.card .code span{font-size:15px;font-weight:700;color:#5a554e;max-width:16ch;line-height:1.35}
+.field{display:grid;gap:8px;margin-top:18px}
+.field label{font-size:14px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#5a554e}
+.field div{height:58px;border:2px solid #e6ddd0;border-radius:14px;display:flex;align-items:center;padding:0 18px;font-size:20px;font-weight:700;color:#9a948b}
+.confetti{position:absolute;inset:0;pointer-events:none;z-index:5}
+.confetti i{position:absolute;top:-20px;width:14px;height:22px;border-radius:3px;animation:fall 2.4s ease-in forwards}
+@keyframes fall{to{transform:translateY(860px) rotate(540deg);opacity:.2}}
+.poc-bar{position:absolute;z-index:60;left:0;right:0;bottom:0;height:var(--poc-h);display:flex;align-items:center;justify-content:space-between;padding:0 20px;background:#15161d;border-top:1px solid rgba(255,255,255,.14)}
+.poc-left{display:flex;align-items:center;gap:12px}
+.poc-badge{background:#2b00ff;color:#fff;font-size:11px;font-weight:800;letter-spacing:.14em;padding:4px 10px;border-radius:6px}
+.poc-text{font-size:12px;font-weight:700;color:#cbd5e1}
+.poc-right{display:flex;align-items:center;gap:10px}
+.poc-powered{font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:#94a3b8}
+.goomer-logo{display:block;width:88px;height:auto;color:#fff}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="viewport" id="vp">
+  <div id="app"></div>
+  <div class="confetti" id="cf"></div>
+  <footer class="poc-bar">
+    <div class="poc-left"><span class="poc-badge">POC</span><span class="poc-text">Protótipo de demonstração — não é um produto oficial da Estrella Galicia</span></div>
+    <div class="poc-right"><span class="poc-powered">powered by</span>__GOOMER_SVG__</div>
+  </footer>
+</div>
+<script>
+var LOGO='__LOGO__';
+var GH=500, T0=0.80, T1=0.88; /* faixa da tirada perfeita: 80% a 88% do copo (líquido + colarinho) */
+var app=document.getElementById('app'),tries=3,level=0,raf=null,holding=false,last=0;
+function fit(){var vp=document.getElementById('vp');var s=Math.min(innerWidth/1280,innerHeight/800);vp.style.transform='scale('+s+')';vp.style.left=Math.round((innerWidth-1280*s)/2)+'px';vp.style.top=Math.round((innerHeight-800*s)/2)+'px'}
+addEventListener('resize',fit);fit();
+function glass(){var b='';for(var i=0;i<9;i++)b+='<span class="bub" style="left:'+(14+i*9)+'%;animation-delay:'+(i*.27)+'s"></span>';
+ return '<div class="stage"><div class="rim"></div><div class="glass" id="gl"><div class="beer" id="beer">'+b+'</div><div class="foam" id="foam"></div></div><div class="base"></div>'+
+ '<div class="target" style="bottom:'+(30+GH*T1)+'px"><span class="tlabel">Linha perfeita</span></div><div class="target top" style="bottom:'+(30+GH*T0)+'px"></div><div class="label00">0,0</div></div>'}
+function draw(){var total=Math.min(level,1.06),foamH=Math.min(total,1)*0.14*GH*Math.min(1,total/0.4),liq=Math.max(0,total*GH-foamH);
+ var be=document.getElementById('beer'),fo=document.getElementById('foam');if(!be)return;be.style.height=liq+'px';fo.style.bottom=liq+'px';fo.style.height=foamH+'px'}
+function dots(){var s='';for(var i=0;i<3;i++)s+='<i class="'+(i<tries?'':'off')+'"></i>';return '<div class="tries">'+s+'</div>'}
+function intro(){tries=3;app.innerHTML='<section class="screen"><div class="copy"><img class="logo" src="'+LOGO+'" alt="Estrella Galicia"><span class="badge">Tirada Perfeita 0,0</span><h1>Tire a <em>0,0 perfeita</em></h1><p>Segure para encher o copo e solte na linha. Acertou, concorre a uma experiência Estrella Galicia.</p><button class="btn" id="go">Bora tirar</button><span class="foot">Leva 15 segundos. Estrella Galicia 0,0 é sem álcool.</span></div>'+glass()+'</section>';
+ level=0.86;draw();document.getElementById('go').onclick=play}
+function play(){level=0;app.innerHTML='<section class="screen"><div class="copy"><img class="logo" src="'+LOGO+'" alt="Estrella Galicia"><span class="badge">Tentativas</span>'+dots()+'<h1>Segure e <em>solte na linha</em></h1><div class="msg" id="msg">O colarinho tem que parar entre as linhas vermelhas.</div><button class="btn hold" id="hd">Segure para encher</button></div>'+glass()+'</section>';
+ draw();var hd=document.getElementById('hd');
+ hd.addEventListener('pointerdown',function(e){e.preventDefault();if(holding)return;holding=true;hd.classList.add('on');last=performance.now();raf=requestAnimationFrame(tick)});
+ ['pointerup','pointerleave','pointercancel'].forEach(function(ev){hd.addEventListener(ev,release)})}
+function tick(t){if(!holding)return;var dt=(t-last)/1000;last=t;level+=dt*(0.34+level*0.28);draw();if(level>=1.06){release();return}raf=requestAnimationFrame(tick)}
+function release(){if(!holding)return;holding=false;cancelAnimationFrame(raf);var hd=document.getElementById('hd');hd.classList.remove('on');hd.disabled=true;
+ var m=document.getElementById('msg'),ok=level>=T0&&level<=T1;
+ if(ok){m.textContent='Tirada perfeita!';confetti();setTimeout(cadastro,1100);return}
+ tries--;m.textContent=level>1?'Transbordou! Mais devagar no final.':(level>T1?'Passou um pouquinho da linha.':'Faltou cerveja no copo.');
+ setTimeout(function(){if(tries>0)play();else fim()},1400)}
+function cadastro(){app.innerHTML='<section class="screen"><div class="copy"><img class="logo" src="'+LOGO+'" alt="Estrella Galicia"><span class="badge">Tirada perfeita!</span><h1>Agora é só <em>se cadastrar</em></h1><p>Deixe seu nome e WhatsApp para concorrer à experiência Estrella Galicia.</p><button class="btn" id="ok">Quero concorrer</button><span class="foot">Sorteio para maiores de 18 anos. Regulamento no app.</span></div><div class="card"><div class="k">Sorteio Estrella Galicia</div><div class="v">Experiência Estrella Galicia</div><div class="field"><label>Nome</label><div>Seu nome</div></div><div class="field"><label>WhatsApp</label><div>(11) 9 0000-0000</div></div></div></section>';
+ document.getElementById('ok').onclick=sorte}
+function sorte(){var n=String(1000+Math.floor(Math.random()*9000));
+ app.innerHTML='<section class="screen"><div class="copy"><img class="logo" src="'+LOGO+'" alt="Estrella Galicia"><span class="badge">Você está concorrendo</span><h1>Que <em>tirada!</em></h1><p>O resultado sai pelo WhatsApp. Enquanto isso, que tal pedir uma 0,0?</p><button class="btn alt" id="re">Jogar de novo</button></div><div class="card"><div class="k">Número da sorte</div><div class="v">Experiência Estrella Galicia</div><div class="d">Guarde este número. Ele vale para o sorteio desta campanha.</div><div class="code"><b>'+n+'</b><span>Resultado pelo WhatsApp</span></div></div></section>';
+ document.getElementById('re').onclick=intro;confetti()}
+function fim(){app.innerHTML='<section class="screen"><div class="copy"><img class="logo" src="'+LOGO+'" alt="Estrella Galicia"><span class="badge">Quase lá</span><h1>A tirada perfeita <em>pede prática</em></h1><p>Mais uma rodada? O colarinho tem que parar entre as linhas vermelhas.</p><button class="btn" id="re">Tentar de novo</button></div>'+glass()+'</section>';
+ level=0.5;draw();document.getElementById('re').onclick=function(){tries=3;play()}}
+function confetti(){var cf=document.getElementById('cf'),c=['#C8102E','#F4C542','#fff','#D9A21B'],h='';
+ for(var i=0;i<70;i++)h+='<i style="left:'+(Math.random()*100)+'%;background:'+c[i%4]+';animation-delay:'+(Math.random()*.6)+'s;animation-duration:'+(1.8+Math.random()*1.2)+'s"></i>';
+ cf.innerHTML=h;setTimeout(function(){cf.innerHTML=''},3400)}
+intro();
+</script>
+</body>
+</html>
