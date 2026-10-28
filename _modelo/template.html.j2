@@ -15,8 +15,7 @@ a{color:var(--lima)}a:hover{color:#fff}
 .hero{background:var(--azul);color:#fff;padding:36px 64px 0 64px;display:grid;grid-template-columns:minmax(0,1fr) 440px;gap:32px;box-sizing:border-box;align-items:end}
 .hero-l{display:flex;flex-direction:column;gap:22px;padding-bottom:40px;align-self:stretch}
 .hero-top{display:flex;align-items:center;gap:18px;margin-bottom:auto}
-.hero-top .gl{width:140px;height:auto}
-.hero-top .ads{font-size:17px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.hero-top .gl{height:46px;width:auto;display:block}
 .hero-top .bl{height:{{ logo_altura_hero }}px;width:auto;display:block;margin-left:auto{% if logo_branco %};filter:brightness(0) invert(1){% endif %}}
 .hero h1{margin:0;font-size:64px;line-height:1;width:470px}
 .hero .sub{margin:0;font-size:19px;line-height:1.45;max-width:490px;white-space:nowrap;opacity:.9}
@@ -303,7 +302,7 @@ h2{font-size:30px}.sec-head span{font-size:30px}
 <div class="hero">
 <div class="hero-l">
 <div class="hero-top">
-<img class="gl" src="{{ img.goomer }}" alt="Goomer"><span class="ads">Ads</span><img class="bl" src="{{ img.logo }}" alt="{{ marca }}">
+<img class="gl" src="{{ img.goomer_ads }}" alt="Goomer Ads"><img class="bl" src="{{ img.logo }}" alt="{{ marca }}">
 </div>
 {% if b2b %}<div class="tabs" role="tablist" aria-label="Escolha a proposta"><span class="tl">Escolha a proposta:</span>
 <button type="button" role="tab" data-t="b2c" aria-selected="true">B2C · Na mesa do cliente</button>

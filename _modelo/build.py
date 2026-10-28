@@ -67,6 +67,7 @@ def main():
     cor_b2b = (b2b or {}).get('cor', cor)
     img = {
         'goomer': data_uri(os.path.join(BASE, 'goomer.svg')),
+        'goomer_ads': data_uri(os.path.join(BASE, 'goomer-ads.svg')),
         'logo': asset('logo', os.path.join(PH, 'logo.svg'), 600),
         'tablet': data_uri(os.path.join(BASE, 'tablet-frame.png')),
         'hero_b2c': data_uri(os.path.join(BASE, 'hero-b2c.jpg')),
