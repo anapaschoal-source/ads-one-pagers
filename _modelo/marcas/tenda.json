@@ -7,7 +7,11 @@
   "logo_altura_hero": 26,
   "logo_altura_secao": 34,
   "imagens": {
-    "logo": "tenda/logo.png"
+    "logo": "tenda/logo.png",
+    "foto_inicio": "tenda/foto-inicio.jpg",
+    "foto_confirmacao": "tenda/foto-confirmacao.jpg",
+    "foto_conta": "tenda/foto-conta.jpg",
+    "foto_especial": "tenda/foto-especial.jpg"
   },
   "menu": {
     "label": "Tenda",
