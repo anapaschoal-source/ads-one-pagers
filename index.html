@@ -32,7 +32,12 @@ h1{font-size:clamp(28px,4vw,40px);font-weight:700;line-height:1.1;letter-spacing
 .filtros{position:sticky;top:0;z-index:5;background:var(--n-0);border-bottom:1px solid var(--n-200)}
 .filtros .wrap{display:flex;gap:8px;overflow-x:auto;padding-top:12px;padding-bottom:12px;scrollbar-width:none}
 .filtros .wrap::-webkit-scrollbar{display:none}
-.sep{flex-shrink:0;width:1px;background:var(--n-200);margin:4px 4px}
+.tipos{display:flex;gap:4px;background:var(--n-50);border:1px solid var(--n-200);border-radius:14px;padding:4px;width:max-content;max-width:100%;margin-top:28px}
+.tipo-btn{border:0;background:transparent;font:inherit;font-size:15px;font-weight:600;color:var(--n-600);padding:10px 20px;border-radius:10px;cursor:pointer;white-space:nowrap;transition:background-color .2s,color .2s}
+.tipo-btn .n{margin-left:6px;color:var(--n-500);font-variant-numeric:tabular-nums}
+.tipo-btn[aria-pressed="true"]{background:var(--p-700);color:var(--n-0)}
+.tipo-btn[aria-pressed="true"] .n{color:var(--t-200)}
+.tipo-btn:not([aria-pressed="true"]):hover{color:var(--p-700)}
 .chip{flex-shrink:0;white-space:nowrap;border:1px solid var(--n-200);background:var(--n-0);color:var(--n-900);border-radius:100px;padding:8px 16px;font:inherit;font-size:14px;font-weight:600;line-height:1.4;cursor:pointer;transition:background-color .2s,color .2s,border-color .2s}
 .chip:hover{border-color:var(--p-700)}
 .chip .n{color:var(--n-500);margin-left:4px;font-variant-numeric:tabular-nums}
@@ -67,11 +72,12 @@ footer{padding:48px 0 80px;border-top:1px solid var(--n-200);font-size:14px;colo
   <div class="wrap">
     <div class="ga" aria-label="Goomer Ads"><img src="_hub/goomer.svg" alt="goomer"><span>Ads</span></div>
     <h1>Materiais comerciais por marca.</h1>
-    <p class="lede">One-pagers e media kits da Goomer Ads. Toque em uma marca para abrir o material.</p>
+    <p class="lede">One-pagers e media kits da Goomer Ads. Escolha o material, depois o setor, e toque em uma marca para abrir.</p>
+    <div class="tipos" id="tipos" role="group" aria-label="Tipo de material"></div>
   </div>
 </header>
 
-<nav class="filtros" aria-label="Filtros">
+<nav class="filtros" aria-label="Filtrar por setor">
   <div class="wrap" id="filtros"></div>
 </nav>
 
@@ -107,23 +113,28 @@ var MATERIAIS = [
   {marca:'AlmapBBDO',         tipo:'Media kit', setor:'agencias',    url:'/almapbbdo/media-kit/', thumb:'almapbbdo-media-kit', desc:'Media kit com seletor das marcas atendidas.'}
 ];
 
-var filtro = {setor:'', tipo:''};
+var TIPOS = ['One-pager','Media kit'];
+var filtro = {setor:'', tipo:'One-pager'};
+try { var h = decodeURIComponent(location.hash.slice(1)); if (h==='media-kit') filtro.tipo='Media kit'; } catch(e){}
 
 function chip(label, n, attr, val, on){
   return '<button type="button" class="chip" data-'+attr+'="'+val+'" aria-pressed="'+on+'"><span>'+label+'</span><span class="n">'+n+'</span></button>';
 }
 function conta(f){ return MATERIAIS.filter(f).length; }
 
+function renderTipos(){
+  document.getElementById('tipos').innerHTML = TIPOS.map(function(t){
+    var n = conta(function(m){ return m.tipo===t; });
+    return '<button type="button" class="tipo-btn" data-tipo="'+t+'" aria-pressed="'+(filtro.tipo===t)+'">'+t+'s<span class="n">'+n+'</span></button>';
+  }).join('');
+}
+
 function renderFiltros(){
-  var porTipo = MATERIAIS.filter(function(m){ return !filtro.tipo || m.tipo===filtro.tipo; });
+  var porTipo = MATERIAIS.filter(function(m){ return m.tipo===filtro.tipo; });
   var h = chip('Todos', porTipo.length, 'setor', '', filtro.setor==='');
   Object.keys(SETORES).forEach(function(k){
     var n = porTipo.filter(function(m){ return m.setor===k; }).length;
     if (n) h += chip(SETORES[k], n, 'setor', k, filtro.setor===k);
-  });
-  h += '<span class="sep" aria-hidden="true"></span>';
-  ['One-pager','Media kit'].forEach(function(t){
-    h += chip(t+'s', conta(function(m){ return m.tipo===t && (!filtro.setor || m.setor===filtro.setor); }), 'tipo', t, filtro.tipo===t);
   });
   document.getElementById('filtros').innerHTML = h;
 }
@@ -139,7 +150,7 @@ function renderSecoes(){
   var h = '';
   Object.keys(SETORES).forEach(function(k){
     if (filtro.setor && filtro.setor!==k) return;
-    var itens = MATERIAIS.filter(function(m){ return m.setor===k && (!filtro.tipo || m.tipo===filtro.tipo); });
+    var itens = MATERIAIS.filter(function(m){ return m.setor===k && m.tipo===filtro.tipo; });
     if (!itens.length) return;
     h += '<section class="secao"><div class="rot">'+itens.length+(itens.length>1?' materiais':' material')+'</div>'+
          '<h2>'+SETORES[k]+'</h2><div class="grid">'+itens.map(card).join('')+'</div></section>';
@@ -149,11 +160,16 @@ function renderSecoes(){
 
 document.getElementById('filtros').addEventListener('click', function(e){
   var b = e.target.closest('.chip'); if (!b) return;
-  if (b.hasAttribute('data-setor')) filtro.setor = b.getAttribute('data-setor');
-  if (b.hasAttribute('data-tipo')) { var t=b.getAttribute('data-tipo'); filtro.tipo = filtro.tipo===t ? '' : t; }
+  filtro.setor = b.getAttribute('data-setor');
   renderFiltros(); renderSecoes();
 });
-renderFiltros(); renderSecoes();
+document.getElementById('tipos').addEventListener('click', function(e){
+  var b = e.target.closest('.tipo-btn'); if (!b) return;
+  filtro.tipo = b.getAttribute('data-tipo'); filtro.setor = '';
+  try { history.replaceState(null,'', filtro.tipo==='Media kit' ? '#media-kit' : location.pathname); } catch(e){}
+  renderTipos(); renderFiltros(); renderSecoes();
+});
+renderTipos(); renderFiltros(); renderSecoes();
 </script>
 </body>
 </html>
