@@ -52,6 +52,8 @@ h2{margin:0;font-size:34px;color:var(--azul)}
 .journey{position:relative}
 .journey .line{position:absolute;left:22px;right:22px;top:21px;height:2px;background:#B4B1CC;z-index:0}
 .steps4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.steps4.n5{grid-template-columns:repeat(5,1fr);gap:14px}
+.steps4.n5 .fmt-body .d{font-size:12.5px}
 .step{display:flex;flex-direction:column;gap:10px;position:relative;z-index:1}
 .num{width:44px;height:44px;background:var(--azul);color:#fff;font-weight:800;font-size:20px;display:flex;align-items:center;justify-content:center}
 .card{background:var(--cinza);display:flex;flex-direction:column;flex:1}
@@ -252,6 +254,25 @@ body[data-tab="b2c"] .only-b2b,body[data-tab="b2b"] .only-b2c{display:none !impo
 @keyframes vdlg{0%,68%{transform:scale(.6);opacity:0}80%,100%{transform:none;opacity:1}}
 @media (prefers-reduced-motion: reduce){.mk-tv.ad .vd-ph,.mk-tv.ad .vd-tx,.mk-tv.ad .vd-end,.mk-tv.ad .vd-lg2,.mk-tv.ad .vd-play{animation:none}.mk-tv.ad .vd-bar i{animation:none;width:100%}}
 
+
+/* Venda Sugestiva (só marcas endêmicas) */
+.ci small{display:block;color:#2B00FF;font-weight:800;font-size:1.1cqw;text-transform:uppercase;letter-spacing:.06em}
+.ci.sp{display:none}
+.ctot .t2{display:none}
+.vs.added .ci.sp{display:flex}.vs.added .t1{display:none}.vs.added .t2{display:inline}
+.vsug{position:absolute;left:23%;top:6.4%;width:62.8%;background:#fff;border-radius:1.4cqw;overflow:hidden;color:#222;opacity:0;transform:scale(.92);transition:opacity .35s,transform .35s cubic-bezier(.2,.9,.3,1.2);z-index:3}
+.vs.sugm .vsug{opacity:1;transform:none}
+.vsug-ph{height:21cqw;background:#F4F3F8;display:flex;align-items:center;justify-content:center}
+.vsug-ph img{max-height:92%;max-width:80%;object-fit:contain}
+.vsug-tx{padding:1.8cqw 2.4cqw .6cqw;display:grid;gap:.5cqw}
+.vsug-tx b{font-size:2.4cqw}.vsug-tx span{font-size:1.5cqw;color:#666}.vsug-tx em{font-style:normal;font-weight:800;font-size:1.9cqw}
+.vsug-bt{display:grid;grid-template-columns:1fr 1fr;gap:1.4cqw;padding:1.4cqw 2.4cqw 2.2cqw}
+.vsug-bt i{font-style:normal;text-align:center;font-weight:800;font-size:1.4cqw;padding:1.3cqw;border-radius:1cqw;background:#E7E6EC;color:#555}
+.vsug-bt i.ok{background:#5DBB6F;color:#fff}
+.vmhl{left:23%;top:6.4%;width:62.8%;height:87.6%;opacity:0;transition:opacity .3s}
+.vs.sugm .vmhl{opacity:1}
+.vs.added .vdim{opacity:0}
+
 @media print{@page{size:1080px 1528px;margin:0}html,body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}#page{zoom:1 !important;box-shadow:none}.tabs{display:none}}
 @media (max-width: 759px){
 #page{width:100% !important;min-height:0 !important;box-shadow:none}
@@ -325,16 +346,16 @@ h2{font-size:30px}.sec-head span{font-size:30px}
 <div class="stats">
 <div class="stat"><b class="cond">+50 MIL</b><span>telas nas mesas</span></div>
 <div class="stat"><b class="cond">+2 MIL</b><span>restaurantes por todo o Brasil</span></div>
-<div class="stat hl"><b class="cond">4</b><span>formatos na refeição</span></div>
+<div class="stat hl"><b class="cond">{{ n_formatos }}</b><span>formatos na refeição</span></div>
 </div>
 </div>
 <div class="src">Fonte: rede Goomer, {{ fonte_data }}.</div>
 
 <div class="block">
 <h2 class="cond" style="margin-bottom:16px">A jornada da marca</h2>
-<p class="lead" style="margin:-4px 0 20px 0">O inventário Goomer tem 4 formatos de exibição da marca no mesmo tablet. Um tablet por mesa, sendo visto por diversas pessoas no momento de consumo.</p>
+<p class="lead" style="margin:-4px 0 20px 0">O inventário Goomer tem {{ n_formatos }} formatos de exibição da marca no mesmo tablet. Um tablet por mesa, sendo visto por diversas pessoas no momento de consumo.</p>
 <div class="journey"><div class="line"></div>
-<div class="steps4">
+<div class="steps4{% if endemica %} n5{% endif %}">
 
 <div class="step"><div class="num">1</div><div class="card">
 <div class="shot" role="img" aria-label="Formato Tela de Início no tablet Goomer: a tela do restaurante dá lugar à publicidade {{ marca }}"><div class="mk"><img class="mk-bg" src="{{ img.mk_tablet }}" alt="">
@@ -375,6 +396,17 @@ h2{font-size:30px}.sec-head span{font-size:30px}
 </div></div>
 <div class="fmt-body"><div class="t">Página Especial</div><div class="d">Uma categoria nova no cardápio leva a uma página exclusiva da marca.</div><div class="tags"><span class="tag">HTML interativo</span><span class="tag on">Demo {{ marca }}</span></div></div>
 </div></div>
+{% if endemica %}<div class="step"><div class="num">5</div><div class="card">
+<div class="shot" role="img" aria-label="Formato Venda Sugestiva: no pedido, o tablet sugere {{ vs.produto }} e o cliente adiciona"><div class="mk"><img class="mk-bg" src="{{ img.mk_tablet }}" alt="">
+<div class="vs" data-seq="sug" style="left:14.34%;top:11.57%;width:71.31%;height:58.14%">{{ vmenu }}
+<div class="vcart"><h6>Carrinho · Mesa 2</h6><div class="ci"><span>1× Picanha ao Fogo</span><b>R$ 34,90</b></div><div class="ci sp"><span>1× {{ vs.produto }} <small>patrocinado</small></span><b>{{ vs.preco }}</b></div><div class="ctot"><span>Total</span><b class="t1">R$ 34,90</b><b class="t2">{{ vs.total }}</b></div><i class="vgo">FAZER PEDIDO</i></div>
+<div class="vdim"></div>
+<div class="vsug"><div class="vsug-ph"><img src="{{ vs.foto }}" alt=""></div><div class="vsug-tx"><b>{{ vs.produto }}</b><span>{{ vs.descricao }}</span><em>A partir de {{ vs.preco }}</em></div><div class="vsug-bt"><i>NÃO, OBRIGADO</i><i class="ok">ADICIONAR</i></div></div>
+<span class="mk-hl vmhl"></span><i class="finger"></i></div>
+</div></div>
+<div class="fmt-body"><div class="t">Venda Sugestiva</div><div class="d">No pedido, o tablet sugere o produto da marca. Um toque e ele entra no pedido.</div><div class="tags"><span class="tag on">Retail Media</span></div></div>
+</div></div>
+{% endif %}
 
 </div></div>
 </div>
@@ -444,7 +476,7 @@ set(location.hash==='#b2b'?'b2b':'b2c');{% endif %}
 <script>
 /* formatos animados: mesmas sequências do media kit */
 (function(){
- var SEQ={conta:{L:10,P:[[0,'',60,60,0],[1,'',83,4.6,0],[1.8,'',83,4.6,1],[2.3,'conta ban',60,120,0],[9.3,'',60,60,0]]},
+ var SEQ={sug:{L:10,P:[[0,'',70,62,0],[0.8,'',89,45,0],[1.5,'',89,45,1],[2.2,'cart',86,58,0],[3,'cart',82,43,0],[3.6,'cart',82,43,1],[4.3,'sugm',60,60,0],[6.8,'sugm',66,82,0],[7.6,'sugm',66,82,1],[8.4,'cart added',75,70,0]]},conta:{L:10,P:[[0,'',60,60,0],[1,'',83,4.6,0],[1.8,'',83,4.6,1],[2.3,'conta ban',60,120,0],[9.3,'',60,60,0]]},
   confirm:{L:10,P:[[0,'',70,62,0],[0.8,'',89,45,0],[1.5,'',89,45,1],[2.2,'cart',86,58,0],[3,'cart',82,43,0],[3.6,'cart',82,43,1],[4.3,'sugm',93,86,0]]}};
  var red=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
  document.querySelectorAll('.mk .vs').forEach(function(vs){var fg=vs.querySelector('.finger'),S=SEQ[vs.dataset.seq],P=S.P,L=S.L,t0=performance.now(),last=-1;

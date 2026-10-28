@@ -146,6 +146,21 @@ def main():
     banner_confirmacao = banner_bx(criativo('banner_confirmacao'), img['foto_confirmacao'], f['confirmacao']['titulo'], f['confirmacao']['destaque'])
     banner_conta = banner_bx(criativo('banner_conta', 600), img['foto_conta'], f['conta']['titulo'], None, f['conta']['cta'])
 
+    # Venda Sugestiva: só para marca endêmica (vende produto que entra no pedido do restaurante)
+    endemica = bool(c.get('endemica'))
+    vs = None
+    if endemica:
+        v = c.get('venda_sugestiva', {})
+        preco = v.get('preco', 'R$ 9,90')
+        try:
+            tot = 34.90 + float(preco.replace('R$', '').strip().replace('.', '').replace(',', '.'))
+            total = 'R$ ' + f'{tot:,.2f}'.replace(',', 'X').replace('.', ',').replace('X', '.')
+        except ValueError:
+            total = 'R$ 44,80'
+        fp = c.get('imagens', {}).get('foto_produto')
+        vs = {'produto': v.get('produto', marca), 'descricao': v.get('descricao', ''), 'preco': preco, 'total': total,
+              'foto': data_uri(os.path.join(cdir, fp), 600) if fp else img['logo']}
+
     banner = ''
     if b2b:
         bn = b2b.get('banner', {})
@@ -170,6 +185,7 @@ def main():
         fonte_data=c.get('fonte_data', 'out/2026'), img=img, clientes=clientes,
         tela_especial=tela_especial, banner=banner, rban=rban, vmenu=vmenu, criativo_inicio=criativo_inicio,
         banner_confirmacao=banner_confirmacao, banner_conta=banner_conta,
+        endemica=endemica, vs=vs, n_formatos=5 if endemica else 4,
         cta={**{'titulo': f'Vamos levar a {marca} pra mesa?', 'nome': 'João Arcalá', 'cargo': 'CFO/COO · Goomer',
                 'email': 'joao.arcala@goomer.com.br', 'whatsapp': '5515991378552', 'telefone': '+55 15 99137-8552'},
              **c.get('cta', {})},
