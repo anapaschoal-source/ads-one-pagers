@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>One-pagers e Media Kits • Goomer Ads</title>
+<title>One page e Media kit • Goomer Ads</title>
 <meta name="description" content="Materiais comerciais da Goomer Ads por marca.">
 <meta name="theme-color" content="#ffffff">
 <meta name="robots" content="noindex, nofollow">
@@ -72,7 +72,7 @@ footer{padding:48px 0 80px;border-top:1px solid var(--n-200);font-size:14px;colo
   <div class="wrap">
     <div class="ga" aria-label="Goomer Ads"><img src="_hub/goomer.svg" alt="goomer"><span>Ads</span></div>
     <h1>Materiais comerciais por marca.</h1>
-    <p class="lede">One-pagers e media kits da Goomer Ads. Escolha o material, depois o setor, e toque em uma marca para abrir.</p>
+    <p class="lede">One pages e media kits da Goomer Ads. Escolha o material, depois o setor, e toque em uma marca para abrir.</p>
     <div class="tipos" id="tipos" role="group" aria-label="Tipo de material"></div>
   </div>
 </header>
@@ -97,24 +97,24 @@ var SETORES = {
   agencias:     'Agências'
 };
 var MATERIAIS = [
-  {marca:'Mastercard',        tipo:'One-pager', setor:'financeiro',  url:'/mastercard/',        thumb:'mastercard',        desc:'A chave da sorte, com portas premiadas.'},
+  {marca:'Mastercard',        tipo:'One page', setor:'financeiro',  url:'/mastercard/',        thumb:'mastercard',        desc:'A chave da sorte, com portas premiadas.'},
   {marca:'Banco Safra',       tipo:'Media kit', setor:'financeiro',  url:'/safra/media-kit/',   thumb:'safra-media-kit',   desc:'Media kit B2C personalizado.'},
-  {marca:'Cyrela · Living',   tipo:'One-pager', setor:'imobiliario', url:'/cyrela/',            thumb:'cyrela',            desc:'Tour pelo decorado no tablet.'},
+  {marca:'Cyrela · Living',   tipo:'One page', setor:'imobiliario', url:'/cyrela/',            thumb:'cyrela',            desc:'Tour pelo decorado no tablet.'},
   {marca:'Cyrela · Living',   tipo:'Media kit', setor:'imobiliario', url:'/cyrela/media-kit/',  thumb:'cyrela-media-kit',  desc:'Media kit com a cara da Cyrela.'},
-  {marca:'Tenda',             tipo:'One-pager', setor:'imobiliario', url:'/tenda/',             thumb:'tenda',             desc:'Reserva Sacomã, com quiz "Seu primeiro apê".'},
-  {marca:'Housi',             tipo:'One-pager', setor:'imobiliario', url:'/housi/',             thumb:'housi',             desc:'Moradia sem burocracia.'},
+  {marca:'Tenda',             tipo:'One page', setor:'imobiliario', url:'/tenda/',             thumb:'tenda',             desc:'Reserva Sacomã, com quiz "Seu primeiro apê".'},
+  {marca:'Housi',             tipo:'One page', setor:'imobiliario', url:'/housi/',             thumb:'housi',             desc:'Moradia sem burocracia.'},
   {marca:'Housi',             tipo:'Media kit', setor:'imobiliario', url:'/housi/media-kit/',   thumb:'housi-media-kit',   desc:'Media kit B2C personalizado.'},
-  {marca:'Estrella Galicia',  tipo:'One-pager', setor:'alimentos',   url:'/estrella-galicia/',  thumb:'estrella-galicia',  desc:'Jogo Tirada Perfeita 0,0 e sorteio de experiência.'},
-  {marca:'99Food',            tipo:'One-pager', setor:'varejo',      url:'/99food/',            thumb:'99food',            desc:'Roleta de cupom com cadastro por e-mail.'},
-  {marca:'Shopee',            tipo:'One-pager', setor:'varejo',      url:'/shopee/',            thumb:'shopee',            desc:'11.11 com roleta de cupons.'},
-  {marca:'Insider',           tipo:'One-pager', setor:'varejo',      url:'/insider/',           thumb:'insider',           desc:'Cadastro no Insider Members com 10% OFF.'},
-  {marca:'BYD',               tipo:'One-pager', setor:'automotivo',  url:'/byd/',               thumb:'byd',               desc:'Seu test-drive na mesa do cliente.'},
-  {marca:'Rebal',             tipo:'One-pager', setor:'b2b',         url:'/rebal/',             thumb:'rebal',             desc:'Banner no painel do dono (B2B).'},
+  {marca:'Estrella Galicia',  tipo:'One page', setor:'alimentos',   url:'/estrella-galicia/',  thumb:'estrella-galicia',  desc:'Jogo Tirada Perfeita 0,0 e sorteio de experiência.'},
+  {marca:'99Food',            tipo:'One page', setor:'varejo',      url:'/99food/',            thumb:'99food',            desc:'Roleta de cupom com cadastro por e-mail.'},
+  {marca:'Shopee',            tipo:'One page', setor:'varejo',      url:'/shopee/',            thumb:'shopee',            desc:'11.11 com roleta de cupons.'},
+  {marca:'Insider',           tipo:'One page', setor:'varejo',      url:'/insider/',           thumb:'insider',           desc:'Cadastro no Insider Members com 10% OFF.'},
+  {marca:'BYD',               tipo:'One page', setor:'automotivo',  url:'/byd/',               thumb:'byd',               desc:'Seu test-drive na mesa do cliente.'},
+  {marca:'Rebal',             tipo:'One page', setor:'b2b',         url:'/rebal/',             thumb:'rebal',             desc:'Banner no painel do dono (B2B).'},
   {marca:'AlmapBBDO',         tipo:'Media kit', setor:'agencias',    url:'/almapbbdo/media-kit/', thumb:'almapbbdo-media-kit', desc:'Media kit com seletor das marcas atendidas.'}
 ];
 
-var TIPOS = ['One-pager','Media kit'];
-var filtro = {setor:'', tipo:'One-pager'};
+var TIPOS = ['One page','Media kit'];
+var filtro = {setor:'', tipo:'One page'};
 try { var h = decodeURIComponent(location.hash.slice(1)); if (h==='media-kit') filtro.tipo='Media kit'; } catch(e){}
 
 function chip(label, n, attr, val, on){
@@ -125,7 +125,7 @@ function conta(f){ return MATERIAIS.filter(f).length; }
 function renderTipos(){
   document.getElementById('tipos').innerHTML = TIPOS.map(function(t){
     var n = conta(function(m){ return m.tipo===t; });
-    return '<button type="button" class="tipo-btn" data-tipo="'+t+'" aria-pressed="'+(filtro.tipo===t)+'">'+t+'s<span class="n">'+n+'</span></button>';
+    return '<button type="button" class="tipo-btn" data-tipo="'+t+'" aria-pressed="'+(filtro.tipo===t)+'">'+t+'<span class="n">'+n+'</span></button>';
   }).join('');
 }
 
