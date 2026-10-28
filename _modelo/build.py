@@ -19,6 +19,15 @@ BASE = os.path.join(HERE, 'base')
 PH = os.path.join(HERE, 'placeholder')
 
 
+def qr_whatsapp(numero):
+    """QR code (SVG, módulos azul-escuro) que abre o WhatsApp do contato da assinatura."""
+    import segno
+    buf = io.BytesIO()
+    segno.make('https://wa.me/' + re.sub(r'\D', '', str(numero)), error='m').save(
+        buf, kind='svg', scale=10, border=0, dark='#0A0044', xmldecl=False, svgns=True)
+    return 'data:image/svg+xml;base64,' + base64.b64encode(buf.getvalue()).decode()
+
+
 def data_uri(path, max_w=None):
     ext = os.path.splitext(path)[1].lower()
     if max_w and ext in ('.jpg', '.jpeg', '.png', '.webp'):
@@ -192,6 +201,8 @@ def main():
              **c.get('cta', {})},
     )
     ctx['cta']['assunto'] = quote(f'Goomer Ads × {marca}')
+    if ctx['cta'].get('whatsapp'):
+        ctx['cta']['qr'] = qr_whatsapp(ctx['cta']['whatsapp'])
     env = Environment(loader=FileSystemLoader(HERE), autoescape=False, trim_blocks=False)
     out = env.get_template('template.html.j2').render(**ctx)
 
