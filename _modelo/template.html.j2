@@ -127,6 +127,90 @@ body[data-tab="b2c"] .only-b2b,body[data-tab="b2b"] .only-b2c{display:none !impo
 .cy-tap{position:absolute;left:45%;top:50%;width:5cqw;height:5cqw;border-radius:50%;border:.5cqw solid #fff;background:rgba(255,255,255,.35);animation:cytap 3s ease-out infinite}
 @media (prefers-reduced-motion: reduce){.cy-a1,.cy-a2,.cy-a3,.cy-a4,.cy-kb,.cy-tap,.tabs button{animation:none}}
 
+
+/* formatos animados (mesmas animações do media kit) */
+.mk{position:relative;width:100%;aspect-ratio:976/700;container-type:inline-size;font-family:Roboto,Manrope,system-ui,sans-serif;overflow:hidden}
+.mk *{box-sizing:border-box}
+.mk-bg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.mk-tv{position:absolute;overflow:hidden;border-radius:.4cqw;background:#2F190F;container-type:size}
+.mk-tv .mk-ad{position:absolute;inset:0;opacity:0;transition:opacity .45s}
+.mk-tv.ad .mk-ad{opacity:1}
+.rban{position:absolute;inset:0;display:flex;align-items:center;padding:0 6cqw;background:#1A0E08;transition:opacity .45s;overflow:hidden}
+.mk-tv.ad .rban{opacity:0}
+.rb-ph{position:absolute;inset:0 0 0 30%;background:url({{ img.mk_rbph }}) center/cover no-repeat;animation:mkkb 14s ease-in-out infinite alternate}
+.rb-ph::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#1A0E08 0%,rgba(26,14,8,.75) 22%,rgba(26,14,8,0) 55%)}
+@keyframes mkkb{from{transform:scale(1)}to{transform:scale(1.08)}}
+.rb-t{position:relative;z-index:1;display:grid;gap:2.4cqh;color:#fff;max-width:45%}
+.rb-t small{font-size:3.8cqh;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#F7841F}
+.rb-t b{font-family:Antonio,'Arial Narrow',sans-serif;text-transform:uppercase;font-size:15.5cqh;line-height:.92}
+.rb-t span{font-size:4.5cqh;opacity:.85}
+.rb-t em{font-style:normal;font-size:6.2cqh;font-weight:800;color:#F7841F}
+.rb-t i{justify-self:start;font-style:normal;background:#F7841F;color:#fff;font-weight:800;font-size:4.1cqh;padding:2.4cqh 5.2cqh;border-radius:2.4cqh;text-transform:uppercase;letter-spacing:.06em}
+.mk-hl{position:absolute;border:.35cqw solid var(--lima);border-radius:.8cqw;pointer-events:none;z-index:5}
+.mk-vhl{opacity:0;transition:opacity .35s}.mk-vhl.on{opacity:1}
+.mk-pulse{animation:mkhlp 2.2s .6s ease-in-out infinite}
+@keyframes mkhlp{50%{box-shadow:0 0 0 1cqw rgba(189,226,73,0)}0%,100%{box-shadow:0 0 0 0 rgba(189,226,73,.55)}}
+.mk-ad .cr-ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:mkkb 10s ease-in-out infinite alternate}
+.mk-ad .cr-lb{position:absolute;left:4.5%;bottom:9%;max-width:60%;background:var(--escura);border-left:1.2cqh solid var(--cor);color:#fff;padding:3cqh 4cqh;display:flex;flex-direction:column;gap:1cqh}
+.mk-ad .cr-lb b{font-weight:800;font-size:6.5cqh;line-height:1.1;text-transform:uppercase;color:var(--cor);white-space:nowrap}
+.mk-ad .cr-lb span{font-size:5cqh;white-space:nowrap}
+.mk-aba{position:absolute;container-type:size;background:#2F190F;border:.25cqw solid #F7841F;border-radius:.6cqw}
+.mk-aba>div{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10cqh;color:#fff;font-family:Poppins,Manrope,system-ui,sans-serif;text-align:center;line-height:1}
+.mk-aba b{font-weight:600;font-size:{{ menu_fs }}cqw;letter-spacing:.2em;margin-right:-.2em;text-transform:uppercase;white-space:nowrap}
+.mk-aba i{font-style:normal;font-weight:500;font-size:12cqw;opacity:.85;white-space:nowrap}
+.mk-aba img{height:55cqh;width:auto;max-width:85cqw;object-fit:contain;display:block}
+.vs{position:absolute;overflow:hidden;container-type:inline-size;border-radius:2px}
+.vmenu{position:absolute;left:12.9%;top:11.5%;width:87.1%;height:86.7%;background:#2A160C;padding:2.4cqw;display:grid;gap:1.8cqw;align-content:start}
+.vmenu h6{margin:0;color:#fff;font-size:2.6cqw;font-weight:800}
+.vc{display:grid;grid-template-columns:28% 1fr;background:#3A2012;border-radius:1.4cqw;overflow:hidden;min-height:15cqw}
+.vph{background:url({{ img.mk_vph }}) center/cover}
+.vc:nth-child(3) .vph{filter:hue-rotate(-12deg) saturate(1.2)}
+.vt{padding:1.6cqw 2cqw;display:grid;gap:.6cqw;color:#fff}
+.vt b{font-size:2.1cqw}.vt span{font-size:1.5cqw;opacity:.75}
+.vr{display:flex;justify-content:space-between;align-items:center}
+.vr em{font-style:normal;font-weight:800;font-size:2cqw}
+.vadd{font-style:normal;background:#F7841F;color:#fff;font-weight:800;font-size:1.4cqw;padding:1cqw 2cqw;border-radius:1cqw}
+.vcart{position:absolute;right:0;top:11.5%;width:36%;height:86.7%;background:#fff;color:#1d1d1d;padding:2.2cqw;display:grid;gap:1.4cqw;align-content:start;transform:translateX(105%);transition:transform .45s cubic-bezier(.2,.9,.3,1);box-shadow:-1cqw 0 3cqw rgba(0,0,0,.3)}
+.vcart h6{margin:0;font-size:2.2cqw}
+.ci{display:flex;justify-content:space-between;gap:1cqw;font-size:1.5cqw;border-bottom:1px solid #eee;padding-bottom:1cqw}
+.ctot{display:flex;justify-content:space-between;font-size:1.8cqw}
+.vgo{font-style:normal;text-align:center;background:#5DBB6F;color:#fff;font-weight:800;font-size:1.6cqw;padding:1.4cqw;border-radius:1cqw}
+.vdim{position:absolute;inset:0;background:rgba(10,6,4,.6);opacity:0;transition:opacity .6s ease}
+.vs.cart .vcart{transform:none}
+.vs.sugm .vdim{opacity:1}
+.vconf{position:absolute;left:23%;top:8%;width:62.8%;border-radius:1.4cqw;overflow:hidden;background:#fff;opacity:0;transform:translateY(5%);transition:opacity .7s ease,transform .8s cubic-bezier(.22,.8,.3,1)}
+.vs.sugm .vconf{opacity:1;transform:none}
+.vban{position:relative;width:100%;aspect-ratio:876/507;container-type:size;overflow:hidden;background:var(--escura)}
+.vbar{display:block;width:100%;height:auto}
+.vtimer{position:absolute;left:.4%;right:.4%;bottom:.3%;height:1.4%;background:#fff;overflow:hidden}
+.vtimer i{display:block;height:100%;width:0;background:#5DBB6F}
+.vs.sugm .vtimer i{animation:mkvtm 5.4s linear .5s forwards}
+@keyframes mkvtm{to{width:100%}}
+.vchl{left:23%;top:8%;width:62.9%;height:62.3%;opacity:0;transition:opacity .3s}
+.vs.sugm .vchl{opacity:1}
+.mcscr{position:absolute;z-index:2;inset:0;opacity:0;transform:translateX(3%);transition:opacity .6s ease,transform .7s cubic-bezier(.22,.8,.3,1)}
+.mcscr>img{position:absolute;inset:0;width:100%;height:100%;display:block}
+.vs.conta .mcscr{opacity:1;transform:none}
+.mcban{position:absolute;left:68.8%;top:12%;width:29.3%;height:28.3%;border-radius:.9cqw;overflow:hidden;container-type:size;background:var(--escura);opacity:0;transform:translateY(10%);transition:opacity .7s ease .3s,transform .8s cubic-bezier(.22,.8,.3,1) .3s}
+.vs.ban .mcban{opacity:1;transform:none}
+.mchl{left:68.8%;top:12%;width:29.3%;height:28.3%;opacity:0;transition:opacity .5s ease .5s}
+.vs.ban .mchl{opacity:1}
+.finger{position:absolute;z-index:6;width:5.5cqw;height:5.5cqw;margin:-2.75cqw 0 0 -2.75cqw;border-radius:50%;background:rgba(255,255,255,.55);border:.4cqw solid #fff;box-shadow:0 .6cqw 2cqw rgba(0,0,0,.4);left:var(--fx,60%);top:var(--fy,60%);transition:left .6s ease,top .6s ease,transform .15s}
+.finger.tap{transform:scale(.75)}
+.finger::after{content:"";position:absolute;inset:-.4cqw;border-radius:50%;border:.4cqw solid #fff;opacity:0}
+.finger.tap::after{animation:mkrip .5s ease-out}
+@keyframes mkrip{from{transform:scale(1);opacity:.9}to{transform:scale(2.2);opacity:0}}
+.bx{position:absolute;inset:0;color:#fff;font-family:Poppins,Manrope,system-ui,sans-serif}
+.bx .ph{position:absolute;top:0;bottom:0;right:0;width:55%;object-fit:cover;height:100%}
+.bx .fd{position:absolute;inset:0;background:linear-gradient(90deg,var(--escura) 42%,transparent 75%)}
+.bx .tx{position:absolute;left:6%;top:0;bottom:0;width:56%;display:flex;flex-direction:column;justify-content:center;gap:4cqh}
+.bx .lg{height:13cqh;width:auto;max-width:60%;object-fit:contain;object-position:left{% if logo_branco %};filter:brightness(0) invert(1){% endif %}}
+.bx .h{font-weight:700;font-size:11cqh;line-height:1.1}
+.bx .d{font-weight:700;font-size:7cqh;color:var(--cor)}
+.bx .c{align-self:flex-start;background:var(--cor);color:{{ cor_texto }};font-weight:700;font-size:7cqh;padding:2.5cqh 6cqh;border-radius:99px;white-space:nowrap}
+.bx img.full{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+@media (prefers-reduced-motion: reduce){.rb-ph,.mk-pulse,.mk-ad .cr-ph{animation:none}}
+
 @media print{@page{size:1080px 1528px;margin:0}html,body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}#page{zoom:1 !important;box-shadow:none}.tabs{display:none}}
 @media (max-width: 759px){
 #page{width:100% !important;min-height:0 !important;box-shadow:none}
@@ -212,40 +296,41 @@ h2{font-size:30px}.sec-head span{font-size:30px}
 <div class="steps4">
 
 <div class="step"><div class="num">1</div><div class="card">
-<div class="shot" role="img" aria-label="Formato Tela de Início no tablet Goomer, com {{ marca }}"><div class="cy-f" style="background-image:url({{ img.fmt1 }})">
-<div class="cy-ab cy-a1" style="left:17.593%;top:9.115%;width:77.963%;height:66.406%"><img class="cy-ph cy-kb" src="{{ img.foto_inicio }}" alt=""></div>
-<div class="cy-ab cy-a2" style="left:20.370%;top:61.458%;width:29.259%;height:10.417%;background:var(--escura);border-left:.5cqw solid var(--cor);color:#fff;padding:0 1.6cqw;display:flex;flex-direction:column;justify-content:center">
-<div style="font-weight:700;font-size:1.45cqw;line-height:1.2;text-transform:uppercase;white-space:nowrap;color:var(--cor)">{{ marca }}</div><div style="font-size:1.05cqw;opacity:.9;white-space:nowrap">{{ f.inicio.legenda }}</div></div>
+<div class="shot" role="img" aria-label="Formato Tela de Início no tablet Goomer: a tela do restaurante dá lugar à publicidade {{ marca }}"><div class="mk"><img class="mk-bg" src="{{ img.mk_tablet }}" alt="">
+<div class="mk-tv" data-anim="inicio" style="left:23.57%;top:18.29%;width:62.09%;height:50.43%">{{ rban }}
+<div class="mk-ad">{{ criativo_inicio }}</div></div>
+<span class="mk-hl mk-vhl" style="left:23.57%;top:18.29%;width:62.09%;height:50.43%"></span>
 </div></div>
 <div class="fmt-body"><div class="t">Tela de Início</div><div class="d">Depois do pedido, um vídeo de 10 segundos da marca entra na tela inicial.</div><div class="tags"><span class="tag">Vídeo 10s</span></div></div>
 </div></div>
 
 <div class="step"><div class="num">2</div><div class="card">
-<div class="shot" role="img" aria-label="Formato Confirmação de Pedido no tablet Goomer, com {{ marca }}"><div class="cy-f" style="background-image:url({{ img.fmt2 }})">
-<div class="cy-ab cy-a3" style="left:32.407%;top:16.146%;width:48.148%;height:51.823%;background:#0B0B10">
-<div style="position:absolute;left:0;right:0;top:0;height:46%"><img class="cy-ph" src="{{ img.foto_confirmacao }}" alt=""></div>
-<div style="position:absolute;left:0;right:0;top:46%;height:26%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4cqw;color:#fff;font-weight:700;font-size:2cqw;background:var(--escura);text-align:center">{{ f.confirmacao.titulo }}<span style="font-size:1.3cqw;color:var(--cor)">{{ f.confirmacao.destaque }}</span></div>
-<div style="position:absolute;left:0;right:0;bottom:0;height:27.6%;background:#fff;display:flex;align-items:center;gap:1.2cqw;padding:0 1.8cqw;color:#1A1A1A">
-<div style="flex:none;width:3.4cqw;height:3.4cqw;border-radius:50%;background:#EEE;display:flex;align-items:center;justify-content:center;font-size:1.8cqw;font-weight:700">✓</div>
-<div style="flex:1;min-width:0"><div style="font-weight:700;font-size:1.45cqw;line-height:1.3;white-space:nowrap">Pedido enviado com sucesso!</div><div style="font-size:.85cqw;color:#777;white-space:nowrap">Em alguns instantes o seu pedido será entregue.</div></div>
-<div style="flex:none;background:#5BB974;color:#fff;font-weight:700;font-size:1cqw;padding:1.2cqw 2.8cqw;border-radius:.5cqw">OK</div></div></div>
+<div class="shot" role="img" aria-label="Formato Confirmação de Pedido: o cliente envia o pedido e o banner {{ marca }} aparece"><div class="mk"><img class="mk-bg" src="{{ img.mk_tablet }}" alt="">
+<div class="vs" data-seq="confirm" style="left:14.34%;top:11.57%;width:71.31%;height:58.14%">{{ vmenu }}
+<div class="vcart"><h6>Carrinho · Mesa 2</h6><div class="ci"><span>1× Picanha ao Fogo</span><b>R$ 34,90</b></div><div class="ctot"><span>Total</span><b>R$ 34,90</b></div><i class="vgo">FAZER PEDIDO</i></div>
+<div class="vdim"></div>
+<div class="vmodal vconf"><div class="vban">{{ banner_confirmacao }}</div><img class="vbar" src="{{ img.mk_popup_bar }}" alt=""><span class="vtimer"><i></i></span></div>
+<span class="mk-hl vchl"></span><i class="finger"></i></div>
 </div></div>
 <div class="fmt-body"><div class="t">Confirmação de Pedido</div><div class="d">Um banner aparece junto da mensagem de pedido enviado.</div></div>
 </div></div>
 
 <div class="step"><div class="num">3</div><div class="card">
-<div class="shot" role="img" aria-label="Formato Minha Conta no tablet Goomer, com {{ marca }}"><div class="cy-f" style="background-image:url({{ img.fmt3 }})">
-<div class="cy-ab" style="left:69.630%;top:13.802%;width:25.926%;height:21.875%"><div class="cy-a4" style="position:absolute;top:0;left:0;bottom:0;width:89.29%;background:var(--escura);border-radius:1.1cqw;overflow:hidden;color:#fff">
-<div style="position:absolute;left:0;right:0;top:0;height:55%"><img class="cy-ph" src="{{ img.foto_conta }}" alt=""></div>
-<div style="position:absolute;left:1.3cqw;right:.8cqw;bottom:1.2cqw"><div style="font-weight:700;font-size:1.3cqw;line-height:1.2;white-space:nowrap">{{ f.conta.titulo }}</div><div style="font-size:1.1cqw;color:var(--cor);font-weight:600;white-space:nowrap">{{ f.conta.cta }}</div></div></div></div>
+<div class="shot" role="img" aria-label="Formato Minha Conta: o cliente abre a conta e vê o banner {{ marca }}"><div class="mk"><img class="mk-bg" src="{{ img.mk_tablet }}" alt="">
+<div class="vs" data-seq="conta" style="left:14.34%;top:11.57%;width:71.31%;height:58.14%">
+<div class="mk-tv mchome" style="left:12.9%;top:11.5%;width:87.1%;height:86.7%">{{ rban }}</div>
+<div class="mcscr"><img src="{{ img.mk_conta }}" alt=""><div class="mcban">{{ banner_conta }}</div></div>
+<span class="mk-hl mchl"></span><i class="finger"></i></div>
 </div></div>
 <div class="fmt-body"><div class="t">Minha Conta</div><div class="d">Banner na tela da conta, na hora de pagar.</div></div>
 </div></div>
 
 <div class="step"><div class="num">4</div><div class="card hl">
-<div class="shot" role="img" aria-label="Formato Página Especial no tablet Goomer, com {{ marca }}"><div class="cy-f" style="background-image:url({{ img.fmt4 }})">
-<div class="menu-cell" style="left:7.6%;top:21.9%;width:6.9%;height:8.4%"><div>{% if menu_logo %}<img src="{{ menu_logo }}" alt="{{ marca }}" style="height:62cqh;width:auto;max-width:90cqw;object-fit:contain;display:block">{% else %}<b>{{ menu_label }}</b><i>{{ menu_sub }}</i>{% endif %}</div></div>
-<div class="cy-scr" style="left:17.593%;top:9.115%;width:77.963%;height:66.406%">{{ tela_especial }}</div>
+<div class="shot" role="img" aria-label="Formato Página Especial: aba {{ marca }} no cardápio e a página da marca"><div class="mk"><img class="mk-bg" src="{{ img.mk_tablet }}" alt="">
+<div class="mk-aba" style="left:14.86%;top:26.29%;width:7.07%;height:8.57%"><div>{% if menu_logo %}<img src="{{ menu_logo }}" alt="{{ marca }}">{% else %}<b>{{ menu_label }}</b><i>{{ menu_sub }}</i>{% endif %}</div></div>
+<div class="cy-scr" style="left:23.57%;top:18.29%;width:62.09%;height:50.43%">{{ tela_especial }}</div>
+<span class="mk-hl mk-pulse" style="left:14.86%;top:26.29%;width:7.07%;height:8.57%"></span>
+<span class="mk-hl mk-pulse" style="left:23.57%;top:18.29%;width:62.09%;height:50.43%"></span>
 </div></div>
 <div class="fmt-body"><div class="t">Página Especial</div><div class="d">Uma categoria nova no cardápio leva a uma página exclusiva da marca.</div><div class="tags"><span class="tag">HTML interativo</span><span class="tag on">Demo {{ marca }}</span></div></div>
 </div></div>
@@ -313,6 +398,23 @@ fit();window.addEventListener('resize',fit);
 {% if b2b %}var b=document.body;function set(t){b.setAttribute('data-tab',t);document.querySelectorAll('.tabs button').forEach(function(x){x.setAttribute('aria-selected',x.dataset.t===t?'true':'false')});try{history.replaceState(null,'','#'+t)}catch(e){}}
 document.querySelectorAll('.tabs button').forEach(function(x){x.addEventListener('click',function(){set(x.dataset.t)})});
 set(location.hash==='#b2b'?'b2b':'b2c');{% endif %}
+})();
+</script>
+<script>
+/* formatos animados: mesmas sequências do media kit */
+(function(){
+ var SEQ={conta:{L:10,P:[[0,'',60,60,0],[1,'',83,4.6,0],[1.8,'',83,4.6,1],[2.3,'conta ban',60,120,0],[9.3,'',60,60,0]]},
+  confirm:{L:10,P:[[0,'',70,62,0],[0.8,'',89,45,0],[1.5,'',89,45,1],[2.2,'cart',86,58,0],[3,'cart',82,43,0],[3.6,'cart',82,43,1],[4.3,'sugm',93,86,0]]}};
+ var red=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+ document.querySelectorAll('.mk .vs').forEach(function(vs){var fg=vs.querySelector('.finger'),S=SEQ[vs.dataset.seq],P=S.P,L=S.L,t0=performance.now(),last=-1;
+  if(red){vs.className='vs '+P[P.length-1][1]+(vs.dataset.seq==='conta'?' conta ban':'');fg.style.display='none';return}
+  function tick(now){var c=((now-t0)/1000)%L,s=0;for(var k=0;k<P.length;k++)if(c>=P[k][0])s=k;
+   if(s!==last){last=s;var p=P[s];vs.className='vs '+p[1];fg.style.setProperty('--fx',p[2]+'%');fg.style.setProperty('--fy',p[3]+'%');
+    if(p[4]){fg.classList.remove('tap');void fg.offsetWidth;fg.classList.add('tap');setTimeout(function(){fg.classList.remove('tap')},300)}}
+   requestAnimationFrame(tick)}requestAnimationFrame(tick)});
+ document.querySelectorAll('.mk [data-anim="inicio"]').forEach(function(box){var hl=box.parentNode.querySelector('.mk-vhl'),t0=performance.now();
+  if(red){box.classList.add('ad');hl.classList.add('on');return}
+  function tick(now){var c=((now-t0)/1000)%14,ad=c>=2&&c<12;box.classList.toggle('ad',ad);hl.classList.toggle('on',ad);requestAnimationFrame(tick)}requestAnimationFrame(tick)});
 })();
 </script>
 </body>

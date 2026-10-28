@@ -76,6 +76,11 @@ def main():
         'fmt2': data_uri(os.path.join(BASE, 'fmt2-confirmacao.jpg')),
         'fmt3': data_uri(os.path.join(BASE, 'fmt3-conta.jpg')),
         'fmt4': data_uri(os.path.join(BASE, 'fmt4-especial.jpg')),
+        'mk_tablet': data_uri(os.path.join(BASE, 'mk-tablet.webp')),
+        'mk_popup_bar': data_uri(os.path.join(BASE, 'mk-popup-bar.png')),
+        'mk_conta': data_uri(os.path.join(BASE, 'mk-conta.webp')),
+        'mk_rbph': data_uri(os.path.join(BASE, 'mk-rbph.jpg')),
+        'mk_vph': data_uri(os.path.join(BASE, 'mk-vph.jpg')),
     }
     for k in ('inicio', 'confirmacao', 'conta', 'especial'):
         img['foto_' + k] = asset('foto_' + k, os.path.join(PH, f'foto-{k}.jpg'), 900)
@@ -100,6 +105,32 @@ def main():
         '</div>'
     )
 
+    # cenas animadas dos formatos (mesmas do media kit)
+    rban = ('<div class="rban"><div class="rb-ph"></div><div class="rb-t"><small>Restaurante Goomer</small><b>Peça o seu!</b>'
+            '<span>Picanha ao Fogo com molho chimichurri</span><em>R$ 34,90</em><i>Peça o seu</i></div></div>')
+    vc = lambda n, d, p: (f'<div class="vc"><div class="vph"></div><div class="vt"><b>{n}</b><span>{d}</span>'
+                          f'<div class="vr"><em>{p}</em><i class="vadd">ADICIONAR</i></div></div></div>')
+    vmenu = ('<div class="vmenu"><h6>Hambúrgueres Gourmet</h6>' + vc('Picanha ao Fogo', 'Blend de picanha, queijo e molho chimichurri', 'R$ 34,90')
+             + vc('Smash da Casa', 'Dois smashs, cheddar e cebola caramelizada', 'R$ 29,90') + '</div>')
+
+    def criativo(key, w=1200):
+        p = c.get('imagens', {}).get(key)
+        return data_uri(os.path.join(cdir, p), w) if p else None
+
+    cr = criativo('criativo_inicio')
+    criativo_inicio = (f'<img class="cr-ph" src="{cr}" alt="">' if cr else
+                       f'<img class="cr-ph" src="{img["foto_inicio"]}" alt=""><div class="cr-lb"><b>{marca}</b><span>{f["inicio"]["legenda"]}</span></div>')
+
+    def banner_bx(full, foto, titulo, sub, cta=None):
+        if full:
+            return f'<div class="bx"><img class="full" src="{full}" alt=""></div>'
+        return (f'<div class="bx"><img class="ph" src="{foto}" alt=""><div class="fd"></div><div class="tx">'
+                f'<img class="lg" src="{img["logo"]}" alt=""><div class="h">{titulo}</div>'
+                + (f'<div class="c">{cta}</div>' if cta else f'<div class="d">{sub}</div>') + '</div></div>')
+
+    banner_confirmacao = banner_bx(criativo('banner_confirmacao'), img['foto_confirmacao'], f['confirmacao']['titulo'], f['confirmacao']['destaque'])
+    banner_conta = banner_bx(criativo('banner_conta', 600), img['foto_conta'], f['conta']['titulo'], None, f['conta']['cta'])
+
     banner = ''
     if b2b:
         bn = b2b.get('banner', {})
@@ -120,7 +151,8 @@ def main():
         menu_fs=round(min(15, 62 / max(len(label), 1) * 1.0), 2),
         hero=c['hero'], f=f, ativacao=c['ativacao'], b2b=b2b, demo_url=c.get('demo_url'),
         fonte_data=c.get('fonte_data', 'out/2026'), img=img, clientes=clientes,
-        tela_especial=tela_especial, banner=banner,
+        tela_especial=tela_especial, banner=banner, rban=rban, vmenu=vmenu, criativo_inicio=criativo_inicio,
+        banner_confirmacao=banner_confirmacao, banner_conta=banner_conta,
         cta={**{'titulo': f'Vamos levar a {marca} pra mesa?', 'nome': 'João Arcalá', 'cargo': 'CFO/COO · Goomer',
                 'email': 'joao.arcala@goomer.com.br', 'whatsapp': '5515991378552', 'telefone': '+55 15 99137-8552'},
              **c.get('cta', {})},

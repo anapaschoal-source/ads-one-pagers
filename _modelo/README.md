@@ -11,6 +11,7 @@ python3 _modelo/build.py _modelo/marcas/<slug>.json --artefato saida.html  # + v
 - `marcas/<slug>/`: logo e fotos da marca (caminhos no JSON são relativos ao JSON).
 - `base/`: telas Goomer neutras (tablet, formatos, painel, hero). Não editar.
 - `placeholder/`: logo e fotos genéricas usadas quando o JSON não traz imagem.
+- Formatos animados (mesmas animações do media kit): por padrão os banners são montados com logo, fotos e textos do JSON. Para usar o criativo pronto da marca, preencha em `imagens`: `criativo_inicio` (16:9), `banner_confirmacao` (876×507) e `banner_conta` (≈ 204×115).
 - Sem `b2b` no JSON: página só B2C, sem abas.
 - `demo_url`: caminho do demo publicado (ex.: `/marca/jogo/`). Sem ele, o tablet mostra a página especial estática.
 - Logo da marca: sempre o arquivo oficial enviado pela Ana, nunca redesenhado.
