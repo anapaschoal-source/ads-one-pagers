@@ -1,21 +1,34 @@
 {
   "slug": "tenda",
   "marca": "Tenda",
-  "cor": "#F05A22",
-  "cor_escura": "#1C120D",
+  "cor": "#E30613",
+  "cor_escura": "#1E0A0B",
   "logo_branco_no_escuro": true,
   "logo_altura_hero": 26,
   "logo_altura_secao": 34,
-  "imagens": {},
-  "menu": { "label": "Tenda", "sub": "Reserva Sacomã" },
+  "imagens": {
+    "logo": "tenda/logo.png"
+  },
+  "menu": {
+    "label": "Tenda",
+    "sub": "Reserva Sacomã"
+  },
   "hero": {
     "titulo": "O primeiro apê, <br>na mesa do cliente",
-    "subtitulo": "O Reserva Sacomã no tablet dos restaurantes do entorno."
+    "subtitulo": "O Reserva Sacomã nos tablets do bairro."
   },
   "formatos": {
-    "inicio": { "legenda": "Saia do aluguel no Sacomã" },
-    "confirmacao": { "titulo": "Pedido feito! E o seu apê?", "destaque": "Entrada em até 100x" },
-    "conta": { "titulo": "Use o FGTS na entrada", "cta": "Agende sua visita" },
+    "inicio": {
+      "legenda": "Reserva Sacomã · entrada em até 100x"
+    },
+    "confirmacao": {
+      "titulo": "Pedido feito! E o seu apê?",
+      "destaque": "Parcelas a partir de R$ 499"
+    },
+    "conta": {
+      "titulo": "FGTS na entrada, ITBI e registro grátis",
+      "cta": "Quero morar aqui"
+    },
     "especial": {
       "selo": "Quiz · 30s",
       "titulo": "Qual é o seu",
@@ -27,9 +40,18 @@
   "ativacao": {
     "texto": "Na página especial, é possível criar um modelo <strong>inovador</strong> de ativação da marca, podendo gerar benefícios e um nível único de interação com os usuários da mesa. Para a Tenda, criamos o quiz Seu Primeiro Apê: em 30 segundos o cliente vê se a parcela cabe no bolso e agenda a visita ao decorado do Reserva Sacomã, só nos restaurantes a até 5 km do empreendimento.",
     "passos": [
-      { "titulo": "Entra no menu Tenda", "texto": "O usuário abre a categoria Tenda no cardápio do tablet." },
-      { "titulo": "Responde o quiz", "texto": "Quatro perguntas rápidas sobre renda, FGTS e o apê que ele quer." },
-      { "titulo": "Agenda a visita", "texto": "QR code para falar com um corretor e visitar o decorado." }
+      {
+        "titulo": "Entra no menu Tenda",
+        "texto": "O usuário abre a categoria Tenda no cardápio do tablet."
+      },
+      {
+        "titulo": "Responde o quiz",
+        "texto": "Quatro perguntas rápidas sobre renda, FGTS e o apê que ele quer."
+      },
+      {
+        "titulo": "Agenda a visita",
+        "texto": "QR code para falar com um corretor e visitar o decorado."
+      }
     ]
   },
   "demo_url": null,
