@@ -216,6 +216,42 @@ body[data-tab="b2c"] .only-b2b,body[data-tab="b2b"] .only-b2c{display:none !impo
 .bx img.full{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 @media (prefers-reduced-motion: reduce){.rb-ph,.mk-pulse,.mk-ad .cr-ph{animation:none}}
 
+
+/* Tela de Início como vídeo de 10s */
+.vd{position:absolute;inset:0;overflow:hidden;background:var(--escura);color:#fff;font-family:Poppins,Manrope,system-ui,sans-serif}
+.vd-v{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.vd-s1{position:absolute;inset:0}
+.vd-ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.vd-fd{position:absolute;inset:0;background:linear-gradient(90deg,var(--escura) 0%,color-mix(in srgb,var(--escura) 65%,transparent) 36%,transparent 68%)}
+.vd-tx{position:absolute;left:6%;top:0;bottom:0;width:48%;display:flex;flex-direction:column;justify-content:center;gap:5cqh}
+.vd-lg{height:11cqh;width:auto;max-width:60%;object-fit:contain;object-position:left{% if logo_branco %};filter:brightness(0) invert(1){% endif %}}
+.vd-h{font-weight:700;font-size:10cqh;line-height:1.08;text-wrap:balance}
+.vd-end{position:absolute;inset:0;background:var(--cor);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5cqh;opacity:0;padding:0 10%;text-align:center}
+.vd-lg2{height:22cqh;width:auto;max-width:60%;object-fit:contain{% if logo_branco %};filter:brightness(0) invert(1){% endif %}}
+.vd-h2{font-weight:700;font-size:8cqh;line-height:1.15;color:{{ cor_texto }};text-wrap:balance}
+.vd-ui{position:absolute;inset:0;pointer-events:none}
+.vd-play{position:absolute;left:50%;top:50%;width:20cqh;height:20cqh;margin:-10cqh 0 0 -10cqh;border-radius:50%;background:rgba(0,0,0,.45);opacity:0}
+.vd-play::after{content:"";position:absolute;left:39%;top:28%;border-left:7cqh solid #fff;border-top:4.5cqh solid transparent;border-bottom:4.5cqh solid transparent}
+.vd-chip{position:absolute;left:3%;bottom:8cqh;display:flex;align-items:center;gap:1.6cqh;background:rgba(0,0,0,.6);border-radius:99px;padding:1.4cqh 3cqh 1.4cqh 2.4cqh;font:700 4.6cqh/1 Manrope,system-ui,sans-serif;font-variant-numeric:tabular-nums}
+.vd-chip i{width:0;height:0;border-left:2.6cqh solid #fff;border-top:1.6cqh solid transparent;border-bottom:1.6cqh solid transparent}
+.vd-bar{position:absolute;left:0;right:0;bottom:0;height:2.6cqh;background:rgba(255,255,255,.28)}
+.vd-bar i{display:block;height:100%;width:0;background:var(--cor)}
+.vd-mute{position:absolute;right:3%;bottom:8cqh;width:7cqh;height:7cqh;border-radius:50%;background:rgba(0,0,0,.6)}
+.vd-mute::before{content:"";position:absolute;left:24%;top:32%;width:22%;height:36%;background:#fff;clip-path:polygon(0 25%,45% 25%,100% 0,100% 100%,45% 75%,0 75%)}
+.mk-tv.ad .vd-bar i{animation:vdbar 10s linear forwards}
+.mk-tv.ad .vd-play{animation:vdplay 1.1s ease-out}
+.mk-tv.ad .vd-ph{animation:vdkb 10s ease-out forwards}
+.mk-tv.ad .vd-tx{animation:vdtx 10s ease-out both}
+.mk-tv.ad .vd-end{animation:vdend 10s ease-in-out both}
+.mk-tv.ad .vd-lg2{animation:vdlg 10s ease-out both}
+@keyframes vdbar{to{width:100%}}
+@keyframes vdplay{0%{opacity:0;transform:scale(.7)}25%{opacity:1;transform:none}100%{opacity:0;transform:scale(1.25)}}
+@keyframes vdkb{from{transform:scale(1.02) translateX(0)}to{transform:scale(1.18) translateX(-3%)}}
+@keyframes vdtx{0%,6%{opacity:0;transform:translateY(8cqh)}16%,62%{opacity:1;transform:none}70%,100%{opacity:0;transform:translateY(-4cqh)}}
+@keyframes vdend{0%,64%{opacity:0;clip-path:circle(0% at 50% 50%)}74%,100%{opacity:1;clip-path:circle(80% at 50% 50%)}}
+@keyframes vdlg{0%,68%{transform:scale(.6);opacity:0}80%,100%{transform:none;opacity:1}}
+@media (prefers-reduced-motion: reduce){.mk-tv.ad .vd-ph,.mk-tv.ad .vd-tx,.mk-tv.ad .vd-end,.mk-tv.ad .vd-lg2,.mk-tv.ad .vd-play{animation:none}.mk-tv.ad .vd-bar i{animation:none;width:100%}}
+
 @media print{@page{size:1080px 1528px;margin:0}html,body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}#page{zoom:1 !important;box-shadow:none}.tabs{display:none}}
 @media (max-width: 759px){
 #page{width:100% !important;min-height:0 !important;box-shadow:none}
@@ -260,7 +296,7 @@ h2{font-size:30px}.sec-head span{font-size:30px}
 <div class="hero-art only-b2c">
 <div class="cover"><div style="width:max(100cqw,150cqh);aspect-ratio:1536/1024;left:calc((100cqw - max(100cqw,150cqh))*.52);top:calc((100cqh - max(100cqw,150cqh)/1.5)*.6)">
 <img class="bg" src="{{ img.hero_b2c }}" alt="Tablet Goomer com a página especial {{ marca }} na mesa de um restaurante">
-<div class="menu-cell" style="left:30.6%;top:50.2%;width:3.45%;height:4.3%"><div>{% if menu_logo %}<img src="{{ menu_logo }}" alt="{{ marca }}" style="height:62cqh;width:auto;max-width:90cqw;object-fit:contain;display:block">{% else %}<b>{{ menu_label }}</b><i>{{ menu_sub }}</i>{% endif %}</div></div>
+<div class="menu-cell" style="left:30.6%;top:50.2%;width:3.45%;height:4.3%"><div><img src="{{ menu_logo }}" alt="{{ marca }}" style="height:46cqh;width:auto;max-width:82cqw;object-fit:contain;display:block{% if menu_logo_branco %};filter:brightness(0) invert(1){% endif %}"></div></div>
 <div class="cy-scr" style="left:35.55%;top:44.14%;width:38.67%;height:33.2%">{{ tela_especial }}</div>
 </div></div>
 </div>
@@ -332,7 +368,7 @@ h2{font-size:30px}.sec-head span{font-size:30px}
 
 <div class="step"><div class="num">4</div><div class="card hl">
 <div class="shot" role="img" aria-label="Formato Página Especial: aba {{ marca }} no cardápio e a página da marca"><div class="mk"><img class="mk-bg" src="{{ img.mk_tablet }}" alt="">
-<div class="mk-aba" style="left:14.86%;top:26.29%;width:7.07%;height:8.57%"><div>{% if menu_logo %}<img src="{{ menu_logo }}" alt="{{ marca }}">{% else %}<b>{{ menu_label }}</b><i>{{ menu_sub }}</i>{% endif %}</div></div>
+<div class="mk-aba" style="left:14.86%;top:26.29%;width:7.07%;height:8.57%"><div><img src="{{ menu_logo }}" alt="{{ marca }}"{% if menu_logo_branco %} style="filter:brightness(0) invert(1)"{% endif %}></div></div>
 <div class="cy-scr" style="left:23.57%;top:18.29%;width:62.09%;height:50.43%">{{ tela_especial }}</div>
 <span class="mk-hl mk-pulse" style="left:14.86%;top:26.29%;width:7.07%;height:8.57%"></span>
 <span class="mk-hl mk-pulse" style="left:23.57%;top:18.29%;width:62.09%;height:50.43%"></span>
@@ -352,7 +388,7 @@ h2{font-size:30px}.sec-head span{font-size:30px}
 {% endfor %}</div>
 </div>
 <div class="demo"><div class="cy-tab" role="img" aria-label="Tablet Goomer com o cardápio aberto na página especial {{ marca }}" style="position:absolute;inset:0">
-<div class="menu-cell" style="left:7.45%;top:21.6%;width:7.3%;height:8.9%"><div>{% if menu_logo %}<img src="{{ menu_logo }}" alt="{{ marca }}" style="height:62cqh;width:auto;max-width:90cqw;object-fit:contain;display:block">{% else %}<b>{{ menu_label }}</b><i>{{ menu_sub }}</i>{% endif %}</div></div>
+<div class="menu-cell" style="left:7.45%;top:21.6%;width:7.3%;height:8.9%"><div><img src="{{ menu_logo }}" alt="{{ marca }}" style="height:46cqh;width:auto;max-width:82cqw;object-fit:contain;display:block{% if menu_logo_branco %};filter:brightness(0) invert(1){% endif %}"></div></div>
 {% if demo_url %}<iframe src="{{ demo_url }}" title="Demo {{ marca }}" loading="lazy" allow="fullscreen" style="position:absolute;left:17.572%;top:9.091%;width:77.764%;height:66.517%;border:0;background:var(--escura)"></iframe>
 {% else %}<div class="cy-scr" style="left:17.572%;top:9.091%;width:77.764%;height:66.517%">{{ tela_especial }}</div>{% endif %}
 </div></div>
@@ -419,7 +455,11 @@ set(location.hash==='#b2b'?'b2b':'b2c');{% endif %}
    requestAnimationFrame(tick)}requestAnimationFrame(tick)});
  document.querySelectorAll('.mk [data-anim="inicio"]').forEach(function(box){var hl=box.parentNode.querySelector('.mk-vhl'),t0=performance.now();
   if(red){box.classList.add('ad');hl.classList.add('on');return}
-  function tick(now){var c=((now-t0)/1000)%14,ad=c>=2&&c<12;box.classList.toggle('ad',ad);hl.classList.toggle('on',ad);requestAnimationFrame(tick)}requestAnimationFrame(tick)});
+  var cd=box.querySelector('.vd-cd'),v=box.querySelector('video'),pl=false;
+  function tick(now){var c=((now-t0)/1000)%14,ad=c>=2&&c<12;box.classList.toggle('ad',ad);hl.classList.toggle('on',ad);
+   if(cd)cd.textContent='0:'+('0'+(ad?Math.ceil(12-c):10)).slice(-2);
+   if(v){if(ad&&!pl){pl=true;try{v.currentTime=0}catch(e){}var p=v.play();if(p)p.catch(function(){})}if(!ad&&pl){pl=false;v.pause()}}
+   requestAnimationFrame(tick)}requestAnimationFrame(tick)});
 })();
 </script>
 </body>

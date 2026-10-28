@@ -87,8 +87,9 @@ def main():
 
     clientes = [
         {'src': data_uri(os.path.join(BASE, f)), 'alt': a, 'h': h}
-        for f, a, h in [('cli-uber.png', 'Uber', 30), ('cli-pg.png', 'P&amp;G', 38), ('cli-cocacola.png', 'Coca-Cola', 36),
-                        ('cli-cielo.png', 'Cielo', 30), ('cli-comgas.png', 'Comgás', 38), ('cli-cyrela.png', 'Cyrela', 30)]
+        for f, a, h in [('cli-uber.png', 'Uber', 24), ('cli-pg.png', 'P&amp;G', 30), ('cli-cocacola.png', 'Coca-Cola', 30),
+                        ('cli-btg.png', 'BTG Pactual', 34), ('cli-cielo.png', 'Cielo', 30), ('cli-comgas.png', 'Comgás', 38),
+                        ('cli-cyrela.png', 'Cyrela', 30)]
         if a.replace('&amp;', '&') not in c.get('ocultar_clientes', [])
     ]
 
@@ -117,11 +118,23 @@ def main():
         p = c.get('imagens', {}).get(key)
         return data_uri(os.path.join(cdir, p), w) if p else None
 
+    # Tela de Início = vídeo de 10s: arquivo da marca (video_inicio) ou animação montada com foto, frase e logo
+    vid = c.get('imagens', {}).get('video_inicio')
     cr = criativo('criativo_inicio')
-    # sem criativo pronto: a frase entra dentro da peça (logo + título sobre a foto), sem rodapé de legenda
-    criativo_inicio = (f'<img class="cr-ph" src="{cr}" alt="">' if cr else
-                       f'<div class="bx wide"><img class="ph cr-ph" src="{img["foto_inicio"]}" alt=""><div class="fd"></div><div class="tx">'
-                       f'<img class="lg" src="{img["logo"]}" alt=""><div class="h">{f["inicio"]["legenda"]}</div></div></div>')
+    ui = ('<div class="vd-ui"><span class="vd-play"></span><span class="vd-chip"><i></i><b class="vd-cd">0:10</b></span>'
+          '<span class="vd-bar"><i></i></span><span class="vd-mute"></span></div>')
+    if vid:
+        vp = os.path.join(cdir, vid)
+        mime = 'video/webm' if vid.lower().endswith('.webm') else 'video/mp4'
+        src = f'data:{mime};base64,' + base64.b64encode(open(vp, 'rb').read()).decode()
+        criativo_inicio = f'<div class="vd"><video class="vd-v" muted playsinline preload="auto" src="{src}"></video>{ui}</div>'
+    else:
+        s1 = (f'<img class="vd-ph" src="{cr}" alt="">' if cr else
+              f'<img class="vd-ph" src="{img["foto_inicio"]}" alt=""><div class="vd-fd"></div>'
+              f'<div class="vd-tx"><img class="vd-lg" src="{img["logo"]}" alt=""><div class="vd-h">{f["inicio"]["legenda"]}</div></div>')
+        s2 = (f'<div class="vd-end"><img class="vd-lg2" src="{img["logo"]}" alt="">'
+              f'<div class="vd-h2">{f["inicio"]["legenda"]}</div></div>')
+        criativo_inicio = f'<div class="vd"><div class="vd-s1">{s1}</div>{s2}{ui}</div>'
 
     def banner_bx(full, foto, titulo, sub, cta=None):
         if full:
@@ -149,7 +162,9 @@ def main():
         logo_branco=c.get('logo_branco_no_escuro', True),
         logo_altura_hero=c.get('logo_altura_hero', 22), logo_altura_secao=c.get('logo_altura_secao', 26),
         menu_label=label, menu_sub=c.get('menu', {}).get('sub', 'Especial'),
-        menu_logo=(data_uri(os.path.join(cdir, c['menu']['logo']), 300) if c.get('menu', {}).get('logo') else None),
+        # a aba da Página Especial sempre mostra o logo da marca (menu.logo troca por outra versão do logo)
+        menu_logo=(data_uri(os.path.join(cdir, c['menu']['logo']), 300) if c.get('menu', {}).get('logo') else img['logo']),
+        menu_logo_branco=(not c.get('menu', {}).get('logo')) and c.get('logo_branco_no_escuro', True),
         menu_fs=round(min(15, 62 / max(len(label), 1) * 1.0), 2),
         hero=c['hero'], f=f, ativacao=c['ativacao'], b2b=b2b, demo_url=c.get('demo_url'),
         fonte_data=c.get('fonte_data', 'out/2026'), img=img, clientes=clientes,
