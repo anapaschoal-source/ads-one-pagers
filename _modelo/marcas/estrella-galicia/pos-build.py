@@ -89,12 +89,24 @@ def js_formats():
     return '[' + ',\n'.join(out) + ']'
 
 OVERLAY = open(os.path.join(MK, 'overlay.html'), encoding='utf-8').read()
+
+# faixa de anunciantes: inclui Cyrela e baixa um pouco o logo da Comgás (igual à Shopee)
+CY = uri(os.path.join(D, 'cli-cyrela.png'), 'image/png')
+def clientes(s):
+    if 'alt="Cyrela"' not in s:
+        s = s.replace('grid-template-columns:repeat(5,1fr)', 'grid-template-columns:repeat(6,1fr)', 1)
+        s, k = re.subn(r'(<div class="clients">.*?<div class="grid">(?:\s*<div><img[^>]*></div>)+)', lambda m: m.group(1) + f'\n<div><img src="{CY}" alt="Cyrela" style="max-height:30px"></div>', s, count=1, flags=re.S)
+        assert k, 'faixa de clientes não encontrada'
+    s = s.replace('alt="Comgás" style="max-height:28px"', 'alt="Comgás" style="max-height:28px;transform:translateY(5px)"', 1)
+    return s
+
 NAMES = ['Tela de Início', 'Confirmação de Pedido', 'Minha Conta', 'Página Especial']
 
 for f in sys.argv[1:]:
     s = open(f, encoding='utf-8').read()
     if '/*mk-formatos*/' in s:
         print(f, 'já tem os formatos do media kit'); continue
+    s = clientes(s)
     s = s.replace('</style>', CSS + MKCSS + '\n</style>', 1)
     shots = list(re.finditer(r'<div class="shot" role="img"[^>]*>.*?(?=\s*<div class="fmt-body">)', s, re.S))
     assert len(shots) == 4, f'shots: {len(shots)}'
