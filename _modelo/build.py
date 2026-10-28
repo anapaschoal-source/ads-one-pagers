@@ -116,6 +116,7 @@ def main():
         logo_branco=c.get('logo_branco_no_escuro', True),
         logo_altura_hero=c.get('logo_altura_hero', 22), logo_altura_secao=c.get('logo_altura_secao', 26),
         menu_label=label, menu_sub=c.get('menu', {}).get('sub', 'Especial'),
+        menu_logo=(data_uri(os.path.join(cdir, c['menu']['logo']), 300) if c.get('menu', {}).get('logo') else None),
         menu_fs=round(min(15, 62 / max(len(label), 1) * 1.0), 2),
         hero=c['hero'], f=f, ativacao=c['ativacao'], b2b=b2b, demo_url=c.get('demo_url'),
         fonte_data=c.get('fonte_data', 'out/2026'), img=img, clientes=clientes,

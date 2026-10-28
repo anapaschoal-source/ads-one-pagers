@@ -32,7 +32,7 @@
       { "titulo": "Ganha o benefício", "texto": "[Cupom, cadastro ou QR code que leva para a marca.]" }
     ]
   },
-  "demo_url": null,
+  "demo_url": "/modelo/roleta/",
   "b2b": {
     "hero_titulo": "[Produto], <br>no painel do dono",
     "hero_subtitulo": "Banner no painel de +10 mil restaurantes.",

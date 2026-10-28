@@ -171,7 +171,7 @@ h2{font-size:30px}.sec-head span{font-size:30px}
 <div class="hero-art only-b2c">
 <div class="cover"><div style="width:max(100cqw,150cqh);aspect-ratio:1536/1024;left:calc((100cqw - max(100cqw,150cqh))*.52);top:calc((100cqh - max(100cqw,150cqh)/1.5)*.6)">
 <img class="bg" src="{{ img.hero_b2c }}" alt="Tablet Goomer com a página especial {{ marca }} na mesa de um restaurante">
-<div class="menu-cell" style="left:30.6%;top:50.2%;width:3.45%;height:4.3%"><div><b>{{ menu_label }}</b><i>{{ menu_sub }}</i></div></div>
+<div class="menu-cell" style="left:30.6%;top:50.2%;width:3.45%;height:4.3%"><div>{% if menu_logo %}<img src="{{ menu_logo }}" alt="{{ marca }}" style="height:62cqh;width:auto;max-width:90cqw;object-fit:contain;display:block">{% else %}<b>{{ menu_label }}</b><i>{{ menu_sub }}</i>{% endif %}</div></div>
 <div class="cy-scr" style="left:35.55%;top:44.14%;width:38.67%;height:33.2%">{{ tela_especial }}</div>
 </div></div>
 </div>
@@ -244,7 +244,7 @@ h2{font-size:30px}.sec-head span{font-size:30px}
 
 <div class="step"><div class="num">4</div><div class="card hl">
 <div class="shot" role="img" aria-label="Formato Página Especial no tablet Goomer, com {{ marca }}"><div class="cy-f" style="background-image:url({{ img.fmt4 }})">
-<div class="menu-cell" style="left:7.6%;top:21.9%;width:6.9%;height:8.4%"><div><b>{{ menu_label }}</b><i>{{ menu_sub }}</i></div></div>
+<div class="menu-cell" style="left:7.6%;top:21.9%;width:6.9%;height:8.4%"><div>{% if menu_logo %}<img src="{{ menu_logo }}" alt="{{ marca }}" style="height:62cqh;width:auto;max-width:90cqw;object-fit:contain;display:block">{% else %}<b>{{ menu_label }}</b><i>{{ menu_sub }}</i>{% endif %}</div></div>
 <div class="cy-scr" style="left:17.593%;top:9.115%;width:77.963%;height:66.406%">{{ tela_especial }}</div>
 </div></div>
 <div class="fmt-body"><div class="t">Página Especial</div><div class="d">Uma categoria nova no cardápio leva a uma página exclusiva da marca.</div><div class="tags"><span class="tag">HTML interativo</span><span class="tag on">Demo {{ marca }}</span></div></div>
@@ -262,7 +262,7 @@ h2{font-size:30px}.sec-head span{font-size:30px}
 {% endfor %}</div>
 </div>
 <div class="demo"><div class="cy-tab" role="img" aria-label="Tablet Goomer com o cardápio aberto na página especial {{ marca }}" style="position:absolute;inset:0">
-<div class="menu-cell" style="left:7.45%;top:21.6%;width:7.3%;height:8.9%"><div><b>{{ menu_label }}</b><i>{{ menu_sub }}</i></div></div>
+<div class="menu-cell" style="left:7.45%;top:21.6%;width:7.3%;height:8.9%"><div>{% if menu_logo %}<img src="{{ menu_logo }}" alt="{{ marca }}" style="height:62cqh;width:auto;max-width:90cqw;object-fit:contain;display:block">{% else %}<b>{{ menu_label }}</b><i>{{ menu_sub }}</i>{% endif %}</div></div>
 {% if demo_url %}<iframe src="{{ demo_url }}" title="Demo {{ marca }}" loading="lazy" allow="fullscreen" style="position:absolute;left:17.572%;top:9.091%;width:77.764%;height:66.517%;border:0;background:var(--escura)"></iframe>
 {% else %}<div class="cy-scr" style="left:17.572%;top:9.091%;width:77.764%;height:66.517%">{{ tela_especial }}</div>{% endif %}
 </div></div>
