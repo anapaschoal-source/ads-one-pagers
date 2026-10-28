@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ titulo_pagina }}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Antonio:wght@700&amp;family=Manrope:wght@400;500;700;800&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+:root{--azul:#2B00FF;--tinta:#0A0044;--texto:#2E2950;--cinza:#F2F1F6;--lima:#BDE249;--cor:{{ cor }};--escura:{{ cor_escura }};--cor2:{{ cor_b2b }}}
+html,body{margin:0;background:#0A0044}html{overflow-y:scroll}
+a{color:var(--lima)}a:hover{color:#fff}
+#page{width:1080px;min-height:1528px;box-sizing:border-box;background:#fff;font-family:Manrope,system-ui,sans-serif;color:var(--tinta);display:flex;flex-direction:column;margin:0 auto;box-shadow:0 0 60px rgba(0,0,0,.35)}
+.cond{font-family:Antonio,'Arial Narrow','Roboto Condensed','Helvetica Neue',sans-serif;font-stretch:condensed;font-weight:700;text-transform:uppercase}
+.hero{background:var(--azul);color:#fff;padding:36px 64px 0 64px;display:grid;grid-template-columns:minmax(0,1fr) 440px;gap:32px;box-sizing:border-box;align-items:end}
+.hero-l{display:flex;flex-direction:column;gap:22px;padding-bottom:40px;align-self:stretch}
+.hero-top{display:flex;align-items:center;gap:18px;margin-bottom:auto}
+.hero-top .gl{width:140px;height:auto}
+.hero-top .ads{font-size:17px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.hero-top .bl{height:{{ logo_altura_hero }}px;width:auto;display:block;margin-left:auto{% if logo_branco %};filter:brightness(0) invert(1){% endif %}}
+.hero h1{margin:0;font-size:64px;line-height:1;width:470px}
+.hero .sub{margin:0;font-size:19px;line-height:1.45;max-width:490px;white-space:nowrap;opacity:.9}
+.hero-art{align-self:stretch;position:relative;margin:-36px -64px 0 0;min-height:360px}
+.cover{position:absolute;inset:0;overflow:hidden;container-type:size}
+.cover>div{position:absolute}
+.cover img.bg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.clients{background:#000;padding:22px 64px;display:flex;align-items:center;gap:28px}
+.clients .lbl{flex:none;font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#fff;line-height:1.35}
+.clients .grid{flex:1;display:grid;grid-template-columns:repeat({{ clientes|length }},1fr);gap:14px}
+.clients .grid>div{height:56px;display:flex;align-items:center;justify-content:center}
+.clients img{max-width:100%;width:auto;display:block}
+.sec-head{padding:44px 64px 0 64px}
+.sec-head>div{display:flex;align-items:center;gap:18px;border-bottom:3px solid var(--azul);padding-bottom:14px}
+.sec-head span{font-size:40px;line-height:1;color:var(--tinta)}
+.sec-head img{margin-left:auto;height:{{ logo_altura_secao }}px;width:auto;display:block}
+.b2b .sec-head>div{border-color:var(--cor2)}
+h2{margin:0;font-size:34px;color:var(--azul)}
+.b2b h2{color:var(--cor2)}
+.intro{padding:28px 64px 0 64px;display:grid;grid-template-columns:380px 1fr;gap:40px;align-items:center}
+.intro>div:first-child{display:flex;flex-direction:column;gap:10px}
+.intro p,.lead{margin:0;font-size:16px;line-height:1.5;color:var(--texto)}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.stats.two{grid-template-columns:1.25fr 1fr}
+.stat{background:var(--cinza);padding:20px 22px;box-shadow:8px 8px 0 var(--azul)}
+.b2b .stat{box-shadow:8px 8px 0 var(--cor2)}
+.stat.hl{background:var(--lima)}
+.stat b{display:block;font-size:44px;line-height:1;white-space:nowrap}
+.stat span{display:block;font-size:16px;font-weight:700;margin-top:6px}
+.src{padding:14px 64px 0 64px;font-size:13px;color:#5E5B73;text-align:right}
+.block{padding:26px 64px 0 64px}
+.block.act{padding-top:34px}
+.journey{position:relative}
+.journey .line{position:absolute;left:22px;right:22px;top:21px;height:2px;background:#B4B1CC;z-index:0}
+.steps4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.step{display:flex;flex-direction:column;gap:10px;position:relative;z-index:1}
+.num{width:44px;height:44px;background:var(--azul);color:#fff;font-weight:800;font-size:20px;display:flex;align-items:center;justify-content:center}
+.card{background:var(--cinza);display:flex;flex-direction:column;flex:1}
+.card.hl{background:var(--lima)}
+.shot{width:100%;display:block;background:#fff;padding:8px 8px 0 8px;box-sizing:border-box}
+.fmt-body{padding:12px 14px 14px 14px;display:flex;flex-direction:column;gap:6px}
+.fmt-body .t{font-size:16px;font-weight:800;line-height:1.2}
+.fmt-body .d{font-size:13px;line-height:1.45;color:var(--texto)}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{background:#fff;color:var(--tinta);font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 7px}
+.tag.on{background:var(--azul);color:#fff}
+.act-steps{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px}
+.act-step{display:flex;gap:14px;align-items:flex-start}
+.act-step .n{flex:none;width:34px;height:34px;background:var(--cor);color:{{ cor_texto }};font-weight:800;font-size:17px;display:flex;align-items:center;justify-content:center}
+.b2b .act-step .n{background:var(--cor2);color:{{ cor_b2b_texto }}}
+.act-step>div:last-child{display:flex;flex-direction:column;gap:4px}
+.act-step b{font-size:17px;font-weight:800}
+.act-step span{font-size:15px;line-height:1.45;color:var(--texto)}
+.demo{position:relative;width:100%;margin-top:28px;aspect-ratio:1565/1111}
+.panel{position:relative;margin-top:28px;width:100%;aspect-ratio:1360/603;box-shadow:0 12px 30px rgba(10,0,68,.18);border-radius:8px;overflow:hidden}
+.panel img.bg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.sign{margin-top:auto;background:var(--tinta);color:#fff;padding:44px 64px;display:flex;flex-direction:column;gap:26px}
+.sign .q{font-size:44px;line-height:1;color:var(--lima)}
+.sign .row{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px}
+.sign .who{display:flex;flex-direction:column;gap:4px}.sign .who b{font-size:24px}.sign .who span{font-size:16px;color:rgba(255,255,255,.8)}
+.sign .lines{display:grid;gap:10px}
+.sign .line{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.sign code{font:700 18px Manrope,system-ui,sans-serif;background:rgba(255,255,255,.12);padding:10px 14px}
+.btn{text-decoration:none;font-weight:800;font-size:14px;padding:12px 20px}
+.btn.fill{background:var(--lima);color:var(--tinta)}
+.btn.line{border:1.5px solid #fff;color:#fff;padding:11px 20px}
+
+/* abas B2C/B2B */
+body[data-tab="b2c"] .only-b2b,body[data-tab="b2b"] .only-b2c{display:none !important}
+.tabs{display:flex;flex-wrap:wrap;align-items:center;align-self:flex-start;gap:8px}
+.tabs .tl{font:800 11px Manrope,system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.75);flex-basis:100%}
+.tabs button{display:inline-flex;align-items:center;gap:8px;font:800 11.5px Manrope,system-ui,sans-serif;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;color:#fff;background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.7);border-radius:999px;padding:7px 14px;cursor:pointer;transition:background .15s,transform .15s}
+.tabs button:hover{background:rgba(255,255,255,.22);transform:translateY(-1px)}
+.tabs button::before{content:"";width:10px;height:10px;border-radius:50%;border:2px solid currentColor;box-sizing:border-box}
+.tabs button[aria-selected="false"]{animation:tabpulse 2.2s ease-in-out infinite}
+@keyframes tabpulse{0%,100%{box-shadow:0 0 0 0 rgba(189,226,73,0)}50%{box-shadow:0 0 0 5px rgba(189,226,73,.45)}}
+.tabs button[aria-selected="true"]{background:#fff;color:var(--azul);border-color:#fff}
+.tabs button[aria-selected="true"]::before{background:var(--azul);border-color:var(--azul)}
+.tabs button:focus-visible{outline:2px solid var(--lima);outline-offset:2px}
+
+/* telas do tablet */
+.cy-f{position:relative;width:100%;aspect-ratio:540/384;background:center/100% 100% no-repeat;container-type:inline-size;font-family:Poppins,Manrope,system-ui,sans-serif;text-align:left}
+.cy-f *,.cy-scr *{box-sizing:border-box}
+.cy-tab{position:relative;width:100%;aspect-ratio:1400/994;background:url({{ img.tablet }}) center/100% 100% no-repeat}
+.cy-scr{position:absolute;box-sizing:border-box;container-type:size;overflow:hidden;background:#0A0A0C;color:#fff;font-family:Poppins,Manrope,system-ui,sans-serif;text-align:left}
+.cy-ab{position:absolute;overflow:hidden}
+.cy-ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.menu-cell{position:absolute;container-type:size}.menu-cell>div{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12cqh;color:#fff;font-family:Poppins,Manrope,system-ui,sans-serif;text-align:center;line-height:1}
+.menu-cell b{font-weight:600;font-size:{{ menu_fs }}cqw;letter-spacing:.32em;margin-right:-.32em;text-transform:uppercase;white-space:nowrap}
+.menu-cell i{font-style:normal;font-weight:500;font-size:13cqw;opacity:.85;white-space:nowrap}
+.bnr{position:absolute;container-type:size;overflow:hidden;background:var(--escura)}.bnr>div{position:absolute;inset:0;color:#fff;font-family:Poppins,Manrope,system-ui,sans-serif;display:flex;align-items:center;gap:6cqh;padding:0 4cqw 0 3cqw;box-sizing:border-box}
+.bnr *{box-sizing:border-box}
+.bnr .lg{flex:none;height:46cqh;width:auto;max-width:16cqw;object-fit:contain{% if logo_branco %};filter:brightness(0) invert(1){% endif %}}
+.bnr .tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:5cqh;padding-left:4cqw;border-left:.25cqw solid rgba(255,255,255,.25)}
+.bnr .ey{font-size:8cqh;font-weight:600;letter-spacing:.22em;text-transform:uppercase;opacity:.8;white-space:nowrap}
+.bnr .hd{font-size:15cqh;font-weight:700;line-height:1.15}
+.bnr .hd em{font-style:normal;color:var(--cor2)}
+.bnr .ct{align-self:flex-start;background:var(--cor2);color:{{ cor_b2b_texto }};font-weight:700;font-size:8.5cqh;padding:3cqh 5cqh;border-radius:99px;white-space:nowrap}
+.bnr img.full{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+@keyframes cyfade{0%,8%{opacity:0}20%,100%{opacity:1}}
+@keyframes cylabel{0%,22%{opacity:0;transform:translateY(8%)}34%,100%{opacity:1;transform:none}}
+@keyframes cypop{0%,14%{opacity:0;transform:scale(.92)}26%,100%{opacity:1;transform:none}}
+@keyframes cyslide{0%,18%{transform:translateX(115%)}34%,100%{transform:none}}
+@keyframes cytap{0%,40%{opacity:0;transform:translate(-50%,-50%) scale(.4)}50%{opacity:1;transform:translate(-50%,-50%) scale(1)}62%,100%{opacity:0;transform:translate(-50%,-50%) scale(1.5)}}
+@keyframes cykb{from{transform:scale(1)}to{transform:scale(1.08)}}
+.cy-a1{animation:cyfade 6s ease-out infinite}.cy-a2{animation:cylabel 6s ease-out infinite}.cy-a3{animation:cypop 5s ease-out infinite}.cy-a4{animation:cyslide 5s ease-out infinite}
+.cy-kb{animation:cykb 8s ease-in-out infinite alternate}
+.cy-tap{position:absolute;left:45%;top:50%;width:5cqw;height:5cqw;border-radius:50%;border:.5cqw solid #fff;background:rgba(255,255,255,.35);animation:cytap 3s ease-out infinite}
+@media (prefers-reduced-motion: reduce){.cy-a1,.cy-a2,.cy-a3,.cy-a4,.cy-kb,.cy-tap,.tabs button{animation:none}}
+
+
+/* formatos animados (mesmas animações do media kit) */
+.mk{position:relative;width:100%;aspect-ratio:976/700;container-type:inline-size;font-family:Roboto,Manrope,system-ui,sans-serif;overflow:hidden}
+.mk *{box-sizing:border-box}
+.mk-bg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.mk-tv{position:absolute;overflow:hidden;border-radius:.4cqw;background:#2F190F;container-type:size}
+.mk-tv .mk-ad{position:absolute;inset:0;opacity:0;transition:opacity .45s}
+.mk-tv.ad .mk-ad{opacity:1}
+.rban{position:absolute;inset:0;display:flex;align-items:center;padding:0 6cqw;background:#1A0E08;transition:opacity .45s;overflow:hidden}
+.mk-tv.ad .rban{opacity:0}
+.rb-ph{position:absolute;inset:0 0 0 30%;background:url({{ img.mk_rbph }}) center/cover no-repeat;animation:mkkb 14s ease-in-out infinite alternate}
+.rb-ph::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#1A0E08 0%,rgba(26,14,8,.75) 22%,rgba(26,14,8,0) 55%)}
+@keyframes mkkb{from{transform:scale(1)}to{transform:scale(1.08)}}
+.rb-t{position:relative;z-index:1;display:grid;gap:2.4cqh;color:#fff;max-width:45%}
+.rb-t small{font-size:3.8cqh;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#F7841F}
+.rb-t b{font-family:Antonio,'Arial Narrow',sans-serif;text-transform:uppercase;font-size:15.5cqh;line-height:.92}
+.rb-t span{font-size:4.5cqh;opacity:.85}
+.rb-t em{font-style:normal;font-size:6.2cqh;font-weight:800;color:#F7841F}
+.rb-t i{justify-self:start;font-style:normal;background:#F7841F;color:#fff;font-weight:800;font-size:4.1cqh;padding:2.4cqh 5.2cqh;border-radius:2.4cqh;text-transform:uppercase;letter-spacing:.06em}
+.mk-hl{position:absolute;border:.35cqw solid var(--lima);border-radius:.8cqw;pointer-events:none;z-index:5}
+.mk-vhl{opacity:0;transition:opacity .35s}.mk-vhl.on{opacity:1}
+.mk-pulse{animation:mkhlp 2.2s .6s ease-in-out infinite}
+@keyframes mkhlp{50%{box-shadow:0 0 0 1cqw rgba(189,226,73,0)}0%,100%{box-shadow:0 0 0 0 rgba(189,226,73,.55)}}
+.mk-ad .cr-ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:mkkb 10s ease-in-out infinite alternate}
+.mk-ad .cr-lb{position:absolute;left:4.5%;bottom:9%;max-width:60%;background:var(--escura);border-left:1.2cqh solid var(--cor);color:#fff;padding:3cqh 4cqh;display:flex;flex-direction:column;gap:1cqh}
+.mk-ad .cr-lb b{font-weight:800;font-size:6.5cqh;line-height:1.1;text-transform:uppercase;color:var(--cor);white-space:nowrap}
+.mk-ad .cr-lb span{font-size:5cqh;white-space:nowrap}
+.mk-aba{position:absolute;container-type:size;background:#2F190F;border:.25cqw solid #F7841F;border-radius:.6cqw}
+.mk-aba>div{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10cqh;color:#fff;font-family:Poppins,Manrope,system-ui,sans-serif;text-align:center;line-height:1}
+.mk-aba b{font-weight:600;font-size:{{ menu_fs }}cqw;letter-spacing:.2em;margin-right:-.2em;text-transform:uppercase;white-space:nowrap}
+.mk-aba i{font-style:normal;font-weight:500;font-size:12cqw;opacity:.85;white-space:nowrap}
+.mk-aba img{height:55cqh;width:auto;max-width:85cqw;object-fit:contain;display:block}
+.vs{position:absolute;overflow:hidden;container-type:inline-size;border-radius:2px}
+.vmenu{position:absolute;left:12.9%;top:11.5%;width:87.1%;height:86.7%;background:#2A160C;padding:2.4cqw;display:grid;gap:1.8cqw;align-content:start}
+.vmenu h6{margin:0;color:#fff;font-size:2.6cqw;font-weight:800}
+.vc{display:grid;grid-template-columns:28% 1fr;background:#3A2012;border-radius:1.4cqw;overflow:hidden;min-height:15cqw}
+.vph{background:url({{ img.mk_vph }}) center/cover}
+.vc:nth-child(3) .vph{filter:hue-rotate(-12deg) saturate(1.2)}
+.vt{padding:1.6cqw 2cqw;display:grid;gap:.6cqw;color:#fff}
+.vt b{font-size:2.1cqw}.vt span{font-size:1.5cqw;opacity:.75}
+.vr{display:flex;justify-content:space-between;align-items:center}
+.vr em{font-style:normal;font-weight:800;font-size:2cqw}
+.vadd{font-style:normal;background:#F7841F;color:#fff;font-weight:800;font-size:1.4cqw;padding:1cqw 2cqw;border-radius:1cqw}
+.vcart{position:absolute;right:0;top:11.5%;width:36%;height:86.7%;background:#fff;color:#1d1d1d;padding:2.2cqw;display:grid;gap:1.4cqw;align-content:start;transform:translateX(105%);transition:transform .45s cubic-bezier(.2,.9,.3,1);box-shadow:-1cqw 0 3cqw rgba(0,0,0,.3)}
+.vcart h6{margin:0;font-size:2.2cqw}
+.ci{display:flex;justify-content:space-between;gap:1cqw;font-size:1.5cqw;border-bottom:1px solid #eee;padding-bottom:1cqw}
+.ctot{display:flex;justify-content:space-between;font-size:1.8cqw}
+.vgo{font-style:normal;text-align:center;background:#5DBB6F;color:#fff;font-weight:800;font-size:1.6cqw;padding:1.4cqw;border-radius:1cqw}
+.vdim{position:absolute;inset:0;background:rgba(10,6,4,.6);opacity:0;transition:opacity .6s ease}
+.vs.cart .vcart{transform:none}
+.vs.sugm .vdim{opacity:1}
+.vconf{position:absolute;left:23%;top:8%;width:62.8%;border-radius:1.4cqw;overflow:hidden;background:#fff;opacity:0;transform:translateY(5%);transition:opacity .7s ease,transform .8s cubic-bezier(.22,.8,.3,1)}
+.vs.sugm .vconf{opacity:1;transform:none}
+.vban{position:relative;width:100%;aspect-ratio:876/507;container-type:size;overflow:hidden;background:var(--escura)}
+.vbar{display:block;width:100%;height:auto}
+.vtimer{position:absolute;left:.4%;right:.4%;bottom:.3%;height:1.4%;background:#fff;overflow:hidden}
+.vtimer i{display:block;height:100%;width:0;background:#5DBB6F}
+.vs.sugm .vtimer i{animation:mkvtm 5.4s linear .5s forwards}
+@keyframes mkvtm{to{width:100%}}
+.vchl{left:23%;top:8%;width:62.9%;height:62.3%;opacity:0;transition:opacity .3s}
+.vs.sugm .vchl{opacity:1}
+.mcscr{position:absolute;z-index:2;inset:0;opacity:0;transform:translateX(3%);transition:opacity .6s ease,transform .7s cubic-bezier(.22,.8,.3,1)}
+.mcscr>img{position:absolute;inset:0;width:100%;height:100%;display:block}
+.vs.conta .mcscr{opacity:1;transform:none}
+.mcban{position:absolute;left:68.8%;top:12%;width:29.3%;height:28.3%;border-radius:.9cqw;overflow:hidden;container-type:size;background:var(--escura);opacity:0;transform:translateY(10%);transition:opacity .7s ease .3s,transform .8s cubic-bezier(.22,.8,.3,1) .3s}
+.vs.ban .mcban{opacity:1;transform:none}
+.mchl{left:68.8%;top:12%;width:29.3%;height:28.3%;opacity:0;transition:opacity .5s ease .5s}
+.vs.ban .mchl{opacity:1}
+.finger{position:absolute;z-index:6;width:5.5cqw;height:5.5cqw;margin:-2.75cqw 0 0 -2.75cqw;border-radius:50%;background:rgba(255,255,255,.55);border:.4cqw solid #fff;box-shadow:0 .6cqw 2cqw rgba(0,0,0,.4);left:var(--fx,60%);top:var(--fy,60%);transition:left .6s ease,top .6s ease,transform .15s}
+.finger.tap{transform:scale(.75)}
+.finger::after{content:"";position:absolute;inset:-.4cqw;border-radius:50%;border:.4cqw solid #fff;opacity:0}
+.finger.tap::after{animation:mkrip .5s ease-out}
+@keyframes mkrip{from{transform:scale(1);opacity:.9}to{transform:scale(2.2);opacity:0}}
+.bx{position:absolute;inset:0;color:#fff;font-family:Poppins,Manrope,system-ui,sans-serif}
+.bx .ph{position:absolute;top:0;bottom:0;right:0;width:55%;object-fit:cover;height:100%}
+.bx .fd{position:absolute;inset:0;background:linear-gradient(90deg,var(--escura) 42%,transparent 75%)}
+.bx .tx{position:absolute;left:6%;top:0;bottom:0;width:56%;display:flex;flex-direction:column;justify-content:center;gap:4cqh}
+.bx .lg{height:13cqh;width:auto;max-width:60%;object-fit:contain;object-position:left{% if logo_branco %};filter:brightness(0) invert(1){% endif %}}
+.bx .h{font-weight:700;font-size:11cqh;line-height:1.1}
+.bx .d{font-weight:700;font-size:7cqh;color:var(--cor)}
+.bx .c{align-self:flex-start;background:var(--cor);color:{{ cor_texto }};font-weight:700;font-size:7cqh;padding:2.5cqh 6cqh;border-radius:99px;white-space:nowrap}
+.bx img.full{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+@media (prefers-reduced-motion: reduce){.rb-ph,.mk-pulse,.mk-ad .cr-ph{animation:none}}
+
+@media print{@page{size:1080px 1528px;margin:0}html,body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}#page{zoom:1 !important;box-shadow:none}.tabs{display:none}}
+@media (max-width: 759px){
+#page{width:100% !important;min-height:0 !important;box-shadow:none}
+.hero{grid-template-columns:1fr;padding:24px 20px 0 20px;gap:20px}
+.hero-art{margin:0 -20px;min-height:260px}
+.hero h1{font-size:44px;width:auto}.hero h1 br{display:none}
+.hero .sub{white-space:normal;font-size:17px}
+.hero-l{padding-bottom:4px}
+.clients{flex-direction:column;align-items:flex-start;padding:20px;gap:14px}
+.clients .grid{grid-template-columns:repeat(3,1fr);width:100%}
+.sec-head,.intro,.src,.block{padding-left:20px;padding-right:20px}
+.intro{grid-template-columns:1fr;gap:20px}
+.stats{grid-template-columns:1fr 1fr}
+.stat b{font-size:34px}
+.steps4{grid-template-columns:1fr 1fr;gap:14px}
+.journey .line{display:none}
+.act-steps{grid-template-columns:1fr;gap:14px}
+h2{font-size:30px}.sec-head span{font-size:30px}
+.src{text-align:left}
+.sign{padding:28px 20px}.sign .q{font-size:32px}.sign code{font-size:15px}
+}
+</style>
+</head>
+<body data-tab="b2c">
+<div id="page">
+
+{# ---------- ABERTURA ---------- #}
+<div class="hero">
+<div class="hero-l">
+<div class="hero-top">
+<img class="gl" src="{{ img.goomer }}" alt="Goomer"><span class="ads">Ads</span><img class="bl" src="{{ img.logo }}" alt="{{ marca }}">
+</div>
+{% if b2b %}<div class="tabs" role="tablist" aria-label="Escolha a proposta"><span class="tl">Escolha a proposta:</span>
+<button type="button" role="tab" data-t="b2c" aria-selected="true">B2C · Na mesa do cliente</button>
+<button type="button" role="tab" data-t="b2b" aria-selected="false">B2B · No painel do dono</button>
+</div>{% endif %}
+<h1 class="cond only-b2c">{{ hero.titulo }}</h1>
+<p class="sub only-b2c">{{ hero.subtitulo }}</p>
+{% if b2b %}<h1 class="cond only-b2b">{{ b2b.hero_titulo }}</h1>
+<p class="sub only-b2b">{{ b2b.hero_subtitulo }}</p>{% endif %}
+</div>
+<div class="hero-art only-b2c">
+<div class="cover"><div style="width:max(100cqw,150cqh);aspect-ratio:1536/1024;left:calc((100cqw - max(100cqw,150cqh))*.52);top:calc((100cqh - max(100cqw,150cqh)/1.5)*.6)">
+<img class="bg" src="{{ img.hero_b2c }}" alt="Tablet Goomer com a página especial {{ marca }} na mesa de um restaurante">
+<div class="menu-cell" style="left:30.6%;top:50.2%;width:3.45%;height:4.3%"><div>{% if menu_logo %}<img src="{{ menu_logo }}" alt="{{ marca }}" style="height:62cqh;width:auto;max-width:90cqw;object-fit:contain;display:block">{% else %}<b>{{ menu_label }}</b><i>{{ menu_sub }}</i>{% endif %}</div></div>
+<div class="cy-scr" style="left:35.55%;top:44.14%;width:38.67%;height:33.2%">{{ tela_especial }}</div>
+</div></div>
+</div>
+{% if b2b %}<div class="hero-art only-b2b">
+<div class="cover"><div style="width:max(100cqw,117.19cqh);aspect-ratio:1200/1024;left:calc((100cqw - max(100cqw,117.19cqh))*.5);top:calc((100cqh - max(100cqw,117.19cqh)/1.1719)*.6)">
+<img class="bg" src="{{ img.hero_b2b }}" alt="Computador no caixa do restaurante com o painel Goomer e o banner {{ marca }}">
+<div class="bnr" style="left:40.67%;top:37.89%;width:43.83%;height:6.74%"><div>{{ banner }}</div></div>
+</div></div>
+</div>{% endif %}
+</div>
+
+{# ---------- MARCAS ---------- #}
+<div class="clients">
+<div class="lbl">Marcas que já<br>anunciam com a gente</div>
+<div class="grid">
+{% for c in clientes %}<div><img src="{{ c.src }}" alt="{{ c.alt }}" style="max-height:{{ c.h }}px"></div>
+{% endfor %}</div>
+</div>
+
+{# ---------- B2C ---------- #}
+<div class="only-b2c">
+<div class="sec-head"><div><span class="cond">Na mesa do cliente</span><img src="{{ img.logo }}" alt="{{ marca }}"></div></div>
+<div class="intro">
+<div><h2 class="cond">O tablet Goomer</h2>
+<p>Fica na mesa do restaurante. O cliente vê o cardápio, faz o pedido e confere a conta ali mesmo, sem esperar o garçom. Com a Goomer Ads, a marca acompanha esse momento do começo ao fim da refeição.</p></div>
+<div class="stats">
+<div class="stat"><b class="cond">+50 MIL</b><span>telas nas mesas</span></div>
+<div class="stat"><b class="cond">+2 MIL</b><span>restaurantes por todo o Brasil</span></div>
+<div class="stat hl"><b class="cond">4</b><span>formatos na refeição</span></div>
+</div>
+</div>
+<div class="src">Fonte: rede Goomer, {{ fonte_data }}.</div>
+
+<div class="block">
+<h2 class="cond" style="margin-bottom:16px">A jornada da marca</h2>
+<p class="lead" style="margin:-4px 0 20px 0">O inventário Goomer tem 4 formatos de exibição da marca no mesmo tablet. Um tablet por mesa, sendo visto por diversas pessoas no momento de consumo.</p>
+<div class="journey"><div class="line"></div>
+<div class="steps4">
+
+<div class="step"><div class="num">1</div><div class="card">
+<div class="shot" role="img" aria-label="Formato Tela de Início no tablet Goomer: a tela do restaurante dá lugar à publicidade {{ marca }}"><div class="mk"><img class="mk-bg" src="{{ img.mk_tablet }}" alt="">
+<div class="mk-tv" data-anim="inicio" style="left:23.57%;top:18.29%;width:62.09%;height:50.43%">{{ rban }}
+<div class="mk-ad">{{ criativo_inicio }}</div></div>
+<span class="mk-hl mk-vhl" style="left:23.57%;top:18.29%;width:62.09%;height:50.43%"></span>
+</div></div>
+<div class="fmt-body"><div class="t">Tela de Início</div><div class="d">Depois do pedido, um vídeo de 10 segundos da marca entra na tela inicial.</div><div class="tags"><span class="tag">Vídeo 10s</span></div></div>
+</div></div>
+
+<div class="step"><div class="num">2</div><div class="card">
+<div class="shot" role="img" aria-label="Formato Confirmação de Pedido: o cliente envia o pedido e o banner {{ marca }} aparece"><div class="mk"><img class="mk-bg" src="{{ img.mk_tablet }}" alt="">
+<div class="vs" data-seq="confirm" style="left:14.34%;top:11.57%;width:71.31%;height:58.14%">{{ vmenu }}
+<div class="vcart"><h6>Carrinho · Mesa 2</h6><div class="ci"><span>1× Picanha ao Fogo</span><b>R$ 34,90</b></div><div class="ctot"><span>Total</span><b>R$ 34,90</b></div><i class="vgo">FAZER PEDIDO</i></div>
+<div class="vdim"></div>
+<div class="vmodal vconf"><div class="vban">{{ banner_confirmacao }}</div><img class="vbar" src="{{ img.mk_popup_bar }}" alt=""><span class="vtimer"><i></i></span></div>
+<span class="mk-hl vchl"></span><i class="finger"></i></div>
+</div></div>
+<div class="fmt-body"><div class="t">Confirmação de Pedido</div><div class="d">Um banner aparece junto da mensagem de pedido enviado.</div></div>
+</div></div>
+
+<div class="step"><div class="num">3</div><div class="card">
+<div class="shot" role="img" aria-label="Formato Minha Conta: o cliente abre a conta e vê o banner {{ marca }}"><div class="mk"><img class="mk-bg" src="{{ img.mk_tablet }}" alt="">
+<div class="vs" data-seq="conta" style="left:14.34%;top:11.57%;width:71.31%;height:58.14%">
+<div class="mk-tv mchome" style="left:12.9%;top:11.5%;width:87.1%;height:86.7%">{{ rban }}</div>
+<div class="mcscr"><img src="{{ img.mk_conta }}" alt=""><div class="mcban">{{ banner_conta }}</div></div>
+<span class="mk-hl mchl"></span><i class="finger"></i></div>
+</div></div>
+<div class="fmt-body"><div class="t">Minha Conta</div><div class="d">Banner na tela da conta, na hora de pagar.</div></div>
+</div></div>
+
+<div class="step"><div class="num">4</div><div class="card hl">
+<div class="shot" role="img" aria-label="Formato Página Especial: aba {{ marca }} no cardápio e a página da marca"><div class="mk"><img class="mk-bg" src="{{ img.mk_tablet }}" alt="">
+<div class="mk-aba" style="left:14.86%;top:26.29%;width:7.07%;height:8.57%"><div>{% if menu_logo %}<img src="{{ menu_logo }}" alt="{{ marca }}">{% else %}<b>{{ menu_label }}</b><i>{{ menu_sub }}</i>{% endif %}</div></div>
+<div class="cy-scr" style="left:23.57%;top:18.29%;width:62.09%;height:50.43%">{{ tela_especial }}</div>
+<span class="mk-hl mk-pulse" style="left:14.86%;top:26.29%;width:7.07%;height:8.57%"></span>
+<span class="mk-hl mk-pulse" style="left:23.57%;top:18.29%;width:62.09%;height:50.43%"></span>
+</div></div>
+<div class="fmt-body"><div class="t">Página Especial</div><div class="d">Uma categoria nova no cardápio leva a uma página exclusiva da marca.</div><div class="tags"><span class="tag">HTML interativo</span><span class="tag on">Demo {{ marca }}</span></div></div>
+</div></div>
+
+</div></div>
+</div>
+
+<div class="block act">
+<h2 class="cond" style="margin-bottom:18px">Da campanha para a mesa</h2>
+<div style="display:flex;flex-direction:column;gap:16px">
+<p class="lead">{{ ativacao.texto }}</p>
+<div class="act-steps">
+{% for p in ativacao.passos %}<div class="act-step"><div class="n">{{ loop.index }}</div><div><b>{{ p.titulo }}</b><span>{{ p.texto }}</span></div></div>
+{% endfor %}</div>
+</div>
+<div class="demo"><div class="cy-tab" role="img" aria-label="Tablet Goomer com o cardápio aberto na página especial {{ marca }}" style="position:absolute;inset:0">
+<div class="menu-cell" style="left:7.45%;top:21.6%;width:7.3%;height:8.9%"><div>{% if menu_logo %}<img src="{{ menu_logo }}" alt="{{ marca }}" style="height:62cqh;width:auto;max-width:90cqw;object-fit:contain;display:block">{% else %}<b>{{ menu_label }}</b><i>{{ menu_sub }}</i>{% endif %}</div></div>
+{% if demo_url %}<iframe src="{{ demo_url }}" title="Demo {{ marca }}" loading="lazy" allow="fullscreen" style="position:absolute;left:17.572%;top:9.091%;width:77.764%;height:66.517%;border:0;background:var(--escura)"></iframe>
+{% else %}<div class="cy-scr" style="left:17.572%;top:9.091%;width:77.764%;height:66.517%">{{ tela_especial }}</div>{% endif %}
+</div></div>
+</div>
+</div>
+
+{# ---------- B2B ---------- #}
+{% if b2b %}<div class="only-b2b b2b">
+<div class="sec-head"><div><span class="cond">No painel do dono</span><img src="{{ img.logo }}" alt="{{ marca }}"></div></div>
+<div class="intro">
+<div><h2 class="cond">O painel Goomer</h2>
+<p>É onde o dono e o gestor acompanham vendas, pedidos e cardápio. Com a Goomer Ads, a marca fala com quem decide as compras do restaurante, na tela inicial do painel.</p></div>
+<div class="stats two">
+<div class="stat"><b class="cond">+10 MIL</b><span>restaurantes cadastrados no painel</span></div>
+<div class="stat hl"><b class="cond">+30 MIL</b><span>acessos mensais</span></div>
+</div>
+</div>
+<div class="block act">
+<h2 class="cond" style="margin-bottom:18px">{{ b2b.titulo_ativacao }}</h2>
+<div style="display:flex;flex-direction:column;gap:18px">
+<p class="lead">{{ b2b.texto }}</p>
+<div class="act-steps">
+{% for p in b2b.passos %}<div class="act-step"><div class="n">{{ loop.index }}</div><div><b>{{ p.titulo }}</b><span>{{ p.texto }}</span></div></div>
+{% endfor %}</div>
+</div>
+<p class="lead" style="margin-top:20px;font-size:15px">{{ b2b.rodape }}</p>
+<div class="panel"><img class="bg" src="{{ img.painel }}" alt="Painel Goomer com banner {{ marca }} na tela Início">
+<div class="bnr" style="left:36.91%;top:25.37%;width:61.54%;height:18.41%"><div>{{ banner }}</div></div></div>
+</div>
+</div>{% endif %}
+
+<div style="height:44px"></div>
+<div class="sign">
+<div class="q cond">{{ cta.titulo }}</div>
+<div class="row">
+<div class="who"><b>{{ cta.nome }}</b><span>{{ cta.cargo }}</span></div>
+<div class="lines">
+<div class="line"><code style="user-select:all">{{ cta.email }}</code><a class="btn fill" href="mailto:{{ cta.email }}?subject={{ cta.assunto }}">Enviar e-mail</a></div>
+{% if cta.whatsapp %}<div class="line"><a href="https://wa.me/{{ cta.whatsapp }}" target="_blank" rel="noopener" style="color:inherit;text-decoration:none"><code>{{ cta.telefone }}</code></a><a class="btn line" href="https://wa.me/{{ cta.whatsapp }}" target="_blank" rel="noopener">Chamar no WhatsApp</a></div>{% endif %}
+</div>
+</div>
+</div>
+
+</div>
+<script>
+(function(){var p=document.getElementById('page');function fit(){var w=document.documentElement.clientWidth;var z=w<760?1:Math.max(0.7,Math.min(w/1080,1.5));p.style.zoom=z;}
+fit();window.addEventListener('resize',fit);
+{% if b2b %}var b=document.body;function set(t){b.setAttribute('data-tab',t);document.querySelectorAll('.tabs button').forEach(function(x){x.setAttribute('aria-selected',x.dataset.t===t?'true':'false')});try{history.replaceState(null,'','#'+t)}catch(e){}}
+document.querySelectorAll('.tabs button').forEach(function(x){x.addEventListener('click',function(){set(x.dataset.t)})});
+set(location.hash==='#b2b'?'b2b':'b2c');{% endif %}
+})();
+</script>
+<script>
+/* formatos animados: mesmas sequências do media kit */
+(function(){
+ var SEQ={conta:{L:10,P:[[0,'',60,60,0],[1,'',83,4.6,0],[1.8,'',83,4.6,1],[2.3,'conta ban',60,120,0],[9.3,'',60,60,0]]},
+  confirm:{L:10,P:[[0,'',70,62,0],[0.8,'',89,45,0],[1.5,'',89,45,1],[2.2,'cart',86,58,0],[3,'cart',82,43,0],[3.6,'cart',82,43,1],[4.3,'sugm',93,86,0]]}};
+ var red=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+ document.querySelectorAll('.mk .vs').forEach(function(vs){var fg=vs.querySelector('.finger'),S=SEQ[vs.dataset.seq],P=S.P,L=S.L,t0=performance.now(),last=-1;
+  if(red){vs.className='vs '+P[P.length-1][1]+(vs.dataset.seq==='conta'?' conta ban':'');fg.style.display='none';return}
+  function tick(now){var c=((now-t0)/1000)%L,s=0;for(var k=0;k<P.length;k++)if(c>=P[k][0])s=k;
+   if(s!==last){last=s;var p=P[s];vs.className='vs '+p[1];fg.style.setProperty('--fx',p[2]+'%');fg.style.setProperty('--fy',p[3]+'%');
+    if(p[4]){fg.classList.remove('tap');void fg.offsetWidth;fg.classList.add('tap');setTimeout(function(){fg.classList.remove('tap')},300)}}
+   requestAnimationFrame(tick)}requestAnimationFrame(tick)});
+ document.querySelectorAll('.mk [data-anim="inicio"]').forEach(function(box){var hl=box.parentNode.querySelector('.mk-vhl'),t0=performance.now();
+  if(red){box.classList.add('ad');hl.classList.add('on');return}
+  function tick(now){var c=((now-t0)/1000)%14,ad=c>=2&&c<12;box.classList.toggle('ad',ad);hl.classList.toggle('on',ad);requestAnimationFrame(tick)}requestAnimationFrame(tick)});
+})();
+</script>
+</body>
+</html>

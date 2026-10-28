@@ -1,0 +1,38 @@
+{
+ "marca": "Sua Marca",
+ "titulo_aba": "Roleta Sua Marca",
+ "logo": "../placeholder/logo.svg",
+ "logo_branco_no_hub": true,
+ "cores": {"fundo": "#FFD6EB", "fundo_luz": "#FFF0F7", "tinta": "#09090B", "destaque": "#FA2F93", "suave": "#4A3340"},
+ "poc": "Protótipo de demonstração, não é um produto oficial da Sua Marca. Nenhum e-mail é armazenado.",
+ "intro": {
+  "selo": "[Gancho da campanha]",
+  "titulo": "Gire e ganhe <em>[benefício]</em>",
+  "texto": "[Uma frase: por que girar agora, ligada ao momento da mesa.]",
+  "botao": "Girar a roleta",
+  "rodape": "Leva 10 segundos. [Condição do cupom]."
+ },
+ "fatias": [
+  {"texto": "10% OFF", "cor": "#09090B", "cor_texto": "#FFD6EB"},
+  {"texto": "🍔", "emoji": true, "cor": "#FFF0F7"},
+  {"texto": "FRETE", "cor": "#FA2F93", "cor_texto": "#FFFFFF", "premio": {"valor": "Frete grátis", "valor_prefixo": "", "descricao": "no seu próximo pedido"}},
+  {"texto": "🍕", "emoji": true, "cor": "#FFFFFF"},
+  {"texto": "10% OFF", "cor": "#09090B", "cor_texto": "#FFD6EB"},
+  {"texto": "🍣", "emoji": true, "cor": "#FFF0F7"},
+  {"texto": "BRINDE", "cor": "#FA2F93", "cor_texto": "#FFFFFF", "premio": {"valor": "Brinde", "valor_prefixo": "", "descricao": "na sua próxima compra"}},
+  {"texto": "🥗", "emoji": true, "cor": "#FFFFFF"}
+ ],
+ "premio": {"rotulo": "Cupom Sua Marca", "valor_prefixo": "", "valor": "10% OFF", "descricao": "na sua próxima compra", "codigo": true, "prefixo_codigo": "GOOMER", "entrega": "Enviado por e-mail", "validade": "Válido por 30 dias"},
+ "ganhou": {"selo": "Você ganhou!", "titulo": "Seu cupom <br><em>está aqui</em>", "texto": "Use o código no app da marca.", "botao": "Continuar"},
+ "captura": {"ativa": true, "texto": "Coloque seu e-mail para receber o cupom.", "placeholder": "seu@email.com", "aceite": "Aceito receber o cupom e novidades da Sua Marca por e-mail.", "botao": "Resgatar cupom"},
+ "final": {
+  "selo": "Cupom resgatado",
+  "titulo": "Pronto! Olhe <br><em>seu e-mail</em>",
+  "texto": "O cupom foi para {email}.",
+  "botao": "Voltar ao início",
+  "tag": "Próximo passo",
+  "cartao_titulo": "Use no <span>app da Sua Marca</span>",
+  "passos": ["Abra o app", "Escolha o que quer", "Aplique o cupom no carrinho"],
+  "qr_url": null
+ }
+}

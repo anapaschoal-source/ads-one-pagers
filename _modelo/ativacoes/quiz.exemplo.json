@@ -1,0 +1,32 @@
+{
+ "marca": "Sua Marca",
+ "titulo_aba": "Quiz Sua Marca",
+ "logo": "../placeholder/logo.svg",
+ "logo_branco": true,
+ "foto": "../placeholder/foto-especial.jpg",
+ "cores": {"cor": "#FA2F93", "cor_luz": "#FF5FAE", "cor_escura": "#B0115F", "escura": "#160A10", "suave": "#FFD6EB"},
+ "poc": "Protótipo de demonstração, não é um produto oficial da Sua Marca.",
+ "intro": {"selo": "Quiz · 30s", "titulo": "[Pergunta-tema do quiz]?", "texto": "[Três perguntas enquanto o pedido não chega, e você descobre X.]", "botao": "Começar o quiz", "rodape": "[Produto ou campanha]", "legenda_foto": ""},
+ "perguntas": [
+  {"pergunta": "[Pergunta 1]", "dica": "", "opcoes": [
+   {"emoji": "😀", "texto": "[Opção A]", "sub": "[detalhe]", "frase": "[Frase do resultado para A.]", "beneficio": "[Benefício ligado a A]"},
+   {"emoji": "😎", "texto": "[Opção B]", "sub": "[detalhe]", "frase": "[Frase do resultado para B.]", "beneficio": "[Benefício ligado a B]"},
+   {"emoji": "🤔", "texto": "[Opção C]", "sub": "[detalhe]", "frase": "[Frase do resultado para C.]", "beneficio": "[Benefício ligado a C]"}]},
+  {"pergunta": "[Pergunta 2]", "opcoes": [
+   {"emoji": "🌱", "texto": "[Opção A]", "sub": "[detalhe]"},
+   {"emoji": "🔥", "texto": "[Opção B]", "sub": "[detalhe]"},
+   {"emoji": "⭐", "texto": "[Opção C]", "sub": "[detalhe]"}]},
+  {"pergunta": "[Pergunta 3]", "opcoes": [
+   {"emoji": "🍕", "texto": "[Opção A]", "sub": "[detalhe]", "beneficio": "[Benefício A]"},
+   {"emoji": "🍣", "texto": "[Opção B]", "sub": "[detalhe]", "beneficio": "[Benefício B]"},
+   {"emoji": "🥗", "texto": "[Opção C]", "sub": "[detalhe]", "beneficio": "[Benefício C]"}]}
+ ],
+ "resultado": {
+  "titulo": "[Resultado: o produto da marca combina com você.]",
+  "texto": "[Frase padrão, se nenhuma opção trouxer frase.]",
+  "beneficios_fixos": ["[Benefício fixo 1]", "[Benefício fixo 2]"],
+  "botao_refazer": "Refazer o quiz",
+  "letra_miuda": "",
+  "cartao": {"foto": "../placeholder/foto-conta.jpg", "destaque": "", "qr_url": "https://www.goomer.com.br/", "texto": "Aponte a câmera do celular e [ação]", "rodape": "[Produto] · Sua Marca"}
+ }
+}
