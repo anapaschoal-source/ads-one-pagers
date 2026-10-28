@@ -83,7 +83,7 @@ def main():
     clientes = [
         {'src': data_uri(os.path.join(BASE, f)), 'alt': a, 'h': h}
         for f, a, h in [('cli-uber.png', 'Uber', 30), ('cli-pg.png', 'P&amp;G', 38), ('cli-cocacola.png', 'Coca-Cola', 36),
-                        ('cli-cielo.png', 'Cielo', 30), ('cli-comgas.png', 'Comgás', 28)]
+                        ('cli-cielo.png', 'Cielo', 30), ('cli-comgas.png', 'Comgás', 28), ('cli-cyrela.png', 'Cyrela', 30)]
         if a.replace('&amp;', '&') not in c.get('ocultar_clientes', [])
     ]
 
