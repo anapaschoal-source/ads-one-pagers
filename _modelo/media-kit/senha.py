@@ -8,7 +8,7 @@ Uso: python3 _modelo/media-kit/senha.py <entrada.html> <saida.html> --senha <sen
 A página inteira é comprimida (gzip) e criptografada (AES-256-GCM, chave derivada da senha com
 PBKDF2-SHA256, 250 mil iterações). A saída é uma tela de acesso da Goomer Ads com o conteúdo
 cifrado embutido: sem a senha, nada do kit (textos, números, imagens) fica legível no código-fonte.
-Com a senha certa, o navegador decifra e abre o kit na mesma página. A senha fica lembrada na
+A tela de senha tem o Vercel Web Analytics (conta quem abriu o link). Com a senha certa, o navegador decifra e abre o kit na mesma página. A senha fica lembrada na
 aba (sessionStorage) até fechar o navegador.
 
 Pode rodar de novo sobre uma saída já protegida? Não: rode sempre sobre o HTML aberto.
@@ -82,6 +82,7 @@ var s=null;try{s=sessionStorage.getItem(K)}catch(e){}
 if(s)tentar(s,true);
 })();
 </script>
+<script defer src="/_vercel/insights/script.js"></script>
 </body></html>
 '''
 

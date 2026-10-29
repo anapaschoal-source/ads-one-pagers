@@ -77,6 +77,9 @@ def main():
     os.makedirs(os.path.join(REPO, '_hub', 'thumbs'), exist_ok=True)
     asyncio.run(thumb(page, os.path.join(REPO, '_hub', 'thumbs', thumb_id + '.webp')))
     print(f"ok: hub {'atualizado' if achou else 'com material novo'} -> https://ads-one-pagers.vercel.app{url}")
+    # todas as páginas do hub contam visitantes e page views (Vercel Web Analytics)
+    import subprocess
+    subprocess.run([sys.executable, os.path.join(REPO, '_modelo', 'analytics.py')], check=True)
 
 
 if __name__ == '__main__':
