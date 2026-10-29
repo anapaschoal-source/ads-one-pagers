@@ -473,7 +473,44 @@ h2{font-size:30px}.sec-head span{font-size:30px}
 </div>
 
 </div>
+{% if cta.whatsapp %}<style>
+a.qr{cursor:zoom-in;transition:transform .2s,box-shadow .2s}
+a.qr:hover{transform:scale(1.05);box-shadow:0 0 0 3px #BDE249}
+.qrz{position:fixed;inset:0;z-index:300;background:rgba(4,0,30,.82);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:20px;animation:qrzF .25s ease both}
+.qrz[hidden]{display:none!important}
+@keyframes qrzF{from{opacity:0}to{opacity:1}}
+.qrz-card{position:relative;background:#0A0044;color:#fff;border:1px solid rgba(255,255,255,.18);border-radius:22px;padding:30px 30px 26px;width:min(380px,100%);display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.5);animation:qrzP .35s cubic-bezier(.2,.9,.3,1.25) both;font-family:Manrope,system-ui,sans-serif}
+@keyframes qrzP{from{transform:scale(.85);opacity:0}to{transform:none;opacity:1}}
+.qrz-x{position:absolute;right:12px;top:10px;width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:transparent;color:#fff;font-size:20px;line-height:1;cursor:pointer}
+.qrz-x:hover{background:rgba(255,255,255,.1)}
+.qrz-t{margin:0;padding:0 30px;font-family:Antonio,'Arial Narrow','Roboto Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:38px;line-height:1;color:#BDE249}
+.qrz-who{font-size:15px;color:rgba(255,255,255,.8);margin-top:-6px}
+.qrz-qr{background:#fff;padding:14px;border-radius:16px;line-height:0;box-shadow:0 0 0 4px #BDE249;animation:qrzR 2s ease-in-out .4s infinite}
+@keyframes qrzR{50%{box-shadow:0 0 0 4px #BDE249,0 0 0 14px rgba(189,226,73,.22)}}
+.qrz-qr img{width:min(260px,62vw);height:auto;aspect-ratio:1;display:block}
+.qrz-d{margin:0;font-size:14px;color:rgba(255,255,255,.75)}
+.qrz-btn{display:inline-flex;align-items:center;gap:8px;background:#BDE249;color:#0A0044!important;text-decoration:none;font-weight:800;font-size:15px;padding:12px 22px;border-radius:999px}
+.qrz-btn:hover{background:#fff}
+</style>
+<div class="qrz" id="qrz" hidden role="dialog" aria-modal="true" aria-labelledby="qrzT">
+<div class="qrz-card">
+<button type="button" class="qrz-x" aria-label="Fechar">×</button>
+<h3 class="qrz-t" id="qrzT">Nos chame no WhatsApp</h3>
+<div class="qrz-who"></div>
+<div class="qrz-qr"><img alt=""></div>
+<p class="qrz-d">Aponte a câmera do celular para o código</p>
+<a class="qrz-btn" target="_blank" rel="noopener">Abrir WhatsApp</a>
+</div>
+</div>
 <script>
+(function(){var z=document.getElementById('qrz');if(!z)return;var img=z.querySelector('.qrz-qr img'),btn=z.querySelector('.qrz-btn'),who=z.querySelector('.qrz-who'),x=z.querySelector('.qrz-x'),last=null;
+function close(){z.hidden=true;document.documentElement.style.overflow='';if(last)try{last.focus()}catch(e){}}
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a.qr');
+if(a){e.preventDefault();last=a;var i=a.querySelector('img');img.src=i.src;img.alt=i.alt;btn.href=a.href;var n=(a.getAttribute('aria-label')||'').replace(/^WhatsApp de /,'');who.textContent=n?'Fale com '+n:'';z.hidden=false;document.documentElement.style.overflow='hidden';x.focus();return}
+if(!z.hidden&&(e.target===z||e.target.closest('.qrz-x')))close();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!z.hidden)close()});})();
+</script>
+{% endif %}<script>
 (function(){var p=document.getElementById('page');function fit(){var w=document.documentElement.clientWidth;var z=w<760?1:Math.max(0.7,Math.min(w/1080,1.5));p.style.zoom=z;}
 fit();window.addEventListener('resize',fit);
 {% if b2b %}var b=document.body;function set(t){b.setAttribute('data-tab',t);document.querySelectorAll('.tabs button').forEach(function(x){x.setAttribute('aria-selected',x.dataset.t===t?'true':'false')});try{history.replaceState(null,'','#'+t)}catch(e){}}
