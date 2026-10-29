@@ -1476,7 +1476,7 @@ apply(document.getElementById('fcards'));
 #mapa .filters,#mapa #hint,#mapa .zoomctl,#mapa .pin,#mapa .tip,#mapa #fxBtn{display:none!important}
 #mapa #svg,#mapa #stage{pointer-events:none}
 @media (min-width:981px){
- #mapa .story{left:max(var(--gutter),3%);width:min(600px,44vw);top:clamp(20px,4vh,48px)}
+ #mapa .story{left:max(var(--gutter),calc((100% - min(94vw,calc((100svh - 60px) * 2.15))) / 2));width:min(600px,44vw);top:clamp(20px,4vh,48px)}
  #mapa .story h1{font-size:clamp(44px,4.6vw,68px)}
  #mapa .story .lead{max-width:52ch}
  #mapa .story .kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 32px;max-width:520px}
