@@ -1,7 +1,8 @@
 """Pós-build do Tenda Atacado (diverge do modelo), só neste material:
 1. inclui a Dellys na faixa "Marcas que já anunciam com a gente" (logo branco em cli-dellys.png);
 2. troca a tela do tablet do topo pelo banner de verão;
-3. anima o painel B2B: o cursor clica no banner e abre o site do Tenda Atacado (tela ilustrativa,
+3. card da Página Especial com a tela de início do jogo (tela-jogo.jpg);
+4. anima o painel B2B: o cursor clica no banner e abre o site do Tenda Atacado (tela ilustrativa,
    montada com logo, banner de verão e ícones site-*.svg).
 Uso (na raiz do repo): python3 _modelo/marcas/tenda-atacado/pos-build.py tenda-atacado/index.html [/home/claude/one-pager-tenda-atacado.html]"""
 import sys, os, re, base64
@@ -96,8 +97,19 @@ def hero_tablet(s):
     return s[:k] + img + s[k:]
 
 
+def tela_especial(s):
+    """Card "Página Especial" da jornada: mostra a tela de início do jogo (tela-jogo.jpg)."""
+    if 'alt="Tela de início do Carrinho de Verão"' in s:
+        return s
+    h = s.index('alt="Banner de verão Tenda Atacado"')
+    j = s.index('<div class="cy-scr"', h); k = s.index('>', j) + 1
+    img = (f'<img src="{uri("tela-jogo.jpg", "image/jpeg")}" alt="Tela de início do Carrinho de Verão" '
+           'style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:3">')
+    return s[:k] + img + s[k:]
+
+
 for path in sys.argv[1:]:
     s = open(path, encoding='utf-8').read()
-    s = hero_tablet(painel(dellys(s)))
+    s = tela_especial(hero_tablet(painel(dellys(s))))
     open(path, 'w', encoding='utf-8').write(s)
     print(path, 'ok')
