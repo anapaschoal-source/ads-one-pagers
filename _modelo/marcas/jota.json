@@ -1,0 +1,65 @@
+{
+  "slug": "jota",
+  "marca": "Jota",
+  "cor": "#B13475",
+  "cor_escura": "#141533",
+  "logo_branco_no_escuro": false,
+  "logo_altura_hero": 30,
+  "logo_altura_secao": 40,
+  "imagens": {
+    "logo": "jota/logo.png",
+    "foto_inicio": "jota/foto-inicio.jpg",
+    "foto_confirmacao": "jota/foto-confirmacao.jpg",
+    "foto_conta": "jota/foto-conta.jpg",
+    "foto_especial": "jota/foto-especial.jpg"
+  },
+  "menu": {
+    "label": "Mercado Livre",
+    "sub": "Entrega Relâmpago",
+    "logo": "jota/mercado-livre.png"
+  },
+  "hero": {
+    "titulo": "Jota, <br>na mesa do cliente",
+    "subtitulo": "As marcas da Jota no tablet de +2 mil restaurantes."
+  },
+  "formatos": {
+    "inicio": {
+      "legenda": "Pediu, chegou."
+    },
+    "confirmacao": {
+      "titulo": "Pedido feito! O próximo chega em casa",
+      "destaque": "Cupom de R$ 20 no Mercado Livre"
+    },
+    "conta": {
+      "titulo": "Antes de pagar, garanta seu cupom",
+      "cta": "Jogue a Entrega Relâmpago"
+    },
+    "especial": {
+      "selo": "Entrega Relâmpago · 20s",
+      "titulo": "Entrega",
+      "titulo_destaque": "relâmpago.",
+      "texto": "Toque nos pacotes e entregue 10 em 20 segundos. Bateu a meta, ganha cupom no Mercado Livre.",
+      "botao": "Bora entregar"
+    }
+  },
+  "ativacao": {
+    "texto": "Na página especial, é possível criar um modelo <strong>inovador</strong> de ativação da marca, podendo gerar benefícios e um nível único de interação com os usuários da mesa. Para mostrar o que dá para fazer com as marcas da Jota, criamos a Entrega Relâmpago do Mercado Livre: o cliente entrega 10 pacotes em 20 segundos enquanto espera o pedido e ganha um cupom para usar no app, com segmentação por praça e horário.",
+    "passos": [
+      {
+        "titulo": "Entra no menu Mercado Livre",
+        "texto": "O usuário abre a categoria Mercado Livre no cardápio do tablet."
+      },
+      {
+        "titulo": "Faz a Entrega Relâmpago",
+        "texto": "Toca nos pacotes antes que sumam e entrega 10 em 20 segundos."
+      },
+      {
+        "titulo": "Ganha o cupom",
+        "texto": "Cupom de desconto para usar no app do Mercado Livre."
+      }
+    ]
+  },
+  "demo_url": "/jota/jogo/",
+  "ocultar_clientes": [],
+  "endemica": false
+}

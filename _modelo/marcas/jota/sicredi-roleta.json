@@ -1,0 +1,120 @@
+{
+ "marca": "Sicredi",
+ "titulo_aba": "Roleta Sicredi",
+ "logo": "sicredi.png",
+ "logo_branco_no_hub": false,
+ "cores": {
+  "fundo": "#E2F4DD",
+  "fundo_luz": "#F3FAF0",
+  "tinta": "#0F3D1E",
+  "destaque": "#3A9F37",
+  "suave": "#3D5A45"
+ },
+ "poc": "Protótipo de demonstração, não é um produto oficial do Sicredi. Nenhum e-mail é armazenado.",
+ "intro": {
+  "selo": "Gire e coopere",
+  "titulo": "Gire e ganhe <em>benefícios Sicredi</em>",
+  "texto": "Enquanto o pedido não chega, gire a roleta e leve um benefício para abrir sua conta na cooperativa.",
+  "botao": "Girar a roleta",
+  "rodape": "Leva 10 segundos. Benefício válido para novos associados."
+ },
+ "fatias": [
+  {
+   "texto": "BÔNUS",
+   "cor": "#0F6A2D",
+   "cor_texto": "#E2F4DD",
+   "premio": {
+    "valor": "Cashback",
+    "valor_prefixo": "",
+    "descricao": "nas compras com o cartão Sicredi nos 3 primeiros meses"
+   }
+  },
+  {
+   "texto": "🌱",
+   "emoji": true,
+   "cor": "#F3FAF0"
+  },
+  {
+   "texto": "CARTÃO",
+   "cor": "#40B93C",
+   "cor_texto": "#FFFFFF",
+   "premio": {
+    "valor": "1ª anuidade",
+    "valor_prefixo": "",
+    "descricao": "grátis no cartão de crédito Sicredi"
+   }
+  },
+  {
+   "texto": "🤝",
+   "emoji": true,
+   "cor": "#FFFFFF"
+  },
+  {
+   "texto": "BÔNUS",
+   "cor": "#0F6A2D",
+   "cor_texto": "#E2F4DD",
+   "premio": {
+    "valor": "Cashback",
+    "valor_prefixo": "",
+    "descricao": "nas compras com o cartão Sicredi nos 3 primeiros meses"
+   }
+  },
+  {
+   "texto": "💚",
+   "emoji": true,
+   "cor": "#F3FAF0"
+  },
+  {
+   "texto": "CARTÃO",
+   "cor": "#40B93C",
+   "cor_texto": "#FFFFFF",
+   "premio": {
+    "valor": "1ª anuidade",
+    "valor_prefixo": "",
+    "descricao": "grátis no cartão de crédito Sicredi"
+   }
+  },
+  {
+   "texto": "🏡",
+   "emoji": true,
+   "cor": "#FFFFFF"
+  }
+ ],
+ "premio": {
+  "rotulo": "Benefício Sicredi",
+  "valor_prefixo": "",
+  "valor": "1ª anuidade",
+  "descricao": "grátis no cartão de crédito Sicredi",
+  "codigo": true,
+  "prefixo_codigo": "SICREDI",
+  "entrega": "Enviado por e-mail",
+  "validade": "Válido por 30 dias"
+ },
+ "ganhou": {
+  "selo": "Você ganhou!",
+  "titulo": "Seu benefício <br><em>está aqui</em>",
+  "texto": "Use o código ao abrir sua conta no app Sicredi.",
+  "botao": "Continuar"
+ },
+ "captura": {
+  "ativa": true,
+  "texto": "Coloque seu e-mail para receber o código.",
+  "placeholder": "seu@email.com",
+  "aceite": "Aceito receber o código e novidades do Sicredi por e-mail.",
+  "botao": "Resgatar benefício"
+ },
+ "final": {
+  "selo": "Benefício resgatado",
+  "titulo": "Pronto! Olhe <br><em>seu e-mail</em>",
+  "texto": "O código foi para {email}.",
+  "botao": "Voltar ao início",
+  "tag": "Próximo passo",
+  "cartao_titulo": "Abra sua conta no <span>app Sicredi</span>",
+  "passos": [
+   "Baixe o app Sicredi",
+   "Abra sua conta",
+   "Informe o código"
+  ],
+  "qr_url": "https://www.sicredi.com.br/"
+ }
+}
