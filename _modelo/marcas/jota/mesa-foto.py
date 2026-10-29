@@ -1,4 +1,4 @@
-"""Coloca um frame da Tela de Início (Mercado Livre) na tela do tablet da foto "mesa" do media kit.
+"""Coloca o print da Tela de Início (Mercado Livre, layout do tablet Goomer) na tela do tablet da foto "mesa" do media kit.
 Uso: python3 _modelo/marcas/jota/mesa-foto.py <foto-original.png> <saida.webp>"""
 import sys, os
 import numpy as np
@@ -9,7 +9,7 @@ foto = Image.open(sys.argv[1]).convert('RGB')
 foto = foto.resize((foto.width * K, foto.height * K), Image.LANCZOS)
 quad = [(377, 285), (571, 312), (560, 436), (361, 400)]  # cantos da tela na foto original (TL, TR, BR, BL)
 quad = [(x * K, y * K) for x, y in quad]
-src = Image.open(os.path.join(D, 'ml-inicio-frame.png')).convert('RGB')
+src = Image.open(os.path.join(D, 'tela-inicio-ml.png')).convert('RGB')  # print da Tela de Início no layout do tablet Goomer
 w, h = src.size
 
 def coeffs(dst, srcpts):
