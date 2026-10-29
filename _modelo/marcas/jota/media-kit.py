@@ -183,20 +183,15 @@ s = s.replace('<div><b>Tipo de culinária</b><p>', '<div hidden><b>Tipo de culin
 MAPCSS = """<style>/*jota-mapa*/
 #mapa .filters,#mapa #hint,#mapa .zoomctl,#mapa .pin,#mapa .tip,#mapa #fxBtn{display:none!important}
 #mapa #svg,#mapa #stage{pointer-events:none}
-.jkpis{display:none}
 @media (min-width:981px){
- #mapa .story .kpis{display:none}
- .jkpis{display:grid;position:absolute;z-index:3;right:calc(var(--gutter-r) + 72px);top:50%;transform:translateY(-50%);width:270px;gap:26px;border-left:1px solid var(--line);padding-left:28px}
- .jkpis .kpi b{font-size:clamp(44px,4.4vw,64px)}
- .jkpis .kpi span{font-size:14px}
+ #mapa .story{width:min(600px,44vw);top:clamp(20px,4vh,48px)}
+ #mapa .story h1{font-size:clamp(44px,4.6vw,68px)}
+ #mapa .story .lead{max-width:52ch}
+ #mapa .story .kpis{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px 18px}
+ #mapa #svg,#mapa #dots{transform:translateX(clamp(120px,17vw,260px))}
 }
 </style>"""
-MAPJS = """<script>/*jota-mapa*/(function(){
-var story=document.getElementById('story'),mapa=document.getElementById('mapa');if(!story||!mapa)return;
-var box=document.createElement('div');box.className='jkpis';box.setAttribute('aria-hidden','true');mapa.appendChild(box);
-function sync(){var k=story.querySelector('.kpis');box.innerHTML=k?k.innerHTML:''}
-sync();new MutationObserver(sync).observe(story,{childList:true,subtree:true});
-})();</script>"""
+MAPJS = ""
 s = s.replace('</body>', MAPCSS + MAPJS + '</body>', 1) if '</body>' in s else s + MAPCSS + MAPJS
 
 open(out, 'w', encoding='utf-8').write(s)
