@@ -196,7 +196,7 @@ def main():
         tela_especial=tela_especial, banner=banner, rban=rban, vmenu=vmenu, criativo_inicio=criativo_inicio,
         banner_confirmacao=banner_confirmacao, banner_conta=banner_conta,
         endemica=endemica, vs=vs, n_formatos=5 if endemica else 4,
-        cta={**{'titulo': f'Vamos levar a {marca} pra mesa?', 'nome': 'João Arcalá', 'cargo': 'CFO/COO · Goomer',
+        cta={**{'titulo': f'Vamos levar a {marca} pra mesa?', 'nome': 'João Arcalá', 'cargo': 'CFO/COO',
                 'email': 'joao.arcala@goomer.com.br', 'whatsapp': '5515991378552', 'telefone': '+55 15 99137-8552'},
              **c.get('cta', {})},
     )
