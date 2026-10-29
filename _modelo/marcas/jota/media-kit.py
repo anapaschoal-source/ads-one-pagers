@@ -141,17 +141,9 @@ MAPCSS = """<style>/*jota-mapa*/
 MAPHTML = ('<div class="jm" id="jm"><span class="eyebrow">Onde estamos</span>'
            '<h1>Presença em <em>todos os estados</em></h1>'
            '<p class="lead">Do Norte ao Sul, os tablets Goomer estão nas mesas de restaurantes nas 27 unidades da federação.</p>'
-           '<div style="display:grid;gap:8px"><span class="eyebrow" style="color:var(--muted)">Segmentação por culinária</span>'
-           '<div class="cz" id="jmCz" role="group" aria-label="Culinária"></div><p class="cd" id="jmCd"></p></div>'
            '<button type="button" class="go" id="jmGo">Veja os formatos no tablet →</button></div>')
 MAPJS = """<script>/*jota-mapa*/(function(){
-var cz=document.getElementById('jmCz'),cd=document.getElementById('jmCd'),cur='';
-var ALL=CUISINES.map(function(c){return c.c});
-function btn(id,label,color){var b=document.createElement('button');b.type='button';b.dataset.cu=id;b.setAttribute('aria-pressed',id===''?'true':'false');
- b.innerHTML=(color?'<i style="background:'+color+'"></i>':'')+label;b.onclick=function(){cur=id;cz.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});desc();paintAll()};cz.appendChild(b)}
-btn('','Todas',null);CUISINES.forEach(function(c){btn(c.id,c.s,c.c)});
-function desc(){if(!cur){cd.innerHTML='Toque numa culinária para ver o contexto da sua marca no mapa.';return}var c=CU[cur];cd.innerHTML='<b>'+c.n+'.</b> '+c.t}
-desc();
+var cur='';
 function paths(){return Array.prototype.slice.call(document.querySelectorAll('#gStates path.uf'))}
 function hexA(h,a){var n=parseInt(h.slice(1),16);return 'rgba('+(n>>16)+','+((n>>8)&255)+','+(n&255)+','+a+')'}
 function color(){return cur?CU[cur].c:LIME}
