@@ -1,6 +1,6 @@
-"""Personaliza o media kit Goomer Ads para a Jota (agência), com o Mercado Livre como cliente de exemplo.
+"""Personaliza o media kit Goomer Ads para a Jota (agência), com seletor de marcas: Mercado Livre, Life360 e Sicredi.
 Uso: python3 _modelo/marcas/jota/media-kit.py <modelo.html> <saida.html>
-Pré-requisitos: logos (Jota, Mercado Livre) e jota/ativacoes/index.html (build-seletor.py) + seletor-abertura.png."""
+Pré-requisitos: logos, ativações em jota-ud03yuez/{jogo,quiz,roleta} e vídeos de video-marcas.py."""
 import sys, os, re, io, base64
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 
@@ -40,47 +40,122 @@ s = re.sub(r'<title>[^<]*</title>', '<title>Goomer Ads para Jota</title>', s, 1)
 jt = jota.copy(); jt.thumbnail((680, 64), Image.LANCZOS)
 s = s.replace('<span class="kit">Media Kit 2026</span>', f'<span class="kit logo"><img src="{webp(jt, 92)}" alt="Jota"></span>', 1)
 
-# 2. Confirmação de Pedido: banner do Mercado Livre (ilustrativo) na área de cima do pop-up 876x688
-def banner(w, h, titulo, sub):
-    bn = Image.new('RGBA', (w, h), '#FFE600')
-    foto = Image.open(os.path.join(D, 'foto-confirmacao.jpg')).convert('RGBA')
+# 2. Seletor de marcas (como no kit da AlmapBBDO): Mercado Livre, Life360 e Sicredi, cada uma com peça em
+#    Tela de Início (vídeo), Confirmação de Pedido, Minha Conta e Página Especial (a ativação de cada marca)
+SLUG = 'jota-ud03yuez'
+def logo_img(nome, branco=False):
+    i = trim(Image.open(os.path.join(D, nome)).convert('RGBA'))
+    if branco: i.putdata([(255, 255, 255, a) for *_, a in i.get_flattened_data()])
+    return i
+
+MARCAS = [
+    dict(id='ml', n='Mercado Livre', c='#FFE600', logo='mercado-livre.png', branco=False, jogo='jogo', g='Entrega Relâmpago',
+         bg='#FFE600', ink='#2D3277', cta_bg='#3483FA', cta_ink='#FFFFFF', foto='foto-confirmacao.jpg',
+         conf=['Pedido feito!', 'Ganhe R$ 20 no app'], cta='Jogue e ganhe', conta=['Cupom de R$ 20', 'no app'], cta2='Jogue agora'),
+    dict(id='l360', n='Life360', c='#7A76EC', logo='life360.png', branco=True, jogo='quiz', g='Que família é a sua?',
+         bg='#7A76EC', ink='#FFFFFF', cta_bg='#FFFFFF', cta_ink='#5450C9', foto='foto-life360-2.jpg',
+         conf=['Sua família', 'no mesmo mapa'], cta='Faça o quiz', conta=['Família conectada', 'e segura'], cta2='Faça o quiz'),
+    dict(id='sic', n='Sicredi', c='#40B93C', logo='sicredi.png', branco=True, jogo='roleta', g='Gire e coopere',
+         bg='#0F6A2D', ink='#FFFFFF', cta_bg='#40B93C', cta_ink='#FFFFFF', foto='foto-sicredi.jpg',
+         conf=['Ganhe a 1ª anuidade', 'grátis no cartão'], cta='Gire a roleta', conta=['Ganhe a 1ª anuidade', 'grátis no cartão'], cta2='Gire a roleta'),
+]
+
+def banner_conf(m, w, h):
+    bn = Image.new('RGBA', (w, h), m['bg'])
+    foto = Image.open(os.path.join(D, m['foto'])).convert('RGBA')
     foto = ImageOps.fit(foto, (int(w * .4), h)); bn.paste(foto, (w - foto.width, 0))
     dr = ImageDraw.Draw(bn)
-    lg = ml.copy(); lg.thumbnail((int(w * .36), int(h * .2)), Image.LANCZOS); bn.alpha_composite(lg, (int(w * .05), int(h * .2)))
+    lg = logo_img(m['logo'], m['branco']); lg.thumbnail((int(w * .36), int(h * .2)), Image.LANCZOS); bn.alpha_composite(lg, (int(w * .05), int(h * .2)))
     y = int(h * .46)
-    for ln in titulo:
-        dr.text((int(w * .05), y), ln, font=font(int(h * .085)), fill='#2D3277'); y += int(h * .105)
-    dr.rounded_rectangle((int(w * .05), y + 12, int(w * .05) + int(w * .3), y + 12 + int(h * .13)), radius=int(h * .065), fill='#3483FA')
-    dr.text((int(w * .05) + 22, y + 12 + int(h * .025)), sub, font=font(int(h * .065)), fill='#FFFFFF')
+    for ln in m['conf']:
+        dr.text((int(w * .05), y), ln, font=font(int(h * .085)), fill=m['ink']); y += int(h * .105)
+    fw = int(dr.textlength(m['cta'], font=font(int(h * .065)))) + 44
+    dr.rounded_rectangle((int(w * .05), y + 12, int(w * .05) + fw, y + 12 + int(h * .13)), radius=int(h * .065), fill=m['cta_bg'])
+    dr.text((int(w * .05) + 22, y + 12 + int(h * .025)), m['cta'], font=font(int(h * .065)), fill=m['cta_ink'])
     return bn
 
-u = img_by_alt('Pop-up de pedido enviado com banner do anunciante')
-pop = load_uri(u)
-bh = next(y for y in range(250, pop.height) if all(min(pop.getpixel((x, y))[:3]) > 245 for x in (50, 438, 820)))  # início da faixa branca
-bn = banner(pop.width, bh, ['Pedido feito!', 'Ganhe R$ 20 no app'], 'Jogue e ganhe')
-mask = Image.new('L', bn.size, 0); ImageDraw.Draw(mask).rounded_rectangle((0, 0, bn.width, bn.height + 40), radius=28, fill=255)
-pop.paste(bn, (0, 0), mask)
-s = s.replace(u, webp(pop), 1)
+def banner_conta(m):
+    bw, bh2 = 204, 115
+    sb = Image.new('RGBA', (bw * 4, bh2 * 4), m['bg']); d2 = ImageDraw.Draw(sb)
+    d2.rectangle((0, 320, bw * 4, bh2 * 4), fill='#FFFFFF')
+    lg = logo_img(m['logo']); lg.thumbnail((330, 100), Image.LANCZOS)
+    sb.alpha_composite(lg, (36, 320 + (140 - lg.height) // 2))
+    d2.text((36, 178), m['conta'][0], font=font(46), fill=m['ink'])
+    d2.text((36, 234), m['conta'][1], font=font(46), fill=m['ink'])
+    cb = m['cta_bg'] if m['cta_bg'] != '#FFFFFF' else m['bg']
+    tw = int(d2.textlength(m['cta2'], font=font(40))); x0 = 790 - tw - 68
+    d2.rounded_rectangle((x0, 345, 790, 435), radius=45, fill=cb)
+    d2.text((x0 + 34, 366), m['cta2'], font=font(40), fill='#FFFFFF')
+    sb = sb.resize((bw, bh2), Image.LANCZOS)
+    mk = Image.new('L', sb.size, 0); ImageDraw.Draw(mk).rounded_rectangle((0, 0, bw - 1, bh2 - 1), radius=8, fill=255)
+    return sb, mk
 
-# 3. Página Especial: aba Mercado Livre e tela de abertura do jogo
-u = img_by_alt('Tablet Goomer com a aba PicPay selecionada')
-tab = load_uri(u)
-dr = ImageDraw.Draw(tab)
-dr.rectangle((148, 187, 211, 241), fill='#2F190F')
-ic = jota.copy(); ic.thumbnail((54, 26), Image.LANCZOS); tab.alpha_composite(ic, (180 - ic.width // 2, 192 + (26 - ic.height) // 2))
-f8 = font(8); t = 'Jota'; tw = dr.textlength(t, font=f8); dr.text((180 - tw / 2, 225), t, font=f8, fill='#FFFFFF')
-shot = os.path.join(D, 'seletor-abertura.png')
-if os.path.exists(shot):
-    sc = Image.open(shot).convert('RGBA').resize((836 - 230, 481 - 128), Image.LANCZOS); tab.paste(sc, (230, 128))
-s = s.replace(u, webp(tab), 1)
-s = s.replace('alt="Tablet Goomer com a aba PicPay selecionada e a página especial do jogo"',
-              'alt="Tablet Goomer com a aba Mercado Livre selecionada e a página especial do jogo"')
-game = open(os.path.join(ROOT, 'jota-ud03yuez', 'ativacoes', 'index.html'), 'rb').read()
-s = re.sub(r'(<script type="text/plain" id="game-picpay">)[^<]*(</script>)', lambda m: m.group(1) + base64.b64encode(game).decode() + m.group(2), s, 1)
-# o seletor não tem botão a clicar sozinho: desliga o clique automático
+def abertura(html_path):
+    from playwright.sync_api import sync_playwright
+    with sync_playwright() as pw:
+        br = pw.chromium.launch(); pg = br.new_page(viewport={'width': 1280, 'height': 800})
+        pg.goto('file://' + html_path); pg.wait_for_timeout(900)
+        png = pg.screenshot(); br.close()
+    return Image.open(io.BytesIO(png)).convert('RGBA')
+
+u_pop = img_by_alt('Pop-up de pedido enviado com banner do anunciante'); pop0 = load_uri(u_pop)
+bh = next(y for y in range(250, pop0.height) if all(min(pop0.getpixel((x, y))[:3]) > 245 for x in (50, 438, 820)))  # início da faixa branca
+u_tab = img_by_alt('Tablet Goomer com a aba PicPay selecionada'); tab0 = load_uri(u_tab)
+u_mc = re.search(r'<img class="mcscr" src="(data:image/[a-z]+;base64,[^"]+)"', s).group(1); mc0 = load_uri(u_mc)
+DATA = []
+for m in MARCAS:
+    pop = pop0.copy(); bn = banner_conf(m, pop.width, bh)
+    mask = Image.new('L', bn.size, 0); ImageDraw.Draw(mask).rounded_rectangle((0, 0, bn.width, bn.height + 40), radius=28, fill=255)
+    pop.paste(bn, (0, 0), mask)
+    tab = tab0.copy(); dr = ImageDraw.Draw(tab)
+    dr.rectangle((148, 187, 211, 241), fill='#2F190F')
+    ic = logo_img(m['logo'], m['branco']); ic.thumbnail((54, 26), Image.LANCZOS); tab.alpha_composite(ic, (180 - ic.width // 2, 192 + (26 - ic.height) // 2))
+    f8 = font(8); tw = dr.textlength(m['n'], font=f8); dr.text((180 - tw / 2, 225), m['n'], font=f8, fill='#FFFFFF')
+    gp = os.path.join(ROOT, SLUG, m['jogo'], 'index.html')
+    tab.paste(abertura(gp).resize((836 - 230, 481 - 128), Image.LANCZOS), (230, 128))
+    mc = mc0.copy(); sb, mk = banner_conta(m); mc.paste(sb, (479, 49), mk)
+    vid = lambda ext: f'data:video/{ext};base64,' + base64.b64encode(open(os.path.join(D, f"{m['id']}-inicio.{ext}"), 'rb').read()).decode()
+    DATA.append(dict(id=m['id'], n=m['n'], c=m['c'], g=m['g'], conf=webp(pop), esp=webp(tab), conta=webp(mc), mp4=vid('mp4'), webm=vid('webm'),
+                     game=base64.b64encode(open(gp, 'rb').read()).decode()))
+d0 = DATA[0]
+s = s.replace(u_pop, d0['conf'], 1); s = s.replace(u_tab, d0['esp'], 1); s = s.replace(u_mc, d0['conta'], 1)
+s = s.replace('alt="Tablet Goomer com a aba PicPay selecionada e a página especial do jogo"', 'alt="Tablet Goomer com a aba Mercado Livre selecionada e a página especial do jogo"')
+s = s.replace('alt="Tela Minha Conta com a conta da mesa e o banner do anunciante"', 'alt="Tela Minha Conta com a conta da mesa e o banner do Mercado Livre"', 1)
+s = re.sub(r'(<script type="text/plain" id="game-picpay">)[^<]*(</script>)', lambda mm: mm.group(1) + d0['game'] + mm.group(2), s, count=1)
 s = s.replace("find(x=>/bora jogar/i.test(x.textContent));if(b)b.click();else setTimeout(go,150)", "find(x=>/bora jogar/i.test(x.textContent));if(b)b.click()")
-s = s.replace('Jogar o jogo PicPay', 'Testar as ativações das marcas da Jota')
-s = s.replace('Toque em Bora jogar e teste a ativação do PicPay.', 'Toque em Bora jogar e teste as ativações de Mercado Livre, Life360 e Sicredi.')
+s = s.replace('Jogar o jogo PicPay', 'Testar a ativação')
+s = s.replace('Toque em Bora jogar e teste a ativação do PicPay.', 'Toque em Bora jogar e teste a ativação Mercado Livre: Entrega Relâmpago.')
+BSEL = ('<div class="bsel" data-bsel><div class="bl"><b>Ver exemplos para</b><small>Peças ilustrativas criadas para a Jota</small></div>'
+        '<div class="bc" role="group" aria-label="Escolha a marca"></div></div>')
+s = s.replace('<div class="fcards" id="fcards"></div>', BSEL + '<div class="fcards" id="fcards"></div>', 1)
+s = s.replace('<div class="fx-info" id="fxInfo"></div>', BSEL + '<div class="fx-info" id="fxInfo"></div>', 1)
+import json
+BJSON = json.dumps(DATA, ensure_ascii=False).replace('</', '<\\/')
+BJS = """<script type="application/json" id="jota-brands">""" + BJSON + """</script>
+<script>/*jota-marcas*/(function(){
+var JB=JSON.parse(document.getElementById('jota-brands').textContent),cur=JB[0].id;
+function B(){return JB.find(function(x){return x.id===cur})}
+function esc2(t){return String(t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function apply(root){if(!root)return;var b=B();
+ root.querySelectorAll('img[alt^="Pop-up de pedido"]').forEach(function(im){im.src=b.conf});
+ root.querySelectorAll('img[alt^="Tablet Goomer com a aba"]').forEach(function(im){im.src=b.esp;im.alt='Tablet Goomer com a aba '+b.n+' selecionada e a página especial do jogo'});
+ root.querySelectorAll('img.mcscr').forEach(function(im){im.src=b.conta;im.alt='Tela Minha Conta com a conta da mesa e o banner do '+b.n});
+ root.querySelectorAll('video.tv').forEach(function(v){if(v.dataset.b===b.id)return;v.dataset.b=b.id;
+  v.innerHTML='<source src="'+b.webm+'" type="video/webm"><source src="'+b.mp4+'" type="video/mp4">';v.muted=true;v.setAttribute('muted','');
+  v.setAttribute('aria-label','Vídeo de 10 segundos de '+b.n+' na Tela de Início');
+  try{v.load();var bx=v.closest('.tvbox');if(bx&&bx.classList.contains('ad')){var p=v.play();if(p)p.catch(function(){})}}catch(_){}})}
+window.gameHTML=function(){var b=B();return new TextDecoder().decode(Uint8Array.from(atob(b.game),function(c){return c.charCodeAt(0)}))};
+window.brandDesc=function(f){var b=B();return f.id==='especial'?f.d.replace(/Toque em Bora jogar.*$/,'Toque em Bora jogar e teste a ativação '+b.n+': '+b.g+(/[.?!]$/.test(b.g)?'':'.')):f.d};
+var stage=document.getElementById('fxStage');if(stage)new MutationObserver(function(){apply(stage)}).observe(stage,{childList:true});
+function set(id){cur=id;document.querySelectorAll('[data-bsel] .chip').forEach(function(c){c.setAttribute('aria-pressed',c.dataset.b===id?'true':'false')});
+ apply(document.getElementById('fcards'));
+ var fx=document.getElementById('fx');if(fx&&!fx.hidden){var g=stage.querySelector('.gameclose');if(g&&!g.hidden)g.click();try{fxPaused=true;showFx(fxI)}catch(_){}}}
+document.querySelectorAll('[data-bsel] .bc').forEach(function(bc){
+ bc.innerHTML=JB.map(function(b){return '<button type="button" class="chip" data-b="'+b.id+'" aria-pressed="'+(b.id===cur)+'"><span class="sw" style="background:'+b.c+'"></span>'+esc2(b.n)+'</button>'}).join('');
+ bc.querySelectorAll('.chip').forEach(function(c){c.onclick=function(){set(c.dataset.b)}})});
+apply(document.getElementById('fcards'));
+})();</script>"""
+s = s.replace('</body>', BJS + '</body>', 1) if '</body>' in s else s + BJS
 
 # 4. assinatura: só João; assunto do e-mail
 s = re.sub(r'\s*<div class="sig" data-sig="ana">.*?(?=\s*<div class="sig" data-sig="joao">)', '', s, 1, re.S)
@@ -90,34 +165,14 @@ s = s.replace('?subject=Goomer%20Ads"', '?subject=Goomer%20Ads%20%C3%97%20Jota"'
 s, nb = re.subn(r'\s*<div class="modebar seg2 intop" id="fMode".*?</div>', '', s, count=1, flags=re.S)
 assert nb == 1
 
-# 6. Tela de Início: vídeo ilustrativo da Life360 (deixa de ser case real)
-vw = 'data:video/webm;base64,' + base64.b64encode(open(os.path.join(D, 'life360-inicio.webm'), 'rb').read()).decode()
-vm = 'data:video/mp4;base64,' + base64.b64encode(open(os.path.join(D, 'life360-inicio.mp4'), 'rb').read()).decode()
+# 6. Tela de Início e Minha Conta: as peças da marca selecionada deixam de ser case real
 vi = s.index('<video class="tv"'); ve = s.index('</video>', vi)
 blk = s[vi:ve]
-blk, nv = re.subn(r'<source src="data:[^"]+" type="video/webm">', lambda m: f'<source src="{vw}" type="video/webm">', blk, count=1)
-blk, nm = re.subn(r'<source src="data:[^"]+" type="video/mp4">', lambda m: f'<source src="{vm}" type="video/mp4">', blk, count=1)
+blk, nv = re.subn(r'<source src="data:[^"]+" type="video/webm">', lambda mm: f'<source src="{d0["webm"]}" type="video/webm">', blk, count=1)
+blk, nm = re.subn(r'<source src="data:[^"]+" type="video/mp4">', lambda mm: f'<source src="{d0["mp4"]}" type="video/mp4">', blk, count=1)
 s = s[:vi] + blk + s[ve:]
 assert nv == nm == 1
 s = s.replace('<div class="scr real case vreal">', '<div class="scr real vreal">', 1)
-
-# 7. Minha Conta: banner Sicredi (deixa de ser case real)
-u = re.search(r'<img class="mcscr" src="(data:image/[a-z]+;base64,[^"]+)"', s).group(1)
-mc = load_uri(u)
-bw, bh2 = 204, 115
-sb = Image.new('RGBA', (bw * 4, bh2 * 4), '#0F6A2D'); d2 = ImageDraw.Draw(sb)
-d2.rectangle((0, 320, bw * 4, bh2 * 4), fill='#FFFFFF')
-lg = Image.open(os.path.join(D, 'sicredi.png')).convert('RGBA'); lg.thumbnail((330, 100), Image.LANCZOS)
-sb.alpha_composite(lg, (36, 320 + (140 - lg.height) // 2))
-d2.text((36, 178), 'Ganhe a 1ª anuidade', font=font(46), fill='#FFFFFF')
-d2.text((36, 234), 'grátis no cartão', font=font(46), fill='#FFFFFF')
-d2.rounded_rectangle((440, 345, 790, 435), radius=45, fill='#40B93C')
-d2.text((478, 366), 'Gire a roleta', font=font(40), fill='#FFFFFF')
-sb = sb.resize((bw, bh2), Image.LANCZOS)
-m2 = Image.new('L', sb.size, 0); ImageDraw.Draw(m2).rounded_rectangle((0, 0, bw - 1, bh2 - 1), radius=8, fill=255)
-mc.paste(sb, (479, 49), m2)
-s = s.replace(u, webp(mc), 1)
-s = s.replace('alt="Tela Minha Conta com a conta da mesa e o banner do anunciante"', 'alt="Tela Minha Conta com a conta da mesa e o banner do Sicredi"', 1)
 i = s.index('<img class="mcscr"'); j = s.rfind('<div class="scr real case">', 0, i)
 s = s[:j] + '<div class="scr real">' + s[j + len('<div class="scr real case">'):]
 
