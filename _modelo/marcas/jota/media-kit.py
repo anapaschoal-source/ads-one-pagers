@@ -154,12 +154,13 @@ function desc(){if(!cur){cd.innerHTML='Toque numa culinária para ver o contexto
 desc();
 function paths(){return Array.prototype.slice.call(document.querySelectorAll('#gStates path.uf'))}
 function hexA(h,a){var n=parseInt(h.slice(1),16);return 'rgba('+(n>>16)+','+((n>>8)&255)+','+(n&255)+','+a+')'}
-function color(){return cur?CU[cur].c:ALL[Math.floor(Math.random()*ALL.length)]}
-function paint(p){var c=color(),a=.35+Math.random()*.55;p.style.fill=hexA(c,a);p.style.stroke=hexA(c,.9)}
-function paintAll(){paths().forEach(function(p,i){setTimeout(function(){paint(p)},i*35)})}
-setTimeout(paintAll,300);
+function color(){return cur?CU[cur].c:LIME}
+var last=null;
+function flash(){var ps=paths();if(!ps.length)return;var p;do{p=ps[Math.floor(Math.random()*ps.length)]}while(p===last&&ps.length>1);last=p;
+ var c=color();p.style.fill=hexA(c,.85);p.style.stroke=c;setTimeout(function(){p.style.fill='';p.style.stroke=''},1300)}
+function paintAll(){flash()}
 var rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
-if(!rm)setInterval(function(){var ps=paths();if(!ps.length)return;for(var k=0;k<3;k++)paint(ps[Math.floor(Math.random()*ps.length)])},420);
+if(!rm)setInterval(flash,1000);else setTimeout(flash,600);
 document.getElementById('jmGo').onclick=function(){var f=document.getElementById('fxBtn');if(f)f.click()};
 })();</script>"""
 i = s.index('<div class="story" id="story"')
