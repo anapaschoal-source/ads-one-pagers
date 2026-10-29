@@ -29,7 +29,7 @@ ${erro ? '<p class="e">Senha incorreta. Tente de novo.</p>' : ''}
 <label for="senha" style="font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase">Senha</label>
 <input id="senha" name="senha" type="password" autocomplete="current-password" required autofocus>
 <button type="submit">Entrar</button></form></body></html>`;
-  return new Response(html, { status: 401, headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store' } });
+  return new Response(html, { status: 200, headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store' } });
 }
 
 export default async function middleware(req) {
