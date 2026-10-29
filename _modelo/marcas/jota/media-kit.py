@@ -118,5 +118,54 @@ s = s.replace('alt="Tela Minha Conta com a conta da mesa e o banner do anunciant
 i = s.index('<img class="mcscr"'); j = s.rfind('<div class="scr real case">', 0, i)
 s = s[:j] + '<div class="scr real">' + s[j + len('<div class="scr real case">'):]
 
+# 8. Mapa: só a animação dos estados (todos os 27), sem quantidades; segmentação por culinária colore o mapa
+MAPCSS = """<style>/*jota-mapa*/
+#mapa .story,#mapa .filters,#mapa #hint,#mapa .pin,#mapa .zoomctl,#mapa .tip,#mapa #dots,#mapa #fxBtn{display:none!important}
+#mapa #svg{pointer-events:none}
+#mapa .uf{transition:fill .9s ease,stroke .9s ease}
+.jm{position:absolute;left:var(--gutter);top:28px;width:min(420px,calc(100% - 32px));display:flex;flex-direction:column;gap:18px;z-index:3}
+.jm h1{font-size:clamp(44px,5.6vw,76px)}
+.jm h1 em{font-style:normal;color:var(--lime)}
+.jm .lead{font-size:17px;color:var(--muted);max-width:36ch}
+.jm .cz{display:flex;flex-wrap:wrap;gap:6px}
+.jm .cz button{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:7px 12px;font-size:13px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:7px;color:var(--fg)}
+.jm .cz button i{width:9px;height:9px;border-radius:50%;flex:none}
+.jm .cz button[aria-pressed="true"]{background:var(--lime);border-color:var(--lime);color:var(--ink)}
+.jm .cd{font-size:14px;color:var(--muted);min-height:42px;max-width:40ch}
+.jm .cd b{color:var(--fg)}
+.jm .go{align-self:flex-start;border:0;border-radius:999px;background:var(--lime);color:var(--ink);font-weight:800;font-size:14px;padding:12px 20px;cursor:pointer}
+@media (max-width:980px){.jm{position:relative;left:auto;top:auto;width:auto;padding:24px var(--gutter-r) 8px var(--gutter);order:1}.jm h1{font-size:46px}}
+@media (min-width:981px){#mapa #svg{transform:translateX(150px)}}
+@media (prefers-reduced-motion:reduce){#mapa .uf{transition:none}}
+</style>"""
+MAPHTML = ('<div class="jm" id="jm"><span class="eyebrow">Onde estamos</span>'
+           '<h1>Presença em <em>todos os estados</em></h1>'
+           '<p class="lead">Do Norte ao Sul, os tablets Goomer estão nas mesas de restaurantes nas 27 unidades da federação.</p>'
+           '<div style="display:grid;gap:8px"><span class="eyebrow" style="color:var(--muted)">Segmentação por culinária</span>'
+           '<div class="cz" id="jmCz" role="group" aria-label="Culinária"></div><p class="cd" id="jmCd"></p></div>'
+           '<button type="button" class="go" id="jmGo">Veja os formatos no tablet →</button></div>')
+MAPJS = """<script>/*jota-mapa*/(function(){
+var cz=document.getElementById('jmCz'),cd=document.getElementById('jmCd'),cur='';
+var ALL=CUISINES.map(function(c){return c.c});
+function btn(id,label,color){var b=document.createElement('button');b.type='button';b.dataset.cu=id;b.setAttribute('aria-pressed',id===''?'true':'false');
+ b.innerHTML=(color?'<i style="background:'+color+'"></i>':'')+label;b.onclick=function(){cur=id;cz.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});desc();paintAll()};cz.appendChild(b)}
+btn('','Todas',null);CUISINES.forEach(function(c){btn(c.id,c.s,c.c)});
+function desc(){if(!cur){cd.innerHTML='Toque numa culinária para ver o contexto da sua marca no mapa.';return}var c=CU[cur];cd.innerHTML='<b>'+c.n+'.</b> '+c.t}
+desc();
+function paths(){return Array.prototype.slice.call(document.querySelectorAll('#gStates path.uf'))}
+function hexA(h,a){var n=parseInt(h.slice(1),16);return 'rgba('+(n>>16)+','+((n>>8)&255)+','+(n&255)+','+a+')'}
+function color(){return cur?CU[cur].c:ALL[Math.floor(Math.random()*ALL.length)]}
+function paint(p){var c=color(),a=.35+Math.random()*.55;p.style.fill=hexA(c,a);p.style.stroke=hexA(c,.9)}
+function paintAll(){paths().forEach(function(p,i){setTimeout(function(){paint(p)},i*35)})}
+setTimeout(paintAll,300);
+var rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(!rm)setInterval(function(){var ps=paths();if(!ps.length)return;for(var k=0;k<3;k++)paint(ps[Math.floor(Math.random()*ps.length)])},420);
+document.getElementById('jmGo').onclick=function(){var f=document.getElementById('fxBtn');if(f)f.click()};
+})();</script>"""
+i = s.index('<div class="story" id="story"')
+s = s[:i] + MAPHTML + '\n  ' + s[i:]
+s = s.replace('aria-label="Mapa do Brasil com os pontos onde há restaurantes Goomer"', 'aria-label="Mapa do Brasil com os 27 estados onde a Goomer está presente"')
+s = s.replace('</body>', MAPCSS + MAPJS + '</body>', 1) if '</body>' in s else s + MAPCSS + MAPJS
+
 open(out, 'w', encoding='utf-8').write(s)
 print('ok', out, len(s) // 1024, 'KB')
