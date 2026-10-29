@@ -121,22 +121,15 @@ s = s.replace('alt="Tela Minha Conta com a conta da mesa e o banner do anunciant
 i = s.index('<img class="mcscr"'); j = s.rfind('<div class="scr real case">', 0, i)
 s = s[:j] + '<div class="scr real">' + s[j + len('<div class="scr real case">'):]
 
-# 8. Mapa: mantém tudo do modelo (história, números, região, estado), tira só a segmentação por culinária
-#    e acende um estado de cada vez em verde enquanto o mapa está no Brasil inteiro
+# 8. Mapa fixo: Brasil inteiro com os pontos e os números do modelo, sem filtros nem interação (sem culinária)
 i = s.index('<h3>Culinária</h3>'); j = s.rfind('<div style="display:grid;gap:8px">', 0, i)
 s = s[:j] + '<div style="display:grid;gap:8px" hidden>' + s[j + len('<div style="display:grid;gap:8px">'):]
 s = s.replace('<div><b>Tipo de culinária</b><p>', '<div hidden><b>Tipo de culinária</b><p>')
 MAPCSS = """<style>/*jota-mapa*/
-#mapa .uf.jg{fill:rgba(189,226,73,.85)!important;stroke:#BDE249!important}
-#mapa .uf{transition:fill .9s ease,stroke .9s ease}
-@media (prefers-reduced-motion:reduce){#mapa .uf{transition:none}}
+#mapa .filters,#mapa #hint,#mapa .zoomctl,#mapa .pin,#mapa .tip,#mapa #fxBtn{display:none!important}
+#mapa #svg,#mapa #stage{pointer-events:none}
 </style>"""
-MAPJS = """<script>/*jota-mapa*/(function(){
-var last=null;
-function flash(){if(st.uf||st.region||st.cu)return;var ps=Array.prototype.slice.call(document.querySelectorAll('#gStates path.uf'));if(!ps.length)return;
- var p;do{p=ps[Math.floor(Math.random()*ps.length)]}while(p===last&&ps.length>1);last=p;p.classList.add('jg');setTimeout(function(){p.classList.remove('jg')},1300)}
-if(!matchMedia('(prefers-reduced-motion: reduce)').matches)setInterval(flash,1000);
-})();</script>"""
+MAPJS = ""
 s = s.replace('</body>', MAPCSS + MAPJS + '</body>', 1) if '</body>' in s else s + MAPCSS + MAPJS
 
 open(out, 'w', encoding='utf-8').write(s)

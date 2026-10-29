@@ -1413,12 +1413,6 @@ let lastSz='';new ResizeObserver(()=>{const r=stage.getBoundingClientRect(),k=Ma
 
 
 <style>/*jota-mapa*/
-#mapa .uf.jg{fill:rgba(189,226,73,.85)!important;stroke:#BDE249!important}
-#mapa .uf{transition:fill .9s ease,stroke .9s ease}
-@media (prefers-reduced-motion:reduce){#mapa .uf{transition:none}}
-</style><script>/*jota-mapa*/(function(){
-var last=null;
-function flash(){if(st.uf||st.region||st.cu)return;var ps=Array.prototype.slice.call(document.querySelectorAll('#gStates path.uf'));if(!ps.length)return;
- var p;do{p=ps[Math.floor(Math.random()*ps.length)]}while(p===last&&ps.length>1);last=p;p.classList.add('jg');setTimeout(function(){p.classList.remove('jg')},1300)}
-if(!matchMedia('(prefers-reduced-motion: reduce)').matches)setInterval(flash,1000);
-})();</script></body></html>
+#mapa .filters,#mapa #hint,#mapa .zoomctl,#mapa .pin,#mapa .tip,#mapa #fxBtn{display:none!important}
+#mapa #svg,#mapa #stage{pointer-events:none}
+</style></body></html>
