@@ -42,7 +42,9 @@ export default async function middleware(req) {
   const token = await hash(senha + '|goomer-ads|' + pasta);
   const nome = 'ga_' + pasta.replace(/[^a-z0-9]/gi, '');
   const cookies = (req.headers.get('cookie') || '').split(/;\s*/);
-  if (cookies.includes(nome + '=' + token)) return;
+  const ok = cookies.includes(nome + '=' + token);
+  console.log('senha', JSON.stringify({ path: url.pathname, metodo: req.method, liberado: ok, cookie: cookies.some((c) => c.startsWith(nome + '=')) }));
+  if (ok) return;
   if (req.method === 'POST') {
     const f = await req.formData().catch(() => null);
     if (f && f.get('senha') === senha) {
