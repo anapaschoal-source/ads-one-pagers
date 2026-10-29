@@ -11,3 +11,4 @@ python3 $J/build-seletor.py
 python3 _modelo/build.py _modelo/marcas/jota.json ${3:+--artefato $3}
 python3 $J/pos-build.py jota-ud03yuez/index.html $3
 python3 $J/media-kit.py "$1" "$2"
+python3 $J/site.py "$2"
