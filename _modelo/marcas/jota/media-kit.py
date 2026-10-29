@@ -86,5 +86,37 @@ s = s.replace('Toque em Bora jogar e teste a ativação do PicPay.', 'Toque em B
 s = re.sub(r'\s*<div class="sig" data-sig="ana">.*?(?=\s*<div class="sig" data-sig="joao">)', '', s, 1, re.S)
 s = s.replace('?subject=Goomer%20Ads"', '?subject=Goomer%20Ads%20%C3%97%20Jota"')
 
+# 5. sem B2B: tira o seletor B2C/B2B do topo (o kit abre e fica em B2C)
+s, nb = re.subn(r'\s*<div class="modebar seg2 intop" id="fMode".*?</div>', '', s, count=1, flags=re.S)
+assert nb == 1
+
+# 6. Tela de Início: vídeo ilustrativo da Life360 (deixa de ser case real)
+vw = 'data:video/webm;base64,' + base64.b64encode(open(os.path.join(D, 'life360-inicio.webm'), 'rb').read()).decode()
+vm = 'data:video/mp4;base64,' + base64.b64encode(open(os.path.join(D, 'life360-inicio.mp4'), 'rb').read()).decode()
+s, nv = re.subn(r'<source src="data:[^"]+" type="video/webm">', lambda m: f'<source src="{vw}" type="video/webm">', s, count=1)
+s, nm = re.subn(r'<source src="data:[^"]+" type="video/mp4">', lambda m: f'<source src="{vm}" type="video/mp4">', s, count=1)
+assert nv == nm == 1
+s = s.replace('<div class="scr real case vreal">', '<div class="scr real vreal">', 1)
+
+# 7. Minha Conta: banner Sicredi (deixa de ser case real)
+u = re.search(r'<img class="mcscr" src="(data:image/[a-z]+;base64,[^"]+)"', s).group(1)
+mc = load_uri(u)
+bw, bh2 = 204, 115
+sb = Image.new('RGBA', (bw * 4, bh2 * 4), '#0F6A2D'); d2 = ImageDraw.Draw(sb)
+d2.rectangle((0, 320, bw * 4, bh2 * 4), fill='#FFFFFF')
+lg = Image.open(os.path.join(D, 'sicredi.png')).convert('RGBA'); lg.thumbnail((330, 100), Image.LANCZOS)
+sb.alpha_composite(lg, (36, 320 + (140 - lg.height) // 2))
+d2.text((36, 178), 'Ganhe a 1ª anuidade', font=font(46), fill='#FFFFFF')
+d2.text((36, 234), 'grátis no cartão', font=font(46), fill='#FFFFFF')
+d2.rounded_rectangle((440, 345, 790, 435), radius=45, fill='#40B93C')
+d2.text((478, 366), 'Gire a roleta', font=font(40), fill='#FFFFFF')
+sb = sb.resize((bw, bh2), Image.LANCZOS)
+m2 = Image.new('L', sb.size, 0); ImageDraw.Draw(m2).rounded_rectangle((0, 0, bw - 1, bh2 - 1), radius=8, fill=255)
+mc.paste(sb, (479, 49), m2)
+s = s.replace(u, webp(mc), 1)
+s = s.replace('alt="Tela Minha Conta com a conta da mesa e o banner do anunciante"', 'alt="Tela Minha Conta com a conta da mesa e o banner do Sicredi"', 1)
+i = s.index('<img class="mcscr"'); j = s.rfind('<div class="scr real case">', 0, i)
+s = s[:j] + '<div class="scr real">' + s[j + len('<div class="scr real case">'):]
+
 open(out, 'w', encoding='utf-8').write(s)
 print('ok', out, len(s) // 1024, 'KB')
