@@ -93,8 +93,11 @@ assert nb == 1
 # 6. Tela de Início: vídeo ilustrativo da Life360 (deixa de ser case real)
 vw = 'data:video/webm;base64,' + base64.b64encode(open(os.path.join(D, 'life360-inicio.webm'), 'rb').read()).decode()
 vm = 'data:video/mp4;base64,' + base64.b64encode(open(os.path.join(D, 'life360-inicio.mp4'), 'rb').read()).decode()
-s, nv = re.subn(r'<source src="data:[^"]+" type="video/webm">', lambda m: f'<source src="{vw}" type="video/webm">', s, count=1)
-s, nm = re.subn(r'<source src="data:[^"]+" type="video/mp4">', lambda m: f'<source src="{vm}" type="video/mp4">', s, count=1)
+vi = s.index('<video class="tv"'); ve = s.index('</video>', vi)
+blk = s[vi:ve]
+blk, nv = re.subn(r'<source src="data:[^"]+" type="video/webm">', lambda m: f'<source src="{vw}" type="video/webm">', blk, count=1)
+blk, nm = re.subn(r'<source src="data:[^"]+" type="video/mp4">', lambda m: f'<source src="{vm}" type="video/mp4">', blk, count=1)
+s = s[:vi] + blk + s[ve:]
 assert nv == nm == 1
 s = s.replace('<div class="scr real case vreal">', '<div class="scr real vreal">', 1)
 
