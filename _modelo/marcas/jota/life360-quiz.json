@@ -1,0 +1,32 @@
+{
+ "marca": "Life360",
+ "titulo_aba": "Quiz Life360",
+ "logo": "life360.png",
+ "logo_branco": false,
+ "foto": "foto-life360.jpg",
+ "cores": {"cor": "#8352E3", "cor_luz": "#A57CF0", "cor_escura": "#5B2DB8", "escura": "#160D2B", "suave": "#EDE4FF"},
+ "poc": "Protótipo de demonstração, não é um produto oficial da Life360. Nada digitado é guardado.",
+ "intro": {"selo": "Quiz · 30s", "titulo": "Que família é a sua?", "texto": "Três perguntas enquanto o pedido não chega, e você descobre como a Life360 deixa a sua família mais conectada.", "botao": "Começar o quiz", "rodape": "Life360 · segurança da família", "legenda_foto": ""},
+ "perguntas": [
+  {"pergunta": "Quem está com você hoje?", "dica": "", "opcoes": [
+   {"emoji": "👶", "texto": "Filhos pequenos", "sub": "dia de escola e passeio", "frase": "Com criança por perto, saber onde cada um está faz toda a diferença.", "beneficio": "Aviso de chegada e saída da escola"},
+   {"emoji": "🛹", "texto": "Adolescentes", "sub": "cada um com seu rolê", "frase": "Com adolescente em casa, liberdade e tranquilidade andam juntas.", "beneficio": "Localização em tempo real no mapa da família"},
+   {"emoji": "💑", "texto": "Casal ou amigos", "sub": "a turma de sempre", "frase": "Entre casal e amigos, combinar o encontro fica bem mais fácil.", "beneficio": "Aviso quando alguém chega ao destino"}]},
+  {"pergunta": "Como vocês costumam se deslocar?", "opcoes": [
+   {"emoji": "🚗", "texto": "De carro", "sub": "trânsito faz parte"},
+   {"emoji": "🚌", "texto": "Transporte público", "sub": "ônibus e metrô"},
+   {"emoji": "🚲", "texto": "A pé ou de bike", "sub": "perto de casa"}]},
+  {"pergunta": "O que mais tira o seu sono?", "opcoes": [
+   {"emoji": "🛣️", "texto": "Trânsito e estrada", "sub": "viagens e rodovias", "beneficio": "Detecção de acidente de carro"},
+   {"emoji": "🔋", "texto": "Celular sem bateria", "sub": "e ninguém atende", "beneficio": "Alerta de bateria fraca"},
+   {"emoji": "🆘", "texto": "Uma emergência", "sub": "e não saber quem chamar", "beneficio": "Botão de SOS para a família toda"}]}
+ ],
+ "resultado": {
+  "titulo": "Sua família combina com a Life360.",
+  "texto": "A Life360 deixa todo mundo no mesmo mapa, com avisos na hora certa.",
+  "beneficios_fixos": ["Círculo da família com localização em tempo real", "Teste grátis do plano premium"],
+  "botao_refazer": "Refazer o quiz",
+  "letra_miuda": "Benefícios e teste grátis sujeitos às condições do app.",
+  "cartao": {"foto": "foto-life360-2.jpg", "destaque": "Teste grátis do premium", "qr_url": "https://www.life360.com/", "texto": "Aponte a câmera do celular e baixe a Life360", "rodape": "Life360 · App de segurança da família"}
+ }
+}
