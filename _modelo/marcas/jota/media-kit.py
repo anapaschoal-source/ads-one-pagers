@@ -37,8 +37,18 @@ jota = trim(Image.open(claro if os.path.exists(claro) else os.path.join(D, 'logo
 
 # 1. título e logo da Jota no topo
 s = re.sub(r'<title>[^<]*</title>', '<title>Goomer Ads para Jota</title>', s, 1)
-jt = jota.copy(); jt.thumbnail((680, 64), Image.LANCZOS)
+jt = jota.copy(); jt.thumbnail((900, 120), Image.LANCZOS)
 s = s.replace('<span class="kit">Media Kit 2026</span>', f'<span class="kit logo"><img src="{webp(jt, 92)}" alt="Jota"></span>', 1)
+s = s.replace('</head>', '<style>/*jota-logo*/.brand .kit.logo img{height:34px!important;max-width:240px!important}.brand .kit.logo{padding-top:0!important;padding-bottom:0!important}@media (max-width:760px){.brand .kit.logo img{height:24px!important}}</style></head>', 1) if '</head>' in s else s
+
+# foto da mesa: Tela de Início do Mercado Livre no tablet
+import subprocess, tempfile
+mm = re.search(r'(<figure class="mesa-foto" id="mesaFoto"><img src=")(data:image/[a-z]+;base64,[^"]+)(")', s)
+t0 = tempfile.mktemp(suffix='.png'); t1 = tempfile.mktemp(suffix='.webp')
+load_uri(mm.group(2)).convert('RGB').save(t0)
+subprocess.run([sys.executable, os.path.join(D, 'mesa-foto.py'), t0, t1], check=True, stdout=subprocess.DEVNULL)
+s = s.replace(mm.group(0), mm.group(1) + 'data:image/webp;base64,' + base64.b64encode(open(t1, 'rb').read()).decode() + mm.group(3), 1)
+s = s.replace('alt="Tablet Goomer na mesa de um restaurante, com o cliente comendo petiscos"', 'alt="Tablet Goomer na mesa de um restaurante exibindo a Tela de Início do Mercado Livre"', 1)
 
 # 2. Seletor de marcas (como no kit da AlmapBBDO): Mercado Livre, Life360 e Sicredi, cada uma com peça em
 #    Tela de Início (vídeo), Confirmação de Pedido, Minha Conta e Página Especial (a ativação de cada marca)
@@ -184,7 +194,7 @@ MAPCSS = """<style>/*jota-mapa*/
 #mapa .filters,#mapa #hint,#mapa .zoomctl,#mapa .pin,#mapa .tip,#mapa #fxBtn{display:none!important}
 #mapa #svg,#mapa #stage{pointer-events:none}
 @media (min-width:981px){
- #mapa .story{width:min(600px,44vw);top:clamp(20px,4vh,48px)}
+ #mapa .story{left:max(var(--gutter),3%);width:min(600px,44vw);top:clamp(20px,4vh,48px)}
  #mapa .story h1{font-size:clamp(44px,4.6vw,68px)}
  #mapa .story .lead{max-width:52ch}
  #mapa .story .kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 32px;max-width:520px}
