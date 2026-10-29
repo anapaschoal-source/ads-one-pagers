@@ -17,7 +17,7 @@ def logo(nome, w=420):
 A = [('Mercado Livre', 'mercado-livre.png', 'Jogo', 'Entrega Relâmpago', 'Entregue 10 pacotes em 20 segundos e ganhe cupom.', '#FFE600', 'jogo'),
      ('Life360', 'life360.png', 'Quiz', 'Que família é a sua?', 'Três perguntas e um QR para baixar o app.', '#E9E8FD', 'quiz'),
      ('Sicredi', 'sicredi.png', 'Roleta', 'Gire e coopere', 'Gire a roleta e ganhe um benefício na conta.', '#E2F4DD', 'roleta')]
-html_of = {d: base64.b64encode(open(os.path.join(ROOT, 'jota', d, 'index.html'), 'rb').read()).decode() for *_, d in A}
+html_of = {d: base64.b64encode(open(os.path.join(ROOT, 'jota-ud03yuez', d, 'index.html'), 'rb').read()).decode() for *_, d in A}
 cards = ''.join(
     f'<button class="c" data-k="{d}"><span class="lg" style="background:{bg}"><img src="{logo(lg)}" alt="{nome}"></span>'
     f'<span class="tp">{tp}</span><b>{t}</b><span class="tx">{tx}</span><span class="go">Testar</span></button>'
@@ -70,7 +70,7 @@ fr.onload=function(){{try{{['pointerdown','keydown'].forEach(function(e){{fr.con
 document.querySelectorAll('.c').forEach(function(b){{b.onclick=function(){{abrir(b.dataset.k)}}}});
 bk.onclick=home;
 </script></body></html>'''
-p = os.path.join(ROOT, 'jota', 'ativacoes', 'index.html')
+p = os.path.join(ROOT, 'jota-ud03yuez', 'ativacoes', 'index.html')
 os.makedirs(os.path.dirname(p), exist_ok=True)
 open(p, 'w', encoding='utf-8').write(out)
 print('ok:', p, len(out) // 1024, 'KB')

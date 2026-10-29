@@ -75,7 +75,7 @@ if os.path.exists(shot):
 s = s.replace(u, webp(tab), 1)
 s = s.replace('alt="Tablet Goomer com a aba PicPay selecionada e a página especial do jogo"',
               'alt="Tablet Goomer com a aba Mercado Livre selecionada e a página especial do jogo"')
-game = open(os.path.join(ROOT, 'jota', 'ativacoes', 'index.html'), 'rb').read()
+game = open(os.path.join(ROOT, 'jota-ud03yuez', 'ativacoes', 'index.html'), 'rb').read()
 s = re.sub(r'(<script type="text/plain" id="game-picpay">)[^<]*(</script>)', lambda m: m.group(1) + base64.b64encode(game).decode() + m.group(2), s, 1)
 # o seletor não tem botão a clicar sozinho: desliga o clique automático
 s = s.replace("find(x=>/bora jogar/i.test(x.textContent));if(b)b.click();else setTimeout(go,150)", "find(x=>/bora jogar/i.test(x.textContent));if(b)b.click()")

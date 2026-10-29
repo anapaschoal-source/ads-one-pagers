@@ -16,15 +16,15 @@ def small(nome, w=360):
     b = io.BytesIO(); i.save(b, 'PNG', optimize=True); return 'data:image/png;base64,' + base64.b64encode(b.getvalue()).decode()
 
 ACTS = [
-    ('ml', 'Mercado Livre', 'mercado-livre.png', 'Jogo', '/jota/jogo/', [
+    ('ml', 'Mercado Livre', 'mercado-livre.png', 'Jogo', '/jota-ud03yuez/jogo/', [
         ('Entra no menu Mercado Livre', 'O usuário abre a categoria Mercado Livre no cardápio do tablet.'),
         ('Faz a Entrega Relâmpago', 'Toca nos pacotes antes que sumam e entrega 10 em 20 segundos.'),
         ('Ganha o cupom', 'Cupom de desconto para usar no app do Mercado Livre.')]),
-    ('l360', 'Life360', 'life360.png', 'Quiz', '/jota/quiz/', [
+    ('l360', 'Life360', 'life360.png', 'Quiz', '/jota-ud03yuez/quiz/', [
         ('Entra no menu Life360', 'O usuário abre a categoria Life360 no cardápio do tablet.'),
         ('Responde o quiz', 'Três perguntas sobre a família, em 30 segundos.'),
         ('Baixa o app', 'QR code para baixar a Life360 com teste grátis do premium.')]),
-    ('sic', 'Sicredi', 'sicredi.png', 'Roleta', '/jota/roleta/', [
+    ('sic', 'Sicredi', 'sicredi.png', 'Roleta', '/jota-ud03yuez/roleta/', [
         ('Entra no menu Sicredi', 'O usuário abre a categoria Sicredi no cardápio do tablet.'),
         ('Gira a roleta', 'Um toque e a roleta sorteia um benefício Sicredi.'),
         ('Resgata o benefício', 'Código por e-mail e QR code para abrir a conta no app.')]),
