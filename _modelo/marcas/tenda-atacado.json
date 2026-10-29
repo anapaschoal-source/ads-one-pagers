@@ -19,37 +19,37 @@
   },
   "hero": {
     "titulo": "Tenda Atacado, <br>na mesa do cliente",
-    "subtitulo": "Estoque cheio pro verão no tablet de +2 mil restaurantes."
+    "subtitulo": "Preço baixo no verão, no tablet de +2 mil restaurantes."
   },
   "formatos": {
     "inicio": {
-      "legenda": "Abasteça seu negócio pro verão"
+      "legenda": "Preço baixo é a nossa praia!"
     },
     "confirmacao": {
-      "titulo": "Seu negócio pronto pro verão",
-      "destaque": "Estoque cheio com preço baixo"
+      "titulo": "Ofertas especiais de verão",
+      "destaque": "Preço baixo de verdade"
     },
     "conta": {
-      "titulo": "Abasteça e ganhe frete grátis",
-      "cta": "Jogue no menu Tenda"
+      "titulo": "Verão com frete grátis",
+      "cta": "Cupom FRETEZERO"
     },
     "especial": {
-      "selo": "Abasteça o Estoque · 25s",
-      "titulo": "Abasteça o",
-      "titulo_destaque": "estoque.",
+      "selo": "Carrinho de Verão · 25s",
+      "titulo": "Carrinho de",
+      "titulo_destaque": "verão.",
       "texto": "Toque nas ofertas de verão e encha o carrinho. Passou de R$ 399, ganha o cupom FRETEZERO.",
-      "botao": "Bora abastecer"
+      "botao": "Bora encher"
     }
   },
   "ativacao": {
-    "texto": "Na página especial, é possível criar um modelo <strong>inovador</strong> de ativação da marca, podendo gerar benefícios e um nível único de interação com os usuários da mesa. Para o Tenda Atacado, criamos o Abasteça o Estoque: no clima da campanha de Verão, o cliente enche o carrinho com as ofertas da gôndola enquanto espera o pedido e, ao passar de R$ 399, ganha o cupom FRETEZERO para a primeira compra, com segmentação por praça e horário.",
+    "texto": "Na página especial, é possível criar um modelo <strong>inovador</strong> de ativação da marca, podendo gerar benefícios e um nível único de interação com os usuários da mesa. Para o Tenda Atacado, criamos o Carrinho de Verão: no clima da campanha, o cliente enche o carrinho com as ofertas de verão enquanto espera o pedido e, ao passar de R$ 399, ganha o cupom FRETEZERO para a primeira compra, com segmentação por praça e horário.",
     "passos": [
       {
         "titulo": "Entra no menu Tenda",
         "texto": "O usuário abre a categoria Tenda Atacado no cardápio do tablet."
       },
       {
-        "titulo": "Abastece o carrinho",
+        "titulo": "Enche o carrinho",
         "texto": "Toca nas ofertas de verão antes que acabem e passa de R$ 399 em 25 segundos."
       },
       {
@@ -75,7 +75,7 @@
       },
       {
         "titulo": "Gera compra qualificada",
-        "texto": "O clique leva ao site do Tenda Atacado, com o cupom FRETEZERO."
+        "texto": "O clique leva ao site do Tenda Atacado."
       }
     ],
     "rodape": "Segmentação por região, porte e tipo de cozinha. No fim da campanha, o Tenda Atacado recebe o relatório de impressões e cliques.",
@@ -89,6 +89,11 @@
   "ocultar_clientes": [],
   "endemica": false,
   "cta": {
-    "titulo": "Vamos levar o Tenda Atacado pra mesa?"
+    "titulo": "Vamos levar o Tenda Atacado pra mesa?",
+    "nome": "Ana Paschoal",
+    "cargo": "Coordenadora de Retail Media",
+    "email": "ana.paschoal@goomer.com.br",
+    "whatsapp": "5515997697766",
+    "telefone": "+55 15 99769-7766"
   }
 }
