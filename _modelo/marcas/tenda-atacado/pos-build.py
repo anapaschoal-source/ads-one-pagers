@@ -73,7 +73,7 @@ def dellys(s):
     fim = s.index('<div class="sec-head"', g) if '<div class="sec-head"' in s[g:] else len(s)
     m = list(re.finditer(r'<div><img [^>]*></div>\n', s[g:fim]))[-1]
     j = g + m.end()
-    s = s[:j] + f'<div><img src="{DELLYS}" alt="Dellys" style="max-height:52px"></div>\n' + s[j:]
+    s = s[:j] + f'<div><img src="{DELLYS}" alt="Dellys" style="max-height:36px"></div>\n' + s[j:]
     return re.sub(r'(\.clients \.grid\{flex:1;display:grid;grid-template-columns:repeat\()(\d+)', lambda m: m.group(1) + str(int(m.group(2)) + 1), s, count=1)
 
 
