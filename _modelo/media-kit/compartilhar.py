@@ -187,7 +187,7 @@ def compartilhar(s):
     s = re.sub(r'\n\s*<p class="mkc-dif">.*?</p>', '', s, count=1, flags=re.S)
     # destaque para "O maior inventário de DOOH do food service no Brasil."
     s = s.replace(' O maior inventário de DOOH do food service no Brasil.</p>',
-                  ' <strong class="mkc-maior">O maior inventário de DOOH do food service no Brasil.</strong></p>', 1)
+                  '<br><strong class="mkc-maior">O maior inventário de DOOH do food service no Brasil.</strong></p>', 1)
     # um tablet para cada 2 pessoas
     s = s.replace('<b>1:4</b><span>um tablet para 4 pessoas</span>', '<b>1:2</b><span>um tablet para cada 2 pessoas</span>')
     # formatos um por um logo abaixo do texto
