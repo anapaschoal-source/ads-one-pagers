@@ -15,7 +15,8 @@ Uso: python3 _modelo/media-kit/compartilhar.py <arquivo.html> [<arquivo.html> ..
    "DOOH 2.0 · +400 milhões" (os dois lados no mesmo tamanho) e os formatos no lugar da foto da mesa:
    Tela de Início e Venda Sugestiva lado a lado, Confirmação de Pedido e Minha Conta lado a lado, e a
    Página Especial grande, em destaque (borda lime, "Toque e teste a ativação" pulsando, botão
-   "Jogar agora"): o clique roda o jogo ali mesmo, no tablet do card. Os formatos não abrem
+   "Jogar agora"), com o tablet grande à esquerda e as informações à direita: o clique roda o
+   jogo ali mesmo e dá zoom na tela do tablet para dar para ler a ativação. Os formatos não abrem
    pop-up (a página já tem as informações). Os números (1–2h, 30–40, 1:4, +20) vão para o fim do
    "Inventário por segmento culinário" (com 1:2, um tablet para cada 2 pessoas). As marcas que já
    anunciam vêm logo depois dos formatos.
@@ -54,6 +55,7 @@ FMTCSS = '<style>' + MARCA2 + '''
 #mesa .h2{font-size:clamp(34px,5.4vw,104px)!important;max-width:none!important;white-space:normal}
 @media (min-width:901px){#mesa .h2{white-space:nowrap}}
 #mesa .sub{max-width:none!important;font-size:clamp(16px,1.55vw,22px)!important}
+.mkc-maior{color:var(--ink);font-weight:800;background:linear-gradient(transparent 62%,rgba(189,226,73,.75) 62%);padding:0 .1em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 #mesa .imp400{margin-top:clamp(18px,3vh,32px)}
 #mesa .h2 em{font-style:normal;background:linear-gradient(transparent 10%,var(--lime) 10%,var(--lime) 90%,transparent 90%);padding:0 .08em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 #mesa .head .sub{font-size:clamp(15px,1.2vw,18px)!important;max-width:none!important;margin-top:clamp(10px,1.6vh,18px)}
@@ -78,14 +80,19 @@ FMTCSS = '<style>' + MARCA2 + '''
 .mkc-fmts .fcard .more{grid-area:m;align-self:start}
 .mkc-fmts .fcard.mkc-play{grid-column:1/-1;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);grid-template-areas:"t g" "t n" "t d" "t m";align-items:center;align-content:center;column-gap:clamp(24px,4vw,64px);padding:clamp(22px,3vw,44px)}
 .mkc-fmts .fcard.mkc-play>b{font-size:clamp(30px,3.4vw,52px)}
-@media (min-width:761px){
- .mkc-fmts .fcard.mkc-play{grid-template-columns:minmax(0,1fr) auto!important;grid-template-areas:"t t" "g m" "n m" "d m"!important;align-items:center;column-gap:clamp(24px,4vw,64px);row-gap:12px}
- .mkc-fmts .fcard.mkc-play .thumb{justify-self:center;width:min(100%,calc((100svh - 110px) * 1.4),1240px);margin-bottom:clamp(8px,2vh,24px)}
+@media (min-width:901px){
+ .mkc-fmts .fcard.mkc-play{grid-template-columns:minmax(0,1fr) clamp(250px,24vw,380px)!important;grid-template-areas:"t g" "t n" "t d" "t m"!important;align-items:center;align-content:center;column-gap:clamp(20px,2.6vw,44px);row-gap:12px;padding:clamp(14px,1.6vw,26px) clamp(20px,2.4vw,40px) clamp(14px,1.6vw,26px) clamp(10px,1vw,16px)!important}
+ .mkc-fmts .fcard.mkc-play .thumb{justify-self:stretch;width:100%;max-width:calc((100svh - 90px) * 1.39);margin:0}
  .mkc-fmts .fcard.mkc-play .thumb .scr{max-width:none!important;width:100%!important}
- .mkc-fmts .fcard.mkc-play>p{max-width:80ch}
- .mkc-fmts .fcard.mkc-play .mkc-go{align-self:center;font-size:17px!important;padding:16px 26px}
+ .mkc-fmts .fcard.mkc-play>p{max-width:none}
+ .mkc-fmts .fcard.mkc-play .mkc-go{justify-self:start;font-size:17px!important;padding:16px 26px}
  .mkc-try{font-size:clamp(16px,1.6vw,20px)!important;padding:16px 26px!important}
 }
+/* jogando: zoom na tela do tablet para dar para ler a ativação */
+.mkc-fmts .fcard.mkc-play .thumb{overflow:hidden;border-radius:14px}
+.mkc-fmts .fcard.mkc-play .thumb .scr{animation:none!important;transition:transform .5s cubic-bezier(.2,.8,.2,1);transform-origin:54.6% 43.5%}
+.mkc-fmts .fcard.mkc-play.jogando .thumb .scr{transform:scale(1.5)}
+.mkc-fmts .fcard.mkc-play .thumb>.gameclose{position:absolute;z-index:7;top:10px;right:10px}
 .mkc-fmts .fcard.mkc-play .tags{align-self:end}
 .mkc-fmts .fcard{background:#fff!important;border-color:rgba(10,0,68,.14)!important;color:var(--ink)}
 .mkc-fmts .fcard:hover{border-color:var(--blue)!important}
@@ -142,7 +149,7 @@ if(esp){esp.classList.add('mkc-play');
   var go=document.createElement('button');go.type='button';go.className='more mkc-go';go.textContent='▶ Jogar agora';esp.appendChild(go);
   function jogar(){if(pb&&!pb.hidden){pb.click();esp.classList.add('jogando');setTimeout(function(){var g=th.querySelector('.gamebox')||th;g.scrollIntoView({block:'center',behavior:'smooth'})},120)}}
   t.onclick=jogar;go.onclick=jogar;
-  if(gc)gc.addEventListener('click',function(){esp.classList.remove('jogando')});}
+  if(gc){th.appendChild(gc);gc.addEventListener('click',function(){esp.classList.remove('jogando')})}}
 var st=m.querySelector('.stats'),cu=document.querySelector('.band.cuis .wrap');
 if(st&&cu){st.classList.add('mkc-stats');cu.appendChild(st)}
 var br=document.querySelector('section.band.brands');if(br&&m.parentNode)m.parentNode.insertBefore(br,m.nextSibling);
@@ -171,6 +178,9 @@ def compartilhar(s):
         s = re.sub(r'<h2 class="h2">(?:Mídia na mesa|Na mesa), no momento de consumo\.<br>Não na parede\.</h2>', TITULO, s, count=1)
     # versões antigas deste script punham uma frase de destaque à parte: tira
     s = re.sub(r'\n\s*<p class="mkc-dif">.*?</p>', '', s, count=1, flags=re.S)
+    # destaque para "O maior inventário de DOOH do food service no Brasil."
+    s = s.replace(' O maior inventário de DOOH do food service no Brasil.</p>',
+                  ' <strong class="mkc-maior">O maior inventário de DOOH do food service no Brasil.</strong></p>', 1)
     # um tablet para cada 2 pessoas
     s = s.replace('<b>1:4</b><span>um tablet para 4 pessoas</span>', '<b>1:2</b><span>um tablet para cada 2 pessoas</span>')
     # formatos um por um logo abaixo do texto
