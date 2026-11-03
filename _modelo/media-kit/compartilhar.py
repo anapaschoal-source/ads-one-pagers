@@ -58,7 +58,7 @@ FMTCSS = '<style>' + MARCA2 + '''
 .mkc-maior{color:var(--ink);font-weight:800;background:linear-gradient(transparent 62%,rgba(189,226,73,.75) 62%);padding:0 .1em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 #mesa .imp400{margin-top:clamp(18px,3vh,32px)}
 #mesa .h2 em{font-style:normal;background:linear-gradient(transparent 10%,var(--lime) 10%,var(--lime) 90%,transparent 90%);padding:0 .08em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
-#mesa .head .sub{font-size:clamp(15px,1.2vw,18px)!important;max-width:none!important;margin-top:clamp(10px,1.6vh,18px)}
+#mesa .head .sub{font-size:clamp(17px,1.55vw,24px)!important;line-height:1.45!important;max-width:none!important;margin-top:clamp(10px,1.6vh,18px)}
 #mesa .imp400{margin-top:clamp(22px,4vh,40px);margin-bottom:clamp(28px,5vh,56px)}
 #mesa .imp400{display:grid!important;grid-template-columns:minmax(0,1fr) 1px minmax(0,1fr);align-items:center;justify-items:center;column-gap:clamp(20px,3vw,48px);padding:clamp(22px,3.6vh,40px) clamp(24px,3vw,48px)!important}
 #mesa .imp400 .i4a,#mesa .imp400 .i4b{display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:center!important;text-align:center;gap:clamp(10px,1.6vh,16px)!important;min-width:0}
@@ -152,7 +152,9 @@ if(esp){esp.classList.add('mkc-play');
   var th=esp.querySelector('.thumb'),pb=th&&th.querySelector('.playbtn'),gc=th&&th.querySelector('.gameclose');
   var t=document.createElement('button');t.type='button';t.className='mkc-try';t.innerHTML='<i>&#9654;</i>Toque e teste a ativação';if(th)th.appendChild(t);
   var go=document.createElement('button');go.type='button';go.className='more mkc-go';go.textContent='▶ Jogar agora';esp.appendChild(go);
-  function jogar(){if(pb&&!pb.hidden){pb.click();esp.classList.add('jogando');setTimeout(function(){var g=th.querySelector('.gamebox')||th;g.scrollIntoView({block:'center',behavior:'smooth'})},120)}}
+  function abriu(){esp.classList.add('jogando');setTimeout(function(){var g=th.querySelector('.gamebox')||th;g.scrollIntoView({block:'center',behavior:'smooth'})},120)}
+  if(pb)pb.addEventListener('click',abriu);
+  function jogar(){if(pb&&!pb.hidden)pb.click()}
   t.onclick=jogar;go.onclick=jogar;
   if(gc){th.appendChild(gc);gc.addEventListener('click',function(){esp.classList.remove('jogando')})}}
 var st=m.querySelector('.stats'),cu=document.querySelector('.band.cuis .wrap');
