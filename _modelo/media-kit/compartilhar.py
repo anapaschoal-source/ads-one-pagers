@@ -11,7 +11,9 @@ Uso: python3 _modelo/media-kit/compartilhar.py <arquivo.html> [<arquivo.html> ..
 3. Sem o pop-up "Conheça a Goomer" ao abrir.
 4. "Por que Goomer Ads": texto em cima, em largura total, com o destaque de mídia inovadora
    (primeiro formato na mesa), e logo abaixo os formatos um por um (mockup + descrição), no
-   lugar da foto da mesa. A seção "Formatos" fica só para o modo B2B.
+   lugar da foto da mesa. A Página Especial vem primeiro, em destaque (borda lime, "Toque e teste a
+   ativação" pulsando, botão "Jogar agora"): o clique abre o pop-up já com o jogo rodando.
+   A seção "Formatos" fica só para o modo B2B.
 Pode rodar mais de uma vez. Rode no HTML aberto, antes do senha.py.
 """
 import os, sys
@@ -62,6 +64,17 @@ FMTCSS = '<style>' + MARCA2 + '''
 .mkc-fmts .fcard .more{color:var(--blue)!important}
 .mkc-fmts .fcard .tag:not(.x):not(.l):not(.cr){color:var(--ink);border-color:rgba(10,0,68,.25)}
 .mkc-fmts .fcard .tag.cr{background:#EEEBFF;border-color:#EEEBFF}
+.mkc-fmts .fcard.mkc-play{border:2px solid var(--lime)!important;box-shadow:0 0 0 6px rgba(189,226,73,.22),0 18px 40px rgba(10,0,68,.12);position:relative}
+.mkc-fmts .fcard.mkc-play .thumb{position:relative}
+.mkc-try{position:absolute;z-index:5;left:50%;top:50%;transform:translate(-50%,-50%);display:inline-flex;align-items:center;gap:10px;background:var(--lime);color:var(--ink);font:800 clamp(14px,1.4vw,17px)/1 var(--body,Manrope),sans-serif;padding:14px 22px;border-radius:999px;box-shadow:0 10px 30px rgba(10,0,68,.35);white-space:nowrap;animation:mkcPulse 1.8s ease-in-out infinite}
+.mkc-try i{font-style:normal;display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--ink);color:var(--lime);font-size:12px}
+@keyframes mkcPulse{0%,100%{box-shadow:0 0 0 0 rgba(189,226,73,.7),0 10px 30px rgba(10,0,68,.35)}50%{box-shadow:0 0 0 14px rgba(189,226,73,0),0 10px 30px rgba(10,0,68,.35)}}
+.mkc-fmts .fcard.mkc-play .more{display:inline-flex;align-items:center;gap:8px;justify-self:start;background:var(--ink);color:var(--lime)!important;padding:12px 20px;border-radius:999px;font-size:15px!important}
+.mkc-fmts .fcard.mkc-play:hover .more{background:var(--blue);color:#fff!important}
+.mkc-fmts .mkc-badge{grid-area:g;align-self:end;justify-self:start}
+@media (prefers-reduced-motion:reduce){.mkc-try{animation:none}}
+@media (max-width:900px){.fx-card{grid-template-columns:minmax(0,1fr)!important;overflow-x:hidden}.fx-card>*{min-width:0}.fx-list{grid-template-columns:repeat(2,minmax(0,1fr))!important}.fx-list button{grid-template-columns:minmax(0,1fr)!important;min-width:0}.fx-list button b{font-size:14px}.fx-list button span{font-size:10px}}
+@media (max-width:520px){.mkc-try{font-size:13px;padding:10px 16px;gap:8px}.mkc-try i{width:22px;height:22px;font-size:10px}}
 @media (max-width:760px){.mkc-fmts .fcard,.mkc-fmts .fcard:nth-child(even){grid-template-columns:1fr;grid-template-areas:"t" "g" "n" "d" "m"}}
 ''' + '</style>'
 FMTJS = '''<script>/*mk-compartilhar-formatos-js*/
@@ -72,6 +85,12 @@ Array.prototype.slice.call(fc.querySelectorAll('.fcard.only-b2c')).forEach(funct
   try{var f=FORMATS.filter(function(x){return x.id===c.dataset.f})[0];var p=c.querySelector('p');if(f&&p)p.textContent=f.d}catch(e){}
   list.appendChild(c)});
 top.parentNode.insertBefore(list,top.nextSibling);
+var esp=list.querySelector('.fcard[data-f="especial"]');
+if(esp){list.insertBefore(esp,list.firstChild);esp.classList.add('mkc-play');
+  esp.setAttribute('aria-label','Testar a ativação da Página Especial');
+  var th=esp.querySelector('.thumb');if(th){var t=document.createElement('span');t.className='mkc-try';t.innerHTML='<i>&#9654;</i>Toque e teste a ativação';th.appendChild(t)}
+  var mo=esp.querySelector('.more');if(mo)mo.textContent='\u25B6 Jogar agora';
+  var o=esp.onclick;esp.onclick=function(){if(o)o();var n=0;(function go(){var pb=document.querySelector('#fx .playbtn');if(pb&&!pb.hidden){pb.click();if(innerWidth<900)setTimeout(function(){var g=document.querySelector('#fx .gamebox');if(g)g.scrollIntoView({block:'center',behavior:'smooth'})},350)}else if(n++<20)setTimeout(go,100)})()}}
 if(fs)fs.classList.add('only-b2b');})();
 </script>'''
 
