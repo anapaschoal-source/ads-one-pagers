@@ -18,6 +18,9 @@ def limpar(s):
     # card do ponto
     s, k = re.subn(r"\$\{B2C\?(?:impTable\(c\[6\].*?c\[0\]\)|`<div class=\"pot\">.*?</div>`)\s*:\s*`<p>Painel usado pelo dono no dia a dia\. \$\{fmt\(inCity\)\} restaurantes Goomer nesta cidade\.</p>`\}",
                    "${B2C?'':" + PIN_B2B + "}", s, flags=re.S); n += k
+    # B2B: tira a contagem de restaurantes da cidade (modelo sem o quadro de impactos no B2C)
+    k = s.count('${fmt(inCity)} restaurantes Goomer nesta cidade.')
+    s = s.replace('<p>Painel usado pelo dono no dia a dia. ${fmt(inCity)} restaurantes Goomer nesta cidade.</p>', '<p>Painel usado pelo dono no dia a dia.</p>'); n += k
     # lista de cidades
     s, k = re.subn(r"<span>\$\{fmt\(c\)\}</span>(</li>)", r"\1", s); n += k
     # dados
@@ -33,6 +36,7 @@ def limpar(s):
 def conferir(s):
     erros = []
     if 'Potencial de impactos' in s and "${B2C?''" not in s: erros.append('card do ponto ainda tem impactos')
+    if 'restaurantes Goomer nesta cidade' in s: erros.append('card do ponto ainda tem contagem da cidade')
     if '<span>${fmt(c)}</span></li>' in s: erros.append('lista de cidades ainda tem números')
     m = re.search(r'const _CD = (\{.*?\});', s, re.S)
     if m and any(len(r) > 6 for r in json.loads(m.group(1))['rows']): erros.append('_CD ainda tem contas fechadas')
