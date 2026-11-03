@@ -57,11 +57,17 @@ FMTCSS = '<style>' + MARCA2 + '''
 #mesa .h2 em{font-style:normal;background:linear-gradient(transparent 10%,var(--lime) 10%,var(--lime) 90%,transparent 90%);padding:0 .08em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 #mesa .head .sub{font-size:clamp(15px,1.2vw,18px)!important;max-width:none!important;margin-top:clamp(10px,1.6vh,18px)}
 #mesa .imp400{margin-top:clamp(22px,4vh,40px);margin-bottom:clamp(28px,5vh,56px)}
-#mesa .imp400 .i4a{gap:clamp(14px,1.6vw,24px)}
-#mesa .imp400 .i4a em{font-size:clamp(40px,min(8.4vh,4.4vw),104px)!important;padding:6px 26px!important;line-height:1}
-#mesa .imp400 .i4a span{font-family:var(--display)!important;text-transform:uppercase;font-weight:700!important;color:#fff!important;font-size:clamp(20px,min(3.6vh,1.85vw),40px)!important;line-height:1.04!important;max-width:11ch!important}
-#mesa .imp400 .i4b b{font-size:clamp(52px,min(10vh,5.4vw),128px)!important}
-#mesa .imp400 .i4b>span{font-size:clamp(22px,min(4.2vh,2.3vw),52px)!important}
+#mesa .imp400{display:grid!important;grid-template-columns:minmax(0,1fr) 1px minmax(0,1fr);align-items:center;justify-items:center;column-gap:clamp(20px,3vw,48px);padding:clamp(22px,3.6vh,40px) clamp(24px,3vw,48px)!important}
+#mesa .imp400 .i4a,#mesa .imp400 .i4b{display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:center!important;text-align:center;gap:clamp(10px,1.6vh,16px)!important;min-width:0}
+#mesa .imp400 .i4a em{font-size:clamp(40px,min(9vh,5vw),104px)!important;padding:.06em .36em!important;line-height:1.05}
+#mesa .imp400 .i4b b{font-size:clamp(50px,min(11.5vh,6.6vw),136px)!important;line-height:.95}
+#mesa .imp400 .i4a span,#mesa .imp400 .i4b>span{font-family:var(--display)!important;text-transform:uppercase;font-weight:700!important;color:#fff!important;font-size:clamp(18px,min(3.6vh,2.05vw),40px)!important;line-height:1.1!important;max-width:none!important;white-space:normal!important;display:grid!important;gap:4px;justify-items:center}
+#mesa .imp400 small{font-size:clamp(12px,min(2vh,1.2vw),18px)!important}
+#mesa .imp400 .i4d{display:block!important;width:1px;height:70%;align-self:center;background:rgba(255,255,255,.22)}
+@media (max-width:760px){
+ #mesa .imp400{grid-template-columns:minmax(0,1fr);row-gap:22px;padding:24px 20px!important}
+ #mesa .imp400 .i4d{width:60%;height:1px}
+}
 .mkc-fmts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
 .mkc-fmts .fcard{grid-template-columns:minmax(0,1fr);grid-template-areas:"t" "g" "n" "d" "m";align-content:start;row-gap:12px;padding:clamp(18px,2.2vw,30px)}
 .mkc-fmts .fcard .thumb{grid-area:t;margin-bottom:6px}
