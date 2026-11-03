@@ -11,7 +11,8 @@ Uso: python3 _modelo/media-kit/compartilhar.py <arquivo.html> [<arquivo.html> ..
 3. Sem o pop-up "Conheça a Goomer" ao abrir.
 4. "Por que Goomer Ads": texto em cima, em largura total, com o destaque de mídia inovadora
    (primeiro formato na mesa), e logo abaixo os formatos um por um (mockup + descrição), no
-   lugar da foto da mesa. A Página Especial vem primeiro, em destaque (borda lime, "Toque e teste a
+   lugar da foto da mesa, na ordem Tela de Início, Venda Sugestiva, Confirmação de Pedido, Minha
+   Conta e Página Especial. A Página Especial fecha a lista, em destaque (borda lime, "Toque e teste a
    ativação" pulsando, botão "Jogar agora"): o clique abre o pop-up já com o jogo rodando.
    A seção "Formatos" fica só para o modo B2B.
 Pode rodar mais de uma vez. Rode no HTML aberto, antes do senha.py.
@@ -45,8 +46,14 @@ FMTCSS = '<style>' + MARCA2 + '''
 #mesa .mesa-top{display:block!important}
 #mesa .mesa-foto{display:none!important}
 #mesa .head{max-width:none}
-#mesa .h2{font-size:clamp(40px,min(7vh,5.2vw),88px)!important}
-#mesa .sub{max-width:80ch}
+#mesa .h2{font-size:clamp(38px,5.55vw,92px)!important;max-width:none!important;white-space:normal}
+@media (min-width:901px){#mesa .h2{white-space:nowrap}}
+#mesa .sub{max-width:none!important;font-size:clamp(16px,1.55vw,22px)!important}
+@media (min-width:901px){
+ #mesa .head{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:clamp(28px,4vw,64px);row-gap:clamp(10px,2vh,20px);align-items:center;width:100%}
+ #mesa .head>.eyebrow,#mesa .head>.h2{grid-column:1/-1}
+ #mesa .head>.mkc-dif{margin-top:0;max-width:none;justify-self:stretch}
+}
 .mkc-dif{margin-top:8px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;justify-self:start;background:var(--ink);color:#fff;border-radius:18px;padding:14px 22px;font-size:clamp(15px,1.5vw,19px);line-height:1.4;max-width:900px;box-shadow:0 12px 30px rgba(10,0,68,.18)}
 .mkc-dif b{font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:clamp(20px,2.1vw,28px);line-height:1;background:var(--lime);color:var(--ink);border-radius:999px;padding:7px 16px;white-space:nowrap}
 .mkc-dif span{flex:1 1 320px}
@@ -85,8 +92,9 @@ Array.prototype.slice.call(fc.querySelectorAll('.fcard.only-b2c')).forEach(funct
   try{var f=FORMATS.filter(function(x){return x.id===c.dataset.f})[0];var p=c.querySelector('p');if(f&&p)p.textContent=f.d}catch(e){}
   list.appendChild(c)});
 top.parentNode.insertBefore(list,top.nextSibling);
+['inicio','sug','confirm','conta','especial'].forEach(function(id){var c=list.querySelector('.fcard[data-f="'+id+'"]');if(c)list.appendChild(c)});
 var esp=list.querySelector('.fcard[data-f="especial"]');
-if(esp){list.insertBefore(esp,list.firstChild);esp.classList.add('mkc-play');
+if(esp){esp.classList.add('mkc-play');
   esp.setAttribute('aria-label','Testar a ativação da Página Especial');
   var th=esp.querySelector('.thumb');if(th){var t=document.createElement('span');t.className='mkc-try';t.innerHTML='<i>&#9654;</i>Toque e teste a ativação';th.appendChild(t)}
   var mo=esp.querySelector('.more');if(mo)mo.textContent='\u25B6 Jogar agora';
