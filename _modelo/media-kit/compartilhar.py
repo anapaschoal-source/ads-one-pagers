@@ -13,8 +13,9 @@ Uso: python3 _modelo/media-kit/compartilhar.py <arquivo.html> [<arquivo.html> ..
    "no momento de consumo. Não na parede." (com marca-texto lime no começo), o texto menor embaixo
    em largura total, a faixa
    "DOOH 2.0 · +400 milhões" (os dois lados no mesmo tamanho) e os formatos no lugar da foto da mesa:
-   Tela de Início e Venda Sugestiva lado a lado, Confirmação de Pedido e Minha Conta lado a lado, e a
-   Página Especial grande, em destaque (borda lime, "Toque e teste a ativação" pulsando, botão
+   Tela de Início, Confirmação de Pedido e Minha Conta lado a lado (3 colunas); Venda Sugestiva em
+   destaque, largura total ("Formato prioritário", case +30%, case de Campinas em barras e "Por que
+   priorizar"); e a Página Especial grande, em destaque (borda lime, "Toque e teste a ativação" pulsando, botão
    "Jogar agora"), com o tablet grande à esquerda e as informações à direita: o clique roda o
    jogo ali mesmo e dá zoom na tela do tablet para dar para ler a ativação. Os formatos não abrem
    pop-up (a página já tem as informações). Os números (1–2h, 30–40, 1:4, +20) vão para o fim do
