@@ -9,16 +9,16 @@ Uso: python3 _modelo/media-kit/compartilhar.py <arquivo.html> [<arquivo.html> ..
    culinária, sem zoom e sem clique; texto alinhado à margem das outras seções, em
    duas linhas no título, e o mapa deslocado para a direita.
 3. Sem o pop-up "Conheça a Goomer" ao abrir.
-4. "Por que Goomer Ads": título "Mídia na mesa, no momento de consumo. Não na parede." em largura
-   total e o texto embaixo; logo depois a faixa "+400 milhões de impactos por mês"; depois a frase
-   grande de mídia inovadora (primeiro formato de mídia na mesa); e os formatos no lugar da foto da
-   mesa: Tela de Início e Venda Sugestiva lado a lado, Confirmação de Pedido e Minha Conta lado a
-   lado, e a Página Especial grande, em destaque (borda lime, "Toque e teste a ativação" pulsando,
-   botão "Jogar agora"): o clique abre o pop-up já com o jogo rodando.
+4. "Por que Goomer Ads · Mídia inovadora": título "Primeiro formato de mídia na mesa, no momento de
+   consumo. Não na parede." (primeira linha com marca-texto lime), o texto menor embaixo, a faixa
+   "DOOH 2.0 · +400 milhões" (os dois lados no mesmo tamanho) e os formatos no lugar da foto da mesa:
+   Tela de Início e Venda Sugestiva lado a lado, Confirmação de Pedido e Minha Conta lado a lado, e a
+   Página Especial grande, em destaque (borda lime, "Toque e teste a ativação" pulsando, botão
+   "Jogar agora"): o clique abre o pop-up já com o jogo rodando.
    A seção "Formatos" fica só para o modo B2B.
 Pode rodar mais de uma vez. Rode no HTML aberto, antes do senha.py.
 """
-import os, sys
+import os, re, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from sem_numeros import limpar, conferir
 
@@ -38,21 +38,27 @@ MAPCSS = '<style>' + MARCA + '''
 </style>'''
 
 MARCA2 = '/*mk-compartilhar-formatos*/'
-DESTAQUE = ('<p class="mkc-dif"><span class="mkc-k">Mídia inovadora</span>Somos o <em>primeiro formato de '
-            'mídia na mesa</em> do restaurante. Um diferencial que só a Goomer Ads tem.</p>')
+EYEBROW = '<span class="eyebrow">Por que Goomer Ads · Mídia inovadora</span>'
+TITULO = ('<h2 class="h2"><em>Primeiro formato de mídia na mesa,</em><br>no momento de consumo.<br>'
+          'Não na parede.</h2>')
 FMTCSS = '<style>' + MARCA2 + '''
 #mesa{min-height:0!important}
 #mesa>.wrap{min-height:0!important}
 #mesa .mesa-top{display:block!important}
 #mesa .mesa-foto{display:none!important}
 #mesa .head{max-width:none}
-#mesa .h2{font-size:clamp(38px,5.55vw,92px)!important;max-width:none!important;white-space:normal}
+#mesa .h2{font-size:clamp(34px,6.45vw,124px)!important;max-width:none!important;white-space:normal}
 @media (min-width:901px){#mesa .h2{white-space:nowrap}}
 #mesa .sub{max-width:none!important;font-size:clamp(16px,1.55vw,22px)!important}
 #mesa .imp400{margin-top:clamp(18px,3vh,32px)}
-.mkc-dif{margin:clamp(36px,6vh,72px) 0 clamp(20px,3vh,32px);font-family:var(--display);font-weight:700;text-transform:uppercase;color:var(--ink);font-size:clamp(30px,4vw,64px);line-height:1.12;letter-spacing:-.005em;max-width:none}
-.mkc-dif .mkc-k{display:block;font-family:var(--body,Manrope),sans-serif;font-size:13px;font-weight:800;letter-spacing:.16em;color:var(--blue);margin-bottom:14px}
-.mkc-dif em{font-style:normal;background:linear-gradient(transparent 12%,var(--lime) 12%,var(--lime) 92%,transparent 92%);padding:0 .12em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+#mesa .h2 em{font-style:normal;background:linear-gradient(transparent 10%,var(--lime) 10%,var(--lime) 90%,transparent 90%);padding:0 .08em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+#mesa .head .sub{font-size:clamp(15px,1.2vw,18px)!important;max-width:78ch!important;margin-top:clamp(10px,1.6vh,18px)}
+#mesa .imp400{margin-top:clamp(22px,4vh,40px);margin-bottom:clamp(28px,5vh,56px)}
+#mesa .imp400 .i4a{gap:clamp(14px,1.6vw,24px)}
+#mesa .imp400 .i4a em{font-size:clamp(40px,min(8.4vh,4.4vw),104px)!important;padding:6px 26px!important;line-height:1}
+#mesa .imp400 .i4a span{font-family:var(--display)!important;text-transform:uppercase;font-weight:700!important;color:#fff!important;font-size:clamp(20px,min(3.6vh,1.85vw),40px)!important;line-height:1.04!important;max-width:11ch!important}
+#mesa .imp400 .i4b b{font-size:clamp(52px,min(10vh,5.4vw),128px)!important}
+#mesa .imp400 .i4b>span{font-size:clamp(22px,min(4.2vh,2.3vw),52px)!important}
 .mkc-fmts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
 .mkc-fmts .fcard{grid-template-columns:minmax(0,1fr);grid-template-areas:"t" "g" "n" "d" "m";align-content:start;row-gap:12px;padding:clamp(18px,2.2vw,30px)}
 .mkc-fmts .fcard .thumb{grid-area:t;margin-bottom:6px}
@@ -88,9 +94,8 @@ var list=document.createElement('div');list.className='mkc-fmts';
 Array.prototype.slice.call(fc.querySelectorAll('.fcard.only-b2c')).forEach(function(c){
   try{var f=FORMATS.filter(function(x){return x.id===c.dataset.f})[0];var p=c.querySelector('p');if(f&&p)p.textContent=f.d}catch(e){}
   list.appendChild(c)});
-var anc=top,band=m.querySelector('.imp400'),dif=m.querySelector('.mkc-dif');
+var anc=top,band=m.querySelector('.imp400');
 if(band){top.parentNode.insertBefore(band,top.nextSibling);anc=band}
-if(dif){anc.parentNode.insertBefore(dif,anc.nextSibling);anc=dif}
 anc.parentNode.insertBefore(list,anc.nextSibling);
 ['inicio','sug','confirm','conta','especial'].forEach(function(id){var c=list.querySelector('.fcard[data-f="'+id+'"]');if(c)list.appendChild(c)});
 var esp=list.querySelector('.fcard[data-f="especial"]');
@@ -117,15 +122,13 @@ def compartilhar(s):
         s = s[:i] + MAPCSS + s[i:] if i >= 0 else s + MAPCSS
     # sem o pop-up "Conheça a Goomer" ao abrir
     s = s.replace("setTimeout(()=>open('ask'),600);", '')
-    # título do "Por que Goomer Ads" começa com MÍDIA NA MESA
-    s = s.replace('<h2 class="h2">Na mesa, no momento de consumo.<br>Não na parede.</h2>',
-                  '<h2 class="h2">Mídia na mesa, no momento de consumo.<br>Não na parede.</h2>')
-    # destaque de mídia inovadora logo depois do texto do "Por que Goomer Ads"
-    if 'class="mkc-dif"' not in s:
-        a = s.find('<section class="band light only-b2c" id="mesa">')
-        i = s.find('</p>', s.find('<p class="sub">', a)) if a >= 0 else -1
-        if i > 0:
-            s = s[:i + 4] + '\n      ' + DESTAQUE + s[i + 4:]
+    # "Por que Goomer Ads · Mídia inovadora": título com o primeiro formato de mídia na mesa
+    a = s.find('<section class="band light only-b2c" id="mesa">')
+    if a >= 0:
+        s = s[:a] + s[a:].replace('<span class="eyebrow">Por que Goomer Ads</span>', EYEBROW, 1)
+        s = re.sub(r'<h2 class="h2">(?:Mídia na mesa|Na mesa), no momento de consumo\.<br>Não na parede\.</h2>', TITULO, s, count=1)
+    # versões antigas deste script punham uma frase de destaque à parte: tira
+    s = re.sub(r'\n\s*<p class="mkc-dif">.*?</p>', '', s, count=1, flags=re.S)
     # formatos um por um logo abaixo do texto
     if MARCA2 not in s:
         i = s.lower().rfind('</body>')
@@ -142,9 +145,9 @@ if __name__ == '__main__':
             e.append('mapa fixo não entrou')
         if "setTimeout(()=>open('ask'),600)" in s:
             e.append('pop-up Conheça a Goomer ainda abre sozinho')
-        if 'Mídia na mesa, no momento de consumo.' not in s:
-            e.append('título MÍDIA NA MESA não entrou')
-        if MARCA2 not in s or 'class="mkc-dif"' not in s:
+        if TITULO not in s or EYEBROW not in s:
+            e.append('título/eyebrow de mídia inovadora não entraram')
+        if MARCA2 not in s:
             e.append('formatos/destaque não entraram')
         with open(p, 'w', encoding='utf-8') as fh:
             fh.write(s)
