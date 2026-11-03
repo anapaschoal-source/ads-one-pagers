@@ -9,8 +9,9 @@ Uso: python3 _modelo/media-kit/compartilhar.py <arquivo.html> [<arquivo.html> ..
    culinária, sem zoom e sem clique; texto alinhado à margem das outras seções, em
    duas linhas no título, e o mapa deslocado para a direita.
 3. Sem o pop-up "Conheça a Goomer" ao abrir.
-4. "Por que Goomer Ads · Mídia inovadora": título "Primeiro formato de mídia na mesa, no momento de
-   consumo. Não na parede." (primeira linha com marca-texto lime), o texto menor embaixo, a faixa
+4. "Por que Goomer Ads · Mídia inovadora": título em duas linhas, "Primeiro formato de mídia na mesa,
+   no momento de consumo." / "Não na parede." (com marca-texto lime no começo), o texto menor embaixo
+   em largura total, a faixa
    "DOOH 2.0 · +400 milhões" (os dois lados no mesmo tamanho) e os formatos no lugar da foto da mesa:
    Tela de Início e Venda Sugestiva lado a lado, Confirmação de Pedido e Minha Conta lado a lado, e a
    Página Especial grande, em destaque (borda lime, "Toque e teste a ativação" pulsando, botão
@@ -39,7 +40,7 @@ MAPCSS = '<style>' + MARCA + '''
 
 MARCA2 = '/*mk-compartilhar-formatos*/'
 EYEBROW = '<span class="eyebrow">Por que Goomer Ads · Mídia inovadora</span>'
-TITULO = ('<h2 class="h2"><em>Primeiro formato de mídia na mesa,</em><br>no momento de consumo.<br>'
+TITULO = ('<h2 class="h2"><em>Primeiro formato de mídia na mesa,</em> no momento de consumo.<br>'
           'Não na parede.</h2>')
 FMTCSS = '<style>' + MARCA2 + '''
 #mesa{min-height:0!important}
@@ -47,12 +48,12 @@ FMTCSS = '<style>' + MARCA2 + '''
 #mesa .mesa-top{display:block!important}
 #mesa .mesa-foto{display:none!important}
 #mesa .head{max-width:none}
-#mesa .h2{font-size:clamp(34px,6.45vw,124px)!important;max-width:none!important;white-space:normal}
+#mesa .h2{font-size:clamp(34px,3.82vw,74px)!important;max-width:none!important;white-space:normal}
 @media (min-width:901px){#mesa .h2{white-space:nowrap}}
 #mesa .sub{max-width:none!important;font-size:clamp(16px,1.55vw,22px)!important}
 #mesa .imp400{margin-top:clamp(18px,3vh,32px)}
 #mesa .h2 em{font-style:normal;background:linear-gradient(transparent 10%,var(--lime) 10%,var(--lime) 90%,transparent 90%);padding:0 .08em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
-#mesa .head .sub{font-size:clamp(15px,1.2vw,18px)!important;max-width:78ch!important;margin-top:clamp(10px,1.6vh,18px)}
+#mesa .head .sub{font-size:clamp(15px,1.2vw,18px)!important;max-width:none!important;margin-top:clamp(10px,1.6vh,18px)}
 #mesa .imp400{margin-top:clamp(22px,4vh,40px);margin-bottom:clamp(28px,5vh,56px)}
 #mesa .imp400 .i4a{gap:clamp(14px,1.6vw,24px)}
 #mesa .imp400 .i4a em{font-size:clamp(40px,min(8.4vh,4.4vw),104px)!important;padding:6px 26px!important;line-height:1}
