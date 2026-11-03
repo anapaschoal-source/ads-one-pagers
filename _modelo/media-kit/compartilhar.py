@@ -9,11 +9,12 @@ Uso: python3 _modelo/media-kit/compartilhar.py <arquivo.html> [<arquivo.html> ..
    culinária, sem zoom e sem clique; texto alinhado à margem das outras seções, em
    duas linhas no título, e o mapa deslocado para a direita.
 3. Sem o pop-up "Conheça a Goomer" ao abrir.
-4. "Por que Goomer Ads": texto em cima, em largura total, com o destaque de mídia inovadora
-   (primeiro formato na mesa), e logo abaixo os formatos um por um (mockup + descrição), no
-   lugar da foto da mesa, na ordem Tela de Início, Venda Sugestiva, Confirmação de Pedido, Minha
-   Conta e Página Especial. A Página Especial fecha a lista, em destaque (borda lime, "Toque e teste a
-   ativação" pulsando, botão "Jogar agora"): o clique abre o pop-up já com o jogo rodando.
+4. "Por que Goomer Ads": título "Mídia na mesa, no momento de consumo. Não na parede." em largura
+   total e o texto embaixo; logo depois a faixa "+400 milhões de impactos por mês"; depois a frase
+   grande de mídia inovadora (primeiro formato de mídia na mesa); e os formatos no lugar da foto da
+   mesa: Tela de Início e Venda Sugestiva lado a lado, Confirmação de Pedido e Minha Conta lado a
+   lado, e a Página Especial grande, em destaque (borda lime, "Toque e teste a ativação" pulsando,
+   botão "Jogar agora"): o clique abre o pop-up já com o jogo rodando.
    A seção "Formatos" fica só para o modo B2B.
 Pode rodar mais de uma vez. Rode no HTML aberto, antes do senha.py.
 """
@@ -37,9 +38,8 @@ MAPCSS = '<style>' + MARCA + '''
 </style>'''
 
 MARCA2 = '/*mk-compartilhar-formatos*/'
-DESTAQUE = ('<p class="mkc-dif"><b>Mídia inovadora</b><span>Somos o primeiro formato de mídia na mesa do '
-            'restaurante: um diferencial que só a Goomer Ads entrega, no momento em que o cliente escolhe, '
-            'pede e paga.</span></p>')
+DESTAQUE = ('<p class="mkc-dif"><span class="mkc-k">Mídia inovadora</span>Somos o <em>primeiro formato de '
+            'mídia na mesa</em> do restaurante. Um diferencial que só a Goomer Ads tem.</p>')
 FMTCSS = '<style>' + MARCA2 + '''
 #mesa{min-height:0!important}
 #mesa>.wrap{min-height:0!important}
@@ -49,22 +49,20 @@ FMTCSS = '<style>' + MARCA2 + '''
 #mesa .h2{font-size:clamp(38px,5.55vw,92px)!important;max-width:none!important;white-space:normal}
 @media (min-width:901px){#mesa .h2{white-space:nowrap}}
 #mesa .sub{max-width:none!important;font-size:clamp(16px,1.55vw,22px)!important}
-@media (min-width:901px){
- #mesa .head{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:clamp(28px,4vw,64px);row-gap:clamp(10px,2vh,20px);align-items:center;width:100%}
- #mesa .head>.eyebrow,#mesa .head>.h2{grid-column:1/-1}
- #mesa .head>.mkc-dif{margin-top:0;max-width:none;justify-self:stretch}
-}
-.mkc-dif{margin-top:8px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;justify-self:start;background:var(--ink);color:#fff;border-radius:18px;padding:14px 22px;font-size:clamp(15px,1.5vw,19px);line-height:1.4;max-width:900px;box-shadow:0 12px 30px rgba(10,0,68,.18)}
-.mkc-dif b{font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:clamp(20px,2.1vw,28px);line-height:1;background:var(--lime);color:var(--ink);border-radius:999px;padding:7px 16px;white-space:nowrap}
-.mkc-dif span{flex:1 1 320px}
-.mkc-fmts{display:grid;gap:18px}
-.mkc-fmts .fcard{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);grid-template-areas:"t g" "t n" "t d" "t m";align-items:center;align-content:center;column-gap:clamp(20px,4vw,56px);row-gap:10px;padding:clamp(18px,2.4vw,32px)}
-.mkc-fmts .fcard .thumb{grid-area:t}
-.mkc-fmts .fcard .tags{grid-area:g;align-self:end}
-.mkc-fmts .fcard>b{grid-area:n;font-size:clamp(24px,2.6vw,36px);font-family:var(--display);text-transform:uppercase;line-height:1.05}
-.mkc-fmts .fcard>p{grid-area:d;font-size:clamp(15px,1.4vw,18px);line-height:1.5}
+#mesa .imp400{margin-top:clamp(18px,3vh,32px)}
+.mkc-dif{margin:clamp(36px,6vh,72px) 0 clamp(20px,3vh,32px);font-family:var(--display);font-weight:700;text-transform:uppercase;color:var(--ink);font-size:clamp(30px,4vw,64px);line-height:1.12;letter-spacing:-.005em;max-width:none}
+.mkc-dif .mkc-k{display:block;font-family:var(--body,Manrope),sans-serif;font-size:13px;font-weight:800;letter-spacing:.16em;color:var(--blue);margin-bottom:14px}
+.mkc-dif em{font-style:normal;background:linear-gradient(transparent 12%,var(--lime) 12%,var(--lime) 92%,transparent 92%);padding:0 .12em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.mkc-fmts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.mkc-fmts .fcard{grid-template-columns:minmax(0,1fr);grid-template-areas:"t" "g" "n" "d" "m";align-content:start;row-gap:12px;padding:clamp(18px,2.2vw,30px)}
+.mkc-fmts .fcard .thumb{grid-area:t;margin-bottom:6px}
+.mkc-fmts .fcard .tags{grid-area:g}
+.mkc-fmts .fcard>b{grid-area:n;font-size:clamp(24px,2.4vw,34px);font-family:var(--display);text-transform:uppercase;line-height:1.05}
+.mkc-fmts .fcard>p{grid-area:d;font-size:clamp(15px,1.3vw,17px);line-height:1.5}
 .mkc-fmts .fcard .more{grid-area:m;align-self:start}
-.mkc-fmts .fcard:nth-child(even){grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);grid-template-areas:"g t" "n t" "d t" "m t"}
+.mkc-fmts .fcard.mkc-play{grid-column:1/-1;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);grid-template-areas:"t g" "t n" "t d" "t m";align-items:center;align-content:center;column-gap:clamp(24px,4vw,64px);padding:clamp(22px,3vw,44px)}
+.mkc-fmts .fcard.mkc-play>b{font-size:clamp(30px,3.4vw,52px)}
+.mkc-fmts .fcard.mkc-play .tags{align-self:end}
 .mkc-fmts .fcard{background:#fff!important;border-color:rgba(10,0,68,.14)!important;color:var(--ink)}
 .mkc-fmts .fcard:hover{border-color:var(--blue)!important}
 .mkc-fmts .fcard>p{color:#4A4380!important}
@@ -78,11 +76,10 @@ FMTCSS = '<style>' + MARCA2 + '''
 @keyframes mkcPulse{0%,100%{box-shadow:0 0 0 0 rgba(189,226,73,.7),0 10px 30px rgba(10,0,68,.35)}50%{box-shadow:0 0 0 14px rgba(189,226,73,0),0 10px 30px rgba(10,0,68,.35)}}
 .mkc-fmts .fcard.mkc-play .more{display:inline-flex;align-items:center;gap:8px;justify-self:start;background:var(--ink);color:var(--lime)!important;padding:12px 20px;border-radius:999px;font-size:15px!important}
 .mkc-fmts .fcard.mkc-play:hover .more{background:var(--blue);color:#fff!important}
-.mkc-fmts .mkc-badge{grid-area:g;align-self:end;justify-self:start}
 @media (prefers-reduced-motion:reduce){.mkc-try{animation:none}}
 @media (max-width:900px){.fx-card{grid-template-columns:minmax(0,1fr)!important;overflow-x:hidden}.fx-card>*{min-width:0}.fx-list{grid-template-columns:repeat(2,minmax(0,1fr))!important}.fx-list button{grid-template-columns:minmax(0,1fr)!important;min-width:0}.fx-list button b{font-size:14px}.fx-list button span{font-size:10px}}
 @media (max-width:520px){.mkc-try{font-size:13px;padding:10px 16px;gap:8px}.mkc-try i{width:22px;height:22px;font-size:10px}}
-@media (max-width:760px){.mkc-fmts .fcard,.mkc-fmts .fcard:nth-child(even){grid-template-columns:1fr;grid-template-areas:"t" "g" "n" "d" "m"}}
+@media (max-width:760px){.mkc-fmts{grid-template-columns:minmax(0,1fr)}.mkc-fmts .fcard,.mkc-fmts .fcard.mkc-play{grid-column:auto;grid-template-columns:minmax(0,1fr);grid-template-areas:"t" "g" "n" "d" "m"}}
 ''' + '</style>'
 FMTJS = '''<script>/*mk-compartilhar-formatos-js*/
 (function(){var m=document.getElementById('mesa'),fc=document.getElementById('fcards'),fs=document.getElementById('formatos');
@@ -91,7 +88,10 @@ var list=document.createElement('div');list.className='mkc-fmts';
 Array.prototype.slice.call(fc.querySelectorAll('.fcard.only-b2c')).forEach(function(c){
   try{var f=FORMATS.filter(function(x){return x.id===c.dataset.f})[0];var p=c.querySelector('p');if(f&&p)p.textContent=f.d}catch(e){}
   list.appendChild(c)});
-top.parentNode.insertBefore(list,top.nextSibling);
+var anc=top,band=m.querySelector('.imp400'),dif=m.querySelector('.mkc-dif');
+if(band){top.parentNode.insertBefore(band,top.nextSibling);anc=band}
+if(dif){anc.parentNode.insertBefore(dif,anc.nextSibling);anc=dif}
+anc.parentNode.insertBefore(list,anc.nextSibling);
 ['inicio','sug','confirm','conta','especial'].forEach(function(id){var c=list.querySelector('.fcard[data-f="'+id+'"]');if(c)list.appendChild(c)});
 var esp=list.querySelector('.fcard[data-f="especial"]');
 if(esp){esp.classList.add('mkc-play');
