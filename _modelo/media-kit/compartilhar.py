@@ -23,7 +23,8 @@ Uso: python3 _modelo/media-kit/compartilhar.py <arquivo.html> [<arquivo.html> ..
    jogo ali mesmo e dá zoom na tela do tablet para dar para ler a ativação. Os formatos não abrem
    pop-up (a página já tem as informações). Os números (1–2h, 30–40, 1:4, +20) vão para o fim do
    "Inventário por segmento culinário" (com 1:2, um tablet para cada 2 pessoas). As marcas que já
-   anunciam vêm logo depois dos formatos.
+   anunciam vêm logo depois do "Por que Goomer Ads" e antes dos formatos, que ganham faixa própria;
+   depois dos formatos entra "O que a Goomer Ads gera para a sua marca" (4 objetivos, faixa escura).
    A seção "Formatos" fica só para o modo B2B.
 Pode rodar mais de uma vez. Rode no HTML aberto, antes do senha.py.
 """
@@ -135,6 +136,21 @@ body[data-mode="b2b"] .band.cuis .mkc-stats{display:none}
 @media (max-width:900px){.fx-card{grid-template-columns:minmax(0,1fr)!important;overflow-x:hidden}.fx-card>*{min-width:0}.fx-list{grid-template-columns:repeat(2,minmax(0,1fr))!important}.fx-list button{grid-template-columns:minmax(0,1fr)!important;min-width:0}.fx-list button b{font-size:14px}.fx-list button span{font-size:10px}}
 @media (max-width:520px){.mkc-try{font-size:13px;padding:10px 16px;gap:8px}.mkc-try i{width:22px;height:22px;font-size:10px}}
 @media (max-width:760px){.mkc-fmts{grid-template-columns:minmax(0,1fr)}.mkc-fmts .fcard,.mkc-fmts .fcard.mkc-play{grid-column:auto;grid-template-columns:minmax(0,1fr);grid-template-areas:"t" "g" "n" "d" "m"}}
+/* faixa dos formatos e "O que a Goomer Ads gera" (escura, alternando com as brancas) */
+#mesa{padding-bottom:clamp(36px,6vh,64px)!important}
+#mesa .imp400{margin-bottom:0!important}
+.mkc-fsec>.wrap,.mkc-gera>.wrap{max-width:min(94vw,1400px)!important}
+.mkc-fsec>.wrap{gap:clamp(18px,3vh,32px)}
+.mkc-gera{background:var(--ink);color:#fff}
+.mkc-gera .sub{max-width:72ch;color:rgba(255,255,255,.78);opacity:1;font-size:clamp(16px,1.35vw,19px)}
+.ag-out{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.ag-out article{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:24px 22px;display:grid;gap:8px;align-content:start}
+.ag-out .ag-n{font-family:var(--display);font-size:38px;line-height:1;color:var(--lime)}
+.ag-out b{font-size:clamp(18px,1.45vw,21px);line-height:1.25}
+.ag-out p{font-size:15px;color:rgba(255,255,255,.72);line-height:1.5}
+.ag-out small{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--lime);margin-top:4px}
+@media (max-width:980px){.ag-out{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.ag-out{grid-template-columns:1fr}}
 /* destaque da Venda Sugestiva e formatos em 3 colunas (referência: kit Ambev, nov/2026) */
 .mkc-fmts{grid-template-columns:repeat(3,minmax(0,1fr))!important}
 .mkc-fmts .fcard.mkc-play,.mkc-fmts .fcard.mkc-sug{grid-column:1/-1!important}
@@ -220,6 +236,18 @@ if(esp){esp.classList.add('mkc-play');
 var st=m.querySelector('.stats'),cu=document.querySelector('.band.cuis .wrap');
 if(st&&cu){st.classList.add('mkc-stats');cu.appendChild(st)}
 var br=document.querySelector('section.band.brands');if(br&&m.parentNode)m.parentNode.insertBefore(br,m.nextSibling);
+/* marcas antes dos formatos: os formatos ganham uma faixa própria logo depois das marcas */
+var fsec=document.createElement('section');fsec.className='band light only-b2c mkc-fsec';fsec.id='mkc-formatos';fsec.setAttribute('aria-label','Formatos de mídia');
+var fw=document.createElement('div');fw.className='wrap';fw.innerHTML='<div class="head"><span class="eyebrow">Formatos</span><h2 class="h2">Do início do pedido ao fechamento da conta</h2><p class="sub">Vídeo de 10 segundos, banner estático e HTML interativo no tablet da mesa, durante toda a jornada do cliente.</p></div>';fw.appendChild(list);fsec.appendChild(fw);
+(br||m).parentNode.insertBefore(fsec,(br||m).nextSibling);
+/* depois dos formatos: o que a Goomer Ads gera para a marca */
+var gs=document.createElement('section');gs.className='band only-b2c mkc-gera';gs.id='mkc-gera';
+gs.innerHTML='<div class="wrap"><div class="head"><span class="eyebrow">O que a mídia entrega</span><h2 class="h2">O que a Goomer Ads gera<br>para a sua marca</h2><p class="sub">Mídia na mesa, no momento de consumo: o consumidor fica de 1 a 2 horas na frente da tela enquanto escolhe, pede e paga. Cada objetivo de campanha tem um formato que entrega.</p></div><div class="ag-out">'+
+'<article><span class="ag-n">01</span><b>Alcance e awareness</b><p>Vídeo de 10s na Tela de Início, intercalado ao cardápio, com mais de 400 milhões de impactos por mês.</p><small>Tela de Início · CPM</small></article>'+
+'<article><span class="ag-n">02</span><b>Interação e leads</b><p>Aba da marca no cardápio com jogo, quiz ou roleta, QR code e captura de cadastro.</p><small>Página Especial · por restaurante</small></article>'+
+'<article><span class="ag-n">03</span><b>Venda no ponto de consumo</b><p>O produto da marca sugerido dentro do pedido, com adição em um toque.</p><small>Venda Sugestiva · CPM</small></article>'+
+'<article><span class="ag-n">04</span><b>Precisão geográfica</b><p>Campanha por região, estado, cidade, culinária e horário. Só onde a sua marca quer estar.</p><small>Geolocalização · todos os formatos</small></article></div></div>';
+fsec.parentNode.insertBefore(gs,fsec.nextSibling);
 if(fs)fs.classList.add('only-b2b');})();
 (function(){var l=document.querySelector('.mkc-fmts');if(!l)return;var c=l.querySelector('.fcard[data-f="sug"]');if(!c)return;
 c.classList.add('mkc-sug');var tg=c.querySelector('.tags');if(tg&&!tg.querySelector('.mkc-prio')){var t=document.createElement('span');t.className='tag l mkc-prio';t.textContent='Formato prioritário';tg.insertBefore(t,tg.firstChild);var f=tg.querySelector('.tag.l:not(.mkc-prio)');if(f)f.classList.remove('l')}
