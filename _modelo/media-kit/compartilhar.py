@@ -109,6 +109,9 @@ def compartilhar(s):
         s = s[:i] + MAPCSS + s[i:] if i >= 0 else s + MAPCSS
     # sem o pop-up "Conheça a Goomer" ao abrir
     s = s.replace("setTimeout(()=>open('ask'),600);", '')
+    # título do "Por que Goomer Ads" começa com MÍDIA NA MESA
+    s = s.replace('<h2 class="h2">Na mesa, no momento de consumo.<br>Não na parede.</h2>',
+                  '<h2 class="h2">Mídia na mesa, no momento de consumo.<br>Não na parede.</h2>')
     # destaque de mídia inovadora logo depois do texto do "Por que Goomer Ads"
     if 'class="mkc-dif"' not in s:
         a = s.find('<section class="band light only-b2c" id="mesa">')
@@ -131,6 +134,8 @@ if __name__ == '__main__':
             e.append('mapa fixo não entrou')
         if "setTimeout(()=>open('ask'),600)" in s:
             e.append('pop-up Conheça a Goomer ainda abre sozinho')
+        if 'Mídia na mesa, no momento de consumo.' not in s:
+            e.append('título MÍDIA NA MESA não entrou')
         if MARCA2 not in s or 'class="mkc-dif"' not in s:
             e.append('formatos/destaque não entraram')
         with open(p, 'w', encoding='utf-8') as fh:
