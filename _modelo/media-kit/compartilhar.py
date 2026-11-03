@@ -15,7 +15,9 @@ Uso: python3 _modelo/media-kit/compartilhar.py <arquivo.html> [<arquivo.html> ..
    "DOOH 2.0 · +400 milhões" (os dois lados no mesmo tamanho) e os formatos no lugar da foto da mesa:
    Tela de Início e Venda Sugestiva lado a lado, Confirmação de Pedido e Minha Conta lado a lado, e a
    Página Especial grande, em destaque (borda lime, "Toque e teste a ativação" pulsando, botão
-   "Jogar agora"): o clique abre o pop-up já com o jogo rodando.
+   "Jogar agora"): o clique roda o jogo ali mesmo, no tablet do card. Os formatos não abrem
+   pop-up (a página já tem as informações). Os números (1–2h, 30–40, 1:4, +20) vão para o fim do
+   "Inventário por segmento culinário".
    A seção "Formatos" fica só para o modo B2B.
 Pode rodar mais de uma vez. Rode no HTML aberto, antes do senha.py.
 """
@@ -77,12 +79,27 @@ FMTCSS = '<style>' + MARCA2 + '''
 .mkc-fmts .fcard .tag:not(.x):not(.l):not(.cr){color:var(--ink);border-color:rgba(10,0,68,.25)}
 .mkc-fmts .fcard .tag.cr{background:#EEEBFF;border-color:#EEEBFF}
 .mkc-fmts .fcard.mkc-play{border:2px solid var(--lime)!important;box-shadow:0 0 0 6px rgba(189,226,73,.22),0 18px 40px rgba(10,0,68,.12);position:relative}
-.mkc-fmts .fcard.mkc-play .thumb{position:relative}
+.mkc-fmts .fcard{cursor:default}
+.mkc-fmts .fcard:hover{border-color:rgba(10,0,68,.14)!important;background:#fff!important}
+.mkc-fmts .fcard.mkc-play:hover{border-color:var(--lime)!important}
+.mkc-fmts .fcard.mkc-play .thumb{position:relative;pointer-events:auto}
+.mkc-fmts .fcard.mkc-play .thumb .gameclose:not([hidden]){display:inline-flex!important}
+.mkc-fmts .fcard.mkc-play.jogando .mkc-try{display:none}
+.mkc-try{border:0;cursor:pointer}
+.mkc-go{border:0;cursor:pointer;font:inherit}
+.band.cuis .mkc-stats{margin-top:clamp(28px,5vh,56px)}
+.band.cuis .mkc-stats .stat{padding:clamp(14px,2.2vh,26px) clamp(16px,1.8vw,24px)}
+.band.cuis .mkc-stats{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.16)}
+.band.cuis .mkc-stats .stat{background:var(--ink)}
+.band.cuis .mkc-stats .stat b{font-size:clamp(34px,5.2vh,56px);color:var(--lime)}
+.band.cuis .mkc-stats .stat span{color:#fff}
+.band.cuis .mkc-stats .stat small{color:rgba(255,255,255,.68)}
+body[data-mode="b2b"] .band.cuis .mkc-stats{display:none}
 .mkc-try{position:absolute;z-index:5;left:50%;top:50%;transform:translate(-50%,-50%);display:inline-flex;align-items:center;gap:10px;background:var(--lime);color:var(--ink);font:800 clamp(14px,1.4vw,17px)/1 var(--body,Manrope),sans-serif;padding:14px 22px;border-radius:999px;box-shadow:0 10px 30px rgba(10,0,68,.35);white-space:nowrap;animation:mkcPulse 1.8s ease-in-out infinite}
 .mkc-try i{font-style:normal;display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--ink);color:var(--lime);font-size:12px}
 @keyframes mkcPulse{0%,100%{box-shadow:0 0 0 0 rgba(189,226,73,.7),0 10px 30px rgba(10,0,68,.35)}50%{box-shadow:0 0 0 14px rgba(189,226,73,0),0 10px 30px rgba(10,0,68,.35)}}
 .mkc-fmts .fcard.mkc-play .more{display:inline-flex;align-items:center;gap:8px;justify-self:start;background:var(--ink);color:var(--lime)!important;padding:12px 20px;border-radius:999px;font-size:15px!important}
-.mkc-fmts .fcard.mkc-play:hover .more{background:var(--blue);color:#fff!important}
+.mkc-fmts .fcard.mkc-play .more:hover{background:var(--blue);color:#fff!important}
 @media (prefers-reduced-motion:reduce){.mkc-try{animation:none}}
 @media (max-width:900px){.fx-card{grid-template-columns:minmax(0,1fr)!important;overflow-x:hidden}.fx-card>*{min-width:0}.fx-list{grid-template-columns:repeat(2,minmax(0,1fr))!important}.fx-list button{grid-template-columns:minmax(0,1fr)!important;min-width:0}.fx-list button b{font-size:14px}.fx-list button span{font-size:10px}}
 @media (max-width:520px){.mkc-try{font-size:13px;padding:10px 16px;gap:8px}.mkc-try i{width:22px;height:22px;font-size:10px}}
@@ -94,17 +111,25 @@ if(!m||!fc)return;var top=m.querySelector('.mesa-top');if(!top)return;
 var list=document.createElement('div');list.className='mkc-fmts';
 Array.prototype.slice.call(fc.querySelectorAll('.fcard.only-b2c')).forEach(function(c){
   try{var f=FORMATS.filter(function(x){return x.id===c.dataset.f})[0];var p=c.querySelector('p');if(f&&p)p.textContent=f.d}catch(e){}
-  list.appendChild(c)});
+  /* sem pop-up: o card vira bloco de conteúdo (div), com tudo na página */
+  var d=document.createElement('div');d.className=c.className;d.dataset.f=c.dataset.f;
+  while(c.firstChild)d.appendChild(c.firstChild);
+  var mo=d.querySelector('.more');if(mo)mo.remove();
+  list.appendChild(d)});
 var anc=top,band=m.querySelector('.imp400');
 if(band){top.parentNode.insertBefore(band,top.nextSibling);anc=band}
 anc.parentNode.insertBefore(list,anc.nextSibling);
 ['inicio','sug','confirm','conta','especial'].forEach(function(id){var c=list.querySelector('.fcard[data-f="'+id+'"]');if(c)list.appendChild(c)});
 var esp=list.querySelector('.fcard[data-f="especial"]');
 if(esp){esp.classList.add('mkc-play');
-  esp.setAttribute('aria-label','Testar a ativação da Página Especial');
-  var th=esp.querySelector('.thumb');if(th){var t=document.createElement('span');t.className='mkc-try';t.innerHTML='<i>&#9654;</i>Toque e teste a ativação';th.appendChild(t)}
-  var mo=esp.querySelector('.more');if(mo)mo.textContent='\u25B6 Jogar agora';
-  var o=esp.onclick;esp.onclick=function(){if(o)o();var n=0;(function go(){var pb=document.querySelector('#fx .playbtn');if(pb&&!pb.hidden){pb.click();if(innerWidth<900)setTimeout(function(){var g=document.querySelector('#fx .gamebox');if(g)g.scrollIntoView({block:'center',behavior:'smooth'})},350)}else if(n++<20)setTimeout(go,100)})()}}
+  var th=esp.querySelector('.thumb'),pb=th&&th.querySelector('.playbtn'),gc=th&&th.querySelector('.gameclose');
+  var t=document.createElement('button');t.type='button';t.className='mkc-try';t.innerHTML='<i>&#9654;</i>Toque e teste a ativação';if(th)th.appendChild(t);
+  var go=document.createElement('button');go.type='button';go.className='more mkc-go';go.textContent='▶ Jogar agora';esp.appendChild(go);
+  function jogar(){if(pb&&!pb.hidden){pb.click();esp.classList.add('jogando');th.scrollIntoView({block:'center',behavior:'smooth'})}}
+  t.onclick=jogar;go.onclick=jogar;
+  if(gc)gc.addEventListener('click',function(){esp.classList.remove('jogando')});}
+var st=m.querySelector('.stats'),cu=document.querySelector('.band.cuis .wrap');
+if(st&&cu){st.classList.add('mkc-stats');cu.appendChild(st)}
 if(fs)fs.classList.add('only-b2b');})();
 </script>'''
 
