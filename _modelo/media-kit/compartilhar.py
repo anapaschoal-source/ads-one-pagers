@@ -17,7 +17,8 @@ Uso: python3 _modelo/media-kit/compartilhar.py <arquivo.html> [<arquivo.html> ..
    Página Especial grande, em destaque (borda lime, "Toque e teste a ativação" pulsando, botão
    "Jogar agora"): o clique roda o jogo ali mesmo, no tablet do card. Os formatos não abrem
    pop-up (a página já tem as informações). Os números (1–2h, 30–40, 1:4, +20) vão para o fim do
-   "Inventário por segmento culinário".
+   "Inventário por segmento culinário" (com 1:2, um tablet para cada 2 pessoas). As marcas que já
+   anunciam vêm logo depois dos formatos.
    A seção "Formatos" fica só para o modo B2B.
 Pode rodar mais de uma vez. Rode no HTML aberto, antes do senha.py.
 """
@@ -77,6 +78,14 @@ FMTCSS = '<style>' + MARCA2 + '''
 .mkc-fmts .fcard .more{grid-area:m;align-self:start}
 .mkc-fmts .fcard.mkc-play{grid-column:1/-1;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);grid-template-areas:"t g" "t n" "t d" "t m";align-items:center;align-content:center;column-gap:clamp(24px,4vw,64px);padding:clamp(22px,3vw,44px)}
 .mkc-fmts .fcard.mkc-play>b{font-size:clamp(30px,3.4vw,52px)}
+@media (min-width:761px){
+ .mkc-fmts .fcard.mkc-play{grid-template-columns:minmax(0,1fr) auto!important;grid-template-areas:"t t" "g m" "n m" "d m"!important;align-items:center;column-gap:clamp(24px,4vw,64px);row-gap:12px}
+ .mkc-fmts .fcard.mkc-play .thumb{justify-self:center;width:min(100%,calc((100svh - 110px) * 1.4),1240px);margin-bottom:clamp(8px,2vh,24px)}
+ .mkc-fmts .fcard.mkc-play .thumb .scr{max-width:none!important;width:100%!important}
+ .mkc-fmts .fcard.mkc-play>p{max-width:80ch}
+ .mkc-fmts .fcard.mkc-play .mkc-go{align-self:center;font-size:17px!important;padding:16px 26px}
+ .mkc-try{font-size:clamp(16px,1.6vw,20px)!important;padding:16px 26px!important}
+}
 .mkc-fmts .fcard.mkc-play .tags{align-self:end}
 .mkc-fmts .fcard{background:#fff!important;border-color:rgba(10,0,68,.14)!important;color:var(--ink)}
 .mkc-fmts .fcard:hover{border-color:var(--blue)!important}
@@ -131,11 +140,12 @@ if(esp){esp.classList.add('mkc-play');
   var th=esp.querySelector('.thumb'),pb=th&&th.querySelector('.playbtn'),gc=th&&th.querySelector('.gameclose');
   var t=document.createElement('button');t.type='button';t.className='mkc-try';t.innerHTML='<i>&#9654;</i>Toque e teste a ativação';if(th)th.appendChild(t);
   var go=document.createElement('button');go.type='button';go.className='more mkc-go';go.textContent='▶ Jogar agora';esp.appendChild(go);
-  function jogar(){if(pb&&!pb.hidden){pb.click();esp.classList.add('jogando');th.scrollIntoView({block:'center',behavior:'smooth'})}}
+  function jogar(){if(pb&&!pb.hidden){pb.click();esp.classList.add('jogando');setTimeout(function(){var g=th.querySelector('.gamebox')||th;g.scrollIntoView({block:'center',behavior:'smooth'})},120)}}
   t.onclick=jogar;go.onclick=jogar;
   if(gc)gc.addEventListener('click',function(){esp.classList.remove('jogando')});}
 var st=m.querySelector('.stats'),cu=document.querySelector('.band.cuis .wrap');
 if(st&&cu){st.classList.add('mkc-stats');cu.appendChild(st)}
+var br=document.querySelector('section.band.brands');if(br&&m.parentNode)m.parentNode.insertBefore(br,m.nextSibling);
 if(fs)fs.classList.add('only-b2b');})();
 </script>'''
 
@@ -161,6 +171,8 @@ def compartilhar(s):
         s = re.sub(r'<h2 class="h2">(?:Mídia na mesa|Na mesa), no momento de consumo\.<br>Não na parede\.</h2>', TITULO, s, count=1)
     # versões antigas deste script punham uma frase de destaque à parte: tira
     s = re.sub(r'\n\s*<p class="mkc-dif">.*?</p>', '', s, count=1, flags=re.S)
+    # um tablet para cada 2 pessoas
+    s = s.replace('<b>1:4</b><span>um tablet para 4 pessoas</span>', '<b>1:2</b><span>um tablet para cada 2 pessoas</span>')
     # formatos um por um logo abaixo do texto
     if MARCA2 not in s:
         i = s.lower().rfind('</body>')
@@ -179,6 +191,8 @@ if __name__ == '__main__':
             e.append('pop-up Conheça a Goomer ainda abre sozinho')
         if TITULO not in s or EYEBROW not in s:
             e.append('título/eyebrow de mídia inovadora não entraram')
+        if '<b>1:4</b>' in s or 'para 4 pessoas' in s:
+            e.append('ainda diz um tablet para 4 pessoas')
         if MARCA2 not in s:
             e.append('formatos/destaque não entraram')
         with open(p, 'w', encoding='utf-8') as fh:
