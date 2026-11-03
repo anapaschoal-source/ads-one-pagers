@@ -141,6 +141,7 @@ body[data-mode="b2b"] .band.cuis .mkc-stats{display:none}
 #mesa .imp400{margin-bottom:0!important}
 .mkc-fsec>.wrap,.mkc-gera>.wrap{max-width:min(94vw,1400px)!important}
 .mkc-fsec>.wrap{gap:clamp(18px,3vh,32px)}
+.mkc-fsec .head .sub{max-width:80ch;font-size:clamp(16px,1.35vw,19px)}
 .mkc-gera{background:var(--ink);color:#fff}
 .mkc-gera .sub{max-width:72ch;color:rgba(255,255,255,.78);opacity:1;font-size:clamp(16px,1.35vw,19px)}
 .ag-out{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
@@ -238,7 +239,7 @@ if(st&&cu){st.classList.add('mkc-stats');cu.appendChild(st)}
 var br=document.querySelector('section.band.brands');if(br&&m.parentNode)m.parentNode.insertBefore(br,m.nextSibling);
 /* marcas antes dos formatos: os formatos ganham uma faixa própria logo depois das marcas */
 var fsec=document.createElement('section');fsec.className='band light only-b2c mkc-fsec';fsec.id='mkc-formatos';fsec.setAttribute('aria-label','Formatos de mídia');
-var fw=document.createElement('div');fw.className='wrap';fw.innerHTML='<div class="head"><span class="eyebrow">Formatos</span><h2 class="h2">Do início do pedido ao fechamento da conta</h2><p class="sub">Vídeo de 10 segundos, banner estático e HTML interativo no tablet da mesa, durante toda a jornada do cliente.</p></div>';fw.appendChild(list);fsec.appendChild(fw);
+var fw=document.createElement('div');fw.className='wrap';fw.innerHTML='<div class="head"><span class="eyebrow">Formatos</span><h2 class="h2">Do início do pedido ao fechamento da conta</h2><p class="sub">Cinco formatos no tablet da mesa, presentes em toda a jornada do cliente: do cardápio ao pedido e ao fechamento da conta. Vídeo de 10 segundos, banner estático e HTML interativo, com o consumidor de 1 a 2 horas na frente da tela e mais de 400 milhões de impactos por mês.</p></div>';fw.appendChild(list);fsec.appendChild(fw);
 (br||m).parentNode.insertBefore(fsec,(br||m).nextSibling);
 /* depois dos formatos: o que a Goomer Ads gera para a marca */
 var gs=document.createElement('section');gs.className='band only-b2c mkc-gera';gs.id='mkc-gera';
