@@ -131,6 +131,62 @@ body[data-mode="b2b"] .band.cuis .mkc-stats{display:none}
 @media (max-width:900px){.fx-card{grid-template-columns:minmax(0,1fr)!important;overflow-x:hidden}.fx-card>*{min-width:0}.fx-list{grid-template-columns:repeat(2,minmax(0,1fr))!important}.fx-list button{grid-template-columns:minmax(0,1fr)!important;min-width:0}.fx-list button b{font-size:14px}.fx-list button span{font-size:10px}}
 @media (max-width:520px){.mkc-try{font-size:13px;padding:10px 16px;gap:8px}.mkc-try i{width:22px;height:22px;font-size:10px}}
 @media (max-width:760px){.mkc-fmts{grid-template-columns:minmax(0,1fr)}.mkc-fmts .fcard,.mkc-fmts .fcard.mkc-play{grid-column:auto;grid-template-columns:minmax(0,1fr);grid-template-areas:"t" "g" "n" "d" "m"}}
+/* destaque da Venda Sugestiva e formatos em 3 colunas (referência: kit Ambev, nov/2026) */
+.mkc-fmts{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+.mkc-fmts .fcard.mkc-play,.mkc-fmts .fcard.mkc-sug{grid-column:1/-1!important}
+.mkc-fmts .fcard.mkc-sug{background:#fff!important;border:2px solid var(--lime)!important;box-shadow:0 0 0 6px rgba(189,226,73,.22),0 18px 40px rgba(10,0,68,.12);grid-template-columns:minmax(0,1.05fr) minmax(0,1fr)!important;grid-template-areas:"t g" "t n" "t d" "t k" "x x"!important;column-gap:clamp(24px,3.4vw,56px);row-gap:12px;align-items:center;padding:clamp(18px,2.4vw,36px)!important}
+.mkc-fmts .fcard.mkc-sug:hover{border-color:var(--lime)!important}
+.mkc-fmts .fcard.mkc-sug>b{font-size:clamp(30px,3.4vw,52px)!important}
+.mkc-fmts .fcard.mkc-sug .thumb{margin:0!important}
+.mkc-sugk{grid-area:k;display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 18px;align-items:center;background:#F3F0FF;border-radius:18px;padding:16px 20px}
+.mkc-sugk .lb,.mkc-sugx .lb{grid-column:1/-1;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+.mkc-sugk strong{font-family:var(--display);font-size:clamp(56px,6vw,88px);line-height:.9;color:var(--blue)}
+.mkc-sugk span{font-size:15px;font-weight:700;line-height:1.35;color:var(--ink)}
+.mkc-sugk small{grid-column:1/-1;font-size:13px;color:#4A4380}
+.mkc-sugx{grid-area:x;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(18px,3vw,44px);border-top:1px solid rgba(10,0,68,.12);padding-top:clamp(16px,2.4vh,26px);margin-top:6px}
+.mkc-sugx h4{margin:4px 0 4px;font-size:18px;font-weight:800;color:var(--ink)}
+.mkc-sugx p{font-size:14px;color:#4A4380;line-height:1.45}
+.mkc-bars{display:grid;gap:10px;margin-top:12px}
+.mkc-bar{display:grid;grid-template-columns:minmax(130px,190px) 1fr 62px;gap:12px;align-items:center;font-size:14px;font-weight:700;color:var(--ink)}
+.mkc-bar .tr{height:14px;border-radius:7px;background:rgba(10,0,68,.08);overflow:hidden}
+.mkc-bar .tr i{display:block;height:100%;border-radius:7px;background:var(--blue);width:0;transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
+.mkc-bar.food .tr i{background:rgba(10,0,68,.28)}
+.mkc-sug.in .mkc-bar .tr i{width:var(--w)}
+.mkc-bar b{font-family:var(--display);font-size:22px;text-align:right;color:var(--blue)}
+.mkc-bar.food b{color:#4A4380}
+.mkc-why{display:grid;gap:14px;align-content:start}
+.mkc-why div{border-left:3px solid var(--lime);padding-left:12px}
+.mkc-why b{display:block;font-size:15px;color:var(--ink)}
+.mkc-why small{display:block;font-size:13.5px;color:#4A4380;line-height:1.4}
+.mkc-sugx{align-items:stretch}
+.mkc-why{grid-template-rows:auto repeat(3,minmax(0,1fr));gap:12px!important;align-content:stretch!important}
+.mkc-why div{border-left:0!important;padding:16px 20px!important;background:#F3F0FF;border-radius:16px;display:flex;flex-direction:column;justify-content:center;gap:6px;position:relative;overflow:hidden}
+.mkc-why div::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--lime)}
+.mkc-why b{font-size:clamp(17px,1.5vw,21px)!important;line-height:1.25}
+.mkc-why small{font-size:clamp(14.5px,1.15vw,16.5px)!important;line-height:1.45}
+@media (max-width:900px){.mkc-bar{grid-template-columns:96px minmax(0,1fr) auto!important;gap:10px!important}.mkc-bar b{font-size:19px!important}}
+.mkc-sugx h4{font-size:clamp(19px,1.7vw,24px)!important}
+.mkc-sugx>div:first-child>p{font-size:clamp(15px,1.2vw,17px)!important}
+.mkc-bar{font-size:clamp(15px,1.25vw,17px)!important;grid-template-columns:minmax(150px,220px) 1fr 72px}
+.mkc-bar b{font-size:clamp(24px,2vw,28px)!important}
+.mkc-bar .tr{height:16px}
+.mkc-bars{gap:14px!important}
+@media (max-width:900px){.mkc-bar{grid-template-columns:104px minmax(0,1fr) auto!important;font-size:14px!important}.mkc-bar b{font-size:20px!important}}
+@media (min-width:901px){.mkc-fmts .fcard.mkc-play{grid-template-columns:minmax(0,1fr) clamp(300px,30vw,460px)!important}}
+.mkc-fmts .fcard.mkc-play>b{font-size:clamp(40px,4.6vw,72px)!important}
+.mkc-fmts .fcard.mkc-play>p{font-size:clamp(17px,1.6vw,22px)!important;line-height:1.5!important}
+.mkc-fmts .fcard.mkc-play .tags .tag{font-size:13.5px;padding:6px 12px}
+.mkc-fmts .fcard.mkc-play .mkc-go{font-size:clamp(17px,1.5vw,20px)!important;padding:16px 28px!important}
+@media (min-width:901px){.mkc-fmts .fcard.mkc-sug{grid-template-areas:"t s1" "t g" "t n" "t d" "t k" "t s2" "x x"!important;grid-template-rows:1fr auto auto auto auto 1fr auto!important;row-gap:14px!important;align-items:start!important}}
+.mkc-fmts .fcard.mkc-sug>b{font-size:clamp(40px,4.6vw,72px)!important;line-height:1!important}
+.mkc-fmts .fcard.mkc-sug>p{font-size:clamp(17px,1.6vw,22px)!important;line-height:1.5!important}
+.mkc-fmts .fcard.mkc-sug .tags .tag{font-size:13.5px;padding:6px 12px}
+.mkc-sugk span{font-size:clamp(16px,1.35vw,19px)!important}
+.mkc-sugk small{font-size:clamp(14px,1.15vw,16px)!important}
+.mkc-fmts .fcard .tags{gap:8px!important}
+.mkc-fmts .fcard .tags .tag{font-size:13.5px!important;padding:6px 12px!important;letter-spacing:.06em!important}
+.mkc-sugx .nt{grid-column:1/-1;font-size:11.5px;color:#6B6699}
+@media (max-width:900px){.mkc-fmts{grid-template-columns:minmax(0,1fr)!important}.mkc-fmts .fcard.mkc-sug{grid-template-columns:minmax(0,1fr)!important;grid-template-areas:"t" "g" "n" "d" "k" "x"!important}.mkc-sugx{grid-template-columns:minmax(0,1fr)}.mkc-bar{grid-template-columns:110px 1fr 52px;font-size:13px}}
 ''' + '</style>'
 FMTJS = '''<script>/*mk-compartilhar-formatos-js*/
 (function(){var m=document.getElementById('mesa'),fc=document.getElementById('fcards'),fs=document.getElementById('formatos');
@@ -146,7 +202,7 @@ Array.prototype.slice.call(fc.querySelectorAll('.fcard.only-b2c')).forEach(funct
 var anc=top,band=m.querySelector('.imp400');
 if(band){top.parentNode.insertBefore(band,top.nextSibling);anc=band}
 anc.parentNode.insertBefore(list,anc.nextSibling);
-['inicio','sug','confirm','conta','especial'].forEach(function(id){var c=list.querySelector('.fcard[data-f="'+id+'"]');if(c)list.appendChild(c)});
+['inicio','confirm','conta','sug','especial'].forEach(function(id){var c=list.querySelector('.fcard[data-f="'+id+'"]');if(c)list.appendChild(c)});
 var esp=list.querySelector('.fcard[data-f="especial"]');
 if(esp){esp.classList.add('mkc-play');
   var th=esp.querySelector('.thumb'),pb=th&&th.querySelector('.playbtn'),gc=th&&th.querySelector('.gameclose');
@@ -161,6 +217,15 @@ var st=m.querySelector('.stats'),cu=document.querySelector('.band.cuis .wrap');
 if(st&&cu){st.classList.add('mkc-stats');cu.appendChild(st)}
 var br=document.querySelector('section.band.brands');if(br&&m.parentNode)m.parentNode.insertBefore(br,m.nextSibling);
 if(fs)fs.classList.add('only-b2b');})();
+(function(){var l=document.querySelector('.mkc-fmts');if(!l)return;var c=l.querySelector('.fcard[data-f="sug"]');if(!c)return;
+c.classList.add('mkc-sug');var tg=c.querySelector('.tags');if(tg&&!tg.querySelector('.mkc-prio')){var t=document.createElement('span');t.className='tag l mkc-prio';t.textContent='Formato prioritário';tg.insertBefore(t,tg.firstChild);var f=tg.querySelector('.tag.l:not(.mkc-prio)');if(f)f.classList.remove('l')}
+var dp=c.querySelector(':scope>p');if(dp)dp.textContent='Quando o cliente faz o pedido, o tablet sugere o seu produto antes de enviar para a cozinha. Um toque e ele entra no pedido.';
+var k=document.createElement('div');k.className='mkc-sugk';k.innerHTML='<span class="lb">Case · Venda Sugestiva</span><strong>+30%</strong><span>de crescimento médio nas vendas dos produtos patrocinados</span><small>Produto sugerido no fechamento do pedido, com adição em um toque.</small>';c.appendChild(k);
+var x=document.createElement('div');x.className='mkc-sugx';x.innerHTML='<div><span class="lb">Case · Destaque no cardápio do tablet</span><h4>Rede de food service · unidade em Campinas (SP)</h4><p>Itens ganharam destaque no cardápio digital. Vendas antes e depois da virada, com 42% de penetração do tablet no salão.</p><div class="mkc-bars">'+
+[['Refrigerante zero 500ml',100,'+329%',''],['Suco 500ml',66,'+218%',''],['Refrigerante cola zero 500ml',45,'+148%',''],['Sobremesa',35,'+115%','food'],['Salgado',30,'+100%','food']].map(function(r){return '<div class="mkc-bar '+r[3]+'"><span>'+r[0]+'</span><div class="tr"><i style="--w:'+r[1]+'%"></i></div><b>'+r[2]+'</b></div>'}).join('')+
+'</div></div><div class="mkc-why"><span class="lb">Por que priorizar</span><div><b>Mídia que entra no pedido</b><small>A sugestão aparece quando o cliente já está decidindo o que pedir. Um toque e o produto vai para a cozinha.</small></div><div><b>Exclusivo para indústrias</b><small>Formato pensado para quem vende no food service: bebidas, alimentos e ingredientes.</small></div><div><b>Mensurável por SKU</b><small>Vendas do produto sugerido acompanhadas por restaurante, praça e período.</small></div></div><p class="nt">Cases reais da rede Goomer, apresentados de forma anonimizada. Resultados variam conforme restaurante, praça e período.</p>';c.appendChild(x);
+if('IntersectionObserver' in window){new IntersectionObserver(function(e,o){e.forEach(function(z){if(z.isIntersecting){c.classList.add('in');o.disconnect()}})},{threshold:.2}).observe(c)}else c.classList.add('in');
+})();
 </script>'''
 
 
