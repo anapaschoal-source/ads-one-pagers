@@ -24,7 +24,8 @@ Uso: python3 _modelo/media-kit/compartilhar.py <arquivo.html> [<arquivo.html> ..
    pop-up (a página já tem as informações). Os números (1–2h, 30–40, 1:4, +20) vão para o fim do
    "Inventário por segmento culinário" (com 1:2, um tablet para cada 2 pessoas). As marcas que já
    anunciam vêm logo depois do "Por que Goomer Ads" e antes dos formatos, que ganham faixa própria;
-   depois dos formatos entra "O que a Goomer Ads gera para a sua marca" (4 objetivos, faixa escura).
+   cada formato traz o objetivo que entrega (selo "Objetivo") e o topo dos formatos tem a linha
+   "Precisão geográfica em todos os formatos".
    A seção "Formatos" fica só para o modo B2B.
 Pode rodar mais de uma vez. Rode no HTML aberto, antes do senha.py.
 """
@@ -142,16 +143,14 @@ body[data-mode="b2b"] .band.cuis .mkc-stats{display:none}
 .mkc-fsec>.wrap,.mkc-gera>.wrap{max-width:min(94vw,1400px)!important}
 .mkc-fsec>.wrap{gap:clamp(18px,3vh,32px)}
 .mkc-fsec .head .sub{max-width:80ch;font-size:clamp(16px,1.35vw,19px)}
-.mkc-gera{background:var(--ink);color:#fff}
-.mkc-gera .sub{max-width:72ch;color:rgba(255,255,255,.78);opacity:1;font-size:clamp(16px,1.35vw,19px)}
-.ag-out{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
-.ag-out article{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:24px 22px;display:grid;gap:8px;align-content:start}
-.ag-out .ag-n{font-family:var(--display);font-size:38px;line-height:1;color:var(--lime)}
-.ag-out b{font-size:clamp(18px,1.45vw,21px);line-height:1.25}
-.ag-out p{font-size:15px;color:rgba(255,255,255,.72);line-height:1.5}
-.ag-out small{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--lime);margin-top:4px}
-@media (max-width:980px){.ag-out{grid-template-columns:1fr 1fr}}
-@media (max-width:560px){.ag-out{grid-template-columns:1fr}}
+.mkc-fsec{background:#F5F3FF!important}
+.mkc-objw{flex-basis:100%;display:block;margin-bottom:2px}
+.mkc-obj{display:inline-flex;flex-wrap:wrap;align-items:center;gap:6px 10px;max-width:100%;background:var(--ink);color:#fff;border-radius:12px;padding:8px 14px;margin-bottom:4px}
+.mkc-obj small{font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+.mkc-obj b{font-size:clamp(14px,1.15vw,16px);font-weight:800;color:var(--lime);letter-spacing:0;text-transform:none}
+.mkc-obj i{font-style:normal;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);background:var(--lime);border-radius:999px;padding:3px 9px}
+.mkc-geo{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;margin-top:6px;padding:12px 18px;border-left:5px solid var(--lime);background:#fff;border-radius:12px;font-size:clamp(15px,1.2vw,17px);color:#4A4380;max-width:900px}
+.mkc-geo b{color:var(--ink);font-weight:800}
 /* destaque da Venda Sugestiva e formatos em 3 colunas (referência: kit Ambev, nov/2026) */
 .mkc-fmts{grid-template-columns:repeat(3,minmax(0,1fr))!important}
 .mkc-fmts .fcard.mkc-play,.mkc-fmts .fcard.mkc-sug{grid-column:1/-1!important}
@@ -239,19 +238,14 @@ if(st&&cu){st.classList.add('mkc-stats');cu.appendChild(st)}
 var br=document.querySelector('section.band.brands');if(br&&m.parentNode)m.parentNode.insertBefore(br,m.nextSibling);
 /* marcas antes dos formatos: os formatos ganham uma faixa própria logo depois das marcas */
 var fsec=document.createElement('section');fsec.className='band light only-b2c mkc-fsec';fsec.id='mkc-formatos';fsec.setAttribute('aria-label','Formatos de mídia');
-var fw=document.createElement('div');fw.className='wrap';fw.innerHTML='<div class="head"><span class="eyebrow">Formatos</span><h2 class="h2">Do início do pedido ao fechamento da conta</h2><p class="sub">Cinco formatos no tablet da mesa, presentes em toda a jornada do cliente: do cardápio ao pedido e ao fechamento da conta. Vídeo de 10 segundos, banner estático e HTML interativo, com o consumidor de 1 a 2 horas na frente da tela e mais de 400 milhões de impactos por mês.</p></div>';fw.appendChild(list);fsec.appendChild(fw);
+var fw=document.createElement('div');fw.className='wrap';fw.innerHTML='<div class="head"><span class="eyebrow">Formatos</span><h2 class="h2">Do início do pedido ao fechamento da conta</h2><p class="sub">Cinco formatos no tablet da mesa, presentes em toda a jornada do cliente: do cardápio ao pedido e ao fechamento da conta. Vídeo de 10 segundos, banner estático e HTML interativo, com o consumidor de 1 a 2 horas na frente da tela e mais de 400 milhões de impactos por mês.</p><p class="mkc-geo"><b>Precisão geográfica em todos os formatos</b><span>Campanha por região, estado, cidade, culinária e horário. Só onde a sua marca quer estar.</span></p></div>';fw.appendChild(list);fsec.appendChild(fw);
 (br||m).parentNode.insertBefore(fsec,(br||m).nextSibling);
-/* depois dos formatos: o que a Goomer Ads gera para a marca */
-var gs=document.createElement('section');gs.className='band only-b2c mkc-gera';gs.id='mkc-gera';
-gs.innerHTML='<div class="wrap"><div class="head"><span class="eyebrow">O que a mídia entrega</span><h2 class="h2">O que a Goomer Ads gera<br>para a sua marca</h2><p class="sub">Mídia na mesa, no momento de consumo: o consumidor fica de 1 a 2 horas na frente da tela enquanto escolhe, pede e paga. Cada objetivo de campanha tem um formato que entrega.</p></div><div class="ag-out">'+
-'<article><span class="ag-n">01</span><b>Alcance e awareness</b><p>Vídeo de 10s na Tela de Início, intercalado ao cardápio, com mais de 400 milhões de impactos por mês.</p><small>Tela de Início · CPM</small></article>'+
-'<article><span class="ag-n">02</span><b>Interação e leads</b><p>Aba da marca no cardápio com jogo, quiz ou roleta, QR code e captura de cadastro.</p><small>Página Especial · por restaurante</small></article>'+
-'<article><span class="ag-n">03</span><b>Venda no ponto de consumo</b><p>O produto da marca sugerido dentro do pedido, com adição em um toque.</p><small>Venda Sugestiva · CPM</small></article>'+
-'<article><span class="ag-n">04</span><b>Precisão geográfica</b><p>Campanha por região, estado, cidade, culinária e horário. Só onde a sua marca quer estar.</p><small>Geolocalização · todos os formatos</small></article></div></div>';
-fsec.parentNode.insertBefore(gs,fsec.nextSibling);
+/* objetivo de cada formato (o que a mídia entrega) */
+var OBJ={inicio:['Alcance e awareness','CPM'],confirm:['Atenção no momento do pedido','CPM'],conta:['Lembrança no fechamento da conta','CPM'],sug:['Venda no ponto de consumo','CPM'],especial:['Interação e leads','Por restaurante']};
+Array.prototype.forEach.call(list.querySelectorAll('.fcard'),function(c){var o=OBJ[c.dataset.f],tg=c.querySelector('.tags');if(!o||!tg||tg.querySelector('.mkc-obj'))return;var w=document.createElement('span');w.className='mkc-objw';w.innerHTML='<span class="mkc-obj"><small>Objetivo</small><b>'+o[0]+'</b><i>'+o[1]+'</i></span>';tg.insertBefore(w,tg.firstChild)});
 if(fs)fs.classList.add('only-b2b');})();
 (function(){var l=document.querySelector('.mkc-fmts');if(!l)return;var c=l.querySelector('.fcard[data-f="sug"]');if(!c)return;
-c.classList.add('mkc-sug');var tg=c.querySelector('.tags');if(tg&&!tg.querySelector('.mkc-prio')){var t=document.createElement('span');t.className='tag l mkc-prio';t.textContent='Formato prioritário';tg.insertBefore(t,tg.firstChild);var f=tg.querySelector('.tag.l:not(.mkc-prio)');if(f)f.classList.remove('l')}
+c.classList.add('mkc-sug');var tg=c.querySelector('.tags');if(tg&&!tg.querySelector('.mkc-prio')){var t=document.createElement('span');t.className='tag l mkc-prio';t.textContent='Formato prioritário';var ow=tg.querySelector('.mkc-objw');tg.insertBefore(t,ow?ow.nextSibling:tg.firstChild);var f=tg.querySelector('.tag.l:not(.mkc-prio)');if(f)f.classList.remove('l')}
 var dp=c.querySelector(':scope>p');if(dp)dp.textContent='Quando o cliente faz o pedido, o tablet sugere o seu produto antes de enviar para a cozinha. Um toque e ele entra no pedido.';
 var k=document.createElement('div');k.className='mkc-sugk';k.innerHTML='<span class="lb">Case · Venda Sugestiva</span><strong>+30%</strong><span>de crescimento médio nas vendas dos produtos patrocinados</span><small>Produto sugerido no fechamento do pedido, com adição em um toque.</small>';c.appendChild(k);
 var x=document.createElement('div');x.className='mkc-sugx';x.innerHTML='<div><span class="lb">Case · Destaque no cardápio do tablet</span><h4>Rede de food service · unidade em Campinas (SP)</h4><p>Itens ganharam destaque no cardápio digital. Vendas antes e depois da virada, com 42% de penetração do tablet no salão.</p><div class="mkc-bars">'+
