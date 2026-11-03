@@ -2,6 +2,9 @@
 """Transforma o media kit aberto na versão **Compartilhar** (a que vai para o cliente).
 
 Uso: python3 _modelo/media-kit/compartilhar.py <arquivo.html> [<arquivo.html> ...]
+     python3 _modelo/media-kit/compartilhar.py --apresentacao <arquivo.html>
+     (--apresentacao aplica só o layout novo, itens 3 e 4, mantendo números e mapa interativo:
+      é o que o modelo de Apresentação usa. Rodar de novo atualiza o bloco dos formatos.)
 
 1. Tira os números por cidade e por restaurante (mesmo que sem_numeros.py).
 2. Mapa fixo, como no kit da Jota: Brasil inteiro com os pontos e os números gerais
@@ -230,18 +233,8 @@ if('IntersectionObserver' in window){new IntersectionObserver(function(e,o){e.fo
 </script>'''
 
 
-def compartilhar(s):
-    s, _ = limpar(s)
-    # sem filtro e sem card de culinária
-    k = '<h3>Culinária</h3>'
-    if k in s:
-        i = s.index(k); j = s.rfind('<div style="display:grid;gap:8px">', 0, i)
-        if j >= 0 and i - j < 200:
-            s = s[:j] + '<div style="display:grid;gap:8px" hidden>' + s[j + len('<div style="display:grid;gap:8px">'):]
-    s = s.replace('<div><b>Tipo de culinária</b><p>', '<div hidden><b>Tipo de culinária</b><p>')
-    if MARCA not in s and '/*jota-mapa*/' not in s:
-        i = s.lower().rfind('</body>')
-        s = s[:i] + MAPCSS + s[i:] if i >= 0 else s + MAPCSS
+def layout(s):
+    """O layout novo do kit (vale para Apresentação e Compartilhar): tudo menos números e mapa."""
     # sem o pop-up "Conheça a Goomer" ao abrir
     s = s.replace("setTimeout(()=>open('ask'),600);", '')
     # "Por que Goomer Ads · Mídia inovadora": título com o primeiro formato de mídia na mesa
@@ -256,19 +249,37 @@ def compartilhar(s):
                   '<br><strong class="mkc-maior">O maior inventário de DOOH do food service no Brasil.</strong></p>', 1)
     # um tablet para cada 2 pessoas
     s = s.replace('<b>1:4</b><span>um tablet para 4 pessoas</span>', '<b>1:2</b><span>um tablet para cada 2 pessoas</span>')
-    # formatos um por um logo abaixo do texto
-    if MARCA2 not in s:
-        i = s.lower().rfind('</body>')
-        s = s[:i] + FMTCSS + FMTJS + s[i:] if i >= 0 else s + FMTCSS + FMTJS
+    # formatos: tira a versão anterior do bloco (se houver) e põe a atual
+    s = re.sub(r'<style>/\*mk-compartilhar-formatos\*/.*?</style>', '', s, flags=re.S)
+    s = re.sub(r'<script>/\*mk-compartilhar-formatos-js\*/.*?</script>', '', s, flags=re.S)
+    i = s.lower().rfind('</body>')
+    s = s[:i] + FMTCSS + FMTJS + s[i:] if i >= 0 else s + FMTCSS + FMTJS
     return s
+
+
+def compartilhar(s):
+    s, _ = limpar(s)
+    # sem filtro e sem card de culinária
+    k = '<h3>Culinária</h3>'
+    if k in s:
+        i = s.index(k); j = s.rfind('<div style="display:grid;gap:8px">', 0, i)
+        if j >= 0 and i - j < 200:
+            s = s[:j] + '<div style="display:grid;gap:8px" hidden>' + s[j + len('<div style="display:grid;gap:8px">'):]
+    s = s.replace('<div><b>Tipo de culinária</b><p>', '<div hidden><b>Tipo de culinária</b><p>')
+    if MARCA not in s and '/*jota-mapa*/' not in s:
+        i = s.lower().rfind('</body>')
+        s = s[:i] + MAPCSS + s[i:] if i >= 0 else s + MAPCSS
+    return layout(s)
 
 
 if __name__ == '__main__':
     ok = True
-    for p in sys.argv[1:]:
-        s = compartilhar(open(p, encoding='utf-8').read())
-        e = conferir(s)
-        if MARCA not in s and '/*jota-mapa*/' not in s:
+    apres = '--apresentacao' in sys.argv
+    for p in [a for a in sys.argv[1:] if not a.startswith('--')]:
+        s = open(p, encoding='utf-8').read()
+        s = layout(s) if apres else compartilhar(s)
+        e = [] if apres else conferir(s)
+        if not apres and MARCA not in s and '/*jota-mapa*/' not in s:
             e.append('mapa fixo não entrou')
         if "setTimeout(()=>open('ask'),600)" in s:
             e.append('pop-up Conheça a Goomer ainda abre sozinho')
