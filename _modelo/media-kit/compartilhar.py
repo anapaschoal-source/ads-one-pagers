@@ -111,11 +111,16 @@ FMTCSS = '<style>' + MARCA2 + '''
 .mkc-go{border:0;cursor:pointer;font:inherit}
 .band.cuis .mkc-stats{margin-top:clamp(28px,5vh,56px)}
 .band.cuis .mkc-stats .stat{padding:clamp(14px,2.2vh,26px) clamp(16px,1.8vw,24px)}
-.band.cuis .mkc-stats{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.16)}
-.band.cuis .mkc-stats .stat{background:var(--ink)}
-.band.cuis .mkc-stats .stat b{font-size:clamp(34px,5.2vh,56px);color:var(--lime)}
-.band.cuis .mkc-stats .stat span{color:#fff}
-.band.cuis .mkc-stats .stat small{color:rgba(255,255,255,.68)}
+/* seções alternando branco e azul: mesa branco, marcas escuro, inventário branco, mapa azul, resultados branco, cobrança azul, contato */
+.band.cuis,#resultados{background:var(--paper)!important;color:var(--ink)!important;--line:rgba(10,0,68,.16);--faint:rgba(10,0,68,.06);--muted:#4A4380}
+.band.cuis .eyebrow,#resultados .eyebrow{color:var(--blue)!important}
+.band.cuis .cb .bar{background:rgba(10,0,68,.1)!important}
+.band.cuis .sub,#resultados .sub{color:#4A4380!important;opacity:1!important}
+#cobranca{background:var(--ink)!important;color:#fff!important;--line:rgba(255,255,255,.18);--faint:rgba(255,255,255,.06);--muted:rgba(255,255,255,.66)}
+#cobranca .eyebrow{color:var(--lime)!important}
+#cobranca .head .sub{color:rgba(255,255,255,.75)!important}
+#cobranca .cb-both b{color:var(--lime)!important}
+#cobranca .cb-both span{color:#fff!important}
 body[data-mode="b2b"] .band.cuis .mkc-stats{display:none}
 .mkc-try{position:absolute;z-index:5;left:50%;top:50%;transform:translate(-50%,-50%);display:inline-flex;align-items:center;gap:10px;background:var(--lime);color:var(--ink);font:800 clamp(14px,1.4vw,17px)/1 var(--body,Manrope),sans-serif;padding:14px 22px;border-radius:999px;box-shadow:0 10px 30px rgba(10,0,68,.35);white-space:nowrap;animation:mkcPulse 1.8s ease-in-out infinite}
 .mkc-try i{font-style:normal;display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--ink);color:var(--lime);font-size:12px}
