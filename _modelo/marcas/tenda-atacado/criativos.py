@@ -59,6 +59,11 @@ PAGES = {
 <h1 style="font-size:62px">Verão com<br>frete grátis</h1>
 <div class="sub" style="font-size:30px">Cupom <span class="hl" style="font-weight:800;font-size:44px">FRETEZERO</span></div>
 <div class="sub" style="font-size:24px">Na 1ª compra a partir de R$ 399</div></div></div>"""),
+    'banner-conta-mk.png': (816, 460, f"""<div class="c" style="width:816px;height:460px"><div class="rays"></div>
+<img src="{VERAO}" style="position:absolute;left:36px;top:150px;width:430px">
+<img class="lg" src="{LOGO}" style="position:absolute;right:44px;top:150px;width:250px">
+<div style="position:absolute;left:0;right:0;bottom:0;height:120px;background:#EE2E24;display:flex;align-items:center;justify-content:center;gap:22px;font-family:B,sans-serif;color:#fff">
+<span style="font-weight:800;font-size:54px">Frete grátis:</span><span style="font-weight:800;font-size:62px;color:#FFE15A">FRETEZERO</span></div></div>"""),
     'banner-b2b.png': (1500, 200, f"""<div class="c" style="width:1500px;height:200px"><div class="rays" style="background:repeating-conic-gradient(from 0deg at 12% 50%,rgba(255,255,255,.12) 0 6deg,rgba(255,255,255,0) 6deg 18deg)"></div>
 <img src="{VERAO}" style="position:absolute;left:40px;top:20px;width:340px">
 <img class="lg" src="{LOGO}" style="position:absolute;left:410px;top:38px;height:124px">

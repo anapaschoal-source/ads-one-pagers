@@ -108,8 +108,9 @@ def tela_especial(s):
     return s[:k] + img + s[k:]
 
 
-for path in sys.argv[1:]:
-    s = open(path, encoding='utf-8').read()
-    s = tela_especial(hero_tablet(painel(dellys(s))))
-    open(path, 'w', encoding='utf-8').write(s)
-    print(path, 'ok')
+if __name__ == '__main__':
+    for path in sys.argv[1:]:
+        s = open(path, encoding='utf-8').read()
+        s = tela_especial(hero_tablet(painel(dellys(s))))
+        open(path, 'w', encoding='utf-8').write(s)
+        print(path, 'ok')

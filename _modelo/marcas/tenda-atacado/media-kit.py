@@ -2,7 +2,8 @@
 Uso (na raiz do repo): python3 _modelo/marcas/tenda-atacado/media-kit.py <modelo-aberto.html> <saida-aberta.html>
 Pré-requisitos: criativos.py e build-jogo.py já rodados (banner-confirmacao.png, banner-b2b.png, tenda-atacado/jogo/index.html).
 Troca: título, logo do topo, Confirmação de Pedido, Banner B2B, Página Especial (jogo Carrinho de Verão),
-logo da Dellys na grade de anunciantes, assinatura só da Ana. Cases reais (Wickbold, BTG, Coca-Cola Zero) ficam.
+logo da Dellys na grade de anunciantes, assinatura só da Ana, Tela de Início (vídeo do KV) e Minha Conta (FRETEZERO).
+Case real que fica: Venda Sugestiva (Coca-Cola Zero).
 A foto da mesa é trocada depois com _modelo/media-kit/tela_tablet.py."""
 import sys, os, re, io, base64, glob
 from PIL import Image, ImageDraw, ImageFont
@@ -105,6 +106,36 @@ assert n == 1
 s, n = re.subn(r'\s*<div class="sig" data-sig="joao">.*?</div>\s*</div>\s*</div>(?=\s*</div>\s*<p class="note">)', '', s, count=1, flags=re.S)
 assert n == 1, 'assinatura do João não encontrada'
 s = s.replace('?subject=Goomer%20Ads"', '?subject=Goomer%20Ads%20%C3%97%20Tenda%20Atacado"')
+
+# 7. Tela de Início: vídeo de 10s com o KV de verão (tela-inicio.mp4/.webm); deixa de ser case real
+vi = s.index('<video class="tv"'); ve = s.index('</video>', vi); blk = s[vi:ve]
+vid = lambda ext: f'data:video/{ext};base64,' + base64.b64encode(open(os.path.join(D, f'tela-inicio.{ext}'), 'rb').read()).decode()
+blk, nw = re.subn(r'<source src="data:[^"]+" type="video/webm">', lambda m: f'<source src="{vid("webm")}" type="video/webm">', blk, count=1)
+blk, nm = re.subn(r'<source src="data:[^"]+" type="video/mp4">', lambda m: f'<source src="{vid("mp4")}" type="video/mp4">', blk, count=1)
+assert nw == nm == 1
+blk = blk.replace('aria-label="Publicidade de 10 segundos exibida na Tela de Início"', 'aria-label="Vídeo de 10 segundos do Tenda Atacado na Tela de Início"')
+s = s[:vi] + blk + s[ve:]
+assert '<div class="scr real case vreal">' in s
+s = s.replace('<div class="scr real case vreal">', '<div class="scr real vreal">', 1)
+
+# 8. Minha Conta: banner FRETEZERO de verão (banner-conta.png) no lugar do BTG; deixa de ser case real
+u = re.search(r'<img class="mcscr" src="(data:image/[a-z]+;base64,[^"]+)"', s).group(1); mc = load_uri(u)
+bc = Image.open(os.path.join(D, 'banner-conta-mk.png')).convert('RGBA'); bc = bc.resize((204, round(bc.height * 204 / bc.width)), Image.LANCZOS)
+mc.paste(bc, (479, 49), rounded(bc, 8))
+s = s.replace(u, webp(mc), 1)
+s = s.replace('.vs .mchl{z-index:4;left:68.8%;top:12%;width:29.3%;height:28.3%;', f'.vs .mchl{{z-index:4;left:68.8%;top:12%;width:29.3%;height:{bc.height / 407 * 100:.1f}%;', 1)
+i = s.index('<img class="mcscr"'); j = s.rfind('<div class="scr real case">', 0, i)
+assert j > 0
+s = s[:j] + '<div class="scr real">' + s[j + len('<div class="scr real case">'):]
+s = re.sub(r'(<img class="mcscr" src="[^"]+" alt=")[^"]*"', r'\1Tela Minha Conta com a conta da mesa e o banner de verão do Tenda Atacado"', s, count=1)
+
+# 9. Banner Home B2B: animação do cursor clicando no banner e abrindo o site do Tenda Atacado (tela ilustrativa)
+import importlib.util
+spec = importlib.util.spec_from_file_location('tenda_pos', os.path.join(D, 'pos-build.py')); pb = importlib.util.module_from_spec(spec); spec.loader.exec_module(pb)
+i = s.index("{id:'b2b'"); j = s.index('<span class="hl"', i); k = s.index('</span></div></div></div>`', j) + len('</span>')
+s = s[:k] + pb.site() + s[k:]
+css = pb.CSS.replace('.panel{container-type:inline-size}', '.bimg{container-type:inline-size;overflow:hidden}.bimg .tsite .ts-hd img{width:auto}.bimg .tsite{inset:2% 4%}.bimg .tsite .ts-hero{margin-top:.8cqw}.bimg .tsite .ts-h{margin:.8cqw 2.2cqw .5cqw}')
+s = s.replace('</head>', css.replace('/*tenda-site*/', '/*tenda-site-mk*/') + '</head>', 1)
 
 open(out, 'w', encoding='utf-8').write(s)
 print('ok:', out, len(s) // 1024, 'KB')
