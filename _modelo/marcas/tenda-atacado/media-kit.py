@@ -138,7 +138,7 @@ css = pb.CSS.replace('.panel{container-type:inline-size}', '.bimg{container-type
 s = s.replace('</head>', css.replace('/*tenda-site*/', '/*tenda-site-mk*/') + '</head>', 1)
 
 # 10. Modo B2B: sem a faixa de anunciantes e com o formato (Banner Home B2B) logo no início
-B2BJS = """<style>/*tenda-b2b*/body[data-mode="b2b"] .band.brands{display:none!important}</style>
+B2BJS = """<style>/*tenda-b2b*/body[data-mode="b2b"] .band.brands{display:none!important}body[data-mode="b2b"] .fcard .thumb{width:100%!important;max-width:1180px;margin:0 auto}body[data-mode="b2b"] .fcard .thumb .real{max-width:none}</style>
 <script>/*tenda-b2b*/(function(){var b=document.body,f=document.getElementById('formatos'),h=document.querySelector('header.top'),ph=document.createComment('formatos');
 if(!f||!h)return;f.parentNode.insertBefore(ph,f);
 function upd(){if(b.dataset.mode==='b2b'){if(h.nextElementSibling!==f)h.after(f)}else if(ph.nextSibling!==f){ph.after(f)}}
