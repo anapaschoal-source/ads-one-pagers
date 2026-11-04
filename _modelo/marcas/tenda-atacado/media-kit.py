@@ -137,5 +137,13 @@ s = s[:k] + pb.site() + s[k:]
 css = pb.CSS.replace('.panel{container-type:inline-size}', '.bimg{container-type:inline-size;overflow:hidden}.bimg .tsite .ts-hd img{width:auto}.bimg .tsite{inset:2% 4%}.bimg .tsite .ts-hero{margin-top:.8cqw}.bimg .tsite .ts-h{margin:.8cqw 2.2cqw .5cqw}')
 s = s.replace('</head>', css.replace('/*tenda-site*/', '/*tenda-site-mk*/') + '</head>', 1)
 
+# 10. Modo B2B: sem a faixa de anunciantes e com o formato (Banner Home B2B) logo no início
+B2BJS = """<style>/*tenda-b2b*/body[data-mode="b2b"] .band.brands{display:none!important}</style>
+<script>/*tenda-b2b*/(function(){var b=document.body,f=document.getElementById('formatos'),h=document.querySelector('header.top'),ph=document.createComment('formatos');
+if(!f||!h)return;f.parentNode.insertBefore(ph,f);
+function upd(){if(b.dataset.mode==='b2b'){if(h.nextElementSibling!==f)h.after(f)}else if(ph.nextSibling!==f){ph.after(f)}}
+new MutationObserver(upd).observe(b,{attributes:true,attributeFilter:['data-mode']});upd()})();</script>"""
+s = s.replace('</body>', B2BJS + '</body>', 1) if '</body>' in s else s + B2BJS
+
 open(out, 'w', encoding='utf-8').write(s)
 print('ok:', out, len(s) // 1024, 'KB')
