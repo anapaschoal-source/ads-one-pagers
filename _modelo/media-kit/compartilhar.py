@@ -5,6 +5,8 @@ Uso: python3 _modelo/media-kit/compartilhar.py <arquivo.html> [<arquivo.html> ..
      python3 _modelo/media-kit/compartilhar.py --apresentacao <arquivo.html>
      (--apresentacao aplica só o layout novo, itens 3 e 4, mantendo números e mapa interativo:
       é o que o modelo de Apresentação usa. Rodar de novo atualiza o bloco dos formatos.)
+     --nao-endemica / --endemica: Venda Sugestiva compacta (sem cases) ou em destaque. Sem a opção,
+      mantém o que o arquivo já tinha (padrão: em destaque).
 
 1. Tira os números por cidade e por restaurante (mesmo que sem_numeros.py).
 2. Mapa fixo, como no kit da Jota: Brasil inteiro com os pontos e os números gerais
@@ -26,6 +28,9 @@ Uso: python3 _modelo/media-kit/compartilhar.py <arquivo.html> [<arquivo.html> ..
    anunciam vêm logo depois do "Por que Goomer Ads" e antes dos formatos, que ganham faixa própria;
    cada formato traz o objetivo que entrega (selo "Objetivo") e o topo dos formatos tem a linha
    "Precisão geográfica em todos os formatos".
+   Cada formato traz "O que você mede" (KPIs de mensuração) e só o selo do objetivo (Venda Sugestiva
+   também "Retail Media"). Só na Compartilhar: ficha técnica em cada formato e "Como combinar" no fim.
+   No celular, um formato por vez (arrastando para o lado, com setas e pontos).
    A seção "Formatos" fica só para o modo B2B.
 Pode rodar mais de uma vez. Rode no HTML aberto, antes do senha.py.
 """
@@ -207,6 +212,63 @@ body[data-mode="b2b"] .band.cuis .mkc-stats{display:none}
 .mkc-fmts .fcard .tags .tag{font-size:13.5px!important;padding:6px 12px!important;letter-spacing:.06em!important}
 .mkc-sugx .nt{grid-column:1/-1;font-size:11.5px;color:#6B6699}
 @media (max-width:900px){.mkc-fmts{grid-template-columns:minmax(0,1fr)!important}.mkc-fmts .fcard.mkc-sug{grid-template-columns:minmax(0,1fr)!important;grid-template-areas:"t" "g" "n" "d" "k" "x"!important}.mkc-sugx{grid-template-columns:minmax(0,1fr)}.mkc-bar{grid-template-columns:110px 1fr 52px;font-size:13px}}
+/* nov/2026: KPIs de mensuração, ficha técnica (só envio), selos enxutos, Venda Sugestiva compacta (não endêmica), combinações (só envio) e carrossel no celular */
+.mkc-objw{display:block!important;width:100%}
+.mkc-obj{display:flex!important;flex-wrap:nowrap!important;width:100%;box-sizing:border-box;align-items:center}
+.mkc-obj b{flex:1 1 auto;min-width:0;line-height:1.25}
+.mkc-obj i{flex:0 0 auto;margin-left:auto;white-space:nowrap}
+.mkc-fmts .fcard .tags .tag.l{background:var(--lime)!important;border-color:var(--lime)!important;color:var(--ink)!important}
+.mkc-fmts .fcard .mkc-kpi{grid-area:q}
+.mkc-fmts .fcard .mkc-spec{grid-area:e}
+.mkc-kpi,.mkc-spec{display:grid;gap:8px;margin-top:2px}
+.mkc-kpi .lb,.mkc-spec .lb,.mkc-combo .lb{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+.mkc-kpi ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.mkc-kpi li{font-size:clamp(13px,1.05vw,14.5px);font-weight:700;color:var(--ink);background:#EEEBFF;border-radius:999px;padding:5px 12px;line-height:1.3}
+.mkc-spec{align-content:start;background:#F7F6FC;border:1px solid rgba(10,0,68,.1);border-radius:14px;padding:12px 16px;margin:0}
+.mkc-spec>div{display:grid;grid-template-columns:96px minmax(0,1fr);gap:10px;font-size:clamp(13px,1.05vw,14.5px);line-height:1.4}
+.mkc-spec dt{font-weight:800;color:#4A4380;margin:0}
+.mkc-spec dd{margin:0;color:var(--ink);font-weight:600}
+.mkc-fmts .fcard:not(.mkc-play):not(.mkc-sug){grid-template-areas:"t" "g" "n" "d" "q" "e"!important}
+.mkc-fmts .fcard.mkc-play{grid-template-areas:"t s1" "t g" "t n" "t d" "t q" "t e" "t m" "t s2"!important;grid-template-rows:1fr repeat(6,auto) 1fr!important;align-items:start!important}
+@media (min-width:901px){.mkc-fmts .fcard.mkc-sug:not(.mkc-sugc){grid-template-areas:"t s1" "t g" "t n" "t d" "t q" "t k" "t e" "t s2" "x x"!important;grid-template-rows:1fr repeat(6,auto) 1fr auto!important}}
+@media (min-width:901px){@supports (grid-template-rows:subgrid){.mkc-fmts .fcard:not(.mkc-play):not(.mkc-sug){grid-row:span 6;grid-template-rows:subgrid!important;row-gap:12px}}}
+/* Venda Sugestiva compacta (marca não endêmica): card menor, sem cases */
+.mkc-fmts .fcard.mkc-sug.mkc-sugc{border:1px solid rgba(10,0,68,.14)!important;box-shadow:none!important;grid-template-columns:minmax(0,.72fr) minmax(0,1fr)!important;grid-template-areas:"t s1" "t g" "t n" "t d" "t q" "t s2"!important;grid-template-rows:1fr repeat(4,auto) 1fr!important;padding:clamp(16px,2vw,28px)!important}
+.mkc-fmts .fcard.mkc-sug.mkc-sugc>b{font-size:clamp(26px,2.6vw,38px)!important}
+.mkc-fmts .fcard.mkc-sug.mkc-sugc>p{font-size:clamp(15px,1.3vw,17px)!important}
+.mkc-fmts .fcard.mkc-sug.mkc-sugc .thumb{max-width:440px}
+/* combinações por objetivo (só envio) */
+.mkc-combo{display:grid;gap:12px;margin-top:clamp(8px,2vh,20px)}
+.mkc-combo h3{margin:0;font-family:var(--display);text-transform:uppercase;font-size:clamp(26px,2.6vw,40px);line-height:1.05;color:var(--ink)}
+.mkc-combo .cg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:6px}
+.mkc-combo .cc{background:#fff;border:1px solid rgba(10,0,68,.12);border-radius:18px;padding:18px 20px;display:grid;gap:8px;align-content:start;position:relative;overflow:hidden}
+.mkc-combo .cc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--lime)}
+.mkc-combo .cc small{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#4A4380}
+.mkc-combo .cc b{font-size:clamp(17px,1.5vw,21px);font-weight:800;color:var(--ink);line-height:1.25}
+.mkc-combo .cc span{font-size:clamp(14px,1.15vw,16px);color:#4A4380;line-height:1.45}
+.mkc-nav{display:none}
+@media (max-width:900px){
+ .mkc-fmts .fcard.mkc-play{grid-template-columns:minmax(0,1fr)!important;grid-template-areas:"t" "g" "n" "d" "q" "e" "m"!important;grid-template-rows:none!important}
+ .mkc-fmts .fcard.mkc-sug:not(.mkc-sugc){grid-template-areas:"t" "g" "n" "d" "q" "k" "e" "x"!important;grid-template-rows:none!important}
+ .mkc-fmts .fcard.mkc-sug.mkc-sugc{grid-template-columns:minmax(0,1fr)!important;grid-template-areas:"t" "g" "n" "d" "q"!important;grid-template-rows:none!important}
+ .mkc-combo .cg{grid-template-columns:minmax(0,1fr)}
+}
+/* celular: um formato por vez, arrastando para o lado */
+@media (max-width:760px){
+ .mkc-fsec{overflow:hidden}
+ .mkc-fmts{display:flex!important;overflow-x:auto;overflow-y:hidden;transition:height .3s ease;scroll-snap-type:x mandatory;gap:12px!important;margin:0 calc(-1 * var(--gutter,16px));padding:4px var(--gutter,16px) 10px;scrollbar-width:none;-webkit-overflow-scrolling:touch;align-items:flex-start}
+ .mkc-fmts::-webkit-scrollbar{display:none}
+ .mkc-fmts>.fcard{flex:0 0 88%;min-width:0;scroll-snap-align:center;scroll-snap-stop:always}
+ .mkc-nav{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:-4px}
+ .mkc-nav .mid{display:flex;align-items:center;gap:12px}
+ .mkc-nav button{border:0;cursor:pointer;width:40px;height:40px;border-radius:50%;background:var(--ink);color:var(--lime);font:800 18px/1 var(--body,Manrope),sans-serif}
+ .mkc-nav button:disabled{opacity:.3}
+ .mkc-nav .dots{display:flex;gap:8px}
+ .mkc-nav .dots i{width:8px;height:8px;border-radius:50%;background:rgba(10,0,68,.2);transition:width .2s}
+ .mkc-nav .dots i.on{width:22px;border-radius:4px;background:var(--blue)}
+ .mkc-obj{flex-wrap:wrap!important}.mkc-obj b{flex-basis:calc(100% - 90px)}.mkc-obj i{margin-left:0}
+ .mkc-nav .ct{font-size:13px;font-weight:800;color:var(--ink);min-width:44px;text-align:center}
+}
 ''' + '</style>'
 FMTJS = '''<script>/*mk-compartilhar-formatos-js*/
 (function(){var m=document.getElementById('mesa'),fc=document.getElementById('fcards'),fs=document.getElementById('formatos');
@@ -238,26 +300,66 @@ if(st&&cu){st.classList.add('mkc-stats');cu.appendChild(st)}
 var br=document.querySelector('section.band.brands');if(br&&m.parentNode)m.parentNode.insertBefore(br,m.nextSibling);
 /* marcas antes dos formatos: os formatos ganham uma faixa própria logo depois das marcas */
 var fsec=document.createElement('section');fsec.className='band light only-b2c mkc-fsec';fsec.id='mkc-formatos';fsec.setAttribute('aria-label','Formatos de mídia');
-var fw=document.createElement('div');fw.className='wrap';fw.innerHTML='<div class="head"><span class="eyebrow">Formatos</span><h2 class="h2">Do início do pedido ao fechamento da conta</h2><p class="sub">Cinco formatos no tablet da mesa, presentes em toda a jornada do cliente: do cardápio ao pedido e ao fechamento da conta. Vídeo de 10 segundos, banner estático e HTML interativo, com o consumidor de 1 a 2 horas na frente da tela e mais de 400 milhões de impactos por mês.</p><p class="mkc-geo"><b>Precisão geográfica em todos os formatos</b><span>Campanha por região, estado, cidade, culinária e horário. Só onde a sua marca quer estar.</span></p></div>';fw.appendChild(list);fsec.appendChild(fw);
+var fw=document.createElement('div');fw.className='wrap';fw.innerHTML='<div class="head"><span class="eyebrow">Formatos</span><h2 class="h2">Do início do pedido ao fechamento da conta</h2><p class="sub">Cinco formatos no tablet da mesa, em toda a jornada do cliente: do cardápio ao pedido e ao fechamento da conta.</p><p class="mkc-geo"><b>Precisão geográfica em todos os formatos</b><span>Campanha por região, estado, cidade, culinária e horário. Só onde a sua marca quer estar.</span></p></div>';fw.appendChild(list);fsec.appendChild(fw);
 (br||m).parentNode.insertBefore(fsec,(br||m).nextSibling);
 /* objetivo de cada formato (o que a mídia entrega) */
 var OBJ={inicio:['Alcance e awareness','CPM'],confirm:['Atenção no momento do pedido','CPM'],conta:['Lembrança no fechamento da conta','CPM'],sug:['Venda no ponto de consumo','CPM'],especial:['Interação e leads','Por restaurante']};
 Array.prototype.forEach.call(list.querySelectorAll('.fcard'),function(c){var o=OBJ[c.dataset.f],tg=c.querySelector('.tags');if(!o||!tg||tg.querySelector('.mkc-obj'))return;var w=document.createElement('span');w.className='mkc-objw';w.innerHTML='<span class="mkc-obj"><small>Objetivo</small><b>'+o[0]+'</b><i>'+o[1]+'</i></span>';tg.insertBefore(w,tg.firstChild)});
+var CFG=window.MKC||{};
+Array.prototype.forEach.call(list.querySelectorAll('.fcard'),function(c){Array.prototype.forEach.call(c.querySelectorAll('.tags .tag'),function(t){if(c.dataset.f==='sug'&&/retail/i.test(t.textContent)){t.className='tag l'}else t.remove()})});
+var KPI={inicio:['Impressões','Pessoas impactadas','Entrega por praça e culinária'],confirm:['Impressões','Pessoas impactadas','Leitura de QR Code'],conta:['Impressões','Pessoas impactadas','Leitura de QR Code'],sug:['Exibições da sugestão','Adições ao pedido','Vendas por SKU'],especial:['Acessos à página','Interações','Leads e cupons']};
+var SPEC={inicio:[['Peça','Vídeo de 10 segundos, sem áudio'],['Tamanho','16:9 · 1920×1080 px'],['Arquivo','MP4'],['Ocupação','Até 6 marcas por restaurante, em rodízio']],
+confirm:[['Peça','Banner estático'],['Tamanho','876×507 px'],['Arquivo','PNG ou JPG'],['Ocupação','1 marca por restaurante']],
+conta:[['Peça','Banner estático'],['Tamanho','16:9 · 204×115 px'],['Arquivo','PNG ou JPG'],['Ocupação','1 marca por restaurante']],
+sug:[['Peça','Foto do produto (PNG sem fundo), nome, descrição curta e preço'],['Ocupação','1 marca por categoria de produto']],
+especial:[['Peça','Página em HTML interativo: jogo, quiz, cupom ou cadastro'],['Tamanho','1280×800 px'],['Ocupação','1 marca por restaurante, em todos os tablets'],['Cobrança','Por restaurante e período']]};
+Array.prototype.forEach.call(list.querySelectorAll('.fcard'),function(c){var id=c.dataset.f,k=KPI[id],p=c.querySelector(':scope>p');if(!k||c.querySelector('.mkc-kpi'))return;
+  var q=document.createElement('div');q.className='mkc-kpi';q.innerHTML='<span class="lb">O que você mede</span><ul>'+k.map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul>';
+  if(p)p.parentNode.insertBefore(q,p.nextSibling);else c.appendChild(q);
+  if(CFG.envio&&SPEC[id]&&!(id==='sug'&&CFG.vsc)){var e=document.createElement('dl');e.className='mkc-spec';e.innerHTML='<span class="lb">Especificações</span>'+SPEC[id].map(function(r){return '<div><dt>'+r[0]+'</dt><dd>'+r[1]+'</dd></div>'}).join('');q.parentNode.insertBefore(e,q.nextSibling)}});
+/* combinações por objetivo (só envio) */
+if(CFG.envio){var cb=document.createElement('div');cb.className='mkc-combo';
+  var CC=[['Alcance e awareness','Tela de Início + Minha Conta','A marca abre e fecha a visita do cliente ao restaurante.'],['Engajamento e leads','Tela de Início + Página Especial','O vídeo chama a atenção e a página especial transforma em interação e cadastro.'],
+  CFG.vsc?['Presença na jornada toda','Tela de Início + Confirmação de Pedido + Minha Conta','Do cardápio ao fechamento da conta, nos três momentos de maior atenção.']:['Venda no ponto de consumo','Venda Sugestiva + Confirmação de Pedido','O produto é sugerido no pedido e a marca aparece de novo quando ele vai para a cozinha.']];
+  cb.innerHTML='<span class="lb">Como combinar</span><h3>Formatos que funcionam juntos</h3><div class="cg">'+CC.map(function(r){return '<div class="cc"><small>'+r[0]+'</small><b>'+r[1]+'</b><span>'+r[2]+'</span></div>'}).join('')+'</div>';fw.appendChild(cb)}
+/* celular: um formato por vez */
+(function(){var cs=list.querySelectorAll(':scope>.fcard');if(cs.length<2)return;var nv=document.createElement('div');nv.className='mkc-nav';
+  nv.innerHTML='<span class="ct"></span><span class="mid"><span class="dots">'+Array.prototype.map.call(cs,function(){return '<i></i>'}).join('')+'</span></span><span class="mid"><button type="button" class="pv" aria-label="Formato anterior">‹</button><button type="button" class="nx" aria-label="Próximo formato">›</button></span>';
+  list.parentNode.insertBefore(nv,list);var ds=nv.querySelectorAll('.dots i'),ct=nv.querySelector('.ct'),pv=nv.querySelector('.pv'),nx=nv.querySelector('.nx');
+  function idx(){var b=list.getBoundingClientRect(),m=b.left+b.width/2,best=0,bd=1e9;Array.prototype.forEach.call(cs,function(c,i){var r=c.getBoundingClientRect(),d=Math.abs(r.left+r.width/2-m);if(d<bd){bd=d;best=i}});return best}
+  var mq=window.matchMedia('(max-width:760px)');function alt(){if(!mq.matches){list.style.height='';return}var c=cs[idx()];list.style.height=(c.offsetHeight+14)+'px'}
+  function upd(){var i=idx();alt();Array.prototype.forEach.call(ds,function(d,j){d.classList.toggle('on',j===i)});ct.textContent=(i+1)+' de '+cs.length;pv.disabled=i===0;nx.disabled=i===cs.length-1}
+  function go(i){i=Math.max(0,Math.min(cs.length-1,i));list.scrollTo({left:cs[i].offsetLeft-(list.clientWidth-cs[i].offsetWidth)/2,behavior:'smooth'})}
+  pv.onclick=function(){go(idx()-1)};nx.onclick=function(){go(idx()+1)};var tm;list.addEventListener('scroll',function(){clearTimeout(tm);tm=setTimeout(upd,60)},{passive:true});
+  if(window.ResizeObserver){var ro=new ResizeObserver(function(){alt()});Array.prototype.forEach.call(cs,function(c){ro.observe(c)})}window.addEventListener('resize',upd);upd()})();
 if(fs)fs.classList.add('only-b2b');})();
 (function(){var l=document.querySelector('.mkc-fmts');if(!l)return;var c=l.querySelector('.fcard[data-f="sug"]');if(!c)return;
-c.classList.add('mkc-sug');var tg=c.querySelector('.tags');if(tg&&!tg.querySelector('.mkc-prio')){var t=document.createElement('span');t.className='tag l mkc-prio';t.textContent='Formato prioritário';var ow=tg.querySelector('.mkc-objw');tg.insertBefore(t,ow?ow.nextSibling:tg.firstChild);var f=tg.querySelector('.tag.l:not(.mkc-prio)');if(f)f.classList.remove('l')}
-var dp=c.querySelector(':scope>p');if(dp)dp.textContent='Quando o cliente faz o pedido, o tablet sugere o seu produto antes de enviar para a cozinha. Um toque e ele entra no pedido.';
-var k=document.createElement('div');k.className='mkc-sugk';k.innerHTML='<span class="lb">Case · Venda Sugestiva</span><strong>+30%</strong><span>de crescimento médio nas vendas dos produtos patrocinados</span><small>Produto sugerido no fechamento do pedido, com adição em um toque.</small>';c.appendChild(k);
+c.classList.add('mkc-sug');var dp=c.querySelector(':scope>p');
+if((window.MKC||{}).vsc){c.classList.add('mkc-sugc');if(dp)dp.textContent='Quando o cliente faz o pedido, o tablet sugere um produto antes de enviar para a cozinha. Formato exclusivo para indústrias de bebidas, alimentos e ingredientes.';return}
+if(dp)dp.textContent='Quando o cliente faz o pedido, o tablet sugere o seu produto antes de enviar para a cozinha. Um toque e ele entra no pedido.';
+var kq=c.querySelector('.mkc-kpi');
+var k=document.createElement('div');k.className='mkc-sugk';k.innerHTML='<span class="lb">Case · Venda Sugestiva</span><strong>+30%</strong><span>de crescimento médio nas vendas dos produtos patrocinados</span><small>Produto sugerido no fechamento do pedido, com adição em um toque.</small>';if(kq)kq.parentNode.insertBefore(k,kq.nextSibling);else c.appendChild(k);
 var x=document.createElement('div');x.className='mkc-sugx';x.innerHTML='<div><span class="lb">Case · Destaque no cardápio do tablet</span><h4>Rede de food service · unidade em Campinas (SP)</h4><p>Itens ganharam destaque no cardápio digital. Vendas antes e depois da virada, com 42% de penetração do tablet no salão.</p><div class="mkc-bars">'+
 [['Refrigerante zero 500ml',100,'+329%',''],['Suco 500ml',66,'+218%',''],['Refrigerante cola zero 500ml',45,'+148%',''],['Sobremesa',35,'+115%','food'],['Salgado',30,'+100%','food']].map(function(r){return '<div class="mkc-bar '+r[3]+'"><span>'+r[0]+'</span><div class="tr"><i style="--w:'+r[1]+'%"></i></div><b>'+r[2]+'</b></div>'}).join('')+
 '</div></div><div class="mkc-why"><span class="lb">Por que priorizar</span><div><b>Mídia que entra no pedido</b><small>A sugestão aparece quando o cliente já está decidindo o que pedir. Um toque e o produto vai para a cozinha.</small></div><div><b>Exclusivo para indústrias</b><small>Formato pensado para quem vende no food service: bebidas, alimentos e ingredientes.</small></div><div><b>Mensurável por SKU</b><small>Vendas do produto sugerido acompanhadas por restaurante, praça e período.</small></div></div><p class="nt">Cases reais da rede Goomer, apresentados de forma anonimizada. Resultados variam conforme restaurante, praça e período.</p>';c.appendChild(x);
+var sp=c.querySelector('.mkc-spec');if(sp)k.parentNode.insertBefore(sp,k.nextSibling);
 if('IntersectionObserver' in window){new IntersectionObserver(function(e,o){e.forEach(function(z){if(z.isIntersecting){c.classList.add('in');o.disconnect()}})},{threshold:.2}).observe(c)}else c.classList.add('in');
 })();
 </script>'''
 
 
-def layout(s):
-    """O layout novo do kit (vale para Apresentação e Compartilhar): tudo menos números e mapa."""
+CFGRE = r'<script>/\*mk-compartilhar-cfg\*/.*?</script>'
+
+
+def layout(s, envio=False, vsc=None):
+    """O layout novo do kit (vale para Apresentação e Compartilhar): tudo menos números e mapa.
+    envio=True liga a ficha técnica e as combinações (só na Compartilhar).
+    vsc=True deixa a Venda Sugestiva compacta (marca não endêmica); None mantém o que o arquivo já tinha."""
+    if vsc is None:
+        m = re.search(r'/\*mk-compartilhar-cfg\*/window\.MKC=\{envio:\d,vsc:(\d)\}', s)
+        vsc = bool(m and m.group(1) == '1')
+    s = re.sub(CFGRE, '', s, flags=re.S)
+    cfg = '<script>/*mk-compartilhar-cfg*/window.MKC={envio:%d,vsc:%d}</script>' % (1 if envio else 0, 1 if vsc else 0)
     # sem o pop-up "Conheça a Goomer" ao abrir
     s = s.replace("setTimeout(()=>open('ask'),600);", '')
     # "Por que Goomer Ads · Mídia inovadora": título com o primeiro formato de mídia na mesa
@@ -276,11 +378,11 @@ def layout(s):
     s = re.sub(r'<style>/\*mk-compartilhar-formatos\*/.*?</style>', '', s, flags=re.S)
     s = re.sub(r'<script>/\*mk-compartilhar-formatos-js\*/.*?</script>', '', s, flags=re.S)
     i = s.lower().rfind('</body>')
-    s = s[:i] + FMTCSS + FMTJS + s[i:] if i >= 0 else s + FMTCSS + FMTJS
+    s = s[:i] + cfg + FMTCSS + FMTJS + s[i:] if i >= 0 else s + cfg + FMTCSS + FMTJS
     return s
 
 
-def compartilhar(s):
+def compartilhar(s, vsc=None):
     s, _ = limpar(s)
     # sem filtro e sem card de culinária
     k = '<h3>Culinária</h3>'
@@ -292,7 +394,7 @@ def compartilhar(s):
     if MARCA not in s and '/*jota-mapa*/' not in s:
         i = s.lower().rfind('</body>')
         s = s[:i] + MAPCSS + s[i:] if i >= 0 else s + MAPCSS
-    return layout(s)
+    return layout(s, envio=True, vsc=vsc)
 
 
 if __name__ == '__main__':
@@ -300,7 +402,8 @@ if __name__ == '__main__':
     apres = '--apresentacao' in sys.argv
     for p in [a for a in sys.argv[1:] if not a.startswith('--')]:
         s = open(p, encoding='utf-8').read()
-        s = layout(s) if apres else compartilhar(s)
+        vsc = True if '--nao-endemica' in sys.argv else (False if '--endemica' in sys.argv else None)
+        s = layout(s, vsc=vsc) if apres else compartilhar(s, vsc=vsc)
         e = [] if apres else conferir(s)
         if not apres and MARCA not in s and '/*jota-mapa*/' not in s:
             e.append('mapa fixo não entrou')
