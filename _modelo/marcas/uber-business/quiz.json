@@ -1,0 +1,110 @@
+{
+ "marca": "Uber for Business",
+ "titulo_aba": "Quiz Uber for Business",
+ "logo": "logo.png",
+ "logo_branco": true,
+ "foto": "foto.png",
+ "cores": {
+  "cor": "#276EF1",
+  "cor_luz": "#4C8BFF",
+  "cor_escura": "#1550C0",
+  "escura": "#000000",
+  "suave": "#DCE8FF"
+ },
+ "poc": "Protótipo de demonstração, não é um produto oficial da Uber. Nenhuma resposta é armazenada.",
+ "intro": {
+  "selo": "Almoço de negócios · 30s",
+  "titulo": "Como a sua empresa se move?",
+  "texto": "Três perguntas enquanto o pedido não chega, e a Uber mostra o plano de mobilidade para a sua empresa.",
+  "botao": "Começar o quiz",
+  "rodape": "A gente move, seu negócio avança.",
+  "legenda_foto": "Conteúdo meramente ilustrativo"
+ },
+ "perguntas": [
+  {
+   "pergunta": "Quantas pessoas trabalham na sua empresa?",
+   "opcoes": [
+    {
+     "emoji": "🧑‍💼",
+     "texto": "Até 50",
+     "sub": "pequena",
+     "frase": "Para empresas pequenas, a Uber para Empresas começa em minutos, sem mensalidade.",
+     "beneficio": "Cadastro em minutos, sem mensalidade"
+    },
+    {
+     "emoji": "👥",
+     "texto": "51 a 500",
+     "sub": "média",
+     "frase": "Para empresas em crescimento, regras de uso por área e relatórios prontos.",
+     "beneficio": "Regras de uso por equipe e centro de custo"
+    },
+    {
+     "emoji": "🏢",
+     "texto": "Mais de 500",
+     "sub": "grande",
+     "frase": "Para grandes operações, atendimento dedicado e integração com o seu sistema de despesas.",
+     "beneficio": "Gerente de conta dedicado"
+    }
+   ]
+  },
+  {
+   "pergunta": "Como a equipe se desloca hoje?",
+   "opcoes": [
+    {
+     "emoji": "🧾",
+     "texto": "Reembolso",
+     "sub": "nota por nota"
+    },
+    {
+     "emoji": "🚕",
+     "texto": "Táxi ou frota",
+     "sub": "contrato próprio"
+    },
+    {
+     "emoji": "🤷",
+     "texto": "Cada um por si",
+     "sub": "sem política"
+    }
+   ]
+  },
+  {
+   "pergunta": "O que mais pesa para você?",
+   "opcoes": [
+    {
+     "emoji": "📊",
+     "texto": "Controle de gastos",
+     "sub": "",
+     "beneficio": "Fatura única mensal, sem reembolso"
+    },
+    {
+     "emoji": "🛡️",
+     "texto": "Segurança",
+     "sub": "",
+     "beneficio": "Viagens monitoradas pela empresa"
+    },
+    {
+     "emoji": "⏱️",
+     "texto": "Agilidade",
+     "sub": "",
+     "beneficio": "Pedidos para convidados e eventos"
+    }
+   ]
+  }
+ ],
+ "resultado": {
+  "titulo": "A Uber para Empresas move o seu negócio.",
+  "texto": "A Uber que você já usa, agora para a sua empresa.",
+  "beneficios_fixos": [
+   "Também com Uber Eats para refeições da equipe"
+  ],
+  "letra_miuda": "Benefícios ilustrativos, a validar com a marca.",
+  "botao_refazer": "Refazer o quiz",
+  "cartao": {
+   "foto": "cartao.png",
+   "destaque": "",
+   "qr_url": "https://www.uber.com/br/pt-br/business/",
+   "texto": "Aponte a câmera do celular e conheça a Uber para Empresas",
+   "rodape": "Uber para Empresas"
+  }
+ }
+}
