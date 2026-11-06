@@ -1,0 +1,111 @@
+{
+ "marca": "Netflix",
+ "titulo_aba": "Quiz Netflix",
+ "logo": "logo.svg",
+ "logo_branco": true,
+ "foto": "foto.png",
+ "cores": {
+  "cor": "#E50914",
+  "cor_luz": "#FF3B44",
+  "cor_escura": "#8C0610",
+  "escura": "#0B0B0B",
+  "suave": "#FFD9DB"
+ },
+ "poc": "Protótipo de demonstração, não é um produto oficial da Netflix. Nenhuma resposta é armazenada.",
+ "intro": {
+  "selo": "Quiz · 30s",
+  "titulo": "Qual série combina com essa mesa?",
+  "texto": "Três perguntas enquanto o pedido não chega, e a Netflix escolhe a sua próxima maratona.",
+  "rodape": "Planos a partir de R$ 20,90",
+  "botao": "Começar o quiz",
+  "legenda_foto": "Conteúdo meramente ilustrativo"
+ },
+ "perguntas": [
+  {
+   "pergunta": "Quem está na mesa hoje?",
+   "opcoes": [
+    {
+     "emoji": "💑",
+     "texto": "Casal",
+     "sub": "jantar a dois",
+     "frase": "Para a dois, uma série que prende do primeiro ao último episódio.",
+     "beneficio": "Perfis separados para cada um"
+    },
+    {
+     "emoji": "👨‍👩‍👧",
+     "texto": "Família",
+     "sub": "com as crianças",
+     "frase": "Para a família toda, aventura para assistir junto no sofá.",
+     "beneficio": "Perfil infantil com controle dos pais"
+    },
+    {
+     "emoji": "🍻",
+     "texto": "Amigos",
+     "sub": "a turma reunida",
+     "frase": "Para a turma, suspense para comentar no grupo depois.",
+     "beneficio": "Assista em até 2 telas ao mesmo tempo"
+    }
+   ]
+  },
+  {
+   "pergunta": "E o clima?",
+   "opcoes": [
+    {
+     "emoji": "😱",
+     "texto": "Suspense",
+     "sub": "coração acelerado"
+    },
+    {
+     "emoji": "😂",
+     "texto": "Comédia",
+     "sub": "pra rir junto"
+    },
+    {
+     "emoji": "🧙",
+     "texto": "Fantasia",
+     "sub": "outro mundo"
+    }
+   ]
+  },
+  {
+   "pergunta": "Onde você vai assistir?",
+   "opcoes": [
+    {
+     "emoji": "📺",
+     "texto": "Na TV",
+     "sub": "sofá e pipoca",
+     "beneficio": "Aproveite na Smart TV"
+    },
+    {
+     "emoji": "📱",
+     "texto": "No celular",
+     "sub": "no caminho",
+     "beneficio": "Baixe e assista offline"
+    },
+    {
+     "emoji": "💻",
+     "texto": "No notebook",
+     "sub": "onde estiver",
+     "beneficio": "Assista onde quiser"
+    }
+   ]
+  }
+ ],
+ "resultado": {
+  "titulo": "Sua próxima maratona está na Netflix.",
+  "texto": "Escolha a série que combina com você.",
+  "beneficios_fixos": [
+   "Planos a partir de R$ 20,90",
+   "Cancele quando quiser"
+  ],
+  "letra_miuda": "Sugestão a validar com a marca.",
+  "cartao": {
+   "foto": "foto.png",
+   "destaque": "",
+   "qr_url": "https://www.netflix.com/br/",
+   "texto": "Aponte a câmera do celular e comece a assistir",
+   "rodape": "Netflix"
+  },
+  "botao_refazer": "Refazer o quiz"
+ }
+}

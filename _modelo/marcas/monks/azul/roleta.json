@@ -1,0 +1,110 @@
+{
+ "marca": "Azul",
+ "titulo_aba": "Roleta Azul",
+ "logo": "logo.svg",
+ "logo_branco_no_hub": true,
+ "cores": {
+  "fundo": "#D7E8FF",
+  "fundo_luz": "#EEF5FF",
+  "tinta": "#0A2A6B",
+  "destaque": "#1C64F2",
+  "suave": "#3A4D7A"
+ },
+ "poc": "Protótipo de demonstração, não é um produto oficial da Azul. Nenhum e-mail é armazenado.",
+ "intro": {
+  "selo": "Azul Fidelidade",
+  "titulo": "Gire e ganhe <em>pontos</em>",
+  "texto": "Enquanto o prato não chega, sua próxima viagem já começa aqui na mesa.",
+  "rodape": "Leva 10 segundos. Pontos creditados no Azul Fidelidade.",
+  "botao": "Girar a roleta"
+ },
+ "fatias": [
+  {
+   "texto": "500 PTS",
+   "cor": "#0A2A6B",
+   "cor_texto": "#D7E8FF"
+  },
+  {
+   "texto": "✈️",
+   "cor": "#EEF5FF",
+   "emoji": true
+  },
+  {
+   "texto": "1.000 PTS",
+   "cor": "#1C64F2",
+   "cor_texto": "#FFFFFF",
+   "premio": {
+    "valor": "1.000",
+    "valor_prefixo": "",
+    "descricao": "pontos bônus no Azul Fidelidade"
+   }
+  },
+  {
+   "texto": "🌴",
+   "cor": "#FFFFFF",
+   "emoji": true
+  },
+  {
+   "texto": "500 PTS",
+   "cor": "#0A2A6B",
+   "cor_texto": "#D7E8FF"
+  },
+  {
+   "texto": "🧳",
+   "cor": "#EEF5FF",
+   "emoji": true
+  },
+  {
+   "texto": "CLUBE",
+   "cor": "#1C64F2",
+   "cor_texto": "#FFFFFF",
+   "premio": {
+    "valor": "1 mês",
+    "valor_prefixo": "",
+    "descricao": "grátis no Clube Azul"
+   }
+  },
+  {
+   "texto": "🏖️",
+   "cor": "#FFFFFF",
+   "emoji": true
+  }
+ ],
+ "premio": {
+  "rotulo": "Benefício Azul Fidelidade",
+  "valor_prefixo": "",
+  "valor": "500",
+  "descricao": "pontos bônus no Azul Fidelidade",
+  "codigo": true,
+  "prefixo_codigo": "AZUL",
+  "entrega": "Enviado por e-mail",
+  "validade": "Resgate em até 30 dias"
+ },
+ "ganhou": {
+  "selo": "Você ganhou!",
+  "titulo": "Seus pontos <br><em>estão aqui</em>",
+  "texto": "Use o código no app Azul Fidelidade.",
+  "botao": "Continuar"
+ },
+ "captura": {
+  "ativa": true,
+  "texto": "Coloque seu e-mail para receber o benefício.",
+  "placeholder": "seu@email.com",
+  "aceite": "Aceito receber o benefício e novidades da Azul por e-mail.",
+  "botao": "Resgatar"
+ },
+ "final": {
+  "selo": "Resgatado",
+  "titulo": "Pronto! Olhe <br><em>seu e-mail</em>",
+  "texto": "O benefício foi para {email}.",
+  "botao": "Voltar ao início",
+  "tag": "Próximo passo",
+  "qr_url": null,
+  "cartao_titulo": "Resgate no <span>app Azul</span>",
+  "passos": [
+   "Abra o app Azul",
+   "Entre no Azul Fidelidade",
+   "Cole o código e receba os pontos"
+  ]
+ }
+}

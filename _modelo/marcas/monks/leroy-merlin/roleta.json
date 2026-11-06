@@ -1,0 +1,110 @@
+{
+ "marca": "Leroy Merlin",
+ "titulo_aba": "Roleta Leroy Merlin",
+ "logo": "logo.svg",
+ "logo_branco_no_hub": true,
+ "cores": {
+  "fundo": "#E3F2CF",
+  "fundo_luz": "#F3FAEA",
+  "tinta": "#14320A",
+  "destaque": "#5AA012",
+  "suave": "#3A4F2E"
+ },
+ "poc": "Protótipo de demonstração, não é um produto oficial da Leroy Merlin. Nenhum e-mail é armazenado.",
+ "intro": {
+  "selo": "Aniversário Leroy Merlin",
+  "titulo": "Gire e ganhe <em>desconto na reforma</em>",
+  "texto": "Projeto de casa nova ou reforma? Comece com um benefício aqui da mesa.",
+  "rodape": "Leva 10 segundos. Válido no app e nas lojas.",
+  "botao": "Girar a roleta"
+ },
+ "fatias": [
+  {
+   "texto": "10% OFF",
+   "cor": "#14320A",
+   "cor_texto": "#E3F2CF"
+  },
+  {
+   "texto": "🔨",
+   "cor": "#F3FAEA",
+   "emoji": true
+  },
+  {
+   "texto": "FRETE",
+   "cor": "#5AA012",
+   "cor_texto": "#FFFFFF",
+   "premio": {
+    "valor": "Frete grátis",
+    "valor_prefixo": "",
+    "descricao": "na sua próxima compra no app"
+   }
+  },
+  {
+   "texto": "🎨",
+   "cor": "#FFFFFF",
+   "emoji": true
+  },
+  {
+   "texto": "10% OFF",
+   "cor": "#14320A",
+   "cor_texto": "#E3F2CF"
+  },
+  {
+   "texto": "🪴",
+   "cor": "#F3FAEA",
+   "emoji": true
+  },
+  {
+   "texto": "6X",
+   "cor": "#5AA012",
+   "cor_texto": "#FFFFFF",
+   "premio": {
+    "valor": "6x",
+    "valor_prefixo": "",
+    "descricao": "sem juros no cartão Leroy Merlin"
+   }
+  },
+  {
+   "texto": "🛠️",
+   "cor": "#FFFFFF",
+   "emoji": true
+  }
+ ],
+ "premio": {
+  "rotulo": "Cupom Leroy Merlin",
+  "valor_prefixo": "",
+  "valor": "10% OFF",
+  "descricao": "na sua próxima compra",
+  "codigo": true,
+  "prefixo_codigo": "LEROY",
+  "entrega": "Enviado por e-mail",
+  "validade": "Válido por 30 dias"
+ },
+ "ganhou": {
+  "selo": "Você ganhou!",
+  "titulo": "Seu cupom <br><em>está aqui</em>",
+  "texto": "Use o código no app ou na loja.",
+  "botao": "Continuar"
+ },
+ "captura": {
+  "ativa": true,
+  "texto": "Coloque seu e-mail para receber o benefício.",
+  "placeholder": "seu@email.com",
+  "aceite": "Aceito receber o benefício e novidades da Leroy Merlin por e-mail.",
+  "botao": "Resgatar"
+ },
+ "final": {
+  "selo": "Resgatado",
+  "titulo": "Pronto! Olhe <br><em>seu e-mail</em>",
+  "texto": "O benefício foi para {email}.",
+  "botao": "Voltar ao início",
+  "tag": "Próximo passo",
+  "qr_url": null,
+  "cartao_titulo": "Use no <span>app Leroy Merlin</span>",
+  "passos": [
+   "Abra o app",
+   "Escolha os produtos",
+   "Aplique o cupom no carrinho"
+  ]
+ }
+}

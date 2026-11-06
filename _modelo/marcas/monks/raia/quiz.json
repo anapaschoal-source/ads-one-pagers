@@ -1,0 +1,110 @@
+{
+ "marca": "Raia",
+ "titulo_aba": "Quiz Raia",
+ "logo": "logo.svg",
+ "logo_branco": true,
+ "foto": "foto.png",
+ "cores": {
+  "cor": "#00A04A",
+  "cor_luz": "#1FC46A",
+  "cor_escura": "#006B31",
+  "escura": "#04170C",
+  "suave": "#D2F2E0"
+ },
+ "poc": "Protótipo de demonstração, não é um produto oficial da Raia. Nenhuma resposta é armazenada.",
+ "intro": {
+  "selo": "Quiz · 30s · 120 anos",
+  "titulo": "Qual é o seu momento de cuidado?",
+  "texto": "Três perguntas enquanto o pedido não chega, e a Raia monta o seu kit de bem-estar.",
+  "rodape": "Raia 120 anos · Cuidado que vale mais",
+  "botao": "Começar o quiz",
+  "legenda_foto": "Conteúdo meramente ilustrativo"
+ },
+ "perguntas": [
+  {
+   "pergunta": "Como foi a sua semana?",
+   "opcoes": [
+    {
+     "emoji": "😴",
+     "texto": "Corrida",
+     "sub": "pouco descanso",
+     "frase": "Uma semana corrida pede um momento de pausa e autocuidado.",
+     "beneficio": "Desconto em itens de autocuidado"
+    },
+    {
+     "emoji": "🏃",
+     "texto": "Ativa",
+     "sub": "treino em dia",
+     "frase": "Para quem está em movimento, cuidado com a pele e a hidratação.",
+     "beneficio": "Desconto em protetor solar"
+    },
+    {
+     "emoji": "😌",
+     "texto": "Tranquila",
+     "sub": "no ritmo certo",
+     "frase": "Para manter o ritmo, uma rotina simples de cuidados.",
+     "beneficio": "Desconto em vitaminas"
+    }
+   ]
+  },
+  {
+   "pergunta": "O que não falta na sua necessaire?",
+   "opcoes": [
+    {
+     "emoji": "🧴",
+     "texto": "Hidratante",
+     "sub": ""
+    },
+    {
+     "emoji": "☀️",
+     "texto": "Protetor solar",
+     "sub": ""
+    },
+    {
+     "emoji": "💊",
+     "texto": "Vitaminas",
+     "sub": ""
+    }
+   ]
+  },
+  {
+   "pergunta": "Como prefere comprar?",
+   "opcoes": [
+    {
+     "emoji": "📱",
+     "texto": "Pelo app",
+     "sub": "entrega rápida",
+     "beneficio": "Entrega em até 1h pelo app"
+    },
+    {
+     "emoji": "🏪",
+     "texto": "Na loja",
+     "sub": "perto de casa",
+     "beneficio": "Retire na loja"
+    },
+    {
+     "emoji": "🔁",
+     "texto": "Recorrente",
+     "sub": "sem esquecer",
+     "beneficio": "Compra programada com desconto"
+    }
+   ]
+  }
+ ],
+ "resultado": {
+  "titulo": "Seu kit de cuidado está na Raia.",
+  "texto": "Um cuidado que vale mais.",
+  "beneficios_fixos": [
+   "Pontos no programa Stix"
+  ],
+  "letra_miuda": "Benefícios ilustrativos, a validar com a marca.",
+  "cartao": {
+   "foto": "foto.png",
+   "destaque": "10% OFF",
+   "qr_url": "https://www.drogaraia.com.br/",
+   "texto": "Aponte a câmera do celular e resgate seu cupom",
+   "rodape": "Raia 120 anos"
+  },
+  "botao_refazer": "Refazer o quiz"
+ }
+}

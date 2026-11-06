@@ -1,0 +1,110 @@
+{
+ "marca": "Brahma",
+ "titulo_aba": "Roleta Brahma",
+ "logo": "logo.svg",
+ "logo_branco_no_hub": true,
+ "cores": {
+  "fundo": "#FFE1E1",
+  "fundo_luz": "#FFF2F2",
+  "tinta": "#2A0A0A",
+  "destaque": "#C8102E",
+  "suave": "#5A2A2A"
+ },
+ "poc": "Protótipo de demonstração, não é um produto oficial da Brahma. Nenhum e-mail é armazenado.",
+ "intro": {
+  "selo": "Só para maiores de 18",
+  "titulo": "Gire e ganhe <em>seu chopp</em>",
+  "texto": "A mesa já está pronta. Falta o chopp Brahma.",
+  "rodape": "Leva 10 segundos. Beba com moderação.",
+  "botao": "Girar a roleta"
+ },
+ "fatias": [
+  {
+   "texto": "10% OFF",
+   "cor": "#2A0A0A",
+   "cor_texto": "#FFE1E1"
+  },
+  {
+   "texto": "🍺",
+   "cor": "#FFF2F2",
+   "emoji": true
+  },
+  {
+   "texto": "CHOPP",
+   "cor": "#C8102E",
+   "cor_texto": "#FFFFFF",
+   "premio": {
+    "valor": "2º chopp",
+    "valor_prefixo": "",
+    "descricao": "com 50% OFF hoje, nesta mesa"
+   }
+  },
+  {
+   "texto": "⚽",
+   "cor": "#FFFFFF",
+   "emoji": true
+  },
+  {
+   "texto": "10% OFF",
+   "cor": "#2A0A0A",
+   "cor_texto": "#FFE1E1"
+  },
+  {
+   "texto": "🍻",
+   "cor": "#FFF2F2",
+   "emoji": true
+  },
+  {
+   "texto": "BRINDE",
+   "cor": "#C8102E",
+   "cor_texto": "#FFFFFF",
+   "premio": {
+    "valor": "Copo",
+    "valor_prefixo": "",
+    "descricao": "Brahma de brinde"
+   }
+  },
+  {
+   "texto": "🎉",
+   "cor": "#FFFFFF",
+   "emoji": true
+  }
+ ],
+ "premio": {
+  "rotulo": "Benefício Brahma",
+  "valor_prefixo": "",
+  "valor": "10% OFF",
+  "descricao": "no chopp Brahma desta mesa",
+  "codigo": true,
+  "prefixo_codigo": "BRAHMA",
+  "entrega": "Mostre ao garçom",
+  "validade": "Válido hoje"
+ },
+ "ganhou": {
+  "selo": "Você ganhou!",
+  "titulo": "Seu benefício <br><em>está aqui</em>",
+  "texto": "Mostre o código ao garçom e peça seu chopp.",
+  "botao": "Continuar"
+ },
+ "captura": {
+  "ativa": false,
+  "texto": "Coloque seu e-mail para receber o benefício.",
+  "placeholder": "seu@email.com",
+  "aceite": "Aceito receber o benefício e novidades da Brahma por e-mail.",
+  "botao": "Resgatar"
+ },
+ "final": {
+  "selo": "Resgatado",
+  "titulo": "Pronto! <br><em>Saúde!</em>",
+  "texto": "Mostre o código ao garçom. Beba com moderação.",
+  "botao": "Voltar ao início",
+  "tag": "Próximo passo",
+  "qr_url": null,
+  "cartao_titulo": "Peça seu <span>chopp Brahma</span>",
+  "passos": [
+   "Chame o garçom",
+   "Mostre o código",
+   "Peça seu chopp"
+  ]
+ }
+}
