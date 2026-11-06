@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Sony no tablet Goomer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Antonio:wght@700&amp;family=Manrope:wght@400;500;700;800&amp;family=Poppins:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+/* Simulação da campanha no tablet: dois tablets grandes, um por formato, sobre o azul Goomer Ads */
+:root{--tinta:#0A0044;--tinta2:#14106A;--lima:#BDE249;--laranja:#F7841F;--rosa:#D23BA8;--verde:#4BE35A;--txt:#fff;--txt2:rgba(255,255,255,.72)}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{background:var(--tinta)}
+body{margin:0;background:var(--tinta);color:var(--txt);font:400 16px/1.5 Manrope,system-ui,-apple-system,sans-serif;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1120px;margin:0 auto;padding-block:36px 56px;display:grid;gap:56px}
+.cond{font-family:Antonio,'Arial Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.01em}
+header{display:grid;gap:14px}
+.ey{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--lima)}
+h1{margin:0;font-size:clamp(34px,6vw,60px);line-height:1;text-wrap:balance}
+h1 span{color:var(--verde)}
+.lead{margin:0;max-width:62ch;color:var(--txt2);font-size:17px}
+section{display:grid;gap:18px}
+.sh{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 20px}
+h2{margin:0;font-size:clamp(26px,4vw,38px);line-height:1.05}
+h2 small{display:block;font:800 12px/1.4 Manrope,sans-serif;letter-spacing:.16em;color:var(--lima);margin-bottom:6px}
+.sh p{margin:0;max-width:52ch;color:var(--txt2);font-size:15px}
+
+/* tablet */
+.mk{position:relative;width:100%;max-width:100%;aspect-ratio:976/700;container-type:inline-size;font-family:Roboto,Manrope,system-ui,sans-serif;margin-inline:auto}
+.mk-bg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.scr{position:absolute;left:23.57%;top:18.29%;width:62.09%;height:50.43%;overflow:hidden;border-radius:.4cqw;background:#2F190F;container-type:size}
+.hl{position:absolute;border:.35cqw solid var(--lima);border-radius:.8cqw;pointer-events:none;z-index:5;opacity:0;transition:opacity .35s}
+.hl.on{opacity:1}
+.pulse{animation:hlp 2.2s .6s ease-in-out infinite}
+@keyframes hlp{50%{box-shadow:0 0 0 1cqw rgba(189,226,73,0)}0%,100%{box-shadow:0 0 0 0 rgba(189,226,73,.55)}}
+.tag{position:absolute;z-index:6;transform:translateY(-120%);background:var(--lima);color:var(--tinta);font:800 1.15cqw/1 Manrope,sans-serif;letter-spacing:.1em;text-transform:uppercase;padding:.6cqw 1cqw;border-radius:99px;white-space:nowrap;opacity:0;transition:opacity .35s}
+.tag.on{opacity:1}
+
+/* banner institucional do restaurante */
+.rban{position:absolute;inset:0;display:flex;align-items:center;padding:0 6cqw;background:#1A0E08;transition:opacity .5s;overflow:hidden}
+.rb-ph{position:absolute;inset:0 0 0 30%;background:url(mk-rbph.jpg) center/cover no-repeat;animation:kb 14s ease-in-out infinite alternate}
+.rb-ph::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#1A0E08 0%,rgba(26,14,8,.75) 22%,rgba(26,14,8,0) 55%)}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.08)}}
+.rb-t{position:relative;z-index:1;display:grid;gap:2.4cqh;color:#fff;max-width:45%}
+.rb-t small{font-size:3.8cqh;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--laranja)}
+.rb-t b{font-family:Antonio,'Arial Narrow',sans-serif;text-transform:uppercase;font-size:15.5cqh;line-height:.92}
+.rb-t span{font-size:4.5cqh;opacity:.85}
+.rb-t em{font-style:normal;font-size:6.2cqh;font-weight:800;color:var(--laranja)}
+.rb-t i{justify-self:start;font-style:normal;background:var(--laranja);color:#fff;font-weight:800;font-size:4.1cqh;padding:2.4cqh 5.2cqh;border-radius:2.4cqh;text-transform:uppercase;letter-spacing:.06em}
+
+/* vídeo da marca */
+.ad{position:absolute;inset:0;opacity:0;transition:opacity .5s;background:#000}
+.scr.on .ad{opacity:1}.scr.on .rban{opacity:0}
+.ad video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.chip{position:absolute;left:3%;bottom:8cqh;display:flex;align-items:center;gap:1.6cqh;background:rgba(0,0,0,.6);border-radius:99px;padding:1.4cqh 3cqh 1.4cqh 2.4cqh;font:700 4.6cqh/1 Manrope,sans-serif;font-variant-numeric:tabular-nums;color:#fff}
+.chip i{width:0;height:0;border-left:2.6cqh solid #fff;border-top:1.6cqh solid transparent;border-bottom:1.6cqh solid transparent}
+.bar{position:absolute;left:0;right:0;bottom:0;height:2.2cqh;background:rgba(255,255,255,.28)}
+.bar i{display:block;height:100%;width:0;background:var(--verde)}
+
+/* linha do tempo da Tela de Início */
+.tl{display:grid;gap:10px;max-width:760px;width:100%;margin-inline:auto}
+.tl-track{position:relative;display:grid;grid-template-columns:4fr 10fr 4fr;gap:4px;height:44px}
+.tl-seg{position:relative;border-radius:10px;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;padding:0 8px;font-size:12px;font-weight:700;color:var(--txt2);text-align:center;line-height:1.2;transition:background .3s,color .3s}
+.tl-seg.sp{background:rgba(75,227,90,.22);color:#fff}
+.tl-seg.cur{background:var(--lima);color:var(--tinta)}
+.tl-head{position:absolute;top:-6px;bottom:-6px;width:3px;margin-left:-1.5px;background:#fff;border-radius:3px;left:0}
+.tl-row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;font-size:13px;color:var(--txt2)}
+.tl-row b{color:#fff}
+button{font:inherit;cursor:pointer}
+.btn{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff;font-weight:800;font-size:14px;padding:10px 18px;border-radius:99px;text-decoration:none}
+.btn:hover{border-color:var(--lima);color:var(--lima)}
+.btn.fill{background:var(--lima);border-color:var(--lima);color:var(--tinta)}
+.btn.fill:hover{background:#fff;border-color:#fff;color:var(--tinta)}
+.btn:focus-visible,.cover:focus-visible{outline:3px solid var(--lima);outline-offset:3px}
+
+/* aba da marca no cardápio */
+.aba{position:absolute;left:14.86%;top:26.29%;width:7.07%;height:8.57%;container-type:size;background:#2F190F;border:.25cqw solid var(--laranja);border-radius:.6cqw}
+.aba>div{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8cqh;color:#fff;font-family:Poppins,Manrope,sans-serif;line-height:1;text-align:center}
+.aba b{font-weight:700;font-size:22cqw;letter-spacing:.14em;margin-right:-.14em}
+.aba i{font-style:normal;font-weight:500;font-size:13cqw;opacity:.85}
+
+/* capa do jogo dentro da página especial */
+.cover{position:absolute;inset:0;border:0;padding:0 7cqw;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:4cqh;text-align:left;color:#fff;background:radial-gradient(45% 70% at 88% 18%,rgba(210,59,168,.55),transparent 70%),radial-gradient(40% 60% at 10% 100%,rgba(210,59,168,.35),transparent 70%),#0B0A10}
+.cover small{font:800 3.6cqh/1 Manrope,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+.cover b{font-family:Antonio,'Arial Narrow',sans-serif;text-transform:uppercase;font-size:17cqh;line-height:.9;color:var(--verde);max-width:70%}
+.cover span{font:700 3.8cqh/1.3 Manrope,sans-serif;letter-spacing:.06em;text-transform:uppercase}
+.cover em{font-style:normal;display:inline-flex;align-items:center;gap:2cqh;background:var(--verde);color:#0B0A10;font:800 5cqh/1 Manrope,sans-serif;text-transform:uppercase;padding:3cqh 5cqh;border-radius:1.6cqh;position:relative}
+.tap{position:absolute;right:-3cqh;bottom:-3cqh;width:8cqh;height:8cqh;border-radius:50%;border:.8cqh solid #fff;background:rgba(255,255,255,.35);animation:tap 2.4s ease-out infinite}
+@keyframes tap{0%,40%{opacity:0;transform:scale(.4)}50%{opacity:1;transform:scale(1)}70%,100%{opacity:0;transform:scale(1.6)}}
+.game{position:absolute;inset:0;width:100%;height:100%;border:0;background:#0B0A10}
+.acts{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+
+/* modo ampliado do jogo */
+.zoom{position:fixed;inset:0;z-index:50;background:rgba(6,0,40,.94);display:grid;place-items:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.zoom-box{width:min(100%,calc((100vh - 110px) * 1.6));aspect-ratio:16/10;max-width:100%;position:relative;border-radius:14px;overflow:hidden;background:#000;box-shadow:0 0 0 6px #1b1b22,0 30px 80px rgba(0,0,0,.6)}
+.zoom-bar{display:flex;gap:10px;justify-content:center;margin-top:16px}
+.zoom-in{display:grid;justify-items:center;width:100%}
+
+.note{font-size:12px;color:var(--txt2);text-align:center;margin:0}
+footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:center;border-top:1px solid rgba(255,255,255,.14);padding-top:22px;font-size:13px;color:var(--txt2)}
+footer b{color:#fff}
+@media (prefers-reduced-motion: reduce){.rb-ph,.pulse,.tap{animation:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+<div class="ey">Goomer Ads × Sony Pictures · simulação</div>
+<h1 class="cond">Como Roubar um Banco <span>na mesa do restaurante</span></h1>
+<p class="lead">Como a campanha aparece no tablet Goomer: o vídeo de 10 segundos entra na Tela de Início entre os banners do restaurante, e o jogo fica numa aba própria do cardápio.</p>
+</header>
+
+<section aria-labelledby="t1">
+<div class="sh">
+<h2 class="cond" id="t1"><small>Formato 1 · Tela de Início</small>Vídeo de 10 segundos</h2>
+<p>O tablet mostra o banner do restaurante, entra o vídeo da Sony e depois a tela volta para o material do restaurante.</p>
+</div>
+<div class="mk" role="img" aria-label="Tablet Goomer: banner do restaurante, depois o vídeo de 10 segundos de Como Roubar um Banco, depois o banner do restaurante de novo">
+<img class="mk-bg" src="mk-tablet.webp" alt="">
+<div class="scr" id="inicio">
+<div class="rban"><div class="rb-ph"></div><div class="rb-t"><small>Restaurante Goomer</small><b>Peça o seu!</b><span>Picanha ao Fogo com molho chimichurri</span><em>R$ 34,90</em><i>Peça o seu</i></div></div>
+<div class="ad"><video id="v" src="sony-10s.mp4" muted playsinline preload="auto"></video><span class="chip"><i></i><b id="cd">0:10</b></span><span class="bar"><i id="pb"></i></span></div>
+</div>
+<span class="hl" id="hl1" style="left:23.57%;top:18.29%;width:62.09%;height:50.43%"></span>
+<span class="tag" id="tg1" style="left:23.57%;top:18.29%">Sony · 10s</span>
+</div>
+<div class="tl">
+<div class="tl-track" aria-hidden="true">
+<div class="tl-seg" id="s0">Banner do restaurante</div>
+<div class="tl-seg sp" id="s1">Vídeo Sony · 10s</div>
+<div class="tl-seg" id="s2">Banner do restaurante</div>
+<span class="tl-head" id="head"></span>
+</div>
+<div class="tl-row"><span>Agora: <b id="now">Banner do restaurante</b></span><button class="btn" id="replay" type="button">↺ Recomeçar</button></div>
+</div>
+</section>
+
+<section aria-labelledby="t2">
+<div class="sh">
+<h2 class="cond" id="t2"><small>Formato 2 · Página Especial</small>O jogo no cardápio</h2>
+<p>A Sony ganha uma aba no cardápio. Ao tocar, o cliente entra no assalto e joga ali mesmo, na mesa. Toque na tela do tablet para testar.</p>
+</div>
+<div class="mk">
+<img class="mk-bg" src="mk-tablet.webp" alt="Tablet Goomer com a aba Sony no cardápio">
+<div class="aba"><div><b>SONY</b><i>Assalto</i></div></div>
+<div class="scr" id="esp">
+<button class="cover" id="play" type="button" aria-label="Jogar Como Roubar um Banco">
+<small>Sony Pictures apresenta</small>
+<b>Como Roubar um Banco</b>
+<span>Exclusivamente nos cinemas · 12 de novembro</span>
+<em>Entre no assalto →<i class="tap"></i></em>
+</button>
+</div>
+<span class="hl on pulse" style="left:14.86%;top:26.29%;width:7.07%;height:8.57%"></span>
+<span class="hl on pulse" id="hl2" style="left:23.57%;top:18.29%;width:62.09%;height:50.43%"></span>
+</div>
+<div class="acts">
+<button class="btn fill" id="play2" type="button">▶ Jogar no tablet</button>
+<button class="btn" id="big" type="button">⤢ Ampliar o jogo</button>
+<a class="btn" href="https://goomer-jogos-sony-red.vercel.app/" target="_blank" rel="noopener">Abrir em nova aba ↗</a>
+</div>
+<p class="note">Simulação para apresentação. Restaurante, pratos e preços são ilustrativos (restaurante padrão Goomer).</p>
+</section>
+
+<footer>
+<span><b>Ana Paschoal</b> · Coordenadora de Ads · Goomer Ads</span>
+<span>+50 mil telas · +2 mil restaurantes</span>
+</footer>
+</div>
+
+<div class="zoom" id="zoom" hidden>
+<div class="zoom-in">
+<div class="zoom-box" id="zbox"></div>
+<div class="zoom-bar"><button class="btn fill" id="zclose" type="button">✕ Fechar</button></div>
+</div>
+</div>
+
+<script>
+(function(){
+ var GAME='https://goomer-jogos-sony-red.vercel.app/';
+ // Tela de Início: 4s banner do restaurante -> 10s vídeo Sony -> 4s banner do restaurante, em loop
+ var A=4,B=10,C=4,L=A+B+C;
+ var scr=document.getElementById('inicio'),v=document.getElementById('v'),cd=document.getElementById('cd'),pb=document.getElementById('pb'),
+     hl=document.getElementById('hl1'),tg=document.getElementById('tg1'),head=document.getElementById('head'),now=document.getElementById('now'),
+     segs=[document.getElementById('s0'),document.getElementById('s1'),document.getElementById('s2')],
+     names=['Banner do restaurante','Vídeo Sony · 10s','Banner do restaurante (volta)'];
+ var t0=performance.now(),playing=false,last=-1;
+ var red=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+ function frac(c){ // posição da agulha respeitando a largura de cada trecho (4/10/4 + gaps)
+  return c/L*100;
+ }
+ function tick(t){
+  var c=((t-t0)/1000)%L,ph=c<A?0:(c<A+B?1:2),ad=ph===1;
+  scr.classList.toggle('on',ad);hl.classList.toggle('on',ad);tg.classList.toggle('on',ad);
+  if(ph!==last){last=ph;segs.forEach(function(s,i){s.classList.toggle('cur',i===ph)});now.textContent=names[ph]}
+  head.style.left=frac(c)+'%';
+  var r=ad?(c-A):0;cd.textContent='0:'+('0'+Math.max(0,Math.ceil(B-r))).slice(-2);pb.style.width=(ad?r/B*100:0)+'%';
+  if(ad&&!playing){playing=true;try{v.currentTime=0}catch(e){}var p=v.play();if(p)p.catch(function(){})}
+  if(!ad&&playing){playing=false;v.pause()}
+  requestAnimationFrame(tick)}
+ if(red){scr.classList.add('on');hl.classList.add('on');v.setAttribute('controls','')}else requestAnimationFrame(tick);
+ document.getElementById('replay').onclick=function(){t0=performance.now();last=-1;playing=false;v.pause()};
+
+ // Página Especial: o jogo roda dentro da tela do tablet
+ var esp=document.getElementById('esp');
+ function frame(){var f=document.createElement('iframe');f.className='game';f.src=GAME;f.title='Jogo Como Roubar um Banco';f.allow='fullscreen; autoplay';return f}
+ function jogar(){if(esp.querySelector('iframe'))return;var cv=document.getElementById('play');if(cv)cv.remove();esp.appendChild(frame());document.getElementById('hl2').classList.remove('pulse')}
+ document.getElementById('play').onclick=jogar;
+ document.getElementById('play2').onclick=function(){jogar();esp.scrollIntoView({behavior:'smooth',block:'center'})};
+ var zoom=document.getElementById('zoom'),zbox=document.getElementById('zbox');
+ document.getElementById('big').onclick=function(){zbox.innerHTML='';zbox.appendChild(frame());zoom.hidden=false;document.getElementById('zclose').focus()};
+ function fechar(){zoom.hidden=true;zbox.innerHTML=''}
+ document.getElementById('zclose').onclick=fechar;
+ zoom.addEventListener('click',function(e){if(e.target===zoom)fechar()});
+ document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!zoom.hidden)fechar()});
+})();
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
