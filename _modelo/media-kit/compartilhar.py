@@ -269,6 +269,11 @@ body[data-mode="b2b"] .band.cuis .mkc-stats{display:none}
  .mkc-obj{flex-wrap:wrap!important}.mkc-obj b{flex-basis:calc(100% - 90px)}.mkc-obj i{margin-left:0}
  .mkc-nav .ct{font-size:13px;font-weight:800;color:var(--ink);min-width:44px;text-align:center}
 }
+/* selo "Objetivo" sutil (nov/2026, igual ao kit de agências): sem fundo escuro, texto em tinta, CPM com contorno */
+.mkc-obj{display:inline-flex!important;width:auto!important;flex-wrap:wrap!important;align-items:baseline!important;gap:4px 8px!important;background:none!important;padding:0!important;border-radius:0!important;margin-bottom:6px!important}
+.mkc-obj small{font-size:10.5px!important;color:var(--blue)!important;letter-spacing:.12em!important}
+.mkc-obj b{flex:0 1 auto!important;flex-basis:auto!important;font-size:14px!important;font-weight:700!important;color:var(--ink)!important;line-height:1.3!important}
+.mkc-obj i{margin-left:0!important;background:none!important;border:1px solid rgba(10,0,68,.25)!important;color:var(--ink)!important;font-size:10px!important;padding:1px 7px!important}
 ''' + '</style>'
 FMTJS = '''<script>/*mk-compartilhar-formatos-js*/
 (function(){var m=document.getElementById('mesa'),fc=document.getElementById('fcards'),fs=document.getElementById('formatos');
