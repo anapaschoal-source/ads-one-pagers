@@ -1,0 +1,52 @@
+{
+  "slug": "uber-business-043nv6q6",
+  "marca": "Uber for Business",
+  "cor": "#276EF1",
+  "cor_escura": "#000000",
+  "logo_branco_no_escuro": true,
+  "logo_altura_hero": 30,
+  "logo_altura_secao": 34,
+  "imagens": {
+    "logo": "uber-business/logo-escuro.png",
+    "foto_inicio": "uber-business/cartao.png",
+    "foto_confirmacao": "uber-business/cartao.png",
+    "foto_conta": "uber-business/foto.png",
+    "foto_especial": "uber-business/foto.png"
+  },
+  "menu": {"label": "Uber", "sub": "Empresas"},
+  "hero": {
+    "titulo": "Uber for Business, <br>na mesa do cliente",
+    "subtitulo": "Mobilidade corporativa no almoço de quem decide."
+  },
+  "formatos": {
+    "inicio": {"legenda": "Viagens da sua empresa, num só lugar."},
+    "confirmacao": {"titulo": "Pedido enviado. E a volta pro escritório?", "destaque": "Uber for Business"},
+    "conta": {"titulo": "Almoço de negócios pago. A corrida também.", "cta": "Conheça o Uber for Business"},
+    "especial": {
+      "selo": "Quiz · 30s",
+      "titulo": "Como a sua empresa",
+      "titulo_destaque": "se move?",
+      "texto": "Três perguntas enquanto o pedido não chega, e a Uber mostra o plano para a empresa.",
+      "botao": "Começar o quiz"
+    }
+  },
+  "ativacao": {
+    "texto": "Na página especial, é possível criar um modelo <strong>inovador</strong> de ativação da marca, podendo gerar benefícios e um nível único de interação com os usuários da mesa. Para Uber for Business, criamos um quiz rápido sobre como a empresa do cliente se move, com segmentação por restaurantes próximos a polos de escritórios e horário de almoço.",
+    "passos": [
+      {"titulo": "Entra no menu Uber", "texto": "O cliente abre a categoria Uber no cardápio do tablet."},
+      {"titulo": "Responde o quiz", "texto": "Porte da empresa, como o time se desloca hoje e o que mais pesa."},
+      {"titulo": "Recebe o plano", "texto": "O resultado mostra o plano ideal e um QR code para o Uber for Business."}
+    ]
+  },
+  "demo_url": "/uber-business-043nv6q6/quiz/",
+  "endemica": false,
+  "ocultar_clientes": ["99Food", "99"],
+  "cta": {
+    "titulo": "Vamos levar o Uber for Business pra mesa?",
+    "nome": "Ana Paschoal",
+    "cargo": "Coordenadora de Ads",
+    "email": "ana.paschoal@goomer.com.br",
+    "whatsapp": "5515997697766",
+    "telefone": "+55 15 99769-7766"
+  }
+}
