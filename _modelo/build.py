@@ -102,6 +102,9 @@ def main():
                         ('cli-cyrela.png', 'Cyrela', 30)]
         if a.replace('&amp;', '&') not in c.get('ocultar_clientes', [])
     ]
+    # logos extras de clientes só para esta marca: [{"logo": "pasta/arquivo.png", "alt": "Nome", "h": 40}]
+    for x in c.get('clientes_extra', []):
+        clientes.append({'src': data_uri(os.path.join(cdir, x['logo'])), 'alt': x['alt'], 'h': x.get('h', 30)})
 
     f = c['formatos']; e = f['especial']
     tela_especial = (
