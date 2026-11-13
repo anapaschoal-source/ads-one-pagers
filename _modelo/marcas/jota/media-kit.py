@@ -100,6 +100,28 @@ def banner_conta(m):
     mk = Image.new('L', sb.size, 0); ImageDraw.Draw(mk).rounded_rectangle((0, 0, bw - 1, bh2 - 1), radius=8, fill=255)
     return sb, mk
 
+def banner_poupanca():
+    """Minha Conta fixa: Poupança Premiada Sicredi (R$ 5 milhões em prêmios em 2026; a cada R$ 100 um número da sorte)."""
+    bw, bh2 = 204, 115; W, H = bw * 4, bh2 * 4
+    sb = Image.new('RGBA', (W, H), '#0F6A2D'); d2 = ImageDraw.Draw(sb)
+    # o selo "Espaço da marca" do modelo cobre o topo do banner: o texto fica do meio para baixo
+    glow = Image.new('RGBA', (W, H), (0, 0, 0, 0)); gd = ImageDraw.Draw(glow)
+    gd.ellipse((W - 260, -60, W + 40, 240), fill=(64, 185, 60, 60))
+    sb.alpha_composite(glow); d2 = ImageDraw.Draw(sb)
+    for x, y, rr in ((W - 120, 70, 44), (W - 55, 135, 30), (W - 185, 140, 26)):
+        d2.ellipse((x - rr, y - rr, x + rr, y + rr), fill='#E8C55A'); d2.ellipse((x - rr * .66, y - rr * .66, x + rr * .66, y + rr * .66), outline='#C9A43C', width=5)
+    d2.text((36, 150), 'Poupança Premiada', font=font(58), fill='#FFFFFF')
+    d2.text((36, 236), 'R$ 5 milhões em prêmios em 2026', font=font(32), fill='#E2F4DD')
+    d2.rectangle((0, 330, W, H), fill='#FFFFFF')
+    lg = logo_img('sicredi.png'); lg.thumbnail((300, 90), Image.LANCZOS)
+    sb.alpha_composite(lg, (36, 330 + (130 - lg.height) // 2))
+    tw = int(d2.textlength('Saiba mais', font=font(38))); x0 = W - 36 - tw - 68
+    d2.rounded_rectangle((x0, 352, W - 36, 438), radius=43, fill='#40B93C')
+    d2.text((x0 + 34, 371), 'Saiba mais', font=font(38), fill='#FFFFFF')
+    sb = sb.resize((bw, bh2), Image.LANCZOS)
+    mk = Image.new('L', sb.size, 0); ImageDraw.Draw(mk).rounded_rectangle((0, 0, bw - 1, bh2 - 1), radius=8, fill=255)
+    return sb, mk
+
 def abertura(html_path):
     from playwright.sync_api import sync_playwright
     with sync_playwright() as pw:
@@ -123,14 +145,14 @@ for m in MARCAS:
     f8 = font(8); tw = dr.textlength(m['n'], font=f8); dr.text((180 - tw / 2, 225), m['n'], font=f8, fill='#FFFFFF')
     gp = os.path.join(ROOT, SLUG, m['jogo'], 'index.html')
     tab.paste(abertura(gp).resize((836 - 230, 481 - 128), Image.LANCZOS), (230, 128))
-    mc = mc0.copy(); sb, mk = banner_conta(m); mc.paste(sb, (479, 49), mk)
+    mc = mc0.copy(); sb, mk = banner_poupanca(); mc.paste(sb, (479, 49), mk)  # Minha Conta fixa: Sicredi
     vid = lambda ext: f'data:video/{ext};base64,' + base64.b64encode(open(os.path.join(D, f"{m['id']}-inicio.{ext}"), 'rb').read()).decode()
-    DATA.append(dict(id=m['id'], n=m['n'], c=m['c'], g=m['g'], conf=webp(pop), esp=webp(tab), conta=webp(mc), mp4=vid('mp4'), webm=vid('webm'),
+    DATA.append(dict(id=m['id'], n=m['n'], c=m['c'], g=m['g'], conf=webp(pop), esp=webp(tab), conta=webp(mc),
                      game=base64.b64encode(open(gp, 'rb').read()).decode()))
 d0 = DATA[0]
 s = s.replace(u_pop, d0['conf'], 1); s = s.replace(u_tab, d0['esp'], 1); s = s.replace(u_mc, d0['conta'], 1)
 s = s.replace('alt="Tablet Goomer com a aba PicPay selecionada e a página especial do jogo"', 'alt="Tablet Goomer com a aba Mercado Livre selecionada e a página especial do jogo"')
-s = s.replace('alt="Tela Minha Conta com a conta da mesa e o banner do anunciante"', 'alt="Tela Minha Conta com a conta da mesa e o banner do Mercado Livre"', 1)
+s = s.replace('alt="Tela Minha Conta com a conta da mesa e o banner do anunciante"', 'alt="Tela Minha Conta com a conta da mesa e o banner da Poupança Premiada Sicredi"', 1)
 s = re.sub(r'(<script type="text/plain" id="game-picpay">)[^<]*(</script>)', lambda mm: mm.group(1) + d0['game'] + mm.group(2), s, count=1)
 s = s.replace("find(x=>/bora jogar/i.test(x.textContent));if(b)b.click();else setTimeout(go,150)", "find(x=>/bora jogar/i.test(x.textContent));if(b)b.click()")
 s = s.replace('Jogar o jogo PicPay', 'Testar a ativação')
@@ -148,12 +170,7 @@ function B(){return JB.find(function(x){return x.id===cur})}
 function esc2(t){return String(t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function apply(root){if(!root)return;var b=B();
  root.querySelectorAll('img[alt^="Pop-up de pedido"]').forEach(function(im){im.src=b.conf});
- root.querySelectorAll('img[alt^="Tablet Goomer com a aba"]').forEach(function(im){im.src=b.esp;im.alt='Tablet Goomer com a aba '+b.n+' selecionada e a página especial do jogo'});
- root.querySelectorAll('img.mcscr').forEach(function(im){im.src=b.conta;im.alt='Tela Minha Conta com a conta da mesa e o banner do '+b.n});
- root.querySelectorAll('video.tv').forEach(function(v){if(v.dataset.b===b.id)return;v.dataset.b=b.id;
-  v.innerHTML='<source src="'+b.webm+'" type="video/webm"><source src="'+b.mp4+'" type="video/mp4">';v.muted=true;v.setAttribute('muted','');
-  v.setAttribute('aria-label','Vídeo de 10 segundos de '+b.n+' na Tela de Início');
-  try{v.load();var bx=v.closest('.tvbox');if(bx&&bx.classList.contains('ad')){var p=v.play();if(p)p.catch(function(){})}}catch(_){}})}
+ root.querySelectorAll('img[alt^="Tablet Goomer com a aba"]').forEach(function(im){im.src=b.esp;im.alt='Tablet Goomer com a aba '+b.n+' selecionada e a página especial do jogo'})}
 window.gameHTML=function(){var b=B();return new TextDecoder().decode(Uint8Array.from(atob(b.game),function(c){return c.charCodeAt(0)}))};
 window.brandDesc=function(f){var b=B();return f.id==='especial'?f.d.replace(/Toque em Bora jogar.*$/,'Toque em Bora jogar e teste a ativação '+b.n+': '+b.g+(/[.?!]$/.test(b.g)?'':'.')):f.d};
 var stage=document.getElementById('fxStage');if(stage)new MutationObserver(function(){apply(stage)}).observe(stage,{childList:true});
@@ -178,8 +195,10 @@ assert nb == 1
 # 6. Tela de Início e Minha Conta: as peças da marca selecionada deixam de ser case real
 vi = s.index('<video class="tv"'); ve = s.index('</video>', vi)
 blk = s[vi:ve]
-blk, nv = re.subn(r'<source src="data:[^"]+" type="video/webm">', lambda mm: f'<source src="{d0["webm"]}" type="video/webm">', blk, count=1)
-blk, nm = re.subn(r'<source src="data:[^"]+" type="video/mp4">', lambda mm: f'<source src="{d0["mp4"]}" type="video/mp4">', blk, count=1)
+MK = 'mack' if os.path.exists(os.path.join(D, 'mack-inicio.mp4')) else d0['id']  # Tela de Início fixa: Mackenzie
+vmk = lambda ext: f'data:video/{ext};base64,' + base64.b64encode(open(os.path.join(D, f"{MK}-inicio.{ext}"), 'rb').read()).decode()
+blk, nv = re.subn(r'<source src="data:[^"]+" type="video/webm">', lambda mm: f'<source src="{vmk("webm")}" type="video/webm">', blk, count=1)
+blk, nm = re.subn(r'<source src="data:[^"]+" type="video/mp4">', lambda mm: f'<source src="{vmk("mp4")}" type="video/mp4">', blk, count=1)
 s = s[:vi] + blk + s[ve:]
 assert nv == nm == 1
 s = s.replace('<div class="scr real case vreal">', '<div class="scr real vreal">', 1)

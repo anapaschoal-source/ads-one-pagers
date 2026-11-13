@@ -32,6 +32,23 @@ def foto_sicredi():
     im.save(os.path.join(D, 'foto-sicredi.jpg'), quality=88)
 
 
+def foto_mackenzie():
+    """Ilustração para o vídeo do Colégio Mackenzie (prédio histórico com colunas, céu e árvores)."""
+    im = Image.new('RGB', (1200, 800), '#F3E9DD'); d = ImageDraw.Draw(im)
+    d.rectangle((0, 0, 1200, 520), fill='#CFE3F2')
+    for x, r in ((90, 120), (1120, 140), (240, 90)):
+        d.ellipse((x - r, 430 - r, x + r, 430 + r), fill='#7FA86B')
+    d.rectangle((300, 250, 900, 620), fill='#C9302C')
+    d.polygon([(280, 255), (600, 120), (920, 255)], fill='#A8231F')
+    for i in range(6):
+        x = 340 + i * 100; d.rectangle((x, 290, x + 36, 600), fill='#F6EFE6')
+    for i in range(5):
+        x = 392 + i * 100; d.rectangle((x, 330, x + 44, 410), fill='#5B2A23'); d.rectangle((x, 450, x + 44, 530), fill='#5B2A23')
+    d.rectangle((560, 520, 640, 620), fill='#5B2A23')
+    d.rectangle((260, 600, 940, 640), fill='#E6D8C6'); d.rectangle((0, 640, 1200, 800), fill='#B9C9A2')
+    im.save(os.path.join(D, 'foto-mackenzie.jpg'), quality=88)
+
+
 MARCAS = {
     'ml': dict(foto='foto-inicio.jpg', logo='mercado-livre.png', branco_painel=False, painel=(255, 255, 255, 240), painel_txt=(45, 50, 119), fim_logo_branco=False,
                msgs=('Tudo o que você procura', 'Chega rapidinho na sua casa'), fim='Baixe o app e aproveite',
@@ -39,6 +56,9 @@ MARCAS = {
     'l360': dict(foto='foto-life360.jpg', logo='life360.png', branco_painel=True, fim_logo_branco=True,
                  msgs=('Sua família no mesmo mapa', 'Avisos de chegada e saída'), fim='Baixe grátis e teste o premium',
                  pill='life360.com', cor=(122, 118, 236), tinta=(255, 255, 255), pill_txt=(84, 80, 201), pill_bg=(255, 255, 255)),
+    'mack': dict(foto='foto-mackenzie.jpg', logo='mackenzie.png', branco_painel=False, fim_logo_branco=True, painel=(255, 255, 255, 240), painel_txt=(165, 25, 30),
+                 msgs=('Colégio Mackenzie Higienópolis', 'Da educação infantil ao ensino médio'), fim='Agende sua visita',
+                 pill='mackenzie.br', cor=(196, 22, 28), tinta=(255, 255, 255), pill_txt=(165, 25, 30), pill_bg=(255, 255, 255)),
     'sic': dict(foto='foto-sicredi.jpg', logo='sicredi.png', branco_painel=True, fim_logo_branco=True,
                 msgs=('Conta, cartão e investimentos', 'Juntos, a gente cresce'), fim='Abra sua conta pelo app',
                 pill='sicredi.com.br', cor=(15, 106, 45), tinta=(255, 255, 255), pill_txt=(15, 106, 45), pill_bg=(255, 255, 255)),
@@ -81,6 +101,7 @@ def video(k, m):
 
 import sys
 foto_sicredi()
+foto_mackenzie()
 for k, m in MARCAS.items():
     if len(sys.argv) < 2 or k in sys.argv[1:]:
         video(k, m)
