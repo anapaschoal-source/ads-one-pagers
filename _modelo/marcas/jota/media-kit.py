@@ -1,4 +1,6 @@
-"""Personaliza o media kit Goomer Ads para a Jota (agência), com seletor de marcas: Mercado Livre, Life360 e Sicredi.
+"""Personaliza o media kit Goomer Ads para a Jota (agência), com seletor de marcas: Mercado Livre, Life360, Sicredi e Mackenzie.
+A marca escolhida troca TODOS os formatos (Tela de Início, Confirmação, Minha Conta e Página Especial), nos cards e no pop-up.
+Rode depois: python3 _modelo/media-kit/compartilhar.py --apresentacao --nao-endemica <saida.html>
 Uso: python3 _modelo/marcas/jota/media-kit.py <modelo.html> <saida.html>
 Pré-requisitos: logos, ativações em jota-ud03yuez/{jogo,quiz,roleta} e vídeos de video-marcas.py."""
 import sys, os, re, io, base64
@@ -67,7 +69,10 @@ MARCAS = [
          conf=['Sua família', 'no mesmo mapa'], cta='Faça o quiz', conta=['Família conectada', 'e segura'], cta2='Faça o quiz'),
     dict(id='sic', n='Sicredi', c='#40B93C', logo='sicredi.png', branco=True, jogo='roleta', g='Gire e coopere',
          bg='#0F6A2D', ink='#FFFFFF', cta_bg='#40B93C', cta_ink='#FFFFFF', foto='foto-sicredi.jpg',
-         conf=['Ganhe a 1ª anuidade', 'grátis no cartão'], cta='Gire a roleta', conta=['Ganhe a 1ª anuidade', 'grátis no cartão'], cta2='Gire a roleta'),
+         conf=['Ganhe a 1ª anuidade', 'grátis no cartão'], cta='Gire a roleta', conta=None, cta2='Saiba mais'),  # Minha Conta = Poupança Premiada
+    dict(id='mack', n='Mackenzie', c='#C4161C', logo='mackenzie.png', branco=True, jogo='mackenzie', g='Qual o próximo passo do seu filho?',
+         bg='#C4161C', ink='#FFFFFF', cta_bg='#FFFFFF', cta_ink='#C4161C', foto='foto-mackenzie.jpg',
+         conf=['Colégio Mackenzie', 'Higienópolis'], cta='Agende sua visita', conta=['Agende sua visita', 'ao colégio'], cta2='Agendar'),
 ]
 
 def banner_conf(m, w, h):
@@ -145,14 +150,14 @@ for m in MARCAS:
     f8 = font(8); tw = dr.textlength(m['n'], font=f8); dr.text((180 - tw / 2, 225), m['n'], font=f8, fill='#FFFFFF')
     gp = os.path.join(ROOT, SLUG, m['jogo'], 'index.html')
     tab.paste(abertura(gp).resize((836 - 230, 481 - 128), Image.LANCZOS), (230, 128))
-    mc = mc0.copy(); sb, mk = banner_poupanca(); mc.paste(sb, (479, 49), mk)  # Minha Conta fixa: Sicredi
+    mc = mc0.copy(); sb, mk = banner_poupanca() if m['id'] == 'sic' else banner_conta(m); mc.paste(sb, (479, 49), mk)
     vid = lambda ext: f'data:video/{ext};base64,' + base64.b64encode(open(os.path.join(D, f"{m['id']}-inicio.{ext}"), 'rb').read()).decode()
     DATA.append(dict(id=m['id'], n=m['n'], c=m['c'], g=m['g'], conf=webp(pop), esp=webp(tab), conta=webp(mc),
-                     game=base64.b64encode(open(gp, 'rb').read()).decode()))
+                     webm=vid('webm'), mp4=vid('mp4'), game=base64.b64encode(open(gp, 'rb').read()).decode()))
 d0 = DATA[0]
 s = s.replace(u_pop, d0['conf'], 1); s = s.replace(u_tab, d0['esp'], 1); s = s.replace(u_mc, d0['conta'], 1)
 s = s.replace('alt="Tablet Goomer com a aba PicPay selecionada e a página especial do jogo"', 'alt="Tablet Goomer com a aba Mercado Livre selecionada e a página especial do jogo"')
-s = s.replace('alt="Tela Minha Conta com a conta da mesa e o banner do anunciante"', 'alt="Tela Minha Conta com a conta da mesa e o banner da Poupança Premiada Sicredi"', 1)
+s = s.replace('alt="Tela Minha Conta com a conta da mesa e o banner do anunciante"', 'alt="Tela Minha Conta com a conta da mesa e o banner Mercado Livre"', 1)
 s = re.sub(r'(<script type="text/plain" id="game-picpay">)[^<]*(</script>)', lambda mm: mm.group(1) + d0['game'] + mm.group(2), s, count=1)
 s = s.replace("find(x=>/bora jogar/i.test(x.textContent));if(b)b.click();else setTimeout(go,150)", "find(x=>/bora jogar/i.test(x.textContent));if(b)b.click()")
 s = s.replace('Jogar o jogo PicPay', 'Testar a ativação')
@@ -170,18 +175,37 @@ function B(){return JB.find(function(x){return x.id===cur})}
 function esc2(t){return String(t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function apply(root){if(!root)return;var b=B();
  root.querySelectorAll('img[alt^="Pop-up de pedido"]').forEach(function(im){im.src=b.conf});
- root.querySelectorAll('img[alt^="Tablet Goomer com a aba"]').forEach(function(im){im.src=b.esp;im.alt='Tablet Goomer com a aba '+b.n+' selecionada e a página especial do jogo'})}
+ root.querySelectorAll('img[alt^="Tablet Goomer com a aba"]').forEach(function(im){im.src=b.esp;im.alt='Tablet Goomer com a aba '+b.n+' selecionada e a página especial'});
+ root.querySelectorAll('img.mcscr').forEach(function(im){im.src=b.conta;im.alt='Tela Minha Conta com a conta da mesa e o banner '+(b.id==='sic'?'da Poupança Premiada Sicredi':b.n)});
+ root.querySelectorAll('video.tv').forEach(function(v){if(v.dataset.b===b.id)return;v.dataset.b=b.id;
+  v.querySelectorAll('source').forEach(function(so){so.src=/webm/.test(so.type)?b.webm:b.mp4});
+  try{v.load();if(v.closest('.tvbox.ad')){var p=v.play();if(p)p.catch(function(){})}}catch(_){}});
+ root.querySelectorAll('.mkc-fmts .fcard[data-f="especial"] p').forEach(function(p){p.textContent=window.brandDesc({id:'especial',d:p.textContent})})}
 window.gameHTML=function(){var b=B();return new TextDecoder().decode(Uint8Array.from(atob(b.game),function(c){return c.charCodeAt(0)}))};
-window.brandDesc=function(f){var b=B();return f.id==='especial'?f.d.replace(/Toque em Bora jogar.*$/,'Toque em Bora jogar e teste a ativação '+b.n+': '+b.g+(/[.?!]$/.test(b.g)?'':'.')):f.d};
+window.brandDesc=function(f){var b=B();return f.id==='especial'?f.d.replace(/(Toque em Bora jogar|Toque e teste).*$/,'Toque e teste a ativação '+b.n+': '+b.g+(/[.?!]$/.test(b.g)?'':'.')):f.d};
 var stage=document.getElementById('fxStage');if(stage)new MutationObserver(function(){apply(stage)}).observe(stage,{childList:true});
 function set(id){cur=id;document.querySelectorAll('[data-bsel] .chip').forEach(function(c){c.setAttribute('aria-pressed',c.dataset.b===id?'true':'false')});
- apply(document.getElementById('fcards'));
+ document.querySelectorAll('.mkc-play .gameclose').forEach(function(g){if(!g.hidden)g.click()});
+ apply(document);
  var fx=document.getElementById('fx');if(fx&&!fx.hidden){var g=stage.querySelector('.gameclose');if(g&&!g.hidden)g.click();try{fxPaused=true;showFx(fxI)}catch(_){}}}
-document.querySelectorAll('[data-bsel] .bc').forEach(function(bc){
- bc.innerHTML=JB.map(function(b){return '<button type="button" class="chip" data-b="'+b.id+'" aria-pressed="'+(b.id===cur)+'"><span class="sw" style="background:'+b.c+'"></span>'+esc2(b.n)+'</button>'}).join('');
- bc.querySelectorAll('.chip').forEach(function(c){c.onclick=function(){set(c.dataset.b)}})});
-apply(document.getElementById('fcards'));
-})();</script>"""
+function init(){
+ var fm=document.querySelector('.mkc-fmts'),t=document.querySelector('[data-bsel]');
+ if(fm&&t&&!fm.parentNode.querySelector(':scope > [data-bsel]')){var c=t.cloneNode(true);c.classList.add('mkc-bsel');fm.parentNode.insertBefore(c,fm)}
+ document.querySelectorAll('[data-bsel] .bc').forEach(function(bc){
+  bc.innerHTML=JB.map(function(b){return '<button type="button" class="chip" data-b="'+b.id+'" aria-pressed="'+(b.id===cur)+'"><span class="sw" style="background:'+b.c+'"></span>'+esc2(b.n)+'</button>'}).join('');
+  bc.querySelectorAll('.chip').forEach(function(c){c.onclick=function(){set(c.dataset.b)}})});
+ apply(document)}
+if(document.readyState==='complete')setTimeout(init,0);else window.addEventListener('load',function(){setTimeout(init,0)});
+})();</script>
+<style>/*jota-bsel*/
+.mkc-bsel{margin:0 0 18px;padding:14px 16px;border-radius:16px;background:#fff;border:1px solid rgba(10,0,68,.12)}
+.mkc-bsel .bl b{color:var(--blue)!important}
+.mkc-bsel .bc{flex-wrap:wrap!important}
+.mkc-bsel .chip{color:var(--ink);background:#fff;border:1.5px solid rgba(10,0,68,.18);font-size:14px!important;padding:8px 14px!important;display:inline-flex;align-items:center;gap:8px;border-radius:999px;cursor:pointer;font-weight:800}
+.mkc-bsel .chip .sw{width:12px;height:12px;border-radius:50%;display:inline-block}
+.mkc-bsel .chip[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
+#fcards ~ .bsel,#mesa > .bsel{display:none}
+</style>"""
 s = s.replace('</body>', BJS + '</body>', 1) if '</body>' in s else s + BJS
 
 # 4. assinatura: só João; assunto do e-mail
@@ -195,7 +219,7 @@ assert nb == 1
 # 6. Tela de Início e Minha Conta: as peças da marca selecionada deixam de ser case real
 vi = s.index('<video class="tv"'); ve = s.index('</video>', vi)
 blk = s[vi:ve]
-MK = 'mack' if os.path.exists(os.path.join(D, 'mack-inicio.mp4')) else d0['id']  # Tela de Início fixa: Mackenzie
+MK = d0['id']  # Tela de Início: começa na 1ª marca do seletor
 vmk = lambda ext: f'data:video/{ext};base64,' + base64.b64encode(open(os.path.join(D, f"{MK}-inicio.{ext}"), 'rb').read()).decode()
 blk, nv = re.subn(r'<source src="data:[^"]+" type="video/webm">', lambda mm: f'<source src="{vmk("webm")}" type="video/webm">', blk, count=1)
 blk, nm = re.subn(r'<source src="data:[^"]+" type="video/mp4">', lambda mm: f'<source src="{vmk("mp4")}" type="video/mp4">', blk, count=1)
@@ -205,25 +229,11 @@ s = s.replace('<div class="scr real case vreal">', '<div class="scr real vreal">
 i = s.index('<img class="mcscr"'); j = s.rfind('<div class="scr real case">', 0, i)
 s = s[:j] + '<div class="scr real">' + s[j + len('<div class="scr real case">'):]
 
-# 8. Mapa fixo: Brasil inteiro com os pontos e os números do modelo, sem filtros nem interação (sem culinária)
+# 8. Mapa sem o filtro de culinária (pedido da Jota)
 i = s.index('<h3>Culinária</h3>'); j = s.rfind('<div style="display:grid;gap:8px">', 0, i)
 s = s[:j] + '<div style="display:grid;gap:8px" hidden>' + s[j + len('<div style="display:grid;gap:8px">'):]
 s = s.replace('<div><b>Tipo de culinária</b><p>', '<div hidden><b>Tipo de culinária</b><p>')
-MAPCSS = """<style>/*jota-mapa*/
-#mapa .filters,#mapa #hint,#mapa .zoomctl,#mapa .pin,#mapa .tip,#mapa #fxBtn{display:none!important}
-#mapa #svg,#mapa #stage{pointer-events:none}
-@media (min-width:981px){
- #mapa .story{left:max(var(--gutter),calc((100% - min(94vw,calc((100svh - 60px) * 2.15))) / 2));width:min(600px,44vw);top:clamp(20px,4vh,48px)}
- #mapa .story h1{font-size:clamp(44px,4.6vw,68px)}
- #mapa .story .lead{max-width:52ch}
- #mapa .story .kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 32px;max-width:520px}
- #mapa .story .kpi b{font-size:clamp(52px,5vw,76px)}
- #mapa .story .kpi span{font-size:15px}
- #mapa #svg,#mapa #dots{transform:translateX(clamp(120px,17vw,260px))}
-}
-</style>"""
-MAPJS = ""
-s = s.replace('</body>', MAPCSS + MAPJS + '</body>', 1) if '</body>' in s else s + MAPCSS + MAPJS
+# o mapa fica interativo na Apresentação; na versão de envio o compartilhar.py deixa ele fixo
 
 open(out, 'w', encoding='utf-8').write(s)
 print('ok', out, len(s) // 1024, 'KB')

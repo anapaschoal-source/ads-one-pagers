@@ -1,0 +1,32 @@
+{
+ "marca": "Mackenzie",
+ "titulo_aba": "Quiz Mackenzie",
+ "logo": "mackenzie.png",
+ "logo_branco": true,
+ "foto": "foto-mackenzie.jpg",
+ "cores": {"cor": "#C4161C", "cor_luz": "#E0484D", "cor_escura": "#8E0F14", "escura": "#2A0B0C", "suave": "#FBE9E9"},
+ "poc": "Protótipo de demonstração, não é um produto oficial do Mackenzie. Nada digitado é guardado.",
+ "intro": {"selo": "Quiz · 30s", "titulo": "Qual o próximo passo do seu filho?", "texto": "Três perguntas enquanto o pedido não chega, e você descobre como o Colégio Mackenzie Higienópolis acompanha cada fase da escola.", "botao": "Começar o quiz", "rodape": "Colégio Mackenzie Higienópolis", "legenda_foto": ""},
+ "perguntas": [
+  {"pergunta": "Em que fase está seu filho?", "dica": "", "opcoes": [
+   {"emoji": "🧸", "texto": "Educação infantil", "sub": "os primeiros anos", "frase": "Na educação infantil, cada descoberta conta.", "beneficio": "Educação infantil bilíngue com projetos"},
+   {"emoji": "📚", "texto": "Fundamental", "sub": "do 1º ao 9º ano", "frase": "No fundamental, base forte e curiosidade andam juntas.", "beneficio": "Ensino fundamental com laboratórios e esportes"},
+   {"emoji": "🎓", "texto": "Ensino médio", "sub": "rumo ao vestibular", "frase": "No ensino médio, o foco é o próximo grande passo.", "beneficio": "Ensino médio com preparação para o vestibular"}]},
+  {"pergunta": "O que mais pesa na escolha?", "opcoes": [
+   {"emoji": "🏛️", "texto": "Tradição", "sub": "mais de 150 anos", "beneficio": "Tradição de mais de 150 anos em educação"},
+   {"emoji": "🔬", "texto": "Estrutura", "sub": "laboratórios e quadras"},
+   {"emoji": "🌎", "texto": "Valores e formação", "sub": "para a vida"}]},
+  {"pergunta": "Quando você quer conhecer a escola?", "opcoes": [
+   {"emoji": "📅", "texto": "Ainda este mês", "sub": "quero visitar logo"},
+   {"emoji": "🗓️", "texto": "Para o próximo ano", "sub": "estou pesquisando"},
+   {"emoji": "💬", "texto": "Quero conversar antes", "sub": "tirar dúvidas"}]}
+ ],
+ "resultado": {
+  "titulo": "O Mackenzie tem um lugar para essa fase.",
+  "texto": "Agende uma visita ao Colégio Mackenzie Higienópolis e conheça a escola de perto.",
+  "beneficios_fixos": ["Visita guiada ao colégio", "Conversa com a coordenação"],
+  "botao_refazer": "Refazer o quiz",
+  "letra_miuda": "Agendamento sujeito à disponibilidade do colégio.",
+  "cartao": {"foto": "foto-mackenzie.jpg", "destaque": "Agende sua visita", "qr_url": "https://www.mackenzie.br/colegios/sao-paulo-higienopolis/visita", "texto": "Aponte a câmera do celular e agende a visita", "rodape": "Colégio Mackenzie Higienópolis"}
+ }
+}
