@@ -57,7 +57,7 @@ MARCAS = {
                  msgs=('Sua família no mesmo mapa', 'Avisos de chegada e saída'), fim='Baixe grátis e teste o premium',
                  pill='life360.com', cor=(122, 118, 236), tinta=(255, 255, 255), pill_txt=(84, 80, 201), pill_bg=(255, 255, 255)),
     'mack': dict(foto='foto-mackenzie.jpg', logo='mackenzie.png', branco_painel=False, fim_logo_branco=True, painel=(255, 255, 255, 240), painel_txt=(165, 25, 30),
-                 msgs=('Colégio Mackenzie Higienópolis', 'Da educação infantil ao ensino médio'), fim='Agende sua visita',
+                 msgs=('Formação e valores\nde mãos dadas', 'Da Educação Infantil\nao Ensino Médio'), fim='Agende sua visita',
                  pill='mackenzie.br', cor=(196, 22, 28), tinta=(255, 255, 255), pill_txt=(165, 25, 30), pill_bg=(255, 255, 255)),
     'sic': dict(foto='foto-sicredi.jpg', logo='sicredi.png', branco_painel=True, fim_logo_branco=True,
                 msgs=('Conta, cartão e investimentos', 'Juntos, a gente cresce'), fim='Abra sua conta pelo app',
@@ -65,7 +65,36 @@ MARCAS = {
 }
 
 
+def video_mack(k, m):
+    """Mackenzie: fundo vermelho, foto oficial (criativo do colégio) à direita, logo e frases à esquerda."""
+    foto = Image.open(os.path.join(D, m['foto'])).convert('RGB')
+    lw = fit(logo(m['logo'], True), 96)
+    tmp = tempfile.mkdtemp()
+    for n in range(N):
+        t = n / FPS
+        fr = Image.new('RGBA', (W, H), m['cor']); dr = ImageDraw.Draw(fr)
+        z = 1 + 0.05 * t / 10
+        ph = foto.resize((int(H * foto.width / foto.height * z), int(H * z)))
+        fr.paste(ph.crop((0, (ph.height - H) // 2, min(ph.width, W), (ph.height - H) // 2 + H)), (W - ph.width + (ph.width - min(ph.width, W)), 0))
+        fr.alpha_composite(lw, (80, 110))
+        if t < 7:
+            txt = m['msgs'][0] if t < 3.6 else m['msgs'][1]
+            y = 330
+            for ln in txt.split('\n'):
+                dr.text((80, y), ln, font=F(54), fill=(255, 255, 255)); y += 68
+        else:
+            k2 = min(1, (t - 7) / 0.4)
+            dr.text((80, 330), m['fim'], font=F(58), fill=(255, 255, 255, int(255 * k2)))
+            pw = int(dr.textlength(m['pill'], font=F(30))) + 80
+            dr.rounded_rectangle((80, 440, 80 + pw, 512), 36, fill=m['pill_bg'])
+            dr.text((120, 454), m['pill'], font=F(30), fill=m['pill_txt'])
+        fr.convert('RGB').save(f'{tmp}/f{n:04d}.png')
+    return tmp
+
+
 def video(k, m):
+    if k == 'mack':
+        tmp = video_mack(k, m); return enc(k, tmp)
     foto = Image.open(os.path.join(D, m['foto'])).convert('RGB')
     lw = fit(logo(m['logo'], m['branco_painel']), 64)
     lb = fit(logo(m['logo'], m['fim_logo_branco']), 120)
@@ -90,6 +119,10 @@ def video(k, m):
             dr.rounded_rectangle(((W - pw) / 2, 480, (W + pw) / 2, 552), 36, fill=m['pill_bg'])
             tw = dr.textlength(m['pill'], font=F(30)); dr.text(((W - tw) / 2, 494), m['pill'], font=F(30), fill=m['pill_txt'])
         fr.convert('RGB').save(f'{tmp}/f{n:04d}.png')
+    enc(k, tmp)
+
+
+def enc(k, tmp):
     src = f'{tmp}/f%04d.png'
     subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-framerate', str(FPS), '-i', src, '-c:v', 'libvpx-vp9', '-crf', '36', '-b:v', '0',
                     '-pix_fmt', 'yuv420p', '-an', os.path.join(D, f'{k}-inicio.webm')], check=True)
@@ -101,7 +134,6 @@ def video(k, m):
 
 import sys
 foto_sicredi()
-foto_mackenzie()
 for k, m in MARCAS.items():
     if len(sys.argv) < 2 or k in sys.argv[1:]:
         video(k, m)
