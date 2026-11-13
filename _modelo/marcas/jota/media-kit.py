@@ -50,7 +50,7 @@ t0 = tempfile.mktemp(suffix='.png'); t1 = tempfile.mktemp(suffix='.webp')
 load_uri(mm.group(2)).convert('RGB').save(t0)
 subprocess.run([sys.executable, os.path.join(D, 'mesa-foto.py'), t0, t1], check=True, stdout=subprocess.DEVNULL)
 s = s.replace(mm.group(0), mm.group(1) + 'data:image/webp;base64,' + base64.b64encode(open(t1, 'rb').read()).decode() + mm.group(3), 1)
-s = s.replace('alt="Tablet Goomer na mesa de um restaurante, com o cliente comendo petiscos"', 'alt="Tablet Goomer na mesa de um restaurante exibindo a Tela de Início do Mercado Livre"', 1)
+s = s.replace('alt="Tablet Goomer na mesa de um restaurante, com o cliente comendo petiscos"', 'alt="Tablet Goomer na mesa de um restaurante exibindo a Tela de Início do Colégio Mackenzie"', 1)
 
 # 2. Seletor de marcas (como no kit da AlmapBBDO): Mercado Livre, Life360 e Sicredi, cada uma com peça em
 #    Tela de Início (vídeo), Confirmação de Pedido, Minha Conta e Página Especial (a ativação de cada marca)
